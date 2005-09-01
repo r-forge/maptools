@@ -1,0 +1,85 @@
+read_ShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
+	verbose=FALSE) {
+	.shp2LinesDF(read.shape(filen=fn, verbose=verbose), 
+		proj4string=proj4string)
+}
+
+write_LinesShape <- function(x, fn, factor2char = TRUE) {
+	df <- as(x, "data.frame")
+	df <- data.frame(SL_ID=I(row.names(df)), df)
+	pls <- .SpL2lineslist(as(x, "SpatialLines"))
+	write.linelistShape(pls, df, file=fn, factor2char = factor2char)
+}
+
+
+.shp2LinesDF <- function(shp, proj4string=CRS(as.character(NA)), IDs) {
+	if (class(shp) != "Map") stop("shp not a Map object")
+	shp.type <- attr(shp$Shapes, "shp.type")
+	if (!shp.type %in% c("arc", "poly")) 
+		stop("not an arc or poly Map object")
+	df <- shp$att.data
+	shapes <- shp$Shapes
+	n <- length(shapes)
+	LinesList <- vector(mode="list", length=n)
+	if (missing(IDs)) IDs <- as.character(sapply(shapes, 
+		function(x) x$shpID))
+	if (length(IDs) != n) stop("IDs length differs from number of lines")
+	row.names(df) <- IDs
+	for (i in 1:n) {
+		LinesList[[i]] <- .shapes2LinesList(shapes[[i]], ID=IDs[i])
+	}
+	SL <- SpatialLines(LinesList, proj4string=proj4string)
+	res <- SpatialLinesDataFrame(SL, data=df)
+	res
+}
+
+.shapes2LinesList <- function(shape, ID) {
+	nParts <- attr(shape, "nParts")
+	Pstart <- shape$Pstart
+	nVerts <- nrow(shape$verts)
+	from <- integer(nParts)
+	to <- integer(nParts)
+	from[1] <- 1
+	for (j in 1:nParts) {
+		if (j == nParts) to[j] <- nVerts
+		else {
+			to[j] <- Pstart[j+1]
+			from[j+1] <- to[j]+1
+		}
+	}
+	res <- vector(mode="list", length=nParts)
+	for (i in 1:nParts) {
+		res[[i]] <- Line(coords=shape$verts[from[j]:to[j],])
+	}
+	Lines <- Lines(res, ID=ID)
+	Lines
+}
+
+.SpL2lineslist <- function(x) {
+	pls <- getSLlinesSlot(x)
+	n <- length(pls)
+	res <- vector(mode="list", length=n)
+	for (i in 1:n) {
+		xyL <- lapply(getLinesLinesSlot(pls[[i]]), 
+			coordinates)
+#			getLineCoordsSlot)
+		nP <- length(xyL)
+		nVs <- sapply(xyL, nrow)
+		res[[i]] <- .xyList2NAmat(xyL)
+		attr(res[[i]], "nParts") <- as.integer(nP)
+		from <- integer(nP)
+		to <- integer(nP)
+		from[1] <- 1
+		to[1] <- nVs[1]
+		if (nP > 1) for (j in 2:nP) {
+			from[j] <- to[(j-1)] + 2
+			to[j] <- from[j] + nVs[j] - 1
+		}
+		attr(res[[i]], "pstart") <- list(from=as.integer(from), 
+			to=as.integer(to))
+	}
+	class(res) <- "lineslist"
+	invisible(res)
+}
+
+
