@@ -1,5 +1,5 @@
 read_asciiGrid <- function(fname, as.image = FALSE, plot.image = FALSE,
-	colname=fname, proj4string = CRS(as.character(NA))) {
+	colname=basename(fname), proj4string = CRS(as.character(NA))) {
 	t = file(fname, "r")
 	l5 = readLines(t, n = 6)
 	# instead of:

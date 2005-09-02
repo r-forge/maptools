@@ -13,7 +13,7 @@ export(read_ShapePoints, read_ShapeLines, read_ShapePoly)
 
 export(write_PointsShape, write_LinesShape, write_PolyShape)
 
-export(read.asciigrid, write.asciigrid)
+export(read_asciiGrid, write_asciiGrid)
 
 S3method(plot, Map)
 S3method(plot, polylist)

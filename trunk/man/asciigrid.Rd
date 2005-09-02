@@ -4,9 +4,9 @@
 \title{ read/write to/from (ESRI) asciigrid format }
 \description{ read/write to/from ESRI asciigrid format }
 \usage{ 
-read_asciiGrid(fname, as.image = FALSE, plot.image = FALSE, colname = fname,
- proj4string = CRS(as.character(NA)))
-write.asciigrid(x, fname, attr = 1, na.value = -9999, ...)
+read_asciiGrid(fname, as.image = FALSE, plot.image = FALSE, 
+ colname = basename(fname), proj4string = CRS(as.character(NA)))
+write_asciiGrid(x, fname, attr = 1, na.value = -9999, ...)
 }
 
 \arguments{
@@ -15,7 +15,7 @@ write.asciigrid(x, fname, attr = 1, na.value = -9999, ...)
 shown with the \code{image} command; if FALSE an object of
 class \link{SpatialGridDataFrame-class} is returned }
 \item{plot.image}{logical; if TRUE, an image of the map is plotted}
-\item{colname}{alternative name for data column if not file name}
+\item{colname}{alternative name for data column if not file basename}
 \item{proj4string}{A CRS object setting the projection arguments of the Spatial Grid returned}
 \item{x}{ object of class \link{SpatialGridDataFrame}}
 \item{attr}{attribute column; if missing, the first
@@ -34,7 +34,21 @@ to write the numeric data }
 \author{Edzer J.\ Pebesma, e.pebesma@geo.uu.nl}
 \examples{
 x <- read_asciiGrid(system.file("grids/test.ag", package="maptools")[1])
-class(x)
+summary(x)
 image(x)
+xp <- as(x, "SpatialPixelsDataFrame")
+abline(h=332000, lwd=3)
+xpS <- xp[coordinates(xp)[,2] < 332000,]
+summary(xpS)
+xS <- as(xpS, "SpatialGridDataFrame")
+summary(xS)
+tmpfl <- paste(tempdir(), "testS.ag", sep="/")
+write_asciiGrid(xS, tmpfl)
+axS <- read_asciiGrid(tmpfl)
+opar <- par(mfrow=c(1,2))
+image(xS, main="before export")
+image(axS, main="after import")
+par(opar)
+unlink(tmpfl)
 }
 \keyword{programming}
