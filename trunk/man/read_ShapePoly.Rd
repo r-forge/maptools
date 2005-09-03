@@ -27,8 +27,8 @@ write_PolyShape(x, fn, factor2char = TRUE)
 
 \examples{
 library(maptools)
-xx <- read_ShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=latlong +datum=NAD27"))
-plot(xx, border="blue")
+xx <- read_ShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
+plot(xx, border="blue", axes=TRUE, las=1)
 text(getSpPPolygonsLabptSlots(xx), labels=getSpPPolygonsIDSlots(xx), cex=0.6)
 as(xx, "data.frame")[1:5, 1:6]
 xxx <- xx[xx$SID74 < 2,]

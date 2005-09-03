@@ -40,7 +40,7 @@ axx <- read_ShapeLines(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84")
 plot(xxx, col="black", lwd=4)
 plot(axx, col="yellow", lwd=1, add=TRUE)
 unlink(paste(tmpfl, ".*", sep=""))
-xx <- read_ShapeLines(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=latlong +datum=NAD27"))
+xx <- read_ShapeLines(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
 plot(xx, col="blue")
 }
 \keyword{spatial}
