@@ -1,14 +1,14 @@
-\name{read_ShapePoly}
-\alias{read_ShapePoly}
-\alias{write_PolyShape}
+\name{readShapePoly}
+\alias{readShapePoly}
+\alias{writePolyShape}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read polygon shape files into SpatialPolygonsDataFrame objects}
 \description{
-   The \code{read_ShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{write_PolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile.
+   The \code{readShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{writePolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile.
 }
 \usage{
-read_ShapePoly(fn, proj4string=CRS(as.character(NA)), verbose=FALSE)
-write_PolyShape(x, fn, factor2char = TRUE)
+readShapePoly(fn, proj4string=CRS(as.character(NA)), verbose=FALSE)
+writePolyShape(x, fn, factor2char = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,16 +27,16 @@ write_PolyShape(x, fn, factor2char = TRUE)
 
 \examples{
 library(maptools)
-xx <- read_ShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
 plot(xx, border="blue", axes=TRUE, las=1)
 text(getSpPPolygonsLabptSlots(xx), labels=getSpPPolygonsIDSlots(xx), cex=0.6)
 as(xx, "data.frame")[1:5, 1:6]
 xxx <- xx[xx$SID74 < 2,]
 plot(xxx, border="red", add=TRUE)
 tmpfl <- paste(tempdir(), "xxline", sep="/")
-write_PolyShape(xxx, tmpfl)
+writePolyShape(xxx, tmpfl)
 getinfo.shape(paste(tmpfl, ".shp", sep=""))
-axx <- read_ShapePoly(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
+axx <- readShapePoly(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 plot(xxx, border="black", lwd=4)
 plot(axx, border="yellow", lwd=1, add=TRUE)
 unlink(paste(tmpfl, ".*", sep=""))

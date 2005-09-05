@@ -1,10 +1,10 @@
-read_ShapePoly <- function(fn, proj4string=CRS(as.character(NA)), 
+readShapePoly <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE) {
 	.Map2PolyDF(read.shape(filen=fn, verbose=verbose), 
 		proj4string=proj4string)
 }
 
-write_PolyShape <- function(x, fn, factor2char = TRUE) {
+writePolyShape <- function(x, fn, factor2char = TRUE) {
 	df <- as(x, "data.frame")
 	df <- data.frame(SP_ID=I(row.names(df)), df)
 	pls <- .SpP2polylist(as(x, "SpatialPolygons"))

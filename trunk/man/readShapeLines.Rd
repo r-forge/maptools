@@ -1,14 +1,14 @@
-\name{read_ShapeLines}
-\alias{read_ShapeLines}
-\alias{write_LinesShape}
+\name{readShapeLines}
+\alias{readShapeLines}
+\alias{writeLinesShape}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read arc shape files into SpatialLinesDataFrame objects}
 \description{
-  The \code{read_ShapeLines} function reads data from an arc/line shapefile into a \code{SpatialLinesDataFrame} object; the shapefile may be of type polygon, but for just plotting for example coastlines, a SpatialLines object is sufficient. The \code{write_LinesShape} function writes data from a \code{SpatialLinesDataFrame} object to a shapefile.
+  The \code{readShapeLines} function reads data from an arc/line shapefile into a \code{SpatialLinesDataFrame} object; the shapefile may be of type polygon, but for just plotting for example coastlines, a SpatialLines object is sufficient. The \code{writeLinesShape} function writes data from a \code{SpatialLinesDataFrame} object to a shapefile.
 }
 \usage{
-read_ShapeLines(fn, proj4string=CRS(as.character(NA)), verbose=FALSE)
-write_LinesShape(x, fn, factor2char = TRUE)
+readShapeLines(fn, proj4string=CRS(as.character(NA)), verbose=FALSE)
+writeLinesShape(x, fn, factor2char = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,19 +28,19 @@ write_LinesShape(x, fn, factor2char = TRUE)
 
 
 \examples{
-xx <- read_ShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1], proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
+xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1], proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 plot(xx, col="blue")
 summary(xx)
 xxx <- xx[xx$LENGTH > 30000,]
 plot(xxx, col="red", add=TRUE)
 tmpfl <- paste(tempdir(), "xxline", sep="/")
-write_LinesShape(xxx, tmpfl)
+writeLinesShape(xxx, tmpfl)
 getinfo.shape(paste(tmpfl, ".shp", sep=""))
-axx <- read_ShapeLines(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
+axx <- readShapeLines(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 plot(xxx, col="black", lwd=4)
 plot(axx, col="yellow", lwd=1, add=TRUE)
 unlink(paste(tmpfl, ".*", sep=""))
-xx <- read_ShapeLines(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
+xx <- readShapeLines(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
 plot(xx, col="blue")
 }
 \keyword{spatial}

@@ -1,4 +1,4 @@
-read_asciiGrid <- function(fname, as.image = FALSE, plot.image = FALSE,
+readAsciiGrid <- function(fname, as.image = FALSE, plot.image = FALSE,
 	colname=basename(fname), proj4string = CRS(as.character(NA))) {
 	t = file(fname, "r")
 	l5 = readLines(t, n = 6)
@@ -55,7 +55,7 @@ read_asciiGrid <- function(fname, as.image = FALSE, plot.image = FALSE,
 	SpatialGridDataFrame(grid, data = df, proj4string=proj4string)
 }
 
-write_asciiGrid <- function(x, fname, attr = 1, na.value = -9999, ...) { 
+writeAsciiGrid <- function(x, fname, attr = 1, na.value = -9999, ...) { 
 
 # R> gridparameters(meuse.grid)
 #   cellcentre.offset cellsize cells.dim

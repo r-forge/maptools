@@ -1,10 +1,10 @@
-read_ShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
+readShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE) {
 	.shp2LinesDF(read.shape(filen=fn, verbose=verbose), 
 		proj4string=proj4string)
 }
 
-write_LinesShape <- function(x, fn, factor2char = TRUE) {
+writeLinesShape <- function(x, fn, factor2char = TRUE) {
 	df <- as(x, "data.frame")
 	df <- data.frame(SL_ID=I(row.names(df)), df)
 	pls <- .SpL2lineslist(as(x, "SpatialLines"))

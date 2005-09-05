@@ -1,12 +1,12 @@
-\name{read_asciiGrid}
-\alias{read_asciiGrid}
-\alias{write_asciiGrid}
+\name{readAsciiGrid}
+\alias{readAsciiGrid}
+\alias{writeAsciiGrid}
 \title{ read/write to/from (ESRI) asciigrid format }
 \description{ read/write to/from ESRI asciigrid format }
 \usage{ 
-read_asciiGrid(fname, as.image = FALSE, plot.image = FALSE, 
+readAsciiGrid(fname, as.image = FALSE, plot.image = FALSE, 
  colname = basename(fname), proj4string = CRS(as.character(NA)))
-write_asciiGrid(x, fname, attr = 1, na.value = -9999, ...)
+writeAsciiGrid(x, fname, attr = 1, na.value = -9999, ...)
 }
 
 \arguments{
@@ -26,14 +26,14 @@ resulting map}
 to write the numeric data }
 }
 \value{
-	\code{read_asciiGrid} returns the grid map read; either as
+	\code{readAsciiGrid} returns the grid map read; either as
 	an object of class \link{SpatialGridDataFrame-class} or, if
 	as.image is TRUE, as list with components \code{x}, \code{y} and {z}.
 }
 \seealso{ \link{as.image.SpatialGridDataFrame}, \link{image} }
 \author{Edzer J.\ Pebesma, e.pebesma@geo.uu.nl}
 \examples{
-x <- read_asciiGrid(system.file("grids/test.ag", package="maptools")[1])
+x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
 summary(x)
 image(x)
 xp <- as(x, "SpatialPixelsDataFrame")
@@ -43,8 +43,8 @@ summary(xpS)
 xS <- as(xpS, "SpatialGridDataFrame")
 summary(xS)
 tmpfl <- paste(tempdir(), "testS.ag", sep="/")
-write_asciiGrid(xS, tmpfl)
-axS <- read_asciiGrid(tmpfl)
+writeAsciiGrid(xS, tmpfl)
+axS <- readAsciiGrid(tmpfl)
 opar <- par(mfrow=c(1,2))
 image(xS, main="before export")
 image(axS, main="after import")
