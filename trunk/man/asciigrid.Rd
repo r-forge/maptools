@@ -13,11 +13,11 @@ writeAsciiGrid(x, fname, attr = 1, na.value = -9999, ...)
 \item{fname}{ file name }
 \item{as.image}{logical; if FALSE, a list is returned, ready to be
 shown with the \code{image} command; if FALSE an object of
-class \link{SpatialGridDataFrame-class} is returned }
+class \link[sp]{SpatialGridDataFrame-class} is returned }
 \item{plot.image}{logical; if TRUE, an image of the map is plotted}
 \item{colname}{alternative name for data column if not file basename}
 \item{proj4string}{A CRS object setting the projection arguments of the Spatial Grid returned}
-\item{x}{ object of class \link{SpatialGridDataFrame}}
+\item{x}{ object of class \link[sp]{SpatialGridDataFrame}}
 \item{attr}{attribute column; if missing, the first
 column is taken; a name or a column number may be given}
 \item{na.value}{numeric; value given to missing valued cells in the
@@ -27,10 +27,10 @@ to write the numeric data }
 }
 \value{
 	\code{readAsciiGrid} returns the grid map read; either as
-	an object of class \link{SpatialGridDataFrame-class} or, if
+	an object of class \link[sp]{SpatialGridDataFrame-class} or, if
 	as.image is TRUE, as list with components \code{x}, \code{y} and {z}.
 }
-\seealso{ \link{as.image.SpatialGridDataFrame}, \link{image} }
+\seealso{ \link[sp]{as.image.SpatialGridDataFrame}, \link[graphics]{image} }
 \author{Edzer J.\ Pebesma, e.pebesma@geo.uu.nl}
 \examples{
 x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
