@@ -111,4 +111,20 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 	invisible(res)
 }
 
-
+.polylist2SpP <- function(pl) {
+	if (!inherits(pl, "polylist")) stop("not a polylist object")
+	n <- length(pl)
+	IDs <- attr(pl, "region.id")
+	pL <- vector(mode="list", length=n)
+	for (i in 1:n) {
+		nP <- attr(pl[[i]], "nParts")
+		Ps <- vector(mode="list", length=nP)
+		from <- attr(pl[[i]], "pstart")$from
+		to <- attr(pl[[i]], "pstart")$to
+		for (j in 1:nP) {
+			Ps[[j]] <- Polygon(pl[[i]][from[j]:to[j],])
+		}
+		pL[[i]] <- Polygons(Ps, IDs[i])
+	}
+	res <- SpatialPolygons(pL)
+}

@@ -6,16 +6,17 @@
   Make a list of point coordinate matrices for a dot density map
 }
 \usage{
-dotsInPolys(pl, x, f = csr)
+dotsInPolys(pl, x, f = "random", compatible = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pl}{list of polygons of class \code{polylist}}
   \item{x}{integer vector of counts of same length as pl for dots}
-  \item{f}{function to place points in polygons, either \code{csr} - completely spatially random or \code{gridpts} gridded points from the splancs package}
+  \item{f}{type of sampling used to place points in polygons, either "random" or "regular"}
+  \item{compatible}{what to return, if TRUE a a list of matrices of point coordinates, one matrix for each member of pl, if false a SpatialPointsDataFrame with polygon ID values}
 }
 \details{
- With f=csr (completely spatially random), the dots are placed in the polygon at random, f=gridpts - in a grid pattern (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). No correction is made for holes in the placing of the dots. 
+ With f="random", the dots are placed in the polygon at random, f="regular" - in a grid pattern (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). No correction is made for holes in the placing of the dots. 
 }
 \value{
   The function returns a list of matrices of point coordinates, one matrix for each member of pl. If x[i] is zero, the list element is NULL, and can be tested when plotting - see the examples.
@@ -29,10 +30,10 @@ dotsInPolys(pl, x, f = csr)
 \examples{
 x <- read.shape(system.file("shapes/sids.shp", package="maptools")[1])
 ncpolys <- Map2poly(x)
-try1 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74))
+try1 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), compatible="TRUE")
 plot(ncpolys)
 xx <- lapply(try1, function(x) {if (!is.null(x)) points(x, pch=18, col="red")})
-try2 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), f=gridpts)
+try2 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), f="regular", compatible="TRUE")
 plot(ncpolys)
 xx <- lapply(try2, function(x) {if (!is.null(x)) points(x, pch=18, col="red")})
 }
