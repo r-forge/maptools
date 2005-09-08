@@ -20,7 +20,7 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE) {
   }
   class(shp.lst) <- "ShapeList"
   if (dbf.data) {
-    library(foreign)
+#    library(foreign)
     df <- read.dbf(filen)
     map <- list(Shapes=shp.lst, att.data=df)
     class(map) <- "Map"
@@ -60,7 +60,7 @@ write.pointShape <- function(object, file, coordinates, factor2char=TRUE,
   if (ncol(coordinates) != 2) stop("coordinates must have 2 columns")
   if (nrow(object) != nrow(coordinates))
     stop("different number of rows in coordinates and data frame")
-  library(foreign)
+#  library(foreign)
   write.dbf(object, paste(file, ".dbf", sep=""), factor2char=factor2char)
   res <- .Call("shpwritepoint", as.character(file), as.double(coordinates),
     PACKAGE="maptools")
@@ -99,7 +99,7 @@ write.polylistShape <- function(polylist, df, file, factor2char=TRUE,
 		as.integer(attr(polylist[[i]], "pstart")$to)
     warning("pstart$to changed to integer")
   }
-  library(foreign)
+#  library(foreign)
   write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
   res <- .Call("shpwritepolys", as.character(file), polylist, 
     PACKAGE="maptools")
@@ -122,7 +122,7 @@ write.linelistShape <- function(linelist, df, file, factor2char=TRUE,
     }
     warning("coordinates changed to double")
   }
-  library(foreign)
+#  library(foreign)
   write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
   res <- .Call("shpwritelines", as.character(file), linelist, 
     PACKAGE="maptools")

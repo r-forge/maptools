@@ -184,7 +184,7 @@ shape2points <- function(shape) {
 	if (is.null(shape$shp)) stop("No shp component in this list")
 	if (shape$shp$header$shape.type != 1)
 		stop("maptype not points")
-	n <- length(shape$shp$shp)
+#	n <- length(shape$shp$shp)
 	res <- shape$shp$shp[,2:3]
 	class(res) <- "Mappoints"
 	attr(res, "maplim") <- shp2maplim(shape)
@@ -809,8 +809,8 @@ MapShapeIds <- function(Map) {
 			oddCC <- which((rD == -1) & is.na(after))
 			for (i in oddCC) {
 				if (i != top) {
-					from1 <- from[i]
-					to1 <- to[i]
+#					from1 <- from[i]
+#					to1 <- to[i]
 					res[from[i]:to[i],] <- res[to[i]:from[i],]
 					attr(res, "ringDir")[i] <- ringDir(res, i)
 					warning(paste("ring direction changed in subpolygon"))

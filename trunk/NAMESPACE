@@ -1,6 +1,7 @@
 useDynLib(maptools)
 
 import(sp)
+import(foreign)
 
 export(leglabs, plotpolys, shape2poly, shape2lines, 
 	shape2points, shape2bbs, Map2poly, Map2poly1, Map2lines, Map2points, 
