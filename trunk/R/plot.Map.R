@@ -54,18 +54,18 @@ plot.Map <- function(x, recs, auxvar=NULL, add=FALSE, fg ='gray',
         if(attr(theMap$Shapes[[ii]], 'nParts') == 1) {
           polygon(theMap$Shapes[[ii]]$verts,
                 col=col.rmp$ramp[col.rmp$col.class[i]],
-                border= ol)
+                border= ol, ...)
         }
         if(attr(theMap$Shapes[[ii]], 'nParts') > 1) {
           for(j in 1:attr(theMap$Shapes[[ii]], 'nParts')) {
 	    if(j < attr(theMap$Shapes[[ii]], 'nParts')) {
               polygon(theMap$Shapes[[ii]]$verts[(theMap$Shapes[[ii]]$Pstart[j]+1):
                     theMap$Shapes[[ii]]$Pstart[j+1],],
-		    col=col.rmp$ramp[col.rmp$col.class[i]], border=ol)
+		    col=col.rmp$ramp[col.rmp$col.class[i]], border=ol, ...)
             } else {
               polygon(theMap$Shapes[[ii]]$verts[(theMap$Shapes[[ii]]$Pstart[j]+1):
                     attr(theMap$Shapes[[ii]],'nVerts'),],
-                    col=col.rmp$ramp[col.rmp$col.class[i]],border= ol)
+                    col=col.rmp$ramp[col.rmp$col.class[i]],border= ol, ...)
             }
           }
         }
@@ -75,17 +75,17 @@ plot.Map <- function(x, recs, auxvar=NULL, add=FALSE, fg ='gray',
       for(i in 1:length(recs)) {
         ii <- recs[i]
         if(attr(theMap$Shapes[[ii]],'nParts') == 1) {
-          polygon(theMap$Shapes[[ii]]$verts, col=fg[i], border= ol)
+          polygon(theMap$Shapes[[ii]]$verts, col=fg[i], border= ol, ...)
         }
         if(attr(theMap$Shapes[[ii]],'nParts') > 1) {
           for(j in 1:attr(theMap$Shapes[[ii]], 'nParts')) {
 	    if(j<attr(theMap$Shapes[[ii]], 'nParts')) {
               polygon(theMap$Shapes[[ii]]$verts[(theMap$Shapes[[ii]]$Pstart[j]+1):
-                    theMap$Shapes[[ii]]$Pstart[j+1],], col=fg[i] ,border= ol)
+                    theMap$Shapes[[ii]]$Pstart[j+1],], col=fg[i] ,border= ol, ...)
             } else {
               polygon(theMap$Shapes[[ii]]$verts[(theMap$Shapes[[ii]]$Pstart[j]+1):
                     attr(theMap$Shapes[[ii]],'nVerts'),],
-                    col=fg[i], border=ol)
+                    col=fg[i], border=ol, ...)
             }
           }
         }
