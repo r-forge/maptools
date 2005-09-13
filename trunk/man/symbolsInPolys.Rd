@@ -16,7 +16,7 @@ symbolsInPolys(pl, dens, symb = "+", compatible = FALSE)
   \item{compatible}{what to return, if TRUE a a list of matrices of point coordinates, one matrix for each member of pl, with a \code{symb} attribute, if false a SpatialPointsDataFrame with a \code{symb} column}
 }
 \details{
-  The dots are placed in a grid pattern with the number of points per polygon being polygon area times density (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). No correction is made for holes in the placing of the dots. 
+  The dots are placed in a grid pattern with the number of points per polygon being polygon area times density (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). From maptools release 0.5-2, correction is made for holes in the placing of the dots, but depends on hole values being correctly set, which they often are not. The wrapper package spgpc may be used to check holes, see the \code{dontrun} section of the example. 
 }
 
 \value{
@@ -37,7 +37,14 @@ symbs <- c("-", "+", "x")
 try1 <- symbolsInPolys(ncpolys, 100, symb=symbs[np], compatible=TRUE)
 plot(ncpolys)
 xx <- lapply(try1, function(x) {if (!is.null(x)) points(x, pch=attr(x, "symb"))})
-nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat  +ellps=clrk66"))
+nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=clrk66"))
+\dontrun{
+library(spgpc)
+pls <- getSpPpolygonsSlot(nc_SP)
+pls_new <- lapply(pls, checkPolygonsHoles)
+nc_SP <- SpatialPolygonsDataFrame(SpatialPolygons(pls_new, proj4string=CRS(proj4string(nc_SP))), data=as(nc_SP, "data.frame"))
+}
+symbs <- c("-", "+", "x")
 np <- getSpPnParts(nc_SP)
 try1 <- symbolsInPolys(nc_SP, 100, symb=symbs[np])
 plot(nc_SP, axes=TRUE)
