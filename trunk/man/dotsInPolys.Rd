@@ -3,39 +3,49 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Put dots in polygons}
 \description{
-  Make a list of point coordinate matrices for a dot density map
+  Make point coordinates for a dot density map
 }
 \usage{
-dotsInPolys(pl, x, f = "random", compatible = FALSE)
+dotsInPolys(pl, x, f = "random", offset, compatible = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{pl}{list of polygons of class \code{polylist}}
+  \item{pl}{list of polygons of class \code{polylist}, or an object of class SpatialPolygons or SpatialPolygonsDataFrame}
   \item{x}{integer vector of counts of same length as pl for dots}
   \item{f}{type of sampling used to place points in polygons, either "random" or "regular"}
+\item{offset}{ for regular sampling only: the offset (position) of the regular
+grid; if not set, \code{c(0.5,0.5)}, that is the returned grid is
+not random}
   \item{compatible}{what to return, if TRUE a a list of matrices of point coordinates, one matrix for each member of pl, if false a SpatialPointsDataFrame with polygon ID values}
 }
 \details{
  With f="random", the dots are placed in the polygon at random, f="regular" - in a grid pattern (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). No correction is made for holes in the placing of the dots. 
 }
 \value{
-  The function returns a list of matrices of point coordinates, one matrix for each member of pl. If x[i] is zero, the list element is NULL, and can be tested when plotting - see the examples.
+  If compatible=TRUE, the function returns a list of matrices of point coordinates, one matrix for each member of pl. If x[i] is zero, the list element is NULL, and can be tested when plotting - see the examples. If compatible=FALSE (default), it returns a SpatialPointsDataFrame with polygon ID values as the only column in the data slot.
 }
 
 \note{Waller and Gotway (2004) Applied Spatial Statistics for Public Health Data (Wiley, Hoboken, NJ) explicitly warn that care is needed in plotting and interpreting dot density maps (pp. 81-83)}
 
 \author{Roger Bivand \email{Roger.Bivand@nhh.no}}
 
-\seealso{\code{\link[splancs]{csr}}, \code{\link[splancs]{gridpts}}}
+\seealso{\code{\link[sp]{spsample}}}
 \examples{
 x <- read.shape(system.file("shapes/sids.shp", package="maptools")[1])
 ncpolys <- Map2poly(x)
-try1 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), compatible="TRUE")
+try1 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), compatible=TRUE)
 plot(ncpolys)
 xx <- lapply(try1, function(x) {if (!is.null(x)) points(x, pch=18, col="red")})
-try2 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), f="regular", compatible="TRUE")
+try2 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), f="regular", compatible=TRUE)
 plot(ncpolys)
 xx <- lapply(try2, function(x) {if (!is.null(x)) points(x, pch=18, col="red")})
+nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat  +ellps=clrk66"))
+try1 <- dotsInPolys(nc_SP, as.integer(nc_SP$SID74))
+plot(nc_SP, axes=TRUE)
+plot(try1, add=TRUE, pch=18, col="red")
+try2 <- dotsInPolys(nc_SP, as.integer(nc_SP$SID74), f="regular")
+plot(nc_SP, axes=TRUE)
+plot(try2, add=TRUE, pch=18, col="red")
 }
 \keyword{spatial}
 

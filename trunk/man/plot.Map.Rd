@@ -18,7 +18,7 @@ plot.Map(x, recs, auxvar = NULL, add = FALSE, fg = "gray", ol = "black",
   \item{auxvar}{if the Map has polygon shapes, a variable from which to derive polygon fill colours using the computed class intervals, must be same length as number of shapes}
   \item{add}{default FALSE, if TRUE add to existing plot}
   \item{fg}{foreground colour, can be used to pass through point and polygon colours, permitting the built-in class interval calculation to be avoided; if fg is not equal to the length of recs, all fg are set to fg[1]}
-  \item{ol}{line/boundary colour}
+  \item{ol}{line/boundary colour; boundaries may be removed by setting to NA oe "transparent"}
   \item{prbg}{if not NULL, draw a rectangle around the plot in this colour}
   \item{glyph}{points plotted as this pch code}
   \item{color}{base colour for color.ramp(); default "red"}
