@@ -127,4 +127,5 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 		pL[[i]] <- Polygons(Ps, IDs[i])
 	}
 	res <- SpatialPolygons(pL)
+	res
 }
