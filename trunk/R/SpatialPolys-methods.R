@@ -1,7 +1,13 @@
-readShapePoly <- function(fn, proj4string=CRS(as.character(NA)), 
+readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE) {
-	.Map2PolyDF(read.shape(filen=fn, verbose=verbose), 
-		proj4string=proj4string)
+	Map <- read.shape(filen=fn, verbose=verbose)
+	if (!is.null(IDvar)) {
+		IDvar <- as.character(IDvar)
+		if (!IDvar %in% names(Map$att.data))
+			stop(paste("column not found:", IDvar))
+		IDvar <- as.character(Map$att.data[[IDvar]])
+	}
+	.Map2PolyDF(Map, IDs=IDvar, proj4string=proj4string)
 }
 
 writePolyShape <- function(x, fn, factor2char = TRUE) {
@@ -12,7 +18,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 }
 
 .Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA))) {
-	if (missing(IDs))
+	if (is.null(IDs))
 		IDs <- as.character(sapply(Map$Shapes, function(x) x$shpID))
 	SR <- .asSpatialPolygonsShapes(Map$Shapes, IDs, 
 		proj4string=proj4string)

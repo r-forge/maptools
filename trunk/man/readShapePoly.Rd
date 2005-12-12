@@ -7,18 +7,19 @@
    The \code{readShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{writePolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile.
 }
 \usage{
-readShapePoly(fn, proj4string=CRS(as.character(NA)), verbose=FALSE)
+readShapePoly(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), verbose=FALSE)
 writePolyShape(x, fn, factor2char = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fn}{shapefile layer name, without extension}
+  \item{IDvar}{a character string: the name of a column in the shapefile DBF containing the ID values of the shapes - the values will be converted to a character vector}
   \item{proj4string}{Object of class \code{CRS}; holding a valid proj4 string}
   \item{verbose}{default TRUE - report type of shapefile and number of shapes}
   \item{x}{a \code{SpatialPolygonsDataFrame} object}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
 }
-\details{The shpID values of the shapefile will be used as \code{Polygons} ID values; when writing shapefiles, the object data slot rownames are added to the DBF file as column SP\_ID.}
+\details{If no IDvar argument is given, the shpID values of the shapefile will be used as \code{Polygons} ID values; when writing shapefiles, the object data slot rownames are added to the DBF file as column SP\_ID.}
 \value{
    a SpatialPolygonsDataFrame object
 }
@@ -27,7 +28,7 @@ writePolyShape(x, fn, factor2char = TRUE)
 
 \examples{
 library(maptools)
-xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=clrk66"))
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
 text(getSpPPolygonsLabptSlots(xx), labels=getSpPPolygonsIDSlots(xx), cex=0.6)
 as(xx, "data.frame")[1:5, 1:6]

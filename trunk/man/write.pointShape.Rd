@@ -6,13 +6,13 @@
   The function calls code from shapelib to write a point-type shapefile.
 }
 \usage{
-write.pointShape(object, file, coordinates, factor2char = TRUE, strictFilename=FALSE)
+write.pointShape(coordinates, df, file, factor2char = TRUE, strictFilename=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{object}{a data frame object}
-  \item{file}{a file name of maximum 8 chararacters, numbers or the underscore symbol to be written, omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{coordinates}{a 2-column numeric matrix of coordinates}
+  \item{df}{a data frame object}
+  \item{file}{a file name of maximum 8 chararacters, numbers or the underscore symbol to be written, omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{strictFilename}{if TRUE, impose file basename length limit of 8 characters}
 }
@@ -37,7 +37,7 @@ plot(balt_orig)
 balt_df <- balt_orig$att.data
 balt_cheap <- balt_df[balt_df$PRICE < 40,]
 file <- tempfile("")
-write.pointShape(balt_cheap, file, coordinates=cbind(balt_cheap$X, balt_cheap$Y))
+write.pointShape(coordinates=cbind(balt_cheap$X, balt_cheap$Y), df=balt_cheap, file)
 getinfo.shape(paste(file, ".shp", sep=""))
 balt_new <- read.shape(paste(file, ".shp", sep=""))
 plot(balt_new, fg="red", glyph=1, add=TRUE)

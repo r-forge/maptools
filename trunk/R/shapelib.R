@@ -50,7 +50,8 @@ print.shapehead <- function(x, ...) {
 }
 
 
-write.pointShape <- function(object, file, coordinates, factor2char=TRUE, 
+#write.pointShape <- function(object, file, coordinates, factor2char=TRUE, 
+write.pointShape <- function(coordinates, df, file, factor2char=TRUE, 
   strictFilename=FALSE) {
   file <- path.expand(file)
   if (strictFilename && nchar(basename(file)) > 8) 
@@ -58,10 +59,10 @@ write.pointShape <- function(object, file, coordinates, factor2char=TRUE,
   if (!is.matrix(coordinates)) stop("coordinates must be a matrix")
   if (!is.numeric(coordinates)) stop("coordinates must be numeric")
   if (ncol(coordinates) != 2) stop("coordinates must have 2 columns")
-  if (nrow(object) != nrow(coordinates))
+  if (nrow(df) != nrow(coordinates))
     stop("different number of rows in coordinates and data frame")
 #  library(foreign)
-  write.dbf(object, paste(file, ".dbf", sep=""), factor2char=factor2char)
+  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
   res <- .Call("shpwritepoint", as.character(file), as.double(coordinates),
     PACKAGE="maptools")
   invisible(res)

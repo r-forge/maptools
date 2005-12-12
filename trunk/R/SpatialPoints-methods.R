@@ -20,7 +20,7 @@ readShapePoints <- function(fn, proj4string=CRS(as.character(NA)),
 writePointsShape <- function(x, fn, factor2char = TRUE) {
 	df <- as(x, "data.frame")
 	coords <- coordinates(x)
-	write.pointShape(object=df, file=fn, coordinates=coords, 
+	write.pointShape(coordinates=coords, df=df, file=fn,  
 		factor2char = factor2char)
 }
 
