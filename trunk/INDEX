@@ -8,12 +8,14 @@ plot.Map                Plot a Map object
 plot.polylist           Plot polygons
 readAsciiGrid           read/write to/from (ESRI) asciigrid format
 read.shape              Read shapefile into Map object
-readShapeLines          Read arc shape files into
-                        SpatialLinesDataFrame objects
+readShapeLines          Read arc shape files into SpatialLinesDataFrame
+                        objects
 readShapePoints         Read points shape files into
                         SpatialPointsDataFrame objects
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
+sp2WB                   Export SpatialPolygons object as S-Plus map for
+                        WinBUGS
 subset.polylist         Subset polygon list objects
 symbolsInPolys          Place grids of points over polygons
 write.linelistShape     Write a arc-type shapefile
