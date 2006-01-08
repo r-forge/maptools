@@ -27,8 +27,8 @@ sp2WB <- function(map, filename, Xscale=1, Yscale=Xscale, plotorder=FALSE) {
 	cat(file=f, "Yscale:", Yscale, "\n", sep="")
 	cat(file=f, "\n")
 
-	if(plotorder==TRUE)
-		porder<-getPolygonsplotOrderSlot(nc)
+	if(plotorder)
+		porder <- slot(map, "plotOrder")
 	else
 		porder<-1:nareas
 

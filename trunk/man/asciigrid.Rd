@@ -11,7 +11,7 @@ writeAsciiGrid(x, fname, attr = 1, na.value = -9999, ...)
 
 \arguments{
 \item{fname}{ file name }
-\item{as.image}{logical; if FALSE, a list is returned, ready to be
+\item{as.image}{logical; if TRUE, a list is returned, ready to be
 shown with the \code{image} command; if FALSE an object of
 class \link[sp]{SpatialGridDataFrame-class} is returned }
 \item{plot.image}{logical; if TRUE, an image of the map is plotted}
