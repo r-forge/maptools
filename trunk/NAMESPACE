@@ -16,7 +16,7 @@ export(writePointsShape, writeLinesShape, writePolyShape)
 
 export(readAsciiGrid, writeAsciiGrid)
 
-export(sp2WB)
+export(sp2WB, sp2tmap)
 
 S3method(plot, Map)
 S3method(plot, polylist)

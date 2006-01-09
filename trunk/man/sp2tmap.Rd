@@ -38,7 +38,7 @@ zip.file.extract(paste(tempdir(), "world_adm0.shx", sep=.Platform$file.sep), zip
 zip.file.extract(paste(tempdir(), "world_adm0.shp", sep=.Platform$file.sep), zipname = basename(dfile))
 zip.file.extract(paste(tempdir(), "world_adm0.dbf", sep=.Platform$file.sep), zipname = basename(dfile))
 wrld <- readShapePoly(paste(tempdir(), "world_adm0.shp", sep=.Platform$file.sep), IDvar="NAME")
-write.dta(sp2tmap(as(wrld, "SpatialPolygons"), file="wrldmap.dta"))
+write.dta(sp2tmap(as(wrld, "SpatialPolygons")), file="wrldmap.dta")
 write.dta(as(wrld, "data.frame"), file="wrld.dta")
 }
 }
