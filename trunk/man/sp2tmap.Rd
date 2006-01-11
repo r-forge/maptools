@@ -15,11 +15,12 @@ sp2tmap(SP)
 
 \value{
  a data frame with three columns:
-  \item{\_ID}{a factor of polygon identifiers in alphanumeric order of labels}
+  \item{\_ID}{an integer vector of polygon identifiers in numeric order}
   \item{\_X}{numeric x coordinate}
   \item{\_Y}{numeric y coordinate}
+  and an \code{ID_n} attribute with the named polygon identifiers
 }
-\references{\url{http://www.stata.com/search.cgi?query=tmap}, \url{http://huebler.blogspot.com/2005/11/creating-maps-with-stata.html}}
+\references{\url{http://www.stata.com/search.cgi?query=tmap}}
 \author{Roger Bivand}
 \seealso{\code{\link[foreign]{write.dta}}}
 \examples{
@@ -29,7 +30,7 @@ plot(xx, border="blue", axes=TRUE, las=1)
 tmapdf <- sp2tmap(as(xx, "SpatialPolygons"))
 write.dta(tmapdf, file="NCmap.dta", version=7)
 NCdf <- as(xx, "data.frame")
-NCdf$m_n <- factor(attr(tmapdf, "mangled_names"))
+NCdf$ID_n <- attr(tmapdf, "ID_names")
 write.dta(NCdf, file="NC.dta", version=7)
 }
 }
