@@ -2,9 +2,9 @@
 \alias{plot.Map}
 %\alias{color.ramp}
 
-\title{Plot a Map object}
+\title{Plot a Map object (deprecated)}
 \description{
-  The function plots a map object directly from the imported shapefile data.
+  This function is deprecated. It is difficult to maintain and there are several alternatives, either by converting Map objects to sp class objects or polylist etc. objects. (The function plots a map object directly from the imported shapefile data).
 }
 \usage{
 plot.Map(x, recs, auxvar = NULL, add = FALSE, fg = "gray", ol = "black", 
@@ -38,8 +38,9 @@ plot.Map(x, recs, auxvar = NULL, add = FALSE, fg = "gray", ol = "black",
 
 \author{Nicholas J. Lewin-Koh, modified by Roger Bivand \email{Roger.Bivand@nhh.no}}
 
-\seealso{\code{\link{read.shape}}}
+\seealso{\code{\link{read.shape}}, \code{\link{readShapePoly}}, \code{\link{readShapeLines}}, \code{\link{readShapePoints}}, \code{\link{getinfo.shape}}}
 \examples{
+\dontrun{
 x <- read.shape(system.file("shapes/sids.shp", package="maptools")[1])
 plot(x)
 nParts <- sapply(x$Shapes, function(x) attr(x, "nPart"))
@@ -51,6 +52,7 @@ res <- plot(x, auxvar=x$att.data$BIR74)
 str(res)
 res <- plot(x, auxvar=x$att.data$BIR74, type="e")
 str(res)
+}
 }
 \keyword{spatial}
 

@@ -6,7 +6,7 @@
   The function calls code from shapelib to write a polygon-type shapefile from an S3 polylist object.
 }
 \usage{
-write.polylistShape(polylist, df, file, factor2char = TRUE, strictFilename=FALSE)
+write.polylistShape(polylist, df, file, factor2char = TRUE, strictFilename=FALSE, force = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,6 +15,7 @@ write.polylistShape(polylist, df, file, factor2char = TRUE, strictFilename=FALSE
   \item{file}{a file name of maximum 8 chararacters, numbers or the underscore symbol to be written, omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{strictFilename}{if TRUE, impose file basename length limit of 8 characters}
+  \item{force}{default FALSE, can be set to TRUE to try to force malformed polylist objects to some reasonable form that will not cause both maptools and R to crash. Because polylist objects are old-style rather than new-style classes, it is possible to crash R by trying to write malformed objects. Attempts are made to check for known problems, but using polylist objects rather than sp SpatialPolygons objects is known to be more risky.}
 }
 \details{
   The function calls code from shapelib to write a polygon-type shapefile (both the geometry file with a *.shp extension, the index file with a *.shx extension, and the database file with a *.dbf extension - see \code{\link[foreign]{write.dbf}} for details of the data frame export within this function.

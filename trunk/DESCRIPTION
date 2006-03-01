@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.5-4
-Date: 2005-12-13
+Version: 0.5-8
+Date: 2006-02-28
 Title: tools for reading and handling shapefiles
 Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Virgilio Gómez Rubio and Thomas Jagger
 Maintainer: Roger Bivand <Roger.Bivand@nhh.no>

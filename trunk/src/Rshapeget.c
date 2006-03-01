@@ -75,6 +75,10 @@ SEXP Rshapeget(SEXP shpnm)
 		SET_STRING_ELT(temp0, 0, mkChar("poly"));
 	        setAttrib(Rshplst, install("shp.type"), temp0);
 	}
+	else if(nShapeType==8){ /* MULTIPOINT */
+		SET_STRING_ELT(temp0, 0, mkChar("point"));
+	        setAttrib(Rshplst, install("shp.type"), temp0);
+	}
 	else {
 	  Rprintf("Shapefile type: %s (%d), # of Shapes: %d\n\n",
             SHPTypeName( nShapeType ), nShapeType, nEntities );
@@ -119,6 +123,12 @@ SEXP Rshapeget(SEXP shpnm)
    for( i = 0; i < nEntities; i++ ) 
      { 
 	psShape = SHPReadObject( hSHP, i);
+	if(nShapeType==8 && psShape->nVertices > 1){
+	  Rprintf("Shapefile type: %s (%d), # of Shapes: %d\n",
+            SHPTypeName( nShapeType ), nShapeType, nEntities );
+          Rprintf("Shape: %d has %d vertices\n", i, psShape->nVertices);
+	  error("Multipoint shapefile error");
+	}
         SET_VECTOR_ELT(Rshplst, i, allocVector(VECSXP, 7));
         SET_VECTOR_ELT(VECTOR_ELT(Rshplst,i),0, 
 	  allocVector(INTSXP,psShape->nParts));	

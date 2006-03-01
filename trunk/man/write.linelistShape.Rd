@@ -35,7 +35,7 @@ vol.levels <- data.frame(alt=sapply(line.list, function(x) x[[1]]))
 vol.ll <- lapply(line.list, function(x) cbind(x$x, x$y))
 tmpshp <- paste(tempdir(), "volcano", sep="/")
 write.linelistShape(vol.ll, vol.levels, file=tmpshp)
-try1 <- read.shape(tmpshp)
+try1 <- readShapeLines(tmpshp)
 plot(try1)
 }
 \keyword{spatial}

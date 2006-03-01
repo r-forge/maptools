@@ -5,6 +5,7 @@ plot.Map <- function(x, recs, auxvar=NULL, add=FALSE, fg ='gray',
                    ol='black', prbg=NULL, glyph=16, color='red',
                    type='q', nclass=5, ...) 
 {
+  .Deprecated("plot.Spatial", package="maptools")
   theMap <- x
   if(!inherits(theMap, "Map"))
   stop("Map.obj must be of class Map")

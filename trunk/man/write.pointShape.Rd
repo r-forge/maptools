@@ -32,15 +32,14 @@ write.pointShape(coordinates, df, file, factor2char = TRUE, strictFilename=FALSE
 
 \seealso{\code{\link[foreign]{write.dbf}}}
 \examples{
-balt_orig <- read.shape(system.file("shapes/baltim.shp", package="maptools")[1])
+balt_orig <- readShapePoints(system.file("shapes/baltim.shp", package="maptools")[1])
 plot(balt_orig)
-balt_df <- balt_orig$att.data
-balt_cheap <- balt_df[balt_df$PRICE < 40,]
+balt_cheap <- balt_orig[balt_orig$PRICE < 40,]
 file <- tempfile("")
-write.pointShape(coordinates=cbind(balt_cheap$X, balt_cheap$Y), df=balt_cheap, file)
+write.pointShape(coordinates=coordinates(balt_cheap), df=as(balt_cheap, "data.frame"), file)
 getinfo.shape(paste(file, ".shp", sep=""))
-balt_new <- read.shape(paste(file, ".shp", sep=""))
-plot(balt_new, fg="red", glyph=1, add=TRUE)
+balt_new <- readShapePoints(paste(file, ".shp", sep=""))
+plot(balt_new, col="red", pch=16, add=TRUE)
 }
 \keyword{spatial}
 

@@ -10,6 +10,9 @@ readShapePoints <- function(fn, proj4string=CRS(as.character(NA)),
 	coords <- Map2points(Map)
 	oldClass(coords) <- NULL
 	rownames(coords) <- IDs
+	attr(coords, "shpID") <- NULL
+	attr(coords, "maplim") <- NULL
+
 	df <- Map$att.data
 	rownames(df) <- IDs
 	res <- SpatialPointsDataFrame(coords=coords, data=df, 

@@ -38,7 +38,9 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 		stop("Number of shapes and IDs differ")
 	tab <- table(factor(IDs))
 	n <- length(tab)
-	IDss <- names(tab)
+	IDss <- .mixedsort(names(tab))
+# try to preserve sensible ordering
+#	IDss <- names(tab)
 	reg <- match(IDs, IDss)
 	belongs <- lapply(1:n, function(x) which(x == reg))
 # assemble the list of Srings
@@ -55,6 +57,57 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 	}
 	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4string)
 	res
+}
+# Function mixedorder copied from gtools 2.2.3 LGPL Gregory R. Warnes
+.mixedsort <- function (x) {
+    x[.mixedorder(x)]
+}
+
+.mixedorder <- function (x) {
+    delim = "\\$\\@\\$"
+    numeric <- function(x) {
+        optwarn = options("warn")
+        on.exit(options(optwarn))
+        options(warn = -1)
+        as.numeric(x)
+    }
+    nonnumeric <- function(x) {
+        optwarn = options("warn")
+        on.exit(options(optwarn))
+        options(warn = -1)
+        ifelse(is.na(as.numeric(x)), toupper(x), NA)
+    }
+    x <- as.character(x)
+    which.nas <- which(is.na(x))
+    which.blanks <- which(x == "")
+    if (length(which.blanks) > 0) 
+        x[which.blanks] <- -Inf
+    if (length(which.nas) > 0) 
+        x[which.nas] <- Inf
+    delimited <- gsub("([+-]{0,1}[0-9.]+([eE][+-]{0,1}[0-9.]+){0,1})", 
+        paste(delim, "\\1", delim, sep = ""), x)
+    step1 <- strsplit(delimited, delim)
+    step1 <- lapply(step1, function(x) x[x > ""])
+    step1.numeric <- lapply(step1, numeric)
+    step1.character <- lapply(step1, nonnumeric)
+    maxelem <- max(sapply(step1, length))
+    step1.numeric.t <- lapply(1:maxelem, function(i) sapply(step1.numeric, 
+        function(x) x[i]))
+    step1.character.t <- lapply(1:maxelem, function(i) sapply(step1.character, 
+        function(x) x[i]))
+    rank.numeric <- sapply(step1.numeric.t, rank)
+    rank.character <- sapply(step1.character.t, 
+	function(x) as.numeric(factor(x)))
+    rank.numeric[!is.na(rank.character)] <- 0
+    rank.character <- t(t(rank.character) + apply(matrix(rank.numeric), 
+        2, max, na.rm = TRUE))
+    rank.overall <- ifelse(is.na(rank.character), rank.numeric, 
+        rank.character)
+    order.frame <- as.data.frame(rank.overall)
+    if (length(which.nas) > 0) 
+        order.frame[which.nas, ] <- Inf
+    retval <- do.call("order", order.frame)
+    return(retval)
 }
 
 .shp2srsI <- function(shp, nParts) {

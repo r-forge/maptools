@@ -4,7 +4,7 @@ gpcholes                Hisaji Ono's lake/hole problem
 Map2poly                Create polygon lists and bounding boxes from
                         imported shapefiles
 maptools                Report version information and changes
-plot.Map                Plot a Map object
+plot.Map                Plot a Map object (deprecated)
 plot.polylist           Plot polygons
 readAsciiGrid           read/write to/from (ESRI) asciigrid format
 read.shape              Read shapefile into Map object
@@ -14,6 +14,8 @@ readShapePoints         Read points shape files into
                         SpatialPointsDataFrame objects
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
+sp2tmap                 Convert SpatialPolygons object for Stata tmap
+                        command
 sp2WB                   Export SpatialPolygons object as S-Plus map for
                         WinBUGS
 subset.polylist         Subset polygon list objects
