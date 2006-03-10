@@ -1,6 +1,7 @@
 dotsInPolys             Put dots in polygons
 get.Pcent               Polygon centroids
 gpcholes                Hisaji Ono's lake/hole problem
+gzAzimuth               Find azimuth for geographical coordinates
 Map2poly                Create polygon lists and bounding boxes from
                         imported shapefiles
 maptools                Report version information and changes
@@ -14,6 +15,7 @@ readShapePoints         Read points shape files into
                         SpatialPointsDataFrame objects
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
+sp2Mondrian             write map data for Mondrian
 sp2tmap                 Convert SpatialPolygons object for Stata tmap
                         command
 sp2WB                   Export SpatialPolygons object as S-Plus map for

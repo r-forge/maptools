@@ -75,7 +75,10 @@ writeAsciiGrid <- function(x, fname, attr = 1, na.value = -9999, ...) {
 	gp = gridparameters(x)
 	if (length(gp$cells.dim) != 2)
 		stop("asciigrid only supports 2D grids")
-	if (gp$cellsize[1] != gp$cellsize[2])
+#	if (gp$cellsize[1] != gp$cellsize[2])
+	if (diff(gp$cellsize) < .Machine$double.eps ^ 0.5)
+		gp$cellsize <- rep(mean(gp$cellsize), 2)
+	else
 		stop("Asciigrid does not support grids with non-square cells")
 	f = file(fname, open = "w")
 	writeLines(c(

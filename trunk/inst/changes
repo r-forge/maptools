@@ -1,3 +1,4 @@
+0.5-9	Added azimuth-finding function, function to output polygon maps for Mondrian, and made plot.Map deprecated; a fuzz factor has been added to writeAsciiGrid() to force cell resolution to equality if the difference is less than the square root of machine precision.
 0.5-6	Added guard functionality and traps for malformed polylist objects and force= argument to write.polylistShape(), thanks to excellent bug report from Marian Eriksson.
 0.5-5	Added function sp2tmap to create a data frame for export to Stata's tmap function from SpatialPolygons objects
 0.5-4	Added function sp2WB() to write SpatialPolygons objects to file for reading in SPlus format by WinBUGS, added argument to readShapePoly() to insert polygon IDs from DBF file column.

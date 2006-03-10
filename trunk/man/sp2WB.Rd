@@ -17,7 +17,7 @@ sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
   \item{plotorder}{default=FALSE, if TRUE, export polygons in plotting order}
 }
 
-\references{http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/geobugs12manual.pdf}
+\references{\url{http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/geobugs12manual.pdf}}
 \author{Virgilio Gómez Rubio, partly derived from earlier code by Thomas Jagger}
 
 

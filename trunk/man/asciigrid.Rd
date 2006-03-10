@@ -2,7 +2,7 @@
 \alias{readAsciiGrid}
 \alias{writeAsciiGrid}
 \title{ read/write to/from (ESRI) asciigrid format }
-\description{ read/write to/from ESRI asciigrid format }
+\description{ read/write to/from ESRI asciigrid format; a fuzz factor has been added to \code{writeAsciiGrid} to force cell resolution to equality if the difference is less than the square root of machine precision}
 \usage{ 
 readAsciiGrid(fname, as.image = FALSE, plot.image = FALSE, 
  colname = basename(fname), proj4string = CRS(as.character(NA)))

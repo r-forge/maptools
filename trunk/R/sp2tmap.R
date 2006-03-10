@@ -13,7 +13,6 @@ sp2tmap <- function(SP) {
 		m <- length(pl)
 		for (j in 1:m) {
 			crds <- slot(pl[[j]], "coords")
-			nc <- nrow(crds)
 			if (is.null(cID)) { 
 				cID <- i
 				cX <- as.numeric(NA)
