@@ -18,17 +18,18 @@ sp2Mondrian <- function(SP, file) {
         for (i in 1:n) {
 		pl <- slot(pls[[i]], "Polygons")
 		m <- length(pl)
-		if (m > 1) warning("only writing first polygon for multipolygon object")
-		crds <- slot(pl[[1]], "coords")
-		nc <- nrow(crds)
-		lab <- paste(id[i], paste("/P", IDs[i], sep=""), nc, sep="\t")
-                cat("\n", file = con)
-                writeLines(lab, con = con)
-                write.table(crds, file = con, 
-                	append = TRUE, 
-                	row.names = FALSE, 
-                	col.names = FALSE, sep="\t", dec=".")
-
+		for (j in 1:m) {
+			crds <- slot(pl[[j]], "coords")
+			nc <- nrow(crds)
+			lab <- paste(id[i], paste("/P", IDs[i], sep=""), 
+				nc, sep="\t")
+                	cat("\n", file = con)
+                	writeLines(lab, con = con)
+                	write.table(crds, file = con, 
+                		append = TRUE, 
+                		row.names = FALSE, 
+                		col.names = FALSE, sep="\t", dec=".")
+		}
 		
 	}
 	close(con)

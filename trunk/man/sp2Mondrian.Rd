@@ -18,13 +18,15 @@ sp2Mondrian(SP, file)
 \references{\url{http://www.theusrus.de/Mondrian/index.html}}
 \author{Patrick Hausmann and Roger Bivand}
 \note{
- At this release, the function only passes out the first polygon of multi-polygon spatial objects
+ At this release, the function writes out a text file with both data and polygon(s) identified as belonging to each row of data.
 }
 
 \examples{
 \dontrun{
 xx <- readShapePoly(system.file("shapes/columbus.shp", package="maptools")[1])
 sp2Mondrian(xx, file="columbus1.txt")
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1]))
+sp2Mondrian(xx, file="sids1.txt")
 }
 }
 \keyword{spatial}
