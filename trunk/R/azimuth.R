@@ -37,3 +37,16 @@ gzAzimuth <- function(from, to, type="snyder_sphere") {
   is.na(res) <- lon == lon0 & lat == lat0 
   rad2deg(res)
 }
+
+trackAzimuth <- function(track, type="snyder_sphere") {
+  if (!is.matrix(track)) stop("track must be two-column matrix")
+  if (ncol(track) != 2) stop("track must be two-column matrix")
+  n1 <- nrow(track)-1
+  if (n1 < 2) stop("less than two points")
+  res <- numeric(n1)
+  for (i in seq(along=res)) res[i] <- gzAzimuth(track[i,], track[(i+1),],
+    type=type)
+  res
+} 
+
+

@@ -55,9 +55,11 @@ sp2WB <- function(map, filename, Xscale=1, Yscale=Xscale, plotorder=FALSE) {
 			ncoords<-length(coords[,1])
 		
 # Should we check that there are only x/y coordinates?
+                        xcrd <- formatC(coords[,1], format="f")
+                        ycrd <- formatC(coords[,2], format="f")
 			for(i in 1:ncoords)
-				cat(file=f, label, coords[i,1], 
-					coords[i,2], "\n")
+                                cat(file=f, label, xcrd[i], ycrd[i],
+                                        "\n")
 
 			if(index<nRings)
 				cat(file=f, "NA", "NA", "NA\n")	

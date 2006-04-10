@@ -1,16 +1,19 @@
 \name{gzAzimuth}
 \alias{gzAzimuth}
+\alias{trackAzimuth}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Find azimuth for geographical coordinates}
 \description{
-  The function finds azimuth values for geographical coordinates given as decimal degrees from the \code{from} coordinates to the \code{to} coordinate.
+  The function finds azimuth values for geographical coordinates given as decimal degrees from the \code{from} coordinates to the \code{to} coordinate. In function \code{trackAzimuth}, the azimuth values are found between successive rows of the input coordinate matrix.
 }
 \usage{
 gzAzimuth(from, to, type = "snyder_sphere")
+trackAzimuth(track, type="snyder_sphere")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{from}{a two column matrix of geographical coordinates given as decimal degrees (longitude first)}
+  \item{track}{a two column matrix of geographical coordinates given as decimal degrees (longitude first)}
   \item{to}{a one row, two column matrix or two element vector of geographical coordinates given as decimal degrees (longitude first)}
   \item{type}{default is \code{"snyder_sphere"}, otherwise \code{"abdali"}; the results should be identical with slightly less trigonometry in \code{"abdali"}}
 }
@@ -21,7 +24,7 @@ gzAzimuth(from, to, type = "snyder_sphere")
   values in decimal degrees - zero is North - of the azimuth from the \code{from} coordinates to the \code{to} coordinate.
 }
 \references{Snyder JP (1987) Map projections - a working manual, USGS Professional Paper 1395; Abdali SK (1997) "The Correct Qibla", \url{http://patriot.net/users/abdali/ftp/qibla.pdf}}
-\author{Roger Bivand}
+\author{Roger Bivand, with contributions by Sebastian Luque}
 
 \examples{
 name <- c("Mecca", "Anchorage", "Washington")
@@ -36,5 +39,6 @@ all.equal(r1, crib)
 r2 <- gzAzimuth(x[2:3,], x[1,], type="abdali")
 r2
 all.equal(r2, crib)
+trackAzimuth(x)
 }
 \keyword{spatial}

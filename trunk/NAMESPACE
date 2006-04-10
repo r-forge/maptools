@@ -18,7 +18,7 @@ export(readAsciiGrid, writeAsciiGrid)
 
 export(sp2WB, sp2tmap, sp2Mondrian)
 
-export(gzAzimuth)
+export(gzAzimuth, trackAzimuth)
 
 S3method(plot, Map)
 S3method(plot, polylist)
