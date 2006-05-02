@@ -8,7 +8,7 @@
   Read shapefile into Map object; the file should be given including its ".shp" extension, and the function will reconstruct the names of the database (dbf) file and the index (shx) file from these.
 }
 \usage{
-read.shape(filen, dbf.data = TRUE, verbose=TRUE)
+read.shape(filen, dbf.data = TRUE, verbose=TRUE, repair=FALSE)
 getinfo.shape(filen)
 print.shapehead(x, ...)
 }
@@ -17,6 +17,7 @@ print.shapehead(x, ...)
   \item{filen}{name of file with *.shp extension}
   \item{dbf.data}{read DBF data together with shapes, default TRUE}
   \item{verbose}{default TRUE --- report type of shapefile and number of shapes}
+  \item{repair}{default FALSE: some shapefiles provided by Geolytics Inc. have values of object sizes stored in the *.shx index file that are eight bytes too large, leading the function to try to read past the end of file. If repair=TRUE, an attempt is made to repair the internal values, permitting such files to be read.}
   \item{x}{a shapehead list as returned by getinfo.shape}
   \item{...}{other arguments passed to print}
 }

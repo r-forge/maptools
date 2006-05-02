@@ -1,6 +1,6 @@
 readShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
-	verbose=FALSE) {
-	.shp2LinesDF(read.shape(filen=fn, verbose=verbose), 
+	verbose=FALSE, repair=FALSE) {
+	.shp2LinesDF(read.shape(filen=fn, verbose=verbose, repair=repair), 
 		proj4string=proj4string)
 }
 

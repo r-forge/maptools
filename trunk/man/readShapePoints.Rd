@@ -7,7 +7,7 @@
   The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile.
 }
 \usage{
-readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE)
+readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE, repair=FALSE)
 writePointsShape(x, fn, factor2char = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -15,6 +15,7 @@ writePointsShape(x, fn, factor2char = TRUE)
   \item{fn}{shapefile layer name, without extension}
   \item{proj4string}{Object of class \code{CRS}; holding a valid proj4 string}
   \item{verbose}{default TRUE - report type of shapefile and number of shapes}
+  \item{repair}{default FALSE: some shapefiles provided by Geolytics Inc. have values of object sizes stored in the *.shx index file that are eight bytes too large, leading the function to try to read past the end of file. If repair=TRUE, an attempt is made to repair the internal values, permitting such files to be read.}
   \item{x}{a \code{SpatialLinesDataFrame} object}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
 }

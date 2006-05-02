@@ -1,6 +1,6 @@
 readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), 
-	verbose=FALSE) {
-	Map <- read.shape(filen=fn, verbose=verbose)
+	verbose=FALSE, repair=FALSE) {
+	Map <- read.shape(filen=fn, verbose=verbose, repair=repair)
 	if (!is.null(IDvar)) {
 		IDvar <- as.character(IDvar)
 		if (!IDvar %in% names(Map$att.data))

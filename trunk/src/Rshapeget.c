@@ -11,24 +11,28 @@
 /* #include <R_ext/PrtUtil.h> */
 
 /*#define DEBUG 1*/
-SEXP Rshapeget(SEXP);
+/*SEXP Rshapeget(SEXP, SEXP);*/
 
-SEXP Rshapeget(SEXP shpnm)
+int SHPCheck_SHX( SHPHandle hSHP );
+int SHPCheck_SHX_Geolytics( SHPHandle hSHP );
+
+
+SEXP Rshapeget(SEXP shpnm, SEXP repair)
 
 {
     SHPHandle	hSHP;
-    int    nShapeType, nEntities, i, pc=0;
+    int    nShapeType, nEntities, nImpliedEOF, qRep, i, pc=0;
     double  adfMinBound[4], adfMaxBound[4];
-    int j, pz=0;
+    int j, pz=0, k;
     SHPObject *psShape;
 
     SEXP  Rshplst, shplistnms;
     SEXP temp0, temp1, temp2, temp3;
 
-#ifdef DEBUG
+/*#ifdef DEBUG
     PT Cent;
     double Area;
-#endif
+#endif*/
 
 /* -------------------------------------------------------------------- */
 /*      Open the passed shapefile.                                      */
@@ -37,6 +41,24 @@ SEXP Rshapeget(SEXP shpnm)
     hSHP = SHPOpen(CHAR(STRING_ELT(shpnm,0)), "rb" );
     if( hSHP == NULL )    
 	error("unable to open file");
+
+    qRep = LOGICAL_POINTER(repair)[0];
+
+/* file length implied by *.shx */
+    k = SHPCheck_SHX(hSHP);
+    if (k == 1 && qRep == 0) {
+	error("File size and implied file size differ, consider trying repair=TRUE"); /* implied file length greater than file size */
+    }
+
+    if (qRep == 1 && k == 1) {
+	j = SHPCheck_SHX_Geolytics(hSHP);
+	if (j > 0) error("Cannot repair file size error");
+	if (j == 0) {/* Geolytics size + 8 bug */
+	    for (i=1; i < hSHP->nRecords; i++) 
+	        hSHP->panRecSize[i] = hSHP->panRecSize[i] - 8;
+	    warning("SHX object size off by 8 bug repaired");
+	}
+    }
 
 
 /* -------------------------------------------------------------------- */
@@ -123,6 +145,11 @@ SEXP Rshapeget(SEXP shpnm)
    for( i = 0; i < nEntities; i++ ) 
      { 
 	psShape = SHPReadObject( hSHP, i);
+	if (psShape == NULL) {/* Jon Wakefield 060428 */
+	  Rprintf("Bailing out at geometry object %d of %d\n", i+1, nEntities);
+	  SHPClose(hSHP);
+	  error("Error in fseek() or fread() reading object from .shp file.");
+	}
 	if(nShapeType==8 && psShape->nVertices > 1){
 	  Rprintf("Shapefile type: %s (%d), # of Shapes: %d\n",
             SHPTypeName( nShapeType ), nShapeType, nEntities );
@@ -194,5 +221,28 @@ SEXP Rshapeget(SEXP shpnm)
     return(Rshplst);
 }
 
+int SHPCheck_SHX( SHPHandle hSHP )
+/* checks file length against implied file length in *.shx to guard */
+/* against overrun */
 
+{
+    int result = 0;
+    if ((hSHP->panRecOffset[hSHP->nRecords-1] + 
+	hSHP->panRecSize[hSHP->nRecords-1] + 8) > hSHP->nFileSize)
+	    result = 1;
+    return( result );
+}
+
+int SHPCheck_SHX_Geolytics( SHPHandle hSHP )
+/* checks for Geolytics Inc. off by 8 bytes malformity in *.shx */
+
+{
+    int i, result;
+    for (i=1, result=0; i < hSHP->nRecords; i++)
+	if (hSHP->panRecOffset[i] != (hSHP->panRecOffset[i-1] + 
+	    hSHP->panRecSize[i-1])) result++;
+
+    return( result );
+
+}
 

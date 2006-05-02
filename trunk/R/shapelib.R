@@ -4,7 +4,7 @@
 # set the variables for the header info
 
 
-read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE) {
+read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
   filen <- path.expand(filen)
   shinfo <- getinfo.shape(filen)
   if (dbf.data) {
@@ -16,7 +16,8 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE) {
     if (!dbf.data) stop("to test for multipoint compliance, set dbf.data=TRUE")
     if (ndf != shinfo[[3]]) stop("noncompliant multipoint shapefile")
   }
-  shp.lst <- .Call("Rshapeget", as.character(filen), PACKAGE="maptools")
+  shp.lst <- .Call("Rshapeget", as.character(filen), as.logical(repair), 
+    PACKAGE="maptools")
   if (verbose) {
     print(shinfo)
   }
