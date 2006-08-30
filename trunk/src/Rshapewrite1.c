@@ -32,9 +32,9 @@ SEXP shpwritepolys(SEXP fname, SEXP shapes)
     nParts = (int *) R_alloc((long) nShapes, sizeof(int));
     nVerts = (int *) R_alloc((long) nShapes, sizeof(int));
     PROTECT(SnParts = NEW_CHARACTER(1)); pc++;
-    SET_VECTOR_ELT(SnParts, 0, COPY_TO_USER_STRING("nParts"));
+    SET_STRING_ELT(SnParts, 0, COPY_TO_USER_STRING("nParts"));
     PROTECT(Spstart = NEW_CHARACTER(1)); pc++;
-    SET_VECTOR_ELT(Spstart, 0, COPY_TO_USER_STRING("pstart"));
+    SET_STRING_ELT(Spstart, 0, COPY_TO_USER_STRING("pstart"));
 
     for (i = 0; i < nShapes; i++) {
       nParts[i] = INTEGER_POINTER(GET_ATTR(VECTOR_ELT(shapes, i), SnParts))[0];
