@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read points shape files into SpatialPointsDataFrame objects}
 \description{
-  The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile.
+  The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile. Both reading and writing can be carried out for 2D and 3D point coordinates.
 }
 \usage{
 readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE, repair=FALSE)
@@ -38,6 +38,10 @@ getinfo.shape(paste(tmpfl, ".shp", sep=""))
 axx <- readShapePoints(tmpfl)
 plot(axx, col="red", add=TRUE)
 unlink(paste(tmpfl, ".*", sep=""))
+xx <- readShapePoints(system.file("shapes/pointZ.shp", package="maptools")[1])
+dimensions(xx)
+plot(xx)
+summary(xx)
 }
 \keyword{spatial}
 

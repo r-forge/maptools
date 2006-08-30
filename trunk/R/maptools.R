@@ -314,7 +314,9 @@ Map2points <- function(Map) {
 	if (attr(Map$Shapes,'shp.type') != 'point')
 		stop("maptype not points")
 	n <- attr(Map$Shapes,'nshps')
-	res <- matrix(NA, nrow=n, ncol=2)
+	ncols <- 2
+	if (attr(Map$Shapes[[1]], "shp.type") == 11) ncols <- 3
+	res <- matrix(NA, nrow=n, ncol=ncols)
 	shpIDs <- integer(n)
 	for (i in 1:n) {
 		res[i,] <- Map$Shapes[[i]]$verts

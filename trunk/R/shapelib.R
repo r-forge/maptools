@@ -66,13 +66,15 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
     stop("shapefile names must conform to the 8.3 format")
   if (!is.matrix(coordinates)) stop("coordinates must be a matrix")
   if (!is.numeric(coordinates)) stop("coordinates must be numeric")
-  if (ncol(coordinates) != 2) stop("coordinates must have 2 columns")
+  ncolcrds <- ncol(coordinates)
+  if (ncolcrds < 2) stop("coordinates must have at least 2 columns")
+  if (ncolcrds > 3) stop("coordinates must have 2 or 3 columns")
   if (nrow(df) != nrow(coordinates))
     stop("different number of rows in coordinates and data frame")
 #  library(foreign)
   write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
   res <- .Call("shpwritepoint", as.character(file), as.double(coordinates),
-    PACKAGE="maptools")
+    as.integer(ncolcrds), PACKAGE="maptools")
   invisible(res)
 }
 
