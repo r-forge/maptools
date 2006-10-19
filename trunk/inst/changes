@@ -1,3 +1,4 @@
+0.5-16	Fixed bug in dotsInPolys() for returned NULL point objects.
 0.5-13	Passing through 3rd dimension in reading POINTZ shapefiles (bug report thanks to Michael Toews), POINTZ are also now written for 3D point coordinates.
 0.5-12	Added repair= argument to read.shape(), readShape*() functions, and bug fixes to prevent problems caused by shapefiles with malformed *.shx files; the repair= argument is FALSE by default, equivalent to function behaviour until now, but when TRUE, it tries to repair malformed *.shx files typically found in data provided by Geolytics Inc. Bug report thanks to Jon Wakefield.
 0.5-11	sp2WB now no longer emits 1e5 style coordinates, which WinBUGS cannot read; readAsciiGrid and writeAsciiGrid now have dec= arguments to cater for unusual locale handling in ArcGIS 9 (ArcGIS 8 and ArcView 3.2 read "." even in "," decimal mark locales, ArcGIS 9 is not as predictable); trackAzimuth is a wrapper for gzAzimuth to give directions along a track.
