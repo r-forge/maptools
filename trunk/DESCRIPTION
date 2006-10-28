@@ -1,8 +1,8 @@
 Package: maptools
-Version: 0.5-16
-Date: 2006-10-20
+Version: 0.6-1
+Date: 2006-10-28
 Title: tools for reading and handling shapefiles
-Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Patrick Hausmann, Virgilio Gómez Rubio and Thomas Jagger
+Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Patrick Hausmann, Virgilio Gómez Rubio, Thomas Jagger and Sebastian P. Luque
 Maintainer: Roger Bivand <Roger.Bivand@nhh.no>
 Depends: R (>= 2.1), foreign (>= 0.8), sp (>= 0.8-7)
 Description: Set of tools for manipulating and reading geographic data, in particular ESRI shapefiles; C code used from shapelib. 

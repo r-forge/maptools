@@ -20,6 +20,8 @@ export(sp2WB, sp2tmap, sp2Mondrian)
 
 export(gzAzimuth, trackAzimuth)
 
+export(Crepuscule_t, Sunriset_t, Solarnoon_t, Solarpos_t, crepuscule, sunriset, solarnoon, solarpos)
+
 S3method(plot, Map)
 S3method(plot, polylist)
 S3method(subset, polylist)

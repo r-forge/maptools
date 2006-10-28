@@ -21,6 +21,7 @@ sp2tmap                 Convert SpatialPolygons object for Stata tmap
 sp2WB                   Export SpatialPolygons object as S-Plus map for
                         WinBUGS
 subset.polylist         Subset polygon list objects
+sunriset                Calculation of sun transit times
 symbolsInPolys          Place grids of points over polygons
 write.linelistShape     Write a arc-type shapefile
 write.pointShape        Write a point-type shapefile
