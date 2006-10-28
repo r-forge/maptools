@@ -1,35 +1,37 @@
 ".deg" <- function(radian) 180 * radian / pi
 ".rad" <- function(degree) pi * degree / 180
 
-#"decDeg" <- function(degrees, minutes, seconds)
-#{
-    ## Value: Numeric vector with decimal degrees
-    ## --------------------------------------------------------------------
-    ## Arguments: degrees=numeric degrees, negative for S and W;
-    ## minutes=seconds=numeric minutes and seconds
-    ## --------------------------------------------------------------------
-    ## Author: Sebastian Luque
-    ## --------------------------------------------------------------------
-#    dec <- abs(degrees) + minutes / 60 + seconds / 3600
-#    dec[degrees < 0] <- -dec[degrees <0]
-#    dec
-#}
+## "decDeg" <- function(degrees, minutes, seconds)
+## {
+##     ## Value: Numeric vector with decimal degrees
+##     ## --------------------------------------------------------------------
+##     ## Arguments: degrees=numeric degrees, negative for S and W;
+##     ## minutes=seconds=numeric minutes and seconds
+##     ## --------------------------------------------------------------------
+##     ## Author: Sebastian Luque
+##     ## --------------------------------------------------------------------
+##     minutes <- ifelse(!is.na(minutes), minutes, 0)
+##     seconds <- ifelse(!is.na(seconds), seconds, 0)
+##     dec <- abs(degrees) + minutes / 60 + seconds / 3600
+##     dec[degrees < 0] <- -dec[degrees <0]
+##     dec
+## }
 
-#"dms" <- function(dec.degrees)
-#{
-    ## Value: Numeric matrix with degrees, minutes, and seconds as columns
-    ## --------------------------------------------------------------------
-    ## Arguments: dec.degrees=decimal degrees (negative for S and W)
-    ## --------------------------------------------------------------------
-    ## Author: Sebastian Luque
-    ## --------------------------------------------------------------------
-#    dd <- floor(abs(dec.degrees))
-#    mm <- (abs(dec.degrees) - dd) * 60
-#    ss <- (mm - floor(mm)) * 60
-#    dms <- cbind(degrees=dd, minutes=floor(mm), seconds=ss)
-#    dms[dec.degrees < 0, 1] <- -dms[dec.degrees < 0, 1]
-#    dms
-#}
+## "dms" <- function(dec.degrees)
+## {
+##     ## Value: Numeric matrix with degrees, minutes, and seconds as columns
+##     ## --------------------------------------------------------------------
+##     ## Arguments: dec.degrees=decimal degrees (negative for S and W)
+##     ## --------------------------------------------------------------------
+##     ## Author: Sebastian Luque
+##     ## --------------------------------------------------------------------
+##     dd <- floor(abs(dec.degrees))
+##     mm <- (abs(dec.degrees) - dd) * 60
+##     ss <- (mm - floor(mm)) * 60
+##     dms <- cbind(degrees=dd, minutes=floor(mm), seconds=ss)
+##     dms[dec.degrees < 0, 1] <- -dms[dec.degrees < 0, 1]
+##     dms
+## }
 
 ".julianD" <- function(year, month, day)
 {
@@ -63,7 +65,7 @@
     ## Author: Sebastian Luque
     ## --------------------------------------------------------------------
     l0 <- 280.46646 + jc * (36000.76983 + 0.0003032 * jc)
-    updown <- (!is.finite(l0)) | l0 > 360 | l0 < 0
+    updown <- !is.finite(l0) | l0 > 360 | l0 < 0
     l0[updown] <- l0[updown] %% 360
     l0
 }
@@ -255,8 +257,6 @@
               tan(latrad) * tan(sdrad))
     haarg[abs(haarg) >= 1] <- NA
     angle <- acos(haarg)
-#    angle <- acos(cos(.rad(90 + solarDep)) / (cos(latrad) * cos(sdrad)) -
-#                  tan(latrad) * tan(sdrad))
     switch(direction, dawn=angle, dusk=-angle)
 }
 
@@ -276,11 +276,8 @@
     sdrad <- .rad(solarDec)
     haarg <- (cos(.rad(90.833)) / (cos(latrad) * cos(sdrad)) -
               tan(latrad) * tan(sdrad))
-#    angle <- acos(cos(.rad(90.833)) / (cos(latrad) * cos(sdrad)) -
-#                  tan(latrad) * tan(sdrad))
     haarg[abs(haarg) >= 1] <- NA
     angle <- acos(haarg)
-#    angle <- ifelse(abs(haarg) <= 1, acos(haarg), NaN)
     switch(direction, sunrise= angle, sunset=-angle)
 }
 
@@ -372,6 +369,29 @@
     cbind(newlon, newlat)
 }
 
+".timeData" <- function(time)
+{
+    ## Value: list with numeric vectors year, month, day, offset hours
+    ## from GMT, and whether day light savings is in effect.
+    ## --------------------------------------------------------------------
+    ## Arguments: time=POSIXct
+    ## --------------------------------------------------------------------
+    ## Author: Sebastian P. Luque
+    ## --------------------------------------------------------------------
+    time.gmt <- as.POSIXct(format(time), tz="GMT")
+    time.plt <- as.POSIXlt(time)
+    timezone <- as.numeric(difftime(time.gmt, time, units="hours"))
+    year <- as.integer(format(time.plt, "%Y"))
+    month <- as.integer(format(time.plt, "%m"))
+    day <- as.integer(format(time.plt, "%d"))
+    hour <- as.integer(format(time.plt, "%H"))
+    min <- as.integer(format(time.plt, "%M"))
+    sec <- as.integer(format(time.plt, "%S"))
+    tz <- as.character(format(time, "%Z")) # returned only for debugging
+    list(year=year, month=month, day=day, hour=hour, min=min, sec=sec,
+         timezone=timezone, dlstime=0, tz=tz)
+}
+
 "crepuscule" <- function(lon, lat, year, month, day, timezone,
                          dlstime, solarDep, direction=c("dawn", "dusk"))
 {
@@ -398,6 +418,67 @@
                                               dir="dusk")})
     risetTimeLST <- risetTimeGMT + (60 * timezone) + (dlstime * 60)
     risetTimeLST / 1440
+}
+
+"Crepuscule" <- function(crds, year, month, day, timezone=0, dlstime=0,
+                         solarDep, direction=c("dawn", "dusk")) {
+    if (!inherits(crds, "SpatialPoints")) stop("crds must be SpatialPoints")
+    if (!isTRUE(!is.projected(crds)))
+        stop("crds must be geographical coordinates")
+    if (missing(solarDep)) stop("solarDep must be given")
+    lon <- coordinates(crds)[,1]
+    lat <- coordinates(crds)[,2]
+    ldate <- length(day)
+    lcrds <- length(lon)
+    if (lcrds == 1 && ldate > 1) {
+        lon <- rep(lon, ldate)
+        lat <- rep(lat, ldate)
+    } else if (lcrds > 1 && ldate == 1) {
+        year <- rep(year, lcrds)
+        month <- rep(month, lcrds)
+        day <- rep(day, lcrds)
+    } else if (lcrds != ldate)
+        stop("mismatch in numbers of coordinates and dates")
+    res <- crepuscule(lon=lon, lat=lat, year=year, month=month,
+                      day=day, timezone=timezone, dlstime=dlstime,
+                      solarDep=solarDep, direction=direction)
+    res
+}
+
+"Crepuscule_t" <- function(crds, time, solarDep, direction=c("dawn", "dusk"),
+                           POSIXct_output=FALSE) {
+    if (!inherits(crds, "SpatialPoints")) stop("crds must be SpatialPoints")
+    if (!isTRUE(!is.projected(crds)))
+        stop("crds must be geographical coordinates")
+    if (missing(solarDep)) stop("solarDep must be given")
+    if (!is(time, "POSIXct")) stop("time must belong to class POSIXct")
+    time.ll <- .timeData(time)
+    ldate <- length(time.ll$day)
+    lon <- coordinates(crds)[,1]
+    lat <- coordinates(crds)[,2]
+    lcrds <- length(lon)
+    if (lcrds == 1 && ldate > 1) {
+        lon <- rep(lon, ldate)
+        lat <- rep(lat, ldate)
+    } else if (lcrds > 1 && ldate == 1) {
+        time.ll$year <- rep(time.ll$year, lcrds)
+        time.ll$month <- rep(time.ll$month, lcrds)
+        time.ll$day <- rep(time.ll$day, lcrds)
+        time.ll$timezone <- rep(time.ll$timezone, lcrds)
+        time.ll$dlstime <- rep(time.ll$dlstime, lcrds)
+	time.ll$tz <- rep(time.ll$tz, lcrds)
+    } else if (lcrds != ldate)
+        stop("mismatch in numbers of coordinates and dates")
+    res <- crepuscule(lon=lon, lat=lat, year=time.ll$year, month=time.ll$month,
+                      day=time.ll$day, timezone=time.ll$timezone,
+                      dlstime=time.ll$dlstime, solarDep=solarDep,
+                      direction=direction)
+    if (POSIXct_output) {
+        secs <- res * 86400
+        Pct <- as.POSIXct(format(time, "%Y-%m-%d")) + secs
+	res <- data.frame(day_frac=res, time=Pct)
+    }
+    res
 }
 
 "sunriset" <- function(lon, lat, year, month, day, timezone,
@@ -427,6 +508,64 @@
     risetTimeLST / 1440
 }
 
+"Sunriset" <- function(crds, year, month, day, timezone=0, dlstime=0,
+                       direction=c("sunrise", "sunset")) {
+    if (!inherits(crds, "SpatialPoints")) stop("crds must be SpatialPoints")
+    if (!isTRUE(!is.projected(crds)))
+        stop("crds must be geographical coordinates")
+    lon <- coordinates(crds)[,1]
+    lat <- coordinates(crds)[,2]
+    ldate <- length(day)
+    lcrds <- length(lon)
+    if (lcrds == 1 && ldate > 1) {
+        lon <- rep(lon, ldate)
+        lat <- rep(lat, ldate)
+    } else if (lcrds > 1 && ldate == 1) {
+        year <- rep(year, lcrds)
+        month <- rep(month, lcrds)
+        day <- rep(day, lcrds)
+    } else if (lcrds != ldate)
+        stop("mismatch in numbers of coordinates and dates")
+    res <- sunriset(lon=lon, lat=lat, year=year, month=month,
+                    day=day, timezone=timezone, dlstime=dlstime,
+                    direction=direction)
+    res
+}
+
+"Sunriset_t" <- function(crds, time, direction=c("sunrise", "sunset"),
+                         POSIXct_output=FALSE) {
+    if (!inherits(crds, "SpatialPoints")) stop("crds must be SpatialPoints")
+    if (!isTRUE(!is.projected(crds)))
+        stop("crds must be geographical coordinates")
+    if (!is(time, "POSIXct")) stop("time must belong to class POSIXct")
+    time.ll <- .timeData(time)
+    ldate <- length(time.ll$day)
+    lon <- coordinates(crds)[,1]
+    lat <- coordinates(crds)[,2]
+    lcrds <- length(lon)
+    if (lcrds == 1 && ldate > 1) {
+        lon <- rep(lon, ldate)
+        lat <- rep(lat, ldate)
+    } else if (lcrds > 1 && ldate == 1) {
+        time.ll$year <- rep(time.ll$year, lcrds)
+        time.ll$month <- rep(time.ll$month, lcrds)
+        time.ll$day <- rep(time.ll$day, lcrds)
+        time.ll$timezone <- rep(time.ll$timezone, lcrds)
+        time.ll$dlstime <- rep(time.ll$dlstime, lcrds)
+    } else if (lcrds != ldate)
+        stop("mismatch in numbers of coordinates and dates")
+    res <- sunriset(lon=lon, lat=lat, year=time.ll$year, month=time.ll$month,
+                    day=time.ll$day, timezone=time.ll$timezone,
+                    dlstime=time.ll$dlstime,
+                    direction=direction)
+    if (POSIXct_output) {
+        secs <- res * 86400
+        Pct <- as.POSIXct(format(time, "%Y-%m-%d")) + secs
+	res <- data.frame(day_frac=res, time=Pct)
+    }
+    res
+}
+
 "solarnoon" <- function(lon, lat, year, month, day, timezone, dlstime)
 {
     ## Value: Numeric, time of solar noon in local time (days)
@@ -448,6 +587,66 @@
     solNoonUTC <- 720 + (ll[, 1] * 4) - eqtime
     solarnoon <- solNoonUTC + (60 * timezone) + (dlstime * 60)
     solarnoon / 1440
+}
+
+Solarnoon <- function(crds, year, month, day, timezone=0, dlstime=0) {
+    if (!inherits(crds, "SpatialPoints"))
+        stop("crds must be SpatialPoints")
+    if (!isTRUE(!is.projected(crds)))
+        stop("crds must be geographical coordinates")
+    lon <- coordinates(crds)[,1]
+    lat <- coordinates(crds)[,2]
+    ldate <- length(day)
+    lcrds <- length(lon)
+    if (lcrds == 1 && ldate > 1) {
+        lon <- rep(lon, ldate)
+        lat <- rep(lat, ldate)
+    } else if (lcrds > 1 && ldate == 1) {
+        year <- rep(year, lcrds)
+        month <- rep(month, lcrds)
+        day <- rep(day, lcrds)
+    } else if (lcrds != ldate)
+        stop("mismatch in numbers of coordinates and dates")
+    res <- solarnoon(lon=lon, lat=lat, year=year, month=month,
+                     day=day, timezone=timezone, dlstime=dlstime)
+    res
+}
+
+"Solarnoon_t" <- function(crds, time, POSIXct_output=FALSE) {
+    if (!inherits(crds, "SpatialPoints"))
+        stop("crds must be SpatialPoints")
+    if (!isTRUE(!is.projected(crds)))
+        stop("crds must be geographical coordinates")
+    if (!is(time, "POSIXct"))
+        stop("time must belong to class POSIXct")
+    time.ll <- .timeData(time)
+    ldate <- length(time.ll$day)
+    lon <- coordinates(crds)[,1]
+    lat <- coordinates(crds)[,2]
+    lcrds <- length(lon)
+    if (lcrds == 1 && ldate > 1) {
+        lon <- rep(lon, ldate)
+        lat <- rep(lat, ldate)
+    } else if (lcrds > 1 && ldate == 1) {
+        time.ll$year <- rep(time.ll$year, lcrds)
+        time.ll$month <- rep(time.ll$month, lcrds)
+        time.ll$day <- rep(time.ll$day, lcrds)
+        time.ll$timezone <- rep(time.ll$timezone, lcrds)
+        time.ll$dlstime <- rep(time.ll$dlstime, lcrds)
+        year <- rep(year, lcrds)
+        month <- rep(month, lcrds)
+        day <- rep(day, lcrds)
+    } else if (lcrds != ldate)
+        stop("mismatch in numbers of coordinates and dates")
+    res <- solarnoon(lon=lon, lat=lat, year=time.ll$year, month=time.ll$month,
+                     day=time.ll$day, timezone=time.ll$timezone,
+                     dlstime=time.ll$dlstime)
+    if (POSIXct_output) {
+        secs <- res * 86400
+        Pct <- as.POSIXct(format(time, "%Y-%m-%d")) + secs
+	res <- data.frame(day_frac=res, time=Pct)
+    }
+    res
 }
 
 "solarpos" <- function(lon, lat, year, month, day, hours, minutes,
@@ -524,142 +723,33 @@
     cbind(azimuth=azimuth, elevation=90 - solarzen)
 }
 
-".timeData" <- function(time)
-{
-    ## Value: list with numeric vectors year, month, day, offset hours
-    ## from GMT, and whether day light savings is in effect.
-    ## --------------------------------------------------------------------
-    ## Arguments: time=POSIXct
-    ## --------------------------------------------------------------------
-    ## Author: Sebastian P. Luque
-    ## --------------------------------------------------------------------
-    time.gmt <- as.POSIXct(format(time), tz="GMT")
-    time.plt <- as.POSIXlt(time)
-    timezone <- as.numeric(difftime(time.gmt, time, units="hours"))
-    year <- as.integer(format(time.plt, "%Y"))
-    month <- as.integer(format(time.plt, "%m"))
-    day <- as.integer(format(time.plt, "%d"))
-    hour <- as.integer(format(time.plt, "%H"))
-    min <- as.integer(format(time.plt, "%M"))
-    sec <- as.integer(format(time.plt, "%S"))
-    tz <- as.character(format(time, "%Z"))
-    list(year=year, month=month, day=day, hour=hour, min=min, sec=sec,
-         timezone=timezone, dlstime=0, tz=tz)
-}
-
-
-"Crepuscule_t" <- function(crds, time, solarDep, direction=c("dawn", "dusk"),
-                           POSIXct_output=FALSE) {
-    if (!inherits(crds, "SpatialPoints")) stop("crds must be SpatialPoints")
-    if (!isTRUE(!is.projected(crds)))
-        stop("crds must be geographical coordinates")
-    if (missing(solarDep)) stop("solarDep must be given")
-    if (!is(time, "POSIXct")) stop("time must belong to class POSIXct")
-    time.ll <- .timeData(time)
-    ldate <- length(time.ll$day)
-    lon <- coordinates(crds)[,1]
-    lat <- coordinates(crds)[,2]
-    lcrds <- length(lon)
-    if (lcrds == 1 && ldate > 1) {
-        lon <- rep(lon, ldate)
-        lat <- rep(lat, ldate)
-    } else if (lcrds > 1 && ldate == 1) {
-        time.ll$year <- rep(time.ll$year, lcrds)
-        time.ll$month <- rep(time.ll$month, lcrds)
-        time.ll$day <- rep(time.ll$day, lcrds)
-        time.ll$timezone <- rep(time.ll$timezone, lcrds)
-        time.ll$dlstime <- rep(time.ll$dlstime, lcrds)
-	time.ll$tz <- rep(time.ll$tz, lcrds)
-    } else if (lcrds != ldate)
-        stop("mismatch in numbers of coordinates and dates")
-    res <- crepuscule(lon=lon, lat=lat, year=time.ll$year, month=time.ll$month,
-                      day=time.ll$day, timezone=time.ll$timezone,
-                      dlstime=time.ll$dlstime, solarDep=solarDep,
-                      direction=direction)
-    if (POSIXct_output) {
-	strres0 <- paste(time.ll$year, time.ll$month, day=time.ll$day, sep="-")
-        secs <- res * 86400
-	Pct <- time + secs
-	res <- data.frame(day_frac=res, time=Pct)
-    }
-    res
-}
-
-
-"Sunriset_t" <- function(crds, time, direction=c("sunrise", "sunset"),
-                         POSIXct_output=FALSE) {
-    if (!inherits(crds, "SpatialPoints")) stop("crds must be SpatialPoints")
-    if (!isTRUE(!is.projected(crds)))
-        stop("crds must be geographical coordinates")
-    if (!is(time, "POSIXct")) stop("time must belong to class POSIXct")
-    time.ll <- .timeData(time)
-    ldate <- length(time.ll$day)
-    lon <- coordinates(crds)[,1]
-    lat <- coordinates(crds)[,2]
-    lcrds <- length(lon)
-    if (lcrds == 1 && ldate > 1) {
-        lon <- rep(lon, ldate)
-        lat <- rep(lat, ldate)
-    } else if (lcrds > 1 && ldate == 1) {
-        time.ll$year <- rep(time.ll$year, lcrds)
-        time.ll$month <- rep(time.ll$month, lcrds)
-        time.ll$day <- rep(time.ll$day, lcrds)
-        time.ll$timezone <- rep(time.ll$timezone, lcrds)
-        time.ll$dlstime <- rep(time.ll$dlstime, lcrds)
-    } else if (lcrds != ldate)
-        stop("mismatch in numbers of coordinates and dates")
-    res <- sunriset(lon=lon, lat=lat, year=time.ll$year, month=time.ll$month,
-                    day=time.ll$day, timezone=time.ll$timezone,
-                    dlstime=time.ll$dlstime,
-                    direction=direction)
-    if (POSIXct_output) {
-	strres0 <- paste(time.ll$year, time.ll$month, day=time.ll$day, sep="-")
-        secs <- res * 86400
-	Pct <- time + secs
-	res <- data.frame(day_frac=res, time=Pct)
-    }
-    res
-}
-
-
-"Solarnoon_t" <- function(crds, time, POSIXct_output=FALSE) {
+"Solarpos" <- function(crds, year, month, day, hours, minutes, seconds,
+                       timezone=0, dlstime=0) {
     if (!inherits(crds, "SpatialPoints"))
         stop("crds must be SpatialPoints")
     if (!isTRUE(!is.projected(crds)))
         stop("crds must be geographical coordinates")
-    if (!is(time, "POSIXct"))
-        stop("time must belong to class POSIXct")
-    time.ll <- .timeData(time)
-    ldate <- length(time.ll$day)
     lon <- coordinates(crds)[,1]
     lat <- coordinates(crds)[,2]
+    ldate <- length(day)
     lcrds <- length(lon)
     if (lcrds == 1 && ldate > 1) {
         lon <- rep(lon, ldate)
         lat <- rep(lat, ldate)
     } else if (lcrds > 1 && ldate == 1) {
-        time.ll$year <- rep(time.ll$year, lcrds)
-        time.ll$month <- rep(time.ll$month, lcrds)
-        time.ll$day <- rep(time.ll$day, lcrds)
-        time.ll$timezone <- rep(time.ll$timezone, lcrds)
-        time.ll$dlstime <- rep(time.ll$dlstime, lcrds)
         year <- rep(year, lcrds)
         month <- rep(month, lcrds)
         day <- rep(day, lcrds)
+        hours <- rep(hours, lcrds)
+        minutes <- rep(minutes, lcrds)
+        seconds <- rep(seconds, lcrds)
     } else if (lcrds != ldate)
         stop("mismatch in numbers of coordinates and dates")
-    res <- solarnoon(lon=lon, lat=lat, year=time.ll$year, month=time.ll$month,
-                     day=time.ll$day, timezone=time.ll$timezone,
-                     dlstime=time.ll$dlstime)
-    if (POSIXct_output) {
-	strres0 <- paste(time.ll$year, time.ll$month, day=time.ll$day, sep="-")
-        secs <- res * 86400
-	Pct <- time + secs
-	res <- data.frame(day_frac=res, time=Pct)
-    }
+    res <- solarpos(lon=lon, lat=lat, year=year, month=month,
+                    day=day, hours=hours, minutes=minutes, seconds=seconds,
+                    timezone=timezone, dlstime=dlstime)
     res
 }
-
 
 "Solarpos_t" <- function(crds, time) {
     if (!inherits(crds, "SpatialPoints"))
@@ -694,4 +784,3 @@
     res <- data.frame(time=time, azimuth=res[,1], elevation=res[,2])
     res
 }
-
