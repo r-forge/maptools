@@ -387,9 +387,8 @@
     hour <- as.integer(format(time.plt, "%H"))
     min <- as.integer(format(time.plt, "%M"))
     sec <- as.integer(format(time.plt, "%S"))
-    tz <- as.character(format(time, "%Z")) # returned only for debugging
     list(year=year, month=month, day=day, hour=hour, min=min, sec=sec,
-         timezone=timezone, dlstime=0, tz=tz)
+         timezone=timezone, dlstime=0, tz=attr(time, "tzone"))
 }
 
 "crepuscule" <- function(lon, lat, year, month, day, timezone,
@@ -475,7 +474,7 @@
                       direction=direction)
     if (POSIXct_output) {
         secs <- res * 86400
-        Pct <- as.POSIXct(format(time, "%Y-%m-%d")) + secs
+        Pct <- as.POSIXct(format(time, "%Y-%m-%d"), tz=time.ll$tz) + secs
 	res <- data.frame(day_frac=res, time=Pct)
     }
     res
@@ -560,7 +559,7 @@
                     direction=direction)
     if (POSIXct_output) {
         secs <- res * 86400
-        Pct <- as.POSIXct(format(time, "%Y-%m-%d")) + secs
+        Pct <- as.POSIXct(format(time, "%Y-%m-%d"), tz=time.ll$tz) + secs
 	res <- data.frame(day_frac=res, time=Pct)
     }
     res
@@ -643,7 +642,7 @@ Solarnoon <- function(crds, year, month, day, timezone=0, dlstime=0) {
                      dlstime=time.ll$dlstime)
     if (POSIXct_output) {
         secs <- res * 86400
-        Pct <- as.POSIXct(format(time, "%Y-%m-%d")) + secs
+        Pct <- as.POSIXct(format(time, "%Y-%m-%d"), tz=time.ll$tz) + secs
 	res <- data.frame(day_frac=res, time=Pct)
     }
     res
