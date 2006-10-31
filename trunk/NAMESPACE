@@ -20,9 +20,30 @@ export(sp2WB, sp2tmap, sp2Mondrian)
 
 export(gzAzimuth, trackAzimuth)
 
-export(Crepuscule_t, Sunriset_t, Solarnoon_t, Solarpos_t, crepuscule, sunriset, solarnoon, solarpos)
+export(MapGen2SL, ArcObj2SLDF, ContourLines2SLDF)
+
+exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
+
+export(SpatialPolygons2PolySet, SpatialLines2PolySet, map2SpatialPolygons, map2SpatialLines, pruneMap)
+
+export(as.ppp.SpatialPoints, as.ppp.SpatialPointsDataFrame, as.SpatialPoints.ppp, as.SpatialPointsDataFrame.ppp, as.SpatialGridDataFrame.ppp)
+export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.SpatialPolygons)
+
+exportMethods(coerce)
+
 
 S3method(plot, Map)
 S3method(plot, polylist)
 S3method(subset, polylist)
 S3method(print, shapehead)
+#S3method(as.ppp, SpatialPoints)
+#S3method(as.ppp, SpatialPointsDataFrame)
+#S3method(as.owin, SpatialGridDataFrame)
+#S3method(as.owin, SpatialPixelsDataFrame)
+#S3method(as.owin, SpatialPolygons)
+#S3method(as.SpatialPoints, ppp)
+#S3method(as.SpatialPointsDataFrame, ppp)
+#S3method(as.SpatialGridDataFrame, ppp)
+
+
+
