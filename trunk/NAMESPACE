@@ -20,7 +20,7 @@ export(sp2WB, sp2tmap, sp2Mondrian)
 
 export(gzAzimuth, trackAzimuth)
 
-export(MapGen2SL, ArcObj2SLDF, ContourLines2SLDF)
+export(MapGen2SL, ArcObj2SLDF, ContourLines2SLDF, pal2SpatialPolygons)
 
 exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
 
@@ -28,6 +28,10 @@ export(SpatialPolygons2PolySet, SpatialLines2PolySet, map2SpatialPolygons, map2S
 
 export(as.ppp.SpatialPoints, as.ppp.SpatialPointsDataFrame, as.SpatialPoints.ppp, as.SpatialPointsDataFrame.ppp, as.SpatialGridDataFrame.ppp)
 export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.SpatialPolygons)
+
+export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
+
+export(Rgshhs)
 
 exportMethods(coerce)
 

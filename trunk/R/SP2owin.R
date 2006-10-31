@@ -3,7 +3,6 @@
     nParts <- getSpPnParts(SP)
     nOwin <- sum(nParts)
     pls <- getSpPpolygonsSlot(SP)
-    nPls <- length(pls)
     if (nOwin == 1) {
         pl <- getPolygonsPolygonsSlot(pls[[1]])
         crds <- getPolygonCoordsSlot(pl[[1]])

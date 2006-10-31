@@ -72,3 +72,74 @@ ContourLines2SLDF <- function(cL, proj4string=CRS(as.character(NA))) {
 	res
 }
 
+# to be moved to glue with RarcInfo:
+
+pal2SpatialPolygons <- function(arc, pal, IDs, dropPoly1=TRUE, 
+	proj4string=CRS(as.character(NA))) {
+	if (missing(IDs)) stop("IDs required")
+	if (dropPoly1) pale <- lapply(pal[[2]][-1], function(x) x[[1]])
+	else pale <- lapply(pal[[2]], function(x) x[[1]])
+	if (length(pale) != length(IDs)) stop("map and IDs differ in length")
+	tab <- table(factor(IDs))
+	n <- length(tab)
+	IDss <- names(tab)
+	reg <- match(IDs, IDss)
+	belongs <- lapply(1:n, function(x) which(x == reg))
+# assemble the list of Polygons
+	Srl <- vector(mode="list", length=n)
+	for (i in 1:n) {
+		bi <- belongs[[i]]
+		nParts <- length(bi)
+		palei_list <- list()
+		for (j in 1:nParts) {
+			this <- bi[j]
+			paleij <- pale[[this]]
+			if (any(paleij == 0)) {
+				zeros <- which(paleij == 0)
+				palei_list <- c(palei_list, 
+					list(paleij[1:(zeros[1]-1)]))
+				for (k in 1:length(zeros)) {
+					if (k == length(zeros)) {
+						lp <- length(paleij)
+						lz <- zeros[length(zeros)]
+						palei_list <- c(palei_list, 
+						    list(paleij[(lz+1):lp]))
+					} else {
+						zk <- zeros[k]
+						zk1 <- zeros[k+1]
+						palei_list <- c(palei_list, 
+						    list(paleij[(zk+1):(zk1-1)]))
+					}
+				}
+			} else palei_list <- c(palei_list, list(paleij))
+		}
+		nParts <- length(palei_list)
+		srl <- vector(mode="list", length=nParts)
+		for (j in 1:nParts) {
+			paleij <- palei_list[[j]]
+			nArcs <- length(paleij)
+			x <- NULL
+			y <- NULL
+			for (k in 1:nArcs) {
+				kk <- paleij[k]
+				if (kk > 0) {
+					x <- c(x, arc[[2]][[kk]][[1]])
+					y <- c(y, arc[[2]][[kk]][[2]])
+				} else {
+					x <- c(x, rev(arc[[2]][[-kk]][[1]]))
+					y <- c(y, rev(arc[[2]][[-kk]][[2]]))
+				}
+			}
+			if ((x[1] != x[length(x)]) || (y[1] != y[length(y)])) {
+				x <- c(x, x[1])
+				y <- c(y, y[1])
+			}
+			srl[[j]] <- Polygon(coords=cbind(x, y))	
+		}
+		Srl[[i]] <- Polygons(srl, ID=IDss[i])
+	}
+	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4string)
+	res
+}
+
+
