@@ -9,7 +9,7 @@
 }
 \usage{
 map2SpatialPolygons(map, IDs, proj4string = CRS(as.character(NA)))
-map2SpatialLines(map, IDs, proj4string = CRS(as.character(NA)))
+map2SpatialLines(map, IDs=NULL, proj4string = CRS(as.character(NA)))
 pruneMap(map, xlim=NULL, ylim=NULL)
 }
 %- maybe also 'usage' for other objects documented here.

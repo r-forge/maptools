@@ -10,7 +10,7 @@
 \usage{
 read.shape(filen, dbf.data = TRUE, verbose=TRUE, repair=FALSE)
 getinfo.shape(filen)
-print.shapehead(x, ...)
+\method{print}{shapehead}(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

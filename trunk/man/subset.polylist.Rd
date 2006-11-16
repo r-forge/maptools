@@ -6,7 +6,7 @@
   The function subsets a polygon list object, also subsetting region ID attributes and also map limits if required.
 }
 \usage{
-subset.polylist(x, subset, fit.bbox = TRUE, ...)
+\method{subset}{polylist}(x, subset, fit.bbox = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

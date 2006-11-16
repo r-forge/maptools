@@ -86,7 +86,7 @@ SpatialLines2PolySet <- function(SL) {
 	res <- regexpr("utm", p4str, fixed=TRUE)
 	if (res > 0) {
 		val <- "UTM"
-		res <- regexpr("\+zone=", p4str, fixed=TRUE)
+		res <- regexpr("+zone=", p4str, fixed=TRUE)
 		sres <- substring(p4str, res+attr(res, "match.length"))
 		zn0 <- regexpr("[[:digit:]]+", sres)
 		attr(val, "zone") <- as.integer(substring(sres, zn0, 

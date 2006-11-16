@@ -41,7 +41,7 @@ Please also note that use of gpclib is not limited in any way; the licence limit
 }
 
 \examples{
-gshhs.c.b <- system.file("share/gshhs_c.b", package="Rgshhs")
+gshhs.c.b <- system.file("share/gshhs_c.b", package="maptools")
 NZx <- c(160,180)
 NZy <- c(-50,-30)
 NZ <- Rgshhs(gshhs.c.b, xlim=NZx, ylim=NZy)

@@ -13,7 +13,7 @@ plot.polylist(x, col, border = par("fg"), add = FALSE, xlim=NULL,
  ylim=NULL, xlab = "", ylab = "", xpd = NULL, density = NULL, angle = 45, 
  pbg=NULL, forcefill=TRUE, ...)
 leglabs(vec, under="under", over="over", between="-")
-plotpolys(pl, bb, col = NA, border = par("fg"), add = FALSE, xlim, ylim, ...)
+plotpolys(pl, bb, col = NA, border = par("fg"), add = FALSE, xlim=NULL, ylim=NULL, ...)
 }
 
 \arguments{

@@ -84,17 +84,17 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		PROTECT(res = NEW_LIST(11)); pc++;
 
 		PROTECT(resnames = NEW_CHARACTER(11)); pc++;
-		SET_VECTOR_ELT(resnames, 0, COPY_TO_USER_STRING("id"));
-		SET_VECTOR_ELT(resnames, 1, COPY_TO_USER_STRING("n"));
-		SET_VECTOR_ELT(resnames, 2, COPY_TO_USER_STRING("level"));
-		SET_VECTOR_ELT(resnames, 3, COPY_TO_USER_STRING("source"));
-		SET_VECTOR_ELT(resnames, 4, COPY_TO_USER_STRING("greenwich"));
-		SET_VECTOR_ELT(resnames, 5, COPY_TO_USER_STRING("fpos"));
-		SET_VECTOR_ELT(resnames, 6, COPY_TO_USER_STRING("area"));
-		SET_VECTOR_ELT(resnames, 7, COPY_TO_USER_STRING("west"));
-		SET_VECTOR_ELT(resnames, 8, COPY_TO_USER_STRING("east"));
-		SET_VECTOR_ELT(resnames, 9, COPY_TO_USER_STRING("south"));
-		SET_VECTOR_ELT(resnames, 10, COPY_TO_USER_STRING("north"));
+		SET_STRING_ELT(resnames, 0, COPY_TO_USER_STRING("id"));
+		SET_STRING_ELT(resnames, 1, COPY_TO_USER_STRING("n"));
+		SET_STRING_ELT(resnames, 2, COPY_TO_USER_STRING("level"));
+		SET_STRING_ELT(resnames, 3, COPY_TO_USER_STRING("source"));
+		SET_STRING_ELT(resnames, 4, COPY_TO_USER_STRING("greenwich"));
+		SET_STRING_ELT(resnames, 5, COPY_TO_USER_STRING("fpos"));
+		SET_STRING_ELT(resnames, 6, COPY_TO_USER_STRING("area"));
+		SET_STRING_ELT(resnames, 7, COPY_TO_USER_STRING("west"));
+		SET_STRING_ELT(resnames, 8, COPY_TO_USER_STRING("east"));
+		SET_STRING_ELT(resnames, 9, COPY_TO_USER_STRING("south"));
+		SET_STRING_ELT(resnames, 10, COPY_TO_USER_STRING("north"));
 		setAttrib(res, R_NamesSymbol, resnames);
 
 		SET_VECTOR_ELT(res, 0, NEW_INTEGER(npols));

@@ -33,7 +33,7 @@ export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygon
 
 export(Rgshhs)
 
-exportMethods(coerce)
+exportMethods(coerce, spCbind, spRbind, spChFIDs)
 
 
 S3method(plot, Map)
