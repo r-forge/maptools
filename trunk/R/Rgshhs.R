@@ -180,7 +180,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		Srl[[i]] <- Polygons(srl, ID=IDss[i])
 	}
 	res <- as.SpatialPolygons.PolygonsList(Srl, 
-		proj4string=CRS("+proj=longlat ellps=wgs84"))
+		proj4string=CRS("+proj=longlat +datum=WGS84"))
 
 	list(polydata=data.frame(polydata)[chosen_1,], belongs=belongs,
 		new_belongs=new_belongs, SP=res)
