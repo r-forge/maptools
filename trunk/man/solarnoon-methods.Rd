@@ -5,9 +5,9 @@
 \alias{solarnoon,ANY-method}
 \alias{solarnoon,SpatialPoints,POSIXct-method}
 \alias{solarnoon,matrix,POSIXct-method}
-\title{ ~~ Methods for Function solarnoon in Package `maptools' ~~}
+\title{Solarnoon methods}
 \description{
- ~~ Methods for function \code{solarnoon} in Package `maptools' ~~
+ The methods return the solar noon value as a day fraction and clock time.
 }
 \section{Methods}{
 \describe{

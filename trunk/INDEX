@@ -26,8 +26,7 @@ readShapePoints         Read points shape files into
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
 Rgshhs                  Read GSHHS polygons into SpatialPolygons object
-solarnoon-methods       ~~ Methods for Function solarnoon in Package
-                        'maptools' ~~
+solarnoon-methods       Solarnoon methods
 solarpos-methods        Solar position methods
 sp2Mondrian             write map data for Mondrian
 sp2tmap                 Convert SpatialPolygons object for Stata tmap
@@ -36,6 +35,9 @@ sp2WB                   Export SpatialPolygons object as S-Plus map for
                         WinBUGS
 SpatialLines2PolySet    Convert sp line and polygon objects to
                         PBSmapping PolySet objects
+spCbind-methods         cbind for spatial objects
+spChFIDs-methods        change feature IDs in spatial objects
+spRbind-methods         rbind for spatial objects
 subset.polylist         Subset polygon list objects
 sunriset-methods        Sunriset methods
 symbolsInPolys          Place grids of points over polygons
