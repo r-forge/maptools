@@ -27,7 +27,7 @@ exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
 export(SpatialPolygons2PolySet, SpatialLines2PolySet, map2SpatialPolygons, map2SpatialLines, pruneMap)
 
 export(as.ppp.SpatialPoints, as.ppp.SpatialPointsDataFrame, as.SpatialPoints.ppp, as.SpatialPointsDataFrame.ppp, as.SpatialGridDataFrame.ppp)
-export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.SpatialPolygons)
+export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.SpatialPolygons, as.SpatialGridDataFrame.im, as.im.SpatialGridDataFrame)
 
 export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
 
@@ -48,6 +48,7 @@ S3method(print, shapehead)
 #S3method(as.SpatialPoints, ppp)
 #S3method(as.SpatialPointsDataFrame, ppp)
 #S3method(as.SpatialGridDataFrame, ppp)
+#S3method(as.SpatialGridDataFrame, im)
 
 
 
