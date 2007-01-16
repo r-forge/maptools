@@ -1,8 +1,10 @@
-as.ppp                  coercion from sp objects to spatstat objects
+as.owin.SpatialGridDataFrame
+                        coercion between sp objects and spatstat
+                        objects
 checkPolygonsHoles      Check holes in Polygons objects
 ContourLines2SLDF       Converter functions to build
                         SpatialLinesDataFrame objects
-crepuscule-methods      Crepuscule methods
+crepuscule              Methods for sun ephemerides calculations
 dotsInPolys             Put dots in polygons
 get.Pcent               Polygon centroids
 gpcholes                Hisaji Ono's lake/hole problem
@@ -26,8 +28,6 @@ readShapePoints         Read points shape files into
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
 Rgshhs                  Read GSHHS polygons into SpatialPolygons object
-solarnoon-methods       Solarnoon methods
-solarpos-methods        Solar position methods
 sp2Mondrian             write map data for Mondrian
 sp2tmap                 Convert SpatialPolygons object for Stata tmap
                         command
@@ -39,7 +39,6 @@ spCbind-methods         cbind for spatial objects
 spChFIDs-methods        change feature IDs in spatial objects
 spRbind-methods         rbind for spatial objects
 subset.polylist         Subset polygon list objects
-sunriset-methods        Sunriset methods
 symbolsInPolys          Place grids of points over polygons
 unionSpatialPolygons    Aggregate Polygons in a SpatialPolygons object
 write.linelistShape     Write a arc-type shapefile
