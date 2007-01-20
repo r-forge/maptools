@@ -35,6 +35,7 @@ export(Rgshhs)
 
 exportMethods(coerce, spCbind, spRbind, spChFIDs)
 
+export(GE_SpatialGrid, kmlOverlay)
 
 S3method(plot, Map)
 S3method(plot, polylist)
