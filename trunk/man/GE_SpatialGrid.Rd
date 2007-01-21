@@ -31,6 +31,7 @@ The approach may be used as an alternative to writing PNG files from SpatialGrid
 \author{Duncan Golicher, David Forrest and Roger Bivand}
 \seealso{\code{\link{kmlOverlay}}}
 \examples{
+opt_exask <- options(example.ask=FALSE)
 qk <- SpatialPointsDataFrame(quakes[, c(2:1)], quakes)
 proj4string(qk) <- CRS("+proj=longlat")
 tf <- tempfile()
@@ -42,8 +43,14 @@ plot(qk, xlim=SGqk$xlim, ylim=SGqk$ylim, setParUsrBB=TRUE)
 dev.off()
 kmlOverlay(SGqk, paste(tf, ".kml", sep=""), paste(tf, ".png", sep=""))
 \dontrun{
+qk0 <- quakes
+qk0$long <- ifelse(qk0$long <= 180, qk0$long, qk0$long-360)
+qk0a <- SpatialPointsDataFrame(qk0[, c(2:1)], qk0)
+proj4string(qk0a) <- CRS("+proj=longlat")
+writeOGR(qk0a, paste(tf, "v.kml", sep=""), "Quakes", "KML")
 system(paste("googleearth ", tf, ".kml", sep=""))
 }
+options(example.ask=opt_exask)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
