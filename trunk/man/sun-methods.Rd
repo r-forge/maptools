@@ -42,10 +42,10 @@
          proj4string=CRS("+proj=longlat +datum=WGS84"),
          direction=c("sunrise", "sunset"), POSIXct.out=FALSE)
 \S4method{solarnoon}{SpatialPoints,POSIXct}(crds, dateTime, POSIXct.out=FALSE)
-\S4method{solarnoon}{matrix,POSIXct}(crds, proj4string=CRS("+proj=longlat +datum=WGS84"),
+\S4method{solarnoon}{matrix,POSIXct}(crds, dateTime, proj4string=CRS("+proj=longlat +datum=WGS84"),
           POSIXct.out=FALSE)
-\S4method{solarpos}{SpatialPoints,POSIXct}(crds, dateTime)
-\S4method{solarpos}{matrix,POSIXct}(crds, proj4string=CRS("+proj=longlat +datum=WGS84"), dateTime)
+\S4method{solarpos}{SpatialPoints,POSIXct}(crds, dateTime, ...)
+\S4method{solarpos}{matrix,POSIXct}(crds, dateTime, proj4string=CRS("+proj=longlat +datum=WGS84"), ...)
 
 }
 
@@ -69,6 +69,8 @@
 
   \item{proj4string}{string with valid projection string describing the
     projection of data in \code{crds}.}
+
+  \item{\dots}{other arguments passed through.}
 
 }
 

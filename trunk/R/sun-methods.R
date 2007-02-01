@@ -151,7 +151,7 @@ if (!isGeneric("solarpos")) {
 }
 
 setMethod("solarpos", signature(crds="SpatialPoints", dateTime="POSIXct"),
-          function(crds, dateTime) {
+          function(crds, dateTime, ...) {
               if (!isTRUE(!is.projected(crds)))
                   stop("crds must be geographical coordinates")
               crdsmtx <- matrix(c(coordinates(crds)[, 1],
@@ -170,7 +170,7 @@ setMethod("solarpos", signature(crds="SpatialPoints", dateTime="POSIXct"),
 
 setMethod("solarpos", signature(crds="matrix", dateTime="POSIXct"),
           function(crds, dateTime,
-                   proj4string=CRS("+proj=longlat +datum=WGS84")) {
+                   proj4string=CRS("+proj=longlat +datum=WGS84"), ...) {
               crds.sp <- SpatialPoints(crds, proj4string=proj4string)
               solarpos(crds.sp, dateTime=dateTime)
           })

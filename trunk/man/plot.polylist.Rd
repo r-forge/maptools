@@ -9,7 +9,7 @@ A helper function for plotting polygons in a global bounding box, attempts to ha
 \code{leglabs} makes character strings from the same break points. The \code{plot.polylist()} function may be used as a generic S3 method. NOTE! \code{plotpolys()} DEPRECATED: use generic plot() for polylist objects function instead.
 }
 \usage{
-plot.polylist(x, col, border = par("fg"), add = FALSE, xlim=NULL,
+\method{plot}{polylist}(x, col, border = par("fg"), add = FALSE, xlim=NULL,
  ylim=NULL, xlab = "", ylab = "", xpd = NULL, density = NULL, angle = 45, 
  pbg=NULL, forcefill=TRUE, ...)
 leglabs(vec, under="under", over="over", between="-")

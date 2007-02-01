@@ -6,9 +6,11 @@ ContourLines2SLDF       Converter functions to build
                         SpatialLinesDataFrame objects
 crepuscule              Methods for sun ephemerides calculations
 dotsInPolys             Put dots in polygons
+GE_SpatialGrid          Create SpatialGrid for PNG output to GE
 get.Pcent               Polygon centroids
 gpcholes                Hisaji Ono's lake/hole problem
 gzAzimuth               Find azimuth for geographical coordinates
+kmlOverlay              Create and write KML file for PNG image overlay
 Map2poly                Create polygon lists and bounding boxes from
                         imported shapefiles
 map2SpatialPolygons     Convert map objects to sp classes

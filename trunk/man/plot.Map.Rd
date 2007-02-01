@@ -7,8 +7,8 @@
   This function is deprecated. It is difficult to maintain and there are several alternatives, either by converting Map objects to sp class objects or polylist etc. objects. (The function plots a map object directly from the imported shapefile data).
 }
 \usage{
-plot.Map(x, recs, auxvar = NULL, add = FALSE, fg = "gray", ol = "black", 
-  prbg = NULL, glyph = 16, color='red', type = "q", nclass = 5, ...)
+\method{plot}{Map}(x, recs, auxvar = NULL, add = FALSE, fg = "gray", ol = "black", 
+  prbg = NULL, glyph = 16, color='red', type = "q", nclass = 5, \dots)
 %color.ramp(nclass, color='red', nvec=NULL, type='q')
 }
 %- maybe also 'usage' for other objects documented here.
