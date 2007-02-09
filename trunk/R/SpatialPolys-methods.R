@@ -1,5 +1,5 @@
 readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), 
-	verbose=FALSE, repair=FALSE) {
+	verbose=FALSE, repair=FALSE, force_ring=FALSE) {
 	Map <- read.shape(filen=fn, verbose=verbose, repair=repair)
 	if (!is.null(IDvar)) {
 		IDvar <- as.character(IDvar)
@@ -7,7 +7,8 @@ readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
 			stop(paste("column not found:", IDvar))
 		IDvar <- as.character(Map$att.data[[IDvar]])
 	}
-	.Map2PolyDF(Map, IDs=IDvar, proj4string=proj4string)
+	.Map2PolyDF(Map, IDs=IDvar, proj4string=proj4string, 
+		force_ring=force_ring)
 }
 
 writePolyShape <- function(x, fn, factor2char = TRUE) {
@@ -17,11 +18,12 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 	write.polylistShape(pls, df, file=fn, factor2char = factor2char)
 }
 
-.Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA))) {
+.Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA)),
+	force_ring=FALSE) {
 	if (is.null(IDs))
 		IDs <- as.character(sapply(Map$Shapes, function(x) x$shpID))
 	SR <- .asSpatialPolygonsShapes(Map$Shapes, IDs, 
-		proj4string=proj4string)
+		proj4string=proj4string, force_ring=force_ring)
 	df <- Map$att.data
 	rownames(df) <- IDs
 	res <- SpatialPolygonsDataFrame(Sr=SR, data=df)
@@ -29,7 +31,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 }
 
 .asSpatialPolygonsShapes <- function(shapes, IDs, 
-	proj4string=CRS(as.character(NA))) {
+	proj4string=CRS(as.character(NA)), force_ring=FALSE) {
 	if (attr(shapes, "shp.type") != "poly")
 		stop("Not polygon shapes")
 	if (missing(IDs))
@@ -50,7 +52,8 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 		srl <- NULL
 		for (j in 1:nParts) {
 			jres <- .shp2srsI(shapes[[belongs[[i]][j]]], 
-				.nParts.shpI(shapes[[belongs[[i]][j]]]))
+				.nParts.shpI(shapes[[belongs[[i]][j]]]),
+				force_ring=force_ring)
 			srl <- c(srl, jres)
 		}
 		Srl[[i]] <- Polygons(srl, ID=IDss[i])
@@ -110,7 +113,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
     return(retval)
 }
 
-.shp2srsI <- function(shp, nParts) {
+.shp2srsI <- function(shp, nParts, force_ring=FALSE) {
 	Pstart <- shp$Pstart
 	nVerts <- nrow(shp$verts)
 	from <- integer(nParts)
@@ -125,7 +128,12 @@ writePolyShape <- function(x, fn, factor2char = TRUE) {
 	}
 	srl <- vector(mode="list", length=nParts)
 	for (j in 1:nParts) {
-		srl[[j]] <- Polygon(coords=shp$verts[from[j]:to[j],])
+		crds <- shp$verts[from[j]:to[j],]
+		if (force_ring) {
+			if (!isTRUE(all.equal(crds[1,], crds[nrow(crds),])))
+				crds <- rbind(crds, crds[1,])
+		}
+		srl[[j]] <- Polygon(coords=crds)
 	}
 	srl
 }
