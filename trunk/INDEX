@@ -22,6 +22,7 @@ plot.Map                Plot a Map object (deprecated)
 plot.polylist           Plot polygons
 ppp-class               Virtual class "ppp"
 readAsciiGrid           read/write to/from (ESRI) asciigrid format
+readGPS                 GPSbabel read interface
 read.shape              Read shapefile into Map object
 readShapeLines          Read arc shape files into SpatialLinesDataFrame
                         objects

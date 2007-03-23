@@ -48,7 +48,7 @@ plot.Map <- function(x, recs, auxvar=NULL, add=FALSE, fg ='gray',
   if(attr(theMap$Shapes,'shp.type') == 'poly'){
     if(!is.null(auxvar) && nclass > 1) {
       if (length(auxvar) != attr(theMap$Shapes,'nshps'))
-        stop("")
+        stop("lengths conflict")
       col.rmp <- color.ramp(nclass, color=color, nvec=auxvar[recs], type=type)
       for(i in 1:length(recs)) {
         ii <- recs[i]

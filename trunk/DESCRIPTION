@@ -1,8 +1,8 @@
 Package: maptools
-Version: 0.6-8
-Date: 2007-02-01
+Version: 0.6-9
+Date: 2007-03-22
 Title: Tools for reading and handling spatial objects
-Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Patrick Hausmann, Virgilio Gómez Rubio, Thomas Jagger, Sebastian P. Luque, Duncan Golicher and David Forrest
+Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, David Forrest, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Thomas Jagger and Sebastian P. Luque
 Maintainer: Roger Bivand <Roger.Bivand@nhh.no>
 Depends: R (>= 2.4), foreign (>= 0.8), sp (>= 0.9-7), methods
 Suggests: spatstat, PBSmapping, maps, gpclib, RArcInfo

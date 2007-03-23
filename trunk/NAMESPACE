@@ -16,6 +16,8 @@ export(writePointsShape, writeLinesShape, writePolyShape)
 
 export(readAsciiGrid, writeAsciiGrid)
 
+export(readGPS)
+
 export(sp2WB, sp2tmap, sp2Mondrian)
 
 export(gzAzimuth, trackAzimuth)
