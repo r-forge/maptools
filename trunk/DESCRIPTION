@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.6-9
-Date: 2007-03-22
+Version: 0.6-10
+Date: 2007-04-16
 Title: Tools for reading and handling spatial objects
 Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, David Forrest, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Thomas Jagger and Sebastian P. Luque
 Maintainer: Roger Bivand <Roger.Bivand@nhh.no>

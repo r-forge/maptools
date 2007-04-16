@@ -43,7 +43,9 @@ map2SpatialLines <- function(map, IDs=NULL, proj4string=CRS(as.character(NA))) {
 		nParts <- length(belongs[[i]])
 		srl <- vector(mode="list", length=nParts)
 		for (j in 1:nParts) {
-			srl[[j]] <- Line(coords=xyList[[belongs[[i]][j]]])
+			crds <- xyList[[belongs[[i]][j]]]
+			if (nrow(crds) > 1) srl[[j]] <- Line(coords=crds)
+			else srl[[j]] <- Line(coords=rbind(crds, crds))
 		}
 		Srl[[i]] <- Lines(srl, ID=IDss[i])
 	}
