@@ -41,6 +41,7 @@ GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
     cells.dim <- c(mywidth, myheight)
     cellcentre.offset <- c(xlim[1]+(0.5*cellsize[1]), 
         ylim[1]+(0.5*cellsize[2]))
+    names(cellcentre.offset) <- c("x", "y")
     grd <- GridTopology(cellcentre.offset, cellsize, cells.dim)
     mySG <- SpatialGrid(grd, proj4string=CRS(p4s))
 

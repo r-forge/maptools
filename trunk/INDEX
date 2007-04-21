@@ -21,9 +21,9 @@ pal2SpatialPolygons     Making SpatialPolygons objects from RArcInfo
 plot.Map                Plot a Map object (deprecated)
 plot.polylist           Plot polygons
 ppp-class               Virtual class "ppp"
+read.shape              Read shapefile into Map object
 readAsciiGrid           read/write to/from (ESRI) asciigrid format
 readGPS                 GPSbabel read interface
-read.shape              Read shapefile into Map object
 readShapeLines          Read arc shape files into SpatialLinesDataFrame
                         objects
 readShapePoints         Read points shape files into
