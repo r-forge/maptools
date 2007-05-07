@@ -5,6 +5,7 @@
 \description{
   The function reads a data frame from an attached GPS using the external program gpsbabel. The columns of the data frame need to be identified by hand because different GPS order NMEA data in different ways, and the columns should be converted to the correct classes by hand. Once the specifics of a particular GPS are identified, and ways of cleaning erroneous locations are found, the conversion of the output data frame into a usable one may be automated.
 }
+\usage{
 readGPS(i = "garmin", f = "usb:", type="w", invisible=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
