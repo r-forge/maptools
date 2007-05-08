@@ -9,12 +9,12 @@ if (!isClass("im"))
     setClass("im")
 
 as.SpatialPoints.ppp =  function(from) SpatialPoints(cbind(from$x, from$y))
-#setAs("ppp", "SpatialPoints", as.SpatialPoints.ppp)
+setAs("ppp", "SpatialPoints", as.SpatialPoints.ppp)
 
 as.SpatialPointsDataFrame.ppp = function(from) 
 	SpatialPointsDataFrame(SpatialPoints(cbind(from$x, from$y)), 
 		data.frame(marks = from$marks))
-#setAs("ppp", "SpatialPointsDataFrame", as.SpatialPointsDataFrame.ppp)
+setAs("ppp", "SpatialPointsDataFrame", as.SpatialPointsDataFrame.ppp)
 
 as.SpatialGridDataFrame.ppp = function(from) {
 	require(spatstat)
@@ -30,7 +30,7 @@ as.SpatialGridDataFrame.ppp = function(from) {
 	data = data.frame(mask = as.vector(m))
 	SpatialGridDataFrame(gt, data)
 }
-#setAs("ppp", "SpatialGridDataFrame", as.SpatialGridDataFrame.ppp)
+setAs("ppp", "SpatialGridDataFrame", as.SpatialGridDataFrame.ppp)
 
 as.SpatialGridDataFrame.im = function(from) {
     require(spatstat)
@@ -43,7 +43,7 @@ as.SpatialGridDataFrame.im = function(from) {
     data = data.frame(v = as.vector(m))
     SpatialGridDataFrame(gt, data)
 }
-#setAs("im", "SpatialGridDataFrame", as.SpatialGridDataFrame.im)
+setAs("im", "SpatialGridDataFrame", as.SpatialGridDataFrame.im)
 
 
 as.im.SpatialGridDataFrame = function(from) {

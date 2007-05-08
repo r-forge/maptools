@@ -24,6 +24,8 @@ export(gzAzimuth, trackAzimuth)
 
 export(MapGen2SL, ArcObj2SLDF, ContourLines2SLDF, pal2SpatialPolygons)
 
+exportClass(ppp, im)
+
 exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
 
 export(SpatialPolygons2PolySet, SpatialLines2PolySet, map2SpatialPolygons, map2SpatialLines, pruneMap)

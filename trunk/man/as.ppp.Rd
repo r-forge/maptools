@@ -12,6 +12,10 @@
 \alias{as.ppp.SpatialPointsDataFrame}
 \alias{coerce,SpatialPoints,ppp-method}
 \alias{coerce,SpatialPointsDataFrame,ppp-method}
+\alias{coerce,im,SpatialGridDataFrame-method}
+\alias{coerce,ppp,SpatialGridDataFrame-method}
+\alias{coerce,ppp,SpatialPointsDataFrame-method}
+\alias{coerce,ppp,SpatialPoints-method}
 \alias{as.SpatialPointsDataFrame.ppp}
 \alias{as.SpatialGridDataFrame.ppp}
 \alias{as.SpatialPoints.ppp}
@@ -30,6 +34,10 @@ S4-style as() coercion works from objects of S4 sp classes to spatstat S3 classe
 \item{coerce}{\code{signature(from = "SpatialPixelsDataFrame", to = "owin")}}
 \item{coerce}{\code{signature(from = "SpatialGridDataFrame", to = "owin")}}
 \item{coerce}{\code{signature(from = "SpatialGridDataFrame", to = "im")}}
+\item{coerce}{\code{signature(from = "im", to = "SpatialGridDataFrame")}}
+\item{coerce}{\code{signature(from = "ppp", to = "SpatialGridDataFrame")}}
+\item{coerce}{\code{signature(from = "ppp", to = "SpatialPointsDataFrame")}}
+\item{coerce}{\code{signature(from = "ppp", to = "SpatialPoints")}}
 }
 }
 
