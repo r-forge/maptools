@@ -9,7 +9,8 @@ readGPS <- function(i="garmin", f="usb:", type="w", invisible=TRUE) {
 	" -o tabsep -F -", sep=""), intern=TRUE)
     if (any(grep("Can't init", gpsdata))) 
 	stop("Cannot read GPS: check connexion")
-    gpsdf <- read.table(textConnection(gpsdata), fill=TRUE)
+    gpsdf <- read.table(con <- textConnection(gpsdata), fill=TRUE)
+    close(con)
     gpsdf
 }
 
