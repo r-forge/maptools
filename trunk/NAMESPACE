@@ -41,6 +41,8 @@ exportMethods(coerce, spCbind, spRbind, spChFIDs)
 
 export(GE_SpatialGrid, kmlOverlay)
 
+export(pointLabel)
+
 S3method(plot, Map)
 S3method(plot, polylist)
 S3method(subset, polylist)
