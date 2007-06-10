@@ -1,3 +1,4 @@
+\encoding{latin1}
 \name{sp2WB}
 \alias{sp2WB}
 %- Also NEED an '\alias' for EACH other topic documented here.

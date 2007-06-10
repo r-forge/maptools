@@ -20,6 +20,7 @@ pal2SpatialPolygons     Making SpatialPolygons objects from RArcInfo
                         input
 plot.Map                Plot a Map object (deprecated)
 plot.polylist           Plot polygons
+pointLabel              Label placement for points to avoid overlaps
 ppp-class               Virtual class "ppp"
 readAsciiGrid           read/write to/from (ESRI) asciigrid format
 readGPS                 GPSbabel read interface

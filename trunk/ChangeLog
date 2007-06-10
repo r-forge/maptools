@@ -1,3 +1,8 @@
+2007-06-10 22:47  rsbivand
+
+	* ChangeLog, DESCRIPTION, NAMESPACE, R/pointLabel.R,
+	  inst/ChangeLog, man/pointLabel.Rd: pointLabel
+
 2007-06-05 15:31  rsbivand
 
 	* INDEX, R/readGPS.R: con correction
