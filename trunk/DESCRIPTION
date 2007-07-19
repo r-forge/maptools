@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.6-13
-Date: 2007-06-10
+Version: 0.6-14
+Date: 2007-07-18
 Title: Tools for reading and handling spatial objects
 Encoding: latin1
 Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, David Forrest, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Thomas Jagger, Sebastian P. Luque and Tom Short

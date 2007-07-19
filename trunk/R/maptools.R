@@ -345,6 +345,11 @@ Map2poly <- function(Map, region.id=NULL, quiet=TRUE) {
 	attr(res, "after") <- after
 	attr(res, "plotOrder") <- pO
 
+    	nD <- unique(sapply(res, function(x) dim(x)[2]))
+    	if (length(nD) > 1) stop("multiple dimension polylist components")
+    	nD <- as.integer(nD)
+    	attr(res, "nDims") <- nD
+
 	res
 }
 

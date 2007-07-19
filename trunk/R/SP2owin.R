@@ -31,7 +31,11 @@
                 io <- io+1
             }
         }
-        res <- owin(poly=opls)
+	if (exists(".spatstat_check") && !.spatstat_check) 
+        	res <- owin(bbox(SP)[1,], bbox(SP)[2,], poly = opls,
+			check=FALSE)
+# 070718 added check avoidance
+	else res <- owin(poly=opls)
     } else stop("no valid polygons")
     res
 }

@@ -33,6 +33,11 @@ y <- 10 * 1:ncol(volcano)
 line.list <- contourLines(x, y, volcano)
 vol.levels <- data.frame(alt=sapply(line.list, function(x) x[[1]]))
 vol.ll <- lapply(line.list, function(x) cbind(x$x, x$y))
+for (i in seq(along=vol.ll)) {
+  attr(vol.ll[[i]], "nParts") <- as.integer(1)
+  attr(vol.ll[[i]], "pstart") <- list(as.integer(1),
+    as.integer(nrow(vol.ll[[i]])))
+}
 tmpshp <- paste(tempdir(), "volcano", sep="/")
 write.linelistShape(vol.ll, vol.levels, file=tmpshp)
 try1 <- readShapeLines(tmpshp)

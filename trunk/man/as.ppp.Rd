@@ -50,6 +50,11 @@ as.SpatialGridDataFrame.im(from)
 \arguments{
   \item{from}{spatstat object of class ppp or im}
 }
+\note{When coercing a SpatialPolygons object to an owin object, full topology
+checking is enabled by default. To avoid checking, set \code{.spatstat_check}
+to FALSE in the global environment. This work-around may not be required 
+from spatstat version 2, and is used at the risk of garbled topology breaking 
+other functions in spatstat.}
 
 \author{Edzer Pebesma \email{e.pebesma@geo.uu.nl}, Roger Bivand}
 \examples{

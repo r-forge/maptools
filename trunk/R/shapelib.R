@@ -85,6 +85,19 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
     if (verbose) cat("zero length polylist\n")
     res <- FALSE
   }
+  if (is.null(attr(polylist, "nDims"))) {
+    if (verbose) cat("null polylist nDims attribute\n")
+    res <- FALSE
+  } else {
+    if (attr(polylist, "nDims") < 2 || attr(polylist, "nDims") > 3) {
+      if (verbose) cat("polylist nDims attribute neither 2 nor 3\n")
+      res <- FALSE
+    }
+    if (!is.integer(attr(polylist, "nDims"))) {
+      if (verbose) cat("nDims not all integer\n")
+      res <- FALSE
+    }
+  }
   if (!all(sapply(polylist, function(x) is.double(x)))) {
     if (verbose) cat("coordinates not all double\n")
     res <- FALSE
@@ -134,10 +147,18 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
   if (!inherits(polylist, "polylist")) stop("not a polylist object")
   if (length(polylist) < 1) stop("zero length polylist")
   n <- length(polylist)
+  if (is.null(attr(polylist, "nDims")) || 
+    !is.integer(attr(polylist, "nDims")) || 
+    (attr(polylist, "nDims") < 2 || attr(polylist, "nDims") > 3)) {
+    nD <- unique(sapply(polylist, function(x) dim(x)[2]))
+    if (length(nD) > 1) stop("multiple dimension polylist components")
+    nD <- as.integer(nD)
+    attr(polylist, "nDims") <- nD
+  }
   if (!all(sapply(polylist, function(x) is.double(x)))) {
     for (i in 1:n) { 
       a <- attributes(polylist[[i]])
-      polylist[[i]] <- matrix(as.double(polylist[[i]]), ncol=2)
+      polylist[[i]] <- matrix(as.double(polylist[[i]]), ncol=nD)
       attributes(polylist[[i]]) <- a
     }
     warning("coordinates changed to double")
@@ -233,7 +254,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
 }
 
 write.polylistShape <- function(polylist, df, file, factor2char=TRUE, 
-  strictFilename=FALSE, force=FALSE) {
+  strictFilename=FALSE, force=TRUE) {
   file <- path.expand(file)
   if (strictFilename && nchar(basename(file)) > 8) 
     stop("shapefile names must conform to the 8.3 format")
@@ -261,8 +282,28 @@ write.linelistShape <- function(linelist, df, file, factor2char=TRUE,
   if (length(linelist) < 1) stop("zero length linelist")
   if (nrow(df) != length(linelist))
     stop("different number of rows in linelist and data frame")
-  if (!all(sapply(linelist, function(x) all(!is.na(x)))))
-    stop("NAs in line coordinate data")
+  if (!any(sapply(linelist, function(x) is.integer(attr(x, "nParts"))))) {
+    for (i in 1:length(linelist)) { 
+      attr(linelist[[i]], "nParts") <- as.integer(attr(linelist[[i]], "nParts"))
+    }
+    warning("nParts changed to integer")
+  }
+  if (!any(sapply(linelist, function(x) is.integer(attr(x, "pstart")[[1]])))) {
+    for (i in 1:length(linelist)) { 
+      attr(linelist[[i]], "pstart")[[1]] <- as.integer(attr(linelist[[i]], 
+	"pstart")[[1]])
+    }
+    warning("pstart changed to integer")
+  }
+  if (!any(sapply(linelist, function(x) is.integer(attr(x, "pstart")[[2]])))) {
+    for (i in 1:length(linelist)) { 
+      attr(linelist[[i]], "pstart")[[2]] <- as.integer(attr(linelist[[i]], 
+	"pstart")[[2]])
+    }
+    warning("pstart changed to integer")
+  }
+#  if (!all(sapply(linelist, function(x) all(!is.na(x)))))
+#    stop("NAs in line coordinate data")
   if (!any(sapply(linelist, function(x) is.double(x)))) {
     for (i in 1:length(linelist)) { 
       linelist[[i]] <- matrix(as.double(linelist[[i]]), ncol=2)
