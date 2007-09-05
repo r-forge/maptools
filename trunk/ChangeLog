@@ -1,3 +1,28 @@
+2007-09-05 18:07  rsbivand
+
+	* DESCRIPTION, R/spmaps.R: double NA at end of map coords
+
+2007-07-25 10:49  rsbivand
+
+	* man/write.polylistShape.Rd: 3D polylist, write line shape, owin
+	  poly
+
+2007-07-19 21:33  rsbivand
+
+	* DESCRIPTION, R/SP2owin.R, R/maptools.R, R/shapelib.R,
+	  inst/changes, man/as.ppp.Rd, man/write.linelistShape.Rd,
+	  man/write.polylistShape.Rd, src/Rshapewrite1.c: 3D polylist
+	  writing
+
+2007-06-11 10:05  rsbivand
+
+	* DESCRIPTION: encoding
+
+2007-06-10 23:27  rsbivand
+
+	* ChangeLog, INDEX, inst/ChangeLog, inst/changes, man/Map2poly.Rd,
+	  man/sp2WB.Rd: encode
+
 2007-06-10 22:47  rsbivand
 
 	* ChangeLog, DESCRIPTION, NAMESPACE, R/pointLabel.R,

@@ -11,11 +11,15 @@
 		NAs <- unclass(attr(na.omit(xy), "na.action"))
 	}
 	nParts <- length(NAs) + 1
+# two NAs at end of file 070905 RSB
+	if (nrow(xy) == NAs[length(NAs)]) nParts <- nParts - 1
 	res <- vector(mode="list", length=nParts)
 	from <- integer(nParts)
 	to <- integer(nParts)
 	from[1] <- 1
 	to[nParts] <- nrow(xy)
+# two NAs at end of file 070905 RSB
+	if (nrow(xy) == NAs[length(NAs)]) to[nParts] <- to[nParts] - 1
 	if (nParts > 1) {
 		for (i in 2:nParts) {
 			to[(i-1)] <- NAs[(i-1)]-1
