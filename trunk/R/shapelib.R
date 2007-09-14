@@ -60,7 +60,7 @@ print.shapehead <- function(x, ...) {
 
 #write.pointShape <- function(object, file, coordinates, factor2char=TRUE, 
 write.pointShape <- function(coordinates, df, file, factor2char=TRUE, 
-  strictFilename=FALSE) {
+  strictFilename=FALSE, max_nchar=254) {
   file <- path.expand(file)
   if (strictFilename && nchar(basename(file)) > 8) 
     stop("shapefile names must conform to the 8.3 format")
@@ -72,7 +72,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
   if (nrow(df) != nrow(coordinates))
     stop("different number of rows in coordinates and data frame")
 #  library(foreign)
-  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
+  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char, max_nchar=max_nchar)
   res <- .Call("shpwritepoint", as.character(file), as.double(coordinates),
     as.integer(ncolcrds), PACKAGE="maptools")
   invisible(res)
@@ -254,7 +254,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
 }
 
 write.polylistShape <- function(polylist, df, file, factor2char=TRUE, 
-  strictFilename=FALSE, force=TRUE) {
+  strictFilename=FALSE, force=TRUE, max_nchar=254) {
   file <- path.expand(file)
   if (strictFilename && nchar(basename(file)) > 8) 
     stop("shapefile names must conform to the 8.3 format")
@@ -268,14 +268,14 @@ write.polylistShape <- function(polylist, df, file, factor2char=TRUE,
     else polylist <- .makePolylistValid(polylist)
   }
 #  library(foreign)
-  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
+  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char, max_nchar=max_nchar)
   res <- .Call("shpwritepolys", as.character(file), polylist, 
     PACKAGE="maptools")
   invisible(res)
 }
 
 write.linelistShape <- function(linelist, df, file, factor2char=TRUE, 
-  strictFilename=FALSE) {
+  strictFilename=FALSE, max_nchar=254) {
   file <- path.expand(file)
   if (strictFilename && nchar(basename(file)) > 8) 
     stop("shapefile names must conform to the 8.3 format")
@@ -311,7 +311,7 @@ write.linelistShape <- function(linelist, df, file, factor2char=TRUE,
     warning("coordinates changed to double")
   }
 #  library(foreign)
-  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char)
+  write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char, max_nchar=max_nchar)
   res <- .Call("shpwritelines", as.character(file), linelist, 
     PACKAGE="maptools")
   invisible(res)

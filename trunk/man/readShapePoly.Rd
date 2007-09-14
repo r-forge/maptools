@@ -8,7 +8,7 @@
 }
 \usage{
 readShapePoly(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), verbose=FALSE, repair=FALSE, force_ring=FALSE)
-writePolyShape(x, fn, factor2char = TRUE)
+writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,6 +20,8 @@ writePolyShape(x, fn, factor2char = TRUE)
   \item{force_ring}{if TRUE, close unclosed input rings}
   \item{x}{a \code{SpatialPolygonsDataFrame} object}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
+  \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
+}
 }
 \details{If no IDvar argument is given, the shpID values of the shapefile will be used as \code{Polygons} ID values; when writing shapefiles, the object data slot rownames are added to the DBF file as column SP\_ID.}
 \value{

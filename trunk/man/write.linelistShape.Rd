@@ -6,7 +6,7 @@
   The function calls code from shapelib to write an arc-type shapefile from a list of matrices of line coordinates with no NAs.
 }
 \usage{
-write.linelistShape(linelist, df, file, factor2char = TRUE, strictFilename=FALSE)
+write.linelistShape(linelist, df, file, factor2char = TRUE, strictFilename=FALSE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,6 +15,7 @@ write.linelistShape(linelist, df, file, factor2char = TRUE, strictFilename=FALSE
   \item{file}{a file name of maximum 8 chararacters, numbers or the underscore symbol to be written, omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{strictFilename}{if TRUE, impose file basename length limit of 8 characters}
+  \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
 }
 \details{
   The function calls code from shapelib to write an arc-type shapefile (both the geometry file with a *.shp extension, the index file with a *.shx extension, and the database file with a *.dbf extension - see \code{\link[foreign]{write.dbf}} for details of the data frame export within this function.

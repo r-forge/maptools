@@ -11,11 +11,11 @@ readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
 		force_ring=force_ring)
 }
 
-writePolyShape <- function(x, fn, factor2char = TRUE) {
+writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	df <- as(x, "data.frame")
 	df <- data.frame(SP_ID=I(row.names(df)), df)
 	pls <- .SpP2polylist(as(x, "SpatialPolygons"))
-	write.polylistShape(pls, df, file=fn, factor2char = factor2char)
+	write.polylistShape(pls, df, file=fn, factor2char = factor2char, max_nchar=max_nchar)
 }
 
 .Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA)),
