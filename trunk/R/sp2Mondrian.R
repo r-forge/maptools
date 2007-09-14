@@ -1,21 +1,23 @@
-# Copyright (c) 2006 Patrick Hausmann and Roger Bivand
+# Copyright (c) 2006-7 Patrick Hausmann and Roger Bivand
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sp2Mondrian <- function(SP, file) {
+sp2Mondrian <- function(SP, file, new_format=TRUE) {
 	if (!inherits(SP, "SpatialPolygonsDataFrame"))
 		stop("not a SpatialPolygonsDataFrame object")
 	pls <- slot(SP, "polygons")
-	IDs <- sapply(pls, function(x) slot(x, "ID"))
-	n <- length(IDs)
+	n <- length(pls)
 	id <- 1:n
-	con <- file(file, open="wt")
 	df <- as(SP, "data.frame")
 	df <- data.frame("/P_SP_ID"=id, df, check.names=FALSE)
-               write.table(df, file = con,
+
+	if (!new_format) {
+	    con <- file(file, open="wt")
+            write.table(df, file = con,
 		quote = FALSE, 
                	row.names = FALSE, 
                	col.names = TRUE, sep="\t", dec=".")
-        for (i in 1:n) {
+	    IDs <- sapply(pls, function(x) slot(x, "ID"))
+            for (i in 1:n) {
 		pl <- slot(pls[[i]], "Polygons")
 		m <- length(pl)
 		for (j in 1:m) {
@@ -31,8 +33,43 @@ sp2Mondrian <- function(SP, file) {
                 		col.names = FALSE, sep="\t", dec=".")
 		}
 		
+	    }
+	    close(con)
+	} else {
+	    bnm <- basename(file)
+	    dnm <- dirname(file)
+	    MAP_file <- paste(dnm, paste("MAP_", bnm, sep=""), 
+		sep=.Platform$file.sep)
+
+	    con <- file(file, open="wt")
+            write.table(df, file = con,
+		quote = FALSE, 
+               	row.names = FALSE, 
+               	col.names = TRUE, sep="\t", dec=".")
+
+       	    cat("\n", file = con)
+	    writeLines(MAP_file, con, sep="")
+
+	    close(con)
+	    con <- file(MAP_file, open="wt")
+            for (i in 1:n) {
+		pl <- slot(pls[[i]], "Polygons")
+		m <- length(pl)
+		for (j in 1:m) {
+			crds <- slot(pl[[j]], "coords")
+			nc <- nrow(crds)
+			lab <- paste(id[i], "/P_SP_ID", nc, sep="\t")
+                	if (i > 1 || j > 1) cat("\n", file = con)
+                	writeLines(lab, con = con)
+                	write.table(crds, file = con, 
+                		append = TRUE, 
+                		row.names = FALSE, 
+                		col.names = FALSE, sep="\t", dec=".")
+		}
+		
+	    }
+	    close(con)
 	}
-	close(con)
 	invisible(NULL)
 }
 
