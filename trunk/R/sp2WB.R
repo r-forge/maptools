@@ -1,4 +1,4 @@
-# 2005 (c) Virgilio Gómez Rubio, partly derived from
+# 2005 (c) Virgilio Gomez Rubio, partly derived from
 # earlier code by Thomas Jagger
 
 # The code in this file exports and sp object into a S-Plus map

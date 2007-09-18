@@ -1,6 +1,6 @@
 # Copyright 2000-2001 (c) Nicholas Lewin-Koh 
 # modifications 2001-2005 Roger Bivand, 
-# shape2poly based on code by Stéphane Dray
+# shape2poly based on code by Stephane Dray
 
 plot.polylist <- function(x, col, border=par("fg"), add=FALSE, 
 	xlim=NULL, ylim=NULL, xlab="", ylab="", xpd=NULL, 

@@ -1,6 +1,23 @@
+2007-09-18 10:15  rsbivand
+
+	* DESCRIPTION, R/maptools.R, R/sp2WB.R: tidy
+
+2007-09-14 22:14  rsbivand
+
+	* R/sp2Mondrian.R, man/sp2Mondrian.Rd: Mondrian new format
+
+2007-09-14 08:58  rsbivand
+
+	* DESCRIPTION, R/SpatialLines-methods.R, R/SpatialPoints-methods.R,
+	  R/SpatialPolys-methods.R, R/shapelib.R, man/readShapeLines.Rd,
+	  man/readShapePoints.Rd, man/readShapePoly.Rd,
+	  man/write.linelistShape.Rd, man/write.pointShape.Rd,
+	  man/write.polylistShape.Rd: pass through max_nchar
+
 2007-09-05 18:07  rsbivand
 
-	* DESCRIPTION, R/spmaps.R: double NA at end of map coords
+	* DESCRIPTION, R/spmaps.R, ChangeLog, inst/ChangeLog, inst/changes:
+	  double NA at end of map coords
 
 2007-07-25 10:49  rsbivand
 
