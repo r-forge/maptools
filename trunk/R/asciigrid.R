@@ -1,7 +1,8 @@
 readAsciiGrid <- function(fname, as.image = FALSE, plot.image = FALSE,
 	colname=basename(fname), proj4string = CRS(as.character(NA)), 
 	dec=options()$OutDec) {
-	if (dec == ".") pdec = "\\."
+#	if (dec == ".") pdec = "\\."
+	pdec <- paste("\\", dec, sep="")
 	t = file(fname, "r")
 	l5 = readLines(t, n = 6)
 	# instead of:
