@@ -1,4 +1,3 @@
-
 pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
                        method = c("SANN", "GA"),
                        allowSmallOverlap = FALSE,
@@ -11,34 +10,38 @@ pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
     y <- NULL
   }
   labels <- as.graphicsAnnot(labels)
-
+  boundary <- par()$usr
+  xyAspect <- par()$pin[1] / par()$pin[2] # width / height
+  # scale to a unit area from 0 to 1
+  toUnityCoords <- function(xy) {
+    list(x = (xy$x - boundary[1]) / (boundary[2] - boundary[1]) * xyAspect,
+         y = (xy$y - boundary[3]) / (boundary[4] - boundary[3]) / xyAspect)
+  }
+  toUserCoords <- function(xy) {
+    list(x = boundary[1] + xy$x / xyAspect * (boundary[2] - boundary[1]), 
+         y = boundary[3] + xy$y * xyAspect * (boundary[4] - boundary[3])) 
+  }
   z <- xy.coords(x, y, recycle = TRUE)
+  z <- toUnityCoords(z)
   x <- z$x
   y <- z$y
-  if (length(labels) < length(x))
+  if (length(labels) < length(x)) 
     labels <- rep(labels, length(x))
-  
   method <- match.arg(method)
-  
-  boundary <- par()$usr
-  image_width <- boundary[2] - boundary[1]
-  image_height <- boundary[4] - boundary[3]
-  if (allowSmallOverlap) # default to 2% of the image size
-    nudgeFactor <- .02*(abs(boundary[1] + 1i*boundary[2] - boundary[3] - 1i*boundary[4]))
-
+    
+  if (allowSmallOverlap) 
+      nudgeFactor <- 0.02 
   n_labels <- length(x)
-                         
   # There are eight possible alignment codes, corresponding to the 
   # corners and side mid-points of the rectangle
   # Codes are 1:8
   # Code 7 (top right) is the most preferred
-  xBoundary <- image_width * 0.01 # add a small boundary around the rectangle
-  yBoundary <- image_height * 0.01
-  width <- strwidth(labels, units = "user", cex = cex) + xBoundary
-  height <- strheight(labels, units = "user", cex = cex) + yBoundary
+  width <- (strwidth(labels, units = "figure", cex = cex) + 0.015) * xyAspect
+  height <- (strheight(labels, units = "figure", cex = cex) + 0.015) / xyAspect 
+
   gen_offset <- function(code)
-         c(-1, -1, -1,  0,  0,  1,  1,  1)[code] * (width/2) +
-    1i * c(-1,  0,  1, -1,  1, -1,  0,  1)[code] * (height/2)
+         c(-1,  -1,  -1,  0,  0,   1,  1,   1)[code] * (width/2) +
+    1i * c(-1,   0,   1, -1,  1,  -1,  0,   1)[code] * (height/2)
   
   
   # Finds intersection area of two rectangles
@@ -82,11 +85,12 @@ pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
       
     # Penalize labels which go outside the image area
     # Count points outside of the image
-    n_outside <- sum(Re(xy + offset - rectv/2) < boundary[1] | Re(xy + offset + rectv/2) > boundary[2] |
-                     Im(xy + offset - rectv/2) < boundary[3] | Im(xy + offset + rectv/2) > boundary[4]) 
-    area + n_outside * image_width * image_height
+    n_outside <- sum(Re(xy + offset - rectv/2) < 0 | Re(xy + offset + rectv/2) > xyAspect |
+                     Im(xy + offset - rectv/2) < 0 | Im(xy + offset + rectv/2) > 1/xyAspect)
+    res <- 1000 * area + n_outside
+    #cat(n_outside,"\n")
+    res
   }
-  
    
   # Make a list of label rectangles in their reference positions,
   # centered over the map feature; the real labels are displaced
@@ -109,7 +113,7 @@ pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
   rectidx2 <- rectidx2[canIntersect]
   if (trace) cat("possible intersects =", length(rectidx1), "\n")
 
-  if (trace) cat("portion covered =", sum(rect_intersect(xy, rectv,xy,rectv))/(image_width*image_height),"\n")
+  if (trace) cat("portion covered =", sum(rect_intersect(xy, rectv,xy,rectv)),"\n")
 
   GA <- function() {
     # Make some starting genes
@@ -180,7 +184,9 @@ pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
         newgene <- gene
         newgene[sample(1:n_labels, 1)] <- sample(1:8,1)
         newscore <- objective(newgene)
-        if (newscore < score || runif(1) < 1 - exp((newscore - score) / T)) {
+        if (newscore <= score || runif(1) < exp((score - newscore) / T)) {
+          # keep the new set if it has the same or better score or
+          # if it's worse randomly based on the annealing criteria
           k <- k + 1
           score <- newscore
           gene <- newgene
@@ -205,8 +211,8 @@ pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
     xy <- SANN()
   else
     xy <- GA()
+  xy <- toUserCoords(xy)
   if (doPlot)
     text(xy, labels, cex = cex, ...)
   invisible(xy)
 }
-
