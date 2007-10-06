@@ -38,10 +38,11 @@ export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygon
 export(Rgshhs)
 
 exportMethods(coerce, spCbind, spRbind, spChFIDs)
+exportMethods(elide)
 
 export(GE_SpatialGrid, kmlOverlay)
 
-export(pointLabel)
+export(pointLabel, gcDestination)
 
 S3method(plot, Map)
 S3method(plot, polylist)
