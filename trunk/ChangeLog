@@ -1,3 +1,24 @@
+2007-10-06 19:38  rsbivand
+
+	* man/gcDestination.Rd: elide first cut
+
+2007-10-06 12:05  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/elide.R, R/gc_dist.R,
+	  man/elide-methods.Rd: elide first cut
+
+2007-09-29 18:37  rsbivand
+
+	* R/pointLabel.R: pointLabel update
+
+2007-09-26 11:09  rsbivand
+
+	* R/asciigrid.R: Ascii Grid dec
+
+2007-09-18 10:19  rsbivand
+
+	* ChangeLog, inst/ChangeLog, inst/changes: tidy
+
 2007-09-18 10:15  rsbivand
 
 	* DESCRIPTION, R/maptools.R, R/sp2WB.R: tidy

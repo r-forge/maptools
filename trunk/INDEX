@@ -6,6 +6,9 @@ ContourLines2SLDF       Converter functions to build
                         SpatialLinesDataFrame objects
 crepuscule              Methods for sun ephemerides calculations
 dotsInPolys             Put dots in polygons
+elide-methods           Methods for Function elide in Package
+                        'maptools'
+gcDestination           Find destination in geographical coordinates
 GE_SpatialGrid          Create SpatialGrid for PNG output to GE
 get.Pcent               Polygon centroids
 gpcholes                Hisaji Ono's lake/hole problem
