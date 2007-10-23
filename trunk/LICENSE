@@ -6,8 +6,8 @@ Copyrights
 
 Files: src/shapefil.h, src/shpopen.c and src/shptree.c are
 copyright (c) 1998 Frank Warmerdam, and released under the conditions
-given in http://shapelib.maptools.org/license.html, with
-default license terms:
+given in http://shapelib.maptools.org/license.html. His code is available
+under the MIT or LGPL licence, and the latter is chosen here.
 
 This software is available under the following "MIT Style" license, or
 at the option of the licensee under the LGPL (see LICENSE.LGPL). This

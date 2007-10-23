@@ -89,6 +89,4 @@ plot(xylims$x, xylims$y, asp=1, type='n', xlab="", ylab="")
 for (i in 1:length(fylk.val)) lines(fylk.val[[i]])
 title(main="Norwegian river centrelines from maptools package")
 }
-
-}
 \keyword{spatial}

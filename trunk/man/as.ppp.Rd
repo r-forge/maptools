@@ -100,5 +100,4 @@ plot(mg_im)
 mg2 <- as.SpatialGridDataFrame.im(mg_im)
 image(mg2, axes=TRUE)
 }
-}
 \keyword{spatial}

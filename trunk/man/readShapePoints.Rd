@@ -20,7 +20,6 @@ writePointsShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
 }
-}
 
 \value{
   a SpatialPointsDataFrame object

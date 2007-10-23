@@ -22,7 +22,6 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
 }
-}
 \details{If no IDvar argument is given, the shpID values of the shapefile will be used as \code{Polygons} ID values; when writing shapefiles, the object data slot rownames are added to the DBF file as column SP\_ID.}
 \value{
    a SpatialPolygonsDataFrame object
