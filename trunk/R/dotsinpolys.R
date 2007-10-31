@@ -5,8 +5,8 @@ dotsInPolys <- function(pl, x, f="random", offset, compatible=FALSE) {
     if (f != "random" && f != "regular") stop(paste(f, "not supported"))
     if (inherits(pl, "polylist")) pl <- .polylist2SpP(pl)
     if (!is(pl, "SpatialPolygons")) stop("unknown class of input polygons")
-    pls <- getSpPpolygonsSlot(pl)
-    IDs <- getSpPPolygonsIDSlots(pl)
+    pls <- slot(pl, "polygons")
+    IDs <- sapply(pls, function(i) slot(i, "ID"))
     if (length(pls) != length(x)) stop("different lengths")
     if (!inherits(x, "integer")) {
         x <- as.integer(x)
@@ -52,15 +52,15 @@ symbolsInPolys <- function(pl, dens, symb="+", compatible=FALSE) {
     if (inherits(pl, "polylist")) pl <- .polylist2SpP(pl)
     if (!is(pl, "SpatialPolygons")) stop("unknown class of input polygons")
     if (!is(pl, "SpatialPolygons")) stop("unknown class of input polygons")
-    pls <- getSpPpolygonsSlot(pl)
+    pls <- slot(pl, "polygons")
     n <- length(pls)
     if (n < 1) stop("zero Polygons")
     if (n != length(dens)) dens <- rep(dens[1], n)
     if (n != length(symb)) symb <- rep(symb[1], n)
-    areas <- lapply(pls, function(x) sapply(getPolygonsPolygonsSlot(x), 
-	getPolygonAreaSlot))
-    holes <- lapply(pls, function(x) sapply(getPolygonsPolygonsSlot(x), 
-	getPolygonHoleSlot))
+    areas <- lapply(pls, function(x) sapply(slot(x, "Polygons"),
+        function(i) slot(i, "area")))
+    holes <- lapply(pls, function(x) sapply(slot(x, "Polygons"),
+        function(i) slot(i, "hole")))
     counts <- vector(mode="list", n)
     for (i in 1:n) {
 	cntvec <- NULL

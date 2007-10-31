@@ -23,31 +23,35 @@ checkPolygonsHoles(x)
 library(sp)
 library(gpclib)
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=clrk66"))
-pl <- getSpPpolygonsSlot(nc1)
-sapply(getPolygonsPolygonsSlot(pl[[4]]), function(x) x@hole)
-pl[[4]] <- Polygons(list(getPolygonsPolygonsSlot(pl[[4]])[[1]], Polygon(getPolygonCoordsSlot(getPolygonsPolygonsSlot(pl[[4]])[[2]]), hole=TRUE), getPolygonsPolygonsSlot(pl[[4]])[[3]]), getPolygonsIDSlot(pl[[4]]))
-sapply(getPolygonsPolygonsSlot(pl[[4]]), function(x) x@hole)
+pl <- slot(nc1, "polygons")
+sapply(slot(pl[[4]], "Polygons"), function(x) slot(x, "hole"))
+pl[[4]] <- Polygons(list(slot(pl[[4]], "Polygons")[[1]],
+ Polygon(slot(slot(pl[[4]], "Polygons")[[2]], "coords"), hole=TRUE),
+ slot(pl[[4]], "Polygons")[[3]]), slot(pl[[4]], "ID"))
+sapply(slot(pl[[4]], "Polygons"), function(x) slot(x, "hole"))
 pl_new <- lapply(pl, checkPolygonsHoles)
-sapply(getPolygonsPolygonsSlot(pl_new[[4]]), function(x) x@hole)
-srs <- getPolygonCoordsSlot(getPolygonsPolygonsSlot(pl[[1]])[[1]])
+sapply(slot(pl_new[[4]], "Polygons"), function(x) slot(x, "hole"))
+srs <- slot(slot(pl[[1]], "Polygons")[[1]], "coords")
 hle2 <- structure(c(-81.64093, -81.38380, -81.34165, -81.66833, -81.64093, 
  36.57865, 36.57234, 36.47603, 36.47894, 36.57865), .Dim = as.integer(c(5, 2)))
 hle3 <- structure(c(-81.47759, -81.39118, -81.38486, -81.46705, -81.47759, 
  36.56289, 36.55659, 36.49907, 36.50380, 36.56289), .Dim = as.integer(c(5, 2)))
 x <- Polygons(list(Polygon(srs), Polygon(hle2), Polygon(hle3)),
- ID=getPolygonsIDSlot(pl[[1]]))
-sapply(getPolygonsPolygonsSlot(x), function(x) x@hole)
+ ID=slot(pl[[1]], "ID"))
+sapply(slot(x, "Polygons"), function(x) slot(x, "hole"))
 res <- checkPolygonsHoles(x)
-sapply(getPolygonsPolygonsSlot(res), function(x) x@hole)
+sapply(slot(res, "Polygons"), function(x) slot(x, "hole"))
 \dontrun{
 opar <- par(mfrow=c(1,2))
-plot(SpatialPolygons(list(x)))
-text(t(sapply(getPolygonsPolygonsSlot(x), getPolygonLabptSlot)),
- labels=sapply(getPolygonsPolygonsSlot(x), getPolygonHoleSlot), cex=0.6)
+SPx <- SpatialPolygons(list(x))
+plot(SPx)
+text(coordinates(SPx),
+ labels=sapply(slot(x, "Polygons"), function(i) slot(i, "hole")), cex=0.6)
 title(xlab="Hole slot values before checking")
-plot(SpatialPolygons(list(res)))
-text(t(sapply(getPolygonsPolygonsSlot(res), getPolygonLabptSlot)),
- labels=sapply(getPolygonsPolygonsSlot(res), getPolygonHoleSlot), cex=0.6)
+SPres <- SpatialPolygons(list(res))
+plot(SPres)
+text(coordinates(SPres),
+ labels=sapply(slot(res, "Polygons"), function(i) slot(i, "hole")), cex=0.6)
 title(xlab="Hole slot values after checking")
 par(opar)
 }

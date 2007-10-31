@@ -2,7 +2,7 @@
 
 SpatialPolygons2PolySet <- function(SpP) {
 	require(PBSmapping)
-	pls <- getSpPpolygonsSlot(SpP)
+	pls <- slot(SpP, "polygons")
 	n <- length(pls)
 	PID <- NULL
 	SID <- NULL
@@ -10,10 +10,10 @@ SpatialPolygons2PolySet <- function(SpP) {
 	X <- NULL
 	Y <- NULL
 	for (i in 1:n) {
-		srs <- getPolygonsPolygonsSlot(pls[[i]])
+		srs <- slot(pls[[i]], "Polygons")
 		m <- length(srs)
 		for (j in 1:m) {
-			crds <- getPolygonCoordsSlot(srs[[j]])
+			crds <- slot(srs[[j]], "coords")
 			k <- nrow(crds)
 			PID <- c(PID, rep(i, k))
 			SID <- c(SID, rep(j, k))
@@ -41,7 +41,7 @@ SpatialPolygons2PolySet <- function(SpP) {
 
 SpatialLines2PolySet <- function(SL) {
 	require(maps)
-	pls <- getSLlinesSlot(SL)
+	pls <- slot(SL, "lines")
 	n <- length(pls)
 	PID <- NULL
 	SID <- NULL
@@ -49,7 +49,7 @@ SpatialLines2PolySet <- function(SL) {
 	X <- NULL
 	Y <- NULL
 	for (i in 1:n) {
-		srs <- getLinesLinesSlot(pls[[i]])
+		srs <- slot(pls[[i]], "Lines")
 		m <- length(srs)
 		for (j in 1:m) {
 			crds <- coordinates(srs[[j]])

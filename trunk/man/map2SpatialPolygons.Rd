@@ -39,7 +39,8 @@ nor_coast_poly <- map("world", "norway", fill=TRUE, col="transparent", plot=FALS
 nor_coast_poly$names
 IDs <- sapply(strsplit(nor_coast_poly$names, ":"), function(x) x[1])
 nor_coast_poly_sp <- map2SpatialPolygons(nor_coast_poly, IDs=IDs, proj4string=CRS("+proj=longlat +datum=wgs84"))
-getSpPnParts(nor_coast_poly_sp)
+sapply(slot(nor_coast_poly_sp, "polygons"),
+ function(x) length(slot(x, "Polygons")))
 plot(nor_coast_poly_sp, col="grey", axes=TRUE)
 nor_coast_lines <- map("world", interior=FALSE, plot=FALSE, xlim=c(4,32), ylim=c(58,72))
 plot(nor_coast_lines, type="l")

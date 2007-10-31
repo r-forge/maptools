@@ -10,8 +10,8 @@ gcDestination(lon, lat, bearing, dist, dist.units = "km", model = NULL, Vincenty
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{lon}{longitude in decimal degrees (either scalar or vector)}
-  \item{lat}{latitude in decimal degrees (either scalar or vector)}
+  \item{lon}{longitude (Eastings) in decimal degrees (either scalar or vector)}
+  \item{lat}{latitude (Northings) in decimal degrees (either scalar or vector)}
   \item{bearing}{bearing from 0 to 360 degrees (either scalar or vector)}
   \item{dist}{distance travelled (scalar)}
   \item{dist.units}{units of distance "km" (kilometers), "nm" (nautical miles), "mi" (statute miles)}
@@ -22,7 +22,7 @@ gcDestination(lon, lat, bearing, dist, dist.units = "km", model = NULL, Vincenty
   The bearing argument may be a vector when lon and lat are scalar, representing a single point.
 }
 \value{
- 
+ A matrix of decimal degree coordinates with Eastings in the first column and Northings in the second column. 
 }
 \references{\url{http://www.movable-type.co.uk/scripts/latlong.html#ellipsoid}, \url{http://williams.best.vwh.net/avform.htm}, \url{http://www.movable-type.co.uk/scripts/latlong-vincenty-direct.html}, 
 Original reference \url{http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf}:

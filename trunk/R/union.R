@@ -1,9 +1,9 @@
 unionSpatialPolygons <- function(SpP, IDs, threshold=NULL) {
 	require(gpclib)
 	if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
-	pl <- getSpPpolygonsSlot(SpP)
+	pl <- slot(SpP, "polygons")
 	proj4CRS <- CRS(proj4string(SpP))
-	SrnParts <- getSpPnParts(SpP)
+	SrnParts <- sapply(pl, function(x) length(slot(x, "Polygons")))
 	if (missing(IDs)) stop("IDs required")
 	if (length(pl) != length(IDs)) stop("input lengths differ")
 	tab <- table(factor(IDs))
@@ -17,7 +17,7 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL) {
 		nParts <- length(ii)
 		if (nParts == 1) {
 			Srl[[i]] <- Polygons(
-				getPolygonsPolygonsSlot(pl[[ii[1]]]), 
+				slot(pl[[ii[1]]], "Polygons"), 
 				ID=IDss[i])
 		} else {
 			nPi <- SrnParts[belongs[[i]]]
@@ -25,10 +25,9 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL) {
 			pli <- vector(mode="list", length=m)
 			jj <- 1
 			for (j in 1:nParts) {
-				SrSrj <- getPolygonsPolygonsSlot(pl[[ii[j]]])
+				SrSrj <- slot(pl[[ii[j]]], "Polygons")
 				for (k in 1:nPi[j]) {
-					pli[[jj]] <- getPolygonCoordsSlot(
-						SrSrj[[k]])
+					pli[[jj]] <- slot(SrSrj[[k]], "coords")
 					if (jj <= m) jj <- jj + 1
 					else stop("jj out of range")
 				}

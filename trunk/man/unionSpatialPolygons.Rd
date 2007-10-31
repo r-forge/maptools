@@ -16,7 +16,7 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL)
 }
 
 \value{
-  Returns an aggregated SpatialPolygons object named with the aggregated IDs values in their sorting order; see getSpPPolygonsIDSlots() of the output object to view the order.
+  Returns an aggregated SpatialPolygons object named with the aggregated IDs values in their sorting order; see the ID values of the output object to view the order.
 }
 
 \author{Roger Bivand}
@@ -25,9 +25,9 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL)
 library(sp)
 library(gpclib)
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
-lps <- getSpPPolygonsLabptSlots(nc1)
+lps <- coordinates(nc1)
 ID <- cut(lps[,1], quantile(lps[,1]), include.lowest=TRUE)
 reg4 <- unionSpatialPolygons(nc1, ID)
-getSpPPolygonsIDSlots(reg4)
+sapply(slot(reg4, "polygons"), function(i) slot(i, "ID"))
 }
 \keyword{spatial}

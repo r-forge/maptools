@@ -1,11 +1,11 @@
 .SP2owin <- function(SP) {
     require(spatstat)
-    nParts <- getSpPnParts(SP)
+    pls <- slot(SP, "polygons")
+    nParts <- sapply(pls, function(x) length(slot(x, "Polygons")))
     nOwin <- sum(nParts)
-    pls <- getSpPpolygonsSlot(SP)
     if (nOwin == 1) {
-        pl <- getPolygonsPolygonsSlot(pls[[1]])
-        crds <- getPolygonCoordsSlot(pl[[1]])
+        pl <- slot(pls[[1]], "Polygons")
+        crds <- slot(pl[[1]], "coords")
 	colnames(crds) <- c("x", "y")
 	rD <- pl[[1]]@ringDir
 	if (rD == 1) crds <- crds[nrow(crds):1,]
@@ -15,12 +15,12 @@
         opls <- vector(mode="list", length=nOwin)
         io <- 1
         for (i in seq(along=pls)) {
-            pl <- getPolygonsPolygonsSlot(pls[[i]])
+            pl <- slot(pls[[i]], "Polygons")
             for (j in 1:nParts[i]) {
-                crds <- getPolygonCoordsSlot(pl[[j]])
+                crds <- slot(pl[[j]], "coords")
 	        colnames(crds) <- c("x", "y")
 	        rD <- sp:::.spFindCG(crds)$rD
-		hole <- getPolygonHoleSlot(pl[[j]])
+		hole <- slot(pl[[j]], "hole")
 
 	        if (rD == -1 && hole) crds <- crds[nrow(crds):1,]
                 else if (rD == 1 && !hole) crds <- crds[nrow(crds):1,]

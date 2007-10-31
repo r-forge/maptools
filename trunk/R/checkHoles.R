@@ -1,13 +1,13 @@
 checkPolygonsHoles <- function(x) {
 	require(gpclib)
 	if (!is(x, "Polygons")) stop("not an Polygons object")
-	pls <- getPolygonsPolygonsSlot(x)
+	pls <- slot(x, "Polygons")
 	nParts <- length(pls)
 #	proj4CRS <- CRS(proj4string(x))
-	ID <- getPolygonsIDSlot(x)
-	gpc <- as(getPolygonCoordsSlot(pls[[1]]), "gpc.poly")
+	ID <- slot(x, "ID")
+	gpc <- as(slot(pls[[1]], "coords"), "gpc.poly")
 	if (nParts > 1) for (i in 2:nParts) gpc <- append.poly(gpc, 
-		as(getPolygonCoordsSlot(pls[[i]]), "gpc.poly"))
+		as(slot(pls[[i]], "coords"), "gpc.poly"))
 	bb <- get.bbox(gpc)
 	bbmat <- matrix(c(rep(bb$x[1], 2), rep(bb$x[2], 2), bb$x[1], bb$y[1], 
 		rep(bb$y[2], 2), rep(bb$y[1], 2)), ncol=2)

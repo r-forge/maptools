@@ -27,13 +27,13 @@ pal2SpatialPolygons(arc, pal, IDs, dropPoly1=TRUE, proj4string=CRS(as.character(
 \examples{
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], ID="FIPS")
 plot(nc1)
-text(getSpPPolygonsLabptSlots(nc1), labels=getSpPPolygonsIDSlots(nc1), cex=0.6)
+text(coordinates(nc1), labels=sapply(slot(nc1, "polygons"), function(i) slot(i, "ID")), cex=0.6)
 library(maps)
 ncmap <- map("county", "north carolina", fill=TRUE, col="transparent", plot=FALSE)
 IDs <- sapply(strsplit(ncmap$names, "[,:]"), function(x) x[2])
 nc2 <- map2SpatialPolygons(ncmap, IDs)
 plot(nc2)
-text(getSpPPolygonsLabptSlots(nc2), labels=getSpPPolygonsIDSlots(nc2), cex=0.6)
+text(coordinates(nc2), labels=sapply(slot(nc2, "polygons"), function(i) slot(i, "ID")), cex=0.6)
 library(RArcInfo)
 td <- tempdir()
 tmpcover <- paste(td, "nc", sep="/")
@@ -45,6 +45,6 @@ sapply(pal[[2]], function(x) length(x[[1]]))
 IDs <- paste(pat$ST[-1], pat$CO[-1], sep="")
 nc3 <- pal2SpatialPolygons(arc, pal, IDs=IDs)
 plot(nc3)
-text(getSpPPolygonsLabptSlots(nc3), labels=getSpPPolygonsIDSlots(nc3), cex=0.6)
+text(coordinates(nc3), labels=sapply(slot(nc3, "polygons"), function(i) slot(i, "ID")), cex=0.6)
 }
 \keyword{spatial}

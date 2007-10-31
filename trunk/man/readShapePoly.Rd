@@ -33,7 +33,7 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
 library(maptools)
 xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
-text(getSpPPolygonsLabptSlots(xx), labels=getSpPPolygonsIDSlots(xx), cex=0.6)
+text(coordinates(xx), labels=sapply(slot(xx, "polygons"), function(i) slot(i, "ID")), cex=0.6)
 as(xx, "data.frame")[1:5, 1:6]
 xxx <- xx[xx$SID74 < 2,]
 plot(xxx, border="red", add=TRUE)

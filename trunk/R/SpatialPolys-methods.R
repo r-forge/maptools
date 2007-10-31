@@ -151,12 +151,12 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 }
 
 .SpP2polylist <- function(x) {
-	pls <- getSpPpolygonsSlot(x)
+	pls <- slot(x, "polygons")
 	n <- length(pls)
 	res <- vector(mode="list", length=n)
 	for (i in 1:n) {
-		xyL <- lapply(getPolygonsPolygonsSlot(pls[[i]]), 
-			getPolygonCoordsSlot)
+		xyL <- lapply(slot(pls[[i]], "Polygons"),
+                    function(i) slot(i, "coords"))
 		nP <- length(xyL)
 		nVs <- sapply(xyL, nrow)
 		res[[i]] <- .xyList2NAmat(xyL)
@@ -173,7 +173,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 			to=as.integer(to))
 		attr(res[[i]], "bbox") <- c(bbox(pls[[i]]))
 	}
-	attr(res, "region.id") <- getSpPPolygonsIDSlots(x)
+	attr(res, "region.id") <- sapply(pls, function(i) slot(i, "ID"))
 	class(res) <- "polylist"
 	invisible(res)
 }

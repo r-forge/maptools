@@ -40,12 +40,12 @@ xx <- lapply(try1, function(x) {if (!is.null(x)) points(x, pch=attr(x, "symb"))}
 nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=clrk66"))
 \dontrun{
 library(spgpc)
-pls <- getSpPpolygonsSlot(nc_SP)
+pls <- slot(nc_SP, "polygons")
 pls_new <- lapply(pls, checkPolygonsHoles)
 nc_SP <- SpatialPolygonsDataFrame(SpatialPolygons(pls_new, proj4string=CRS(proj4string(nc_SP))), data=as(nc_SP, "data.frame"))
 }
 symbs <- c("-", "+", "x")
-np <- getSpPnParts(nc_SP)
+np <- sapply(slot(nc_SP, "polygons"), function(x) length(slot(x, "Polygons")))
 try1 <- symbolsInPolys(nc_SP, 100, symb=symbs[np])
 plot(nc_SP, axes=TRUE)
 plot(try1, add=TRUE, pch=as.character(try1$symb))

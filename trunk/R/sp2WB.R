@@ -16,10 +16,10 @@ sp2WB <- function(map, filename, Xscale=1, Yscale=Xscale, plotorder=FALSE) {
 	f<-file(filename,"w")
 
 # Get the total number of areas and Rings
-	SRings<-getSpPpolygonsSlot(map)
+	SRings<-slot(map, "polygons")
 	nareas<-length(SRings)
-	nRings<-sum(getSpPnParts (map))
-	IDs<-getSpPPolygonsIDSlots(map)
+	nRings<-sum(sapply(Srings, function(x) length(slot(x, "Polygons"))))
+	IDs<-sapply(Srings, function(i) slot(i, "ID"))
 
 # Plot header of the f
 	cat(file=f, "map:",nareas, "\n", sep="")
@@ -42,16 +42,16 @@ sp2WB <- function(map, filename, Xscale=1, Yscale=Xscale, plotorder=FALSE) {
 # Loop to print all the individual rings
 	for(area in (1:nareas)[porder]) {
 		label<-paste("area", IDs[area], sep="")
-		Rings<-getPolygonsPolygonsSlot(SRings[[area]])
+		Rings<-slot(SRings[[area]], "Polygons")
 		lRings<-length(Rings)
 
 		if(plotorder)
-			porderrings<-getPolygonsplotOrderSlot(Rings)
+			porderrings<-slot(Rings, "plotOrder")
 		else
 			porderrings<-1:lRings
 
 		for(ring in (1:lRings)[porderrings]) {
-			coords<-getPolygonCoordsSlot(Rings[[ring]])
+			coords<-slot(Rings[[ring]], "coords")
 			ncoords<-length(coords[,1])
 		
 # Should we check that there are only x/y coordinates?

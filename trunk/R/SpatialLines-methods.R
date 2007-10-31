@@ -56,13 +56,12 @@ writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 }
 
 .SpL2lineslist <- function(x) {
-	pls <- getSLlinesSlot(x)
+	pls <- slot(x, "lines")
 	n <- length(pls)
 	res <- vector(mode="list", length=n)
 	for (i in 1:n) {
-		xyL <- lapply(getLinesLinesSlot(pls[[i]]), 
+		xyL <- lapply(slot(pls[[i]], "Lines"), 
 			coordinates)
-#			getLineCoordsSlot)
 		nP <- length(xyL)
 		nVs <- sapply(xyL, nrow)
 		res[[i]] <- .xyList2NAmat(xyL)
