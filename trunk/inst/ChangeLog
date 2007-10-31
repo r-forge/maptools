@@ -1,3 +1,14 @@
+2007-10-31 14:46  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/SP2owin.R, R/SpatialLines-methods.R,
+	  R/SpatialPolys-methods.R, R/checkHoles.R, R/dotsinpolys.R,
+	  R/nowrapRecenter.R, R/sp2WB.R, R/sp2pbs.R, R/union.R,
+	  inst/ChangeLog, inst/changes, man/checkPolygonsHoles.Rd,
+	  man/dotsInPolys.Rd, man/gcDestination.Rd,
+	  man/map2SpatialPolygons.Rd, man/pal2SpatialPolygons.Rd,
+	  man/readShapePoly.Rd, man/symbolsInPolys.Rd,
+	  man/unionSpatialPolygons.Rd: thingy to slot
+
 2007-10-23 14:50  rsbivand
 
 	* DESCRIPTION, LICENSE, inst/LICENSE, inst/changes,

@@ -18,8 +18,8 @@ sp2WB <- function(map, filename, Xscale=1, Yscale=Xscale, plotorder=FALSE) {
 # Get the total number of areas and Rings
 	SRings<-slot(map, "polygons")
 	nareas<-length(SRings)
-	nRings<-sum(sapply(Srings, function(x) length(slot(x, "Polygons"))))
-	IDs<-sapply(Srings, function(i) slot(i, "ID"))
+	nRings<-sum(sapply(SRings, function(x) length(slot(x, "Polygons"))))
+	IDs<-sapply(SRings, function(i) slot(i, "ID"))
 
 # Plot header of the f
 	cat(file=f, "map:",nareas, "\n", sep="")
