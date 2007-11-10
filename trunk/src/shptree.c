@@ -34,8 +34,11 @@
  ******************************************************************************
  *
  * $Log$
- * Revision 1.1  2005/09/01 18:22:22  rsbivand
- * Initial revision
+ * Revision 1.2  2007/11/10 13:17:42  rsbivand
+ * assert
+ *
+ * Revision 1.1.1.1  2005/09/01 18:22:22  rsbivand
+ * Initial import.
  *
  * Revision 1.10  2005/01/03 22:30:13  fwarmerdam
  * added support for saved quadtrees
@@ -72,7 +75,7 @@
 #include "shapefil.h"
 
 #include <math.h>
-#include <assert.h>
+/* #include <assert.h> RSB 071110 */
 #include <stdlib.h>
 #include <string.h>
 
