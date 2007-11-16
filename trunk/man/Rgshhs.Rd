@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read GSHHS polygons into SpatialPolygons object}
 \description{
-  Read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines. The data are provided in integer form as millionths of decimal degrees, 
+  Read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 1.5 of 3 April 2007 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_1.5.zip}). The data are provided in integer form as millionths of decimal degrees. Reading of earlier versions of the GSHHS binary files will fail with an error message. The netCDF GSHHS files distributed with GMT >= 4.2 cannot be read as they are in a very different format.
 }
 \usage{
 Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift=FALSE, 
@@ -11,7 +11,7 @@ verbose = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{fn}{filename or full path to GSHHS file to be read}
+  \item{fn}{filename or full path to GSHHS 1.5 file to be read}
   \item{xlim}{longitude limits within 0-360 in most cases, negative longitudes are also found east of the Atlantic, but the Americas are recorded as positive values}
   \item{ylim}{latitude limits}
   \item{level}{maximum GSHHS level to include, defaults to 4 (everything), setting 1 will only retrieve land, no lakes}
@@ -31,13 +31,13 @@ verbose = TRUE)
   \item{new_belongs}{a ragged list of polygon inclusion used for making SP}
   \item{SP}{a SpatialPolygons object; this is the principal output object, and will become the only output object as the package matures}
 }
-\references{\url{http://www.soest.hawaii.edu/wessel/gshhs/gshhs.html}, \url{http://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
+\references{\url{http://www.soest.hawaii.edu/wessel/gshhs/gshhs.html}, \url{http://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html} (only old format - use for information only); data downloaded from \url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_1.5.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
 \author{Roger Bivand}
 
 \note{
   A number of steps are taken in this implementation that are unexpected, print messages, and so require explanation. Following the extraction of polygons intersecting the required region, a check is made to see if Antarctica is present. If it is, a new southern border is imposed at the southern ylim value or -90 if no ylim value is given. When clipping polygons seeming to intersect the required region boundary, it can happen that no polygon is left within the region (for example when the boundaries are overlaid, but also because the min/max polygon values in the header may not agree with the polygon itself (one case observed for a lake west of Groningen). The function then reports a null polygon. Another problem occurs when closed polygons are cut up during the finding of intersections between polygons and the required region boundary. The code in gpclib does not close them, so they are closed later, and the closure noted.
 
-Please also note that use of gpclib is not limited in any way; the licence limitations only apply to the compilation of GPC C code into commercial software. This can be verified by checking that exactly the same GPC code is included in the GPL'ed PBSmapping package on CRAN.
+Please also note that limitations on the use of gpclib are very unclear, as exactly the same GPC code is included in the GPL'ed PBSmapping package on CRAN.
 }
 
 \examples{

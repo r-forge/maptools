@@ -34,6 +34,9 @@
  ******************************************************************************
  *
  * $Log$
+ * Revision 1.3  2007/11/16 09:12:40  rsbivand
+ * GSHHS to 1.5
+ *
  * Revision 1.2  2007/11/10 13:17:42  rsbivand
  * assert
  *
@@ -190,6 +193,9 @@
 #include <math.h>
 #include <limits.h>
 /* #include <assert.h> RSB 071110 */
+#include <R.h>
+#include <Rdefines.h>
+#include <R_ext/Applic.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
