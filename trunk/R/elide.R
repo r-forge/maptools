@@ -94,11 +94,11 @@ elide.lines <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
         new_Lns <- lapply(Lns, function(y) {
             crds <- slot(y, "coords")
             if (flip) {
-                yc <- crds[,1]
-                xc <- crds[,2]
+                yc <- crds[,1] + shift[1]
+                xc <- crds[,2] + shift[2]
             } else {
-                xc <- crds[,1]
-                yc <- crds[,2]
+                xc <- crds[,1] + shift[1]
+                yc <- crds[,2] + shift[2]
             }
             new_crds <- elideCoords(x=xc, y=yc, xr=xr, yr=yr, 
                 reflect=reflect, scale=scale)
@@ -144,11 +144,11 @@ elide.polygons <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
         new_Pls <- lapply(Pls, function(y) {
             crds <- slot(y, "coords")
             if (flip) {
-                yc <- crds[,1]
-                xc <- crds[,2]
+                yc <- crds[,1] + shift[1]
+                xc <- crds[,2] + shift[2]
             } else {
-                xc <- crds[,1]
-                yc <- crds[,2]
+                xc <- crds[,1] + shift[1]
+                yc <- crds[,2] + shift[2]
             }
             new_crds <- elideCoords(x=xc, y=yc, xr=xr, yr=yr, 
                 reflect=reflect, scale=scale)
