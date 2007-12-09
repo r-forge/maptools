@@ -1,3 +1,16 @@
+2007-11-16 10:12  rsbivand
+
+	* DESCRIPTION, inst/changes, inst/share/gshhs_c.b, man/Rgshhs.Rd,
+	  src/Rgshhs.c, src/Rgshhs.h, src/shpopen.c: GSHHS to 1.5
+
+2007-11-10 14:17  rsbivand
+
+	* src/: shpopen.c, shptree.c: assert
+
+2007-10-31 16:43  rsbivand
+
+	* ChangeLog, R/sp2WB.R, inst/ChangeLog: thingy to slot
+
 2007-10-31 14:46  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/SP2owin.R, R/SpatialLines-methods.R,

@@ -48,8 +48,8 @@ This modification of gshhs.h is Copyright (c) 2005-7 Roger Bivand
 
 /* For byte swapping on little-endian systems (GSHHS is bigendian) */
 
-#define swabi2(i2) (((i2) >> 8) + (((i2) & 255) << 8))
-#define swabi4(i4) (((i4) >> 24) + (((i4) >> 8) & 65280) + (((i4) & 65280) << 8) + (((i4) & 255) << 24))
+/* #define swabi2(i2) (((i2) >> 8) + (((i2) & 255) << 8))
+#define swabi4(i4) (((i4) >> 24) + (((i4) >> 8) & 65280) + (((i4) & 65280) << 8) + (((i4) & 255) << 24)) */
 
 struct GSHHS {	/* Global Self-consistent Hierarchical High-resolution Shorelines */
 	int id;				/* Unique polygon id number, starting at 0 */

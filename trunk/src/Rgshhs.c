@@ -30,13 +30,31 @@
  *	Contact info: www.soest.hawaii.edu/pwessel */
 
 /*
-This modification of gshhs.c is Copyright (c) 2005 Roger Bivand
+ * This modification of gshhs.c is Copyright (c) 2005-7 Roger Bivand
+ * Modification to swap function taken from Rsystat.c in foreign 071117
 */
 
 #include "Rgshhs.h"
 #include <R.h>
 #include <Rdefines.h>
 #include <R_ext/Applic.h>
+#include <Rconfig.h>
+
+static void swapb(void *result, int size)
+{
+#ifndef WORDS_BIGENDIAN
+    int i;
+    char *p = result, tmp;
+
+    if (size == 1) return;
+    for (i = 0; i < size/2; i++) {
+	tmp = p[i];
+	p[i] = p[size - i - 1];
+	p[size - i - 1] = tmp;
+    }
+#endif
+}
+
 
 SEXP Rgshhs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
@@ -53,7 +71,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 	double w, e, s, n, area, lon, lat;
 	char source;
 	char msg[255];
-	int k, max_east = 270000000, info, n_read, flip, Level, version, greenwich, src;
+	int k, max_east = 270000000, info, n_read, /*flip,*/ Level, version, greenwich, src;
 	struct POINT p;
 	struct GSHHS h;
 	int npols, pc=0;
@@ -114,26 +132,26 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		fpos =  (signed int) ftell(fp);
 		n_read = fread ((void *)&h, (size_t)sizeof (struct GSHHS), 
 			(size_t)1, fp);
-		version = (h.flag >> 8) & 255;
-		flip = (version != GSHHS_DATA_VERSION);	/* Take as sign that byte-swabbing is needed */
+/*		version = (h.flag >> 8) & 255;
+		flip = (version != GSHHS_DATA_VERSION);	 Take as sign that byte-swabbing is needed */
 /*		flip = (! (h.level > 0 && h.level < 5));	
  Take as sign that byte-swabbing is needed */
 		i = 0;
 		while (n_read == 1) {
-		    if (flip) {
-			h.id = swabi4 ((unsigned int)h.id);
-			h.n  = swabi4 ((unsigned int)h.n);
-		/*	h.level = swabi4 ((unsigned int)h.level); */
-			h.west  = swabi4 ((unsigned int)h.west);
-			h.east  = swabi4 ((unsigned int)h.east);
-			h.south = swabi4 ((unsigned int)h.south);
-			h.north = swabi4 ((unsigned int)h.north);
-			h.area  = swabi4 ((unsigned int)h.area);
-		/*	h.version  = swabi4 ((unsigned int)h.version);
+/*		    if (flip) {*/
+			swapb (&h.id, sizeof(int));
+			swapb (&h.n, sizeof(int));
+		/*	h.level = swapb ((unsigned int)h.level); */
+			swapb (&h.west, sizeof(int));
+			swapb (&h.east, sizeof(int));
+			swapb (&h.south, sizeof(int));
+			swapb (&h.north, sizeof(int));
+			swapb (&h.area, sizeof(int));
+		/*	h.version  = swapb ((unsigned int)h.version);
 			h.greenwich = swabi2 ((unsigned int)h.greenwich);
 			h.source = swabi2 ((unsigned int)h.source);*/
-			h.flag  = swabi4 ((unsigned int)h.flag);
-		    }
+			swapb (&h.flag, sizeof(int));
+/*		    }*/
 		    Level = h.flag & 255;
 		    version = (h.flag >> 8) & 255;
 		    if (version != GSHHS_DATA_VERSION) 
@@ -294,10 +312,10 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 			INTEGER_POINTER(VECTOR_ELT(res, 0))[j], k);
 					error(msg);
 			    }
-			    if (flip) {
-				p.x = swabi4 ((unsigned int)p.x);
-				p.y = swabi4 ((unsigned int)p.y);
-			    }
+/*			    if (flip) {*/
+				swapb (&p.x, sizeof(int));
+				swapb (&p.y, sizeof(int));
+/*			    }*/
 			    lon = (INTEGER_POINTER(VECTOR_ELT(res, 4))[j] 
 			    	&& p.x > max_east) ? 
 				p.x * 1.0e-6 - 360.0 : p.x * 1.0e-6;
@@ -316,22 +334,22 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 
 int getNpols(FILE *fp) {
 	struct GSHHS h;
-	int n_read, flip, version;
+	int n_read, /*flip,*/ version;
 	int npols;
 	int n;
 
 	n_read = fread ((void *)&h, (size_t)sizeof (struct GSHHS), 
 		(size_t)1, fp);
-	version = (h.flag >> 8) & 255;
-	flip = (version != GSHHS_DATA_VERSION);	/* Take as sign that byte-swabbing is needed */
+/*	version = (h.flag >> 8) & 255;
+	flip = (version != GSHHS_DATA_VERSION);	 Take as sign that byte-swabbing is needed */
 /*	flip = (! (h.level > 0 && h.level < 5));	
  Take as sign that byte-swabbing is needed */
 	
 	n=0;
 	while (n_read == 1) {
-		if (flip) {
-			h.n  = swabi4 ((unsigned int)h.n);
-		}
+/*		if (flip) {*/
+			swapb (&h.n, sizeof(int));
+/*		}*/
 		fseek (fp, (long)(h.n * sizeof(struct POINT)), SEEK_CUR);
 		n_read = fread((void *)&h, (size_t)sizeof (struct GSHHS), 
 			(size_t)1, fp);

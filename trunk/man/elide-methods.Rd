@@ -42,12 +42,15 @@ elide(obj, ...)
     \item{reflect}{reverse coordinate axes}
     \item{scale}{if NULL, coordinates not scaled; if TRUE, the longer dimension is scaled to lie within [0,1] and aspect maintained; if a scalar, the output range of [0,1] is multiplied by scale}
     \item{flip}{translate coordinates on the main diagonal}
+    \item{rotate}{default 0, rotate angle degrees clockwise around center}
+    \item{center}{default NULL, if not NULL, the rotation center, numeric of length two}
 }}
 }
 
 \value{
 The methods return objects of the input class object with elided coordinates; the coordinate reference system is not set. Note that if the input coordinates or centroids are in the data slot data.frame of the input object, they should be removed before the use of these methods, otherwise they will betray the input positions.
 }
+\note{Rotation code kindly contributed by Don MacQueen}
 
 \examples{
 data(meuse)
@@ -65,6 +68,16 @@ plot(meuse, add=TRUE)
 plot(rivers1, axes=TRUE)
 plot(meuse1, add=TRUE)
 par(opar)
+meuse1 <- elide(meuse, shift=c(10000, -10000))
+bbox(meuse)
+bbox(meuse1)
+rivers1 <- elide(rivers, shift=c(10000, -10000))
+bbox(rivers)
+bbox(rivers1)
+meuse1 <- elide(meuse, rotate=-30, center=apply(bbox(meuse), 1, mean))
+bbox(meuse)
+bbox(meuse1)
+plot(meuse1, axes=TRUE)
 }
 
 \keyword{methods}
