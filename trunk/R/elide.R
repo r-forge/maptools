@@ -45,8 +45,8 @@ elide.pointsdf <- function(obj, bb=NULL, shift=c(0, 0),
   res <- elide(as(obj, "SpatialPoints"), bb=bb, shift=shift,
     reflect=reflect, scale=scale, flip=flip, rotate=rotate, center=center)
 #    df <- as(obj, "data.frame")[,-c(1,2)]
-  df <- as(obj, "data.frame")
-  df <- df[,-c(ncol(df),ncol(df)-1)]
+#  df <- as(obj, "data.frame")
+  df <- slot(obj, "data")
   res <- SpatialPointsDataFrame(res, data=df)
   res
 }
