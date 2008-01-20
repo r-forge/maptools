@@ -1,3 +1,16 @@
+2007-12-13 18:32  rsbivand
+
+	* DESCRIPTION, R/elide.R: elide
+
+2007-12-09 19:03  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/elide.R, inst/ChangeLog,
+	  man/elide-methods.Rd, src/Rgshhs.c, src/Rgshhs.h: elide shift
+
+2007-11-21 23:37  rsbivand
+
+	* R/elide.R: elide bug
+
 2007-11-16 10:12  rsbivand
 
 	* DESCRIPTION, inst/changes, inst/share/gshhs_c.b, man/Rgshhs.Rd,

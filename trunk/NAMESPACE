@@ -28,7 +28,7 @@ exportClass(ppp, im)
 
 exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
 
-export(SpatialPolygons2PolySet, SpatialLines2PolySet, map2SpatialPolygons, map2SpatialLines, pruneMap)
+export(SpatialPolygons2PolySet, SpatialLines2PolySet, PolySet2SpatialPolygons, PolySet2SpatialLines, map2SpatialPolygons, map2SpatialLines, pruneMap)
 
 export(as.ppp.SpatialPoints, as.ppp.SpatialPointsDataFrame, as.SpatialPoints.ppp, as.SpatialPointsDataFrame.ppp, as.SpatialGridDataFrame.ppp)
 export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.SpatialPolygons, as.SpatialGridDataFrame.im, as.im.SpatialGridDataFrame)

@@ -40,7 +40,7 @@ SpatialPolygons2PolySet <- function(SpP) {
 }
 
 SpatialLines2PolySet <- function(SL) {
-	require(maps)
+#	require(maps)
 	pls <- slot(SL, "lines")
 	n <- length(pls)
 	PID <- NULL
@@ -93,6 +93,78 @@ SpatialLines2PolySet <- function(SL) {
 			zn0+attr(zn0, "match.length")))
 	} else val <- "1"
 	val
+}
+
+PolySet2SpatialPolygons <- function(PS, close_polys=TRUE) {
+    if (!inherits(PS, "PolySet")) stop("not a PolySet object")
+    prj <- attr(PS, "projection")
+    if (is.null(prj)) stop("unknown coordinate reference system")
+    if (prj == "LL") p4s <- "+proj=longlat"
+    else if (prj == "UTM") p4s <- paste("+proj=utm +zone=",
+        attr(prj, "zone"), sep="")
+    else stop("unknown coordinate reference system")
+    hasPID <- "PID" %in% names(PS)
+    if (!hasPID) stop("object does not have PID column")
+    res0 <- split(PS, PS$PID)
+    hasSID <- "SID" %in% names(PS)
+    outPolygons <- vector(mode="list", length=length(res0)) 
+    if (hasSID) {
+        res1 <- lapply(res0, function(x) split(x, x$SID))
+        if (close_polys) res1 <- lapply(res1, function(x) {
+            n <- nrow(x)
+            if (!isTRUE(identical(x$X[1], x$X[n])) ||
+                !isTRUE(identical(x$Y[1], x$Y[n]))) rbind(x, x[1,])
+            else x
+        })
+        for (i in seq(along=outPolygons)) {
+            outPolygons[[i]] <- Polygons(lapply(res1[[i]], function(x) 
+                Polygon(cbind(x$X, x$Y))), ID=as.character(i))
+        }
+    } else {
+        if (close_polys) res0 <- lapply(res0, function(x) {
+            n <- nrow(x)
+            if (!isTRUE(identical(x$X[1], x$X[n])) ||
+                !isTRUE(identical(x$Y[1], x$Y[n]))) rbind(x, x[1,])
+            else x
+        })
+        for (i in seq(along=outPolygons)) {
+            outPolygons[[i]] <- Polygons(list(Polygon(cbind(res0[[i]]$X,
+                res0[[i]]$Y))), ID=as.character(i))
+        }
+    }
+    outSP <- SpatialPolygons(outPolygons, proj4string=CRS(p4s))
+    outSP
+}
+
+PolySet2SpatialLines <- function(PS) {
+    if (!inherits(PS, "PolySet")) stop("not a PolySet object")
+    prj <- attr(PS, "projection")
+    if (is.null(prj)) stop("unknown coordinate reference system")
+    if (prj == "LL") p4s <- "+proj=longlat"
+    else if (prj == "UTM") p4s <- paste("+proj=utm +zone=",
+        attr(prj, "zone"), sep="")
+    else stop("unknown coordinate reference system")
+    hasPID <- "PID" %in% names(PS)
+    if (!hasPID) stop("object does not have PID column")
+    res0 <- split(PS, PS$PID)
+    hasSID <- "SID" %in% names(PS)
+    outLines <- vector(mode="list", length=length(res0)) 
+    if (hasSID) {
+        res1 <- lapply(res0, function(x) split(x, x$SID))
+        for (i in seq(along=outLines)) {
+            outLines[[i]] <- Lines(lapply(res1[[i]], function(x) 
+                Line(cbind(x$X, x$Y))), ID=as.character(i))
+        }
+    } else {
+        for (i in seq(along=outLines)) {
+            outLines[[i]] <- Lines(lapply(res0[[i]], function(x)
+                Line(cbind(res0[[i]]$X, res0[[i]]$Y))), ID=as.character(i))
+        }
+    }
+    outSP <- SpatialLines(outLines, proj4string=CRS(p4s))
+    outSP
+    
+
 }
 
 
