@@ -2,7 +2,9 @@
 
 as.ppp.SpatialPoints = function(X) {
 	require(spatstat)
-	W = owin(bbox(X)[1,], bbox(X)[2,])
+        bb <- bbox(X)
+        colnames(bb) <- NULL
+	W = owin(bb[1,], bb[2,])
 	cc = coordinates(X)
 	return(ppp(cc[,1], cc[,2], window = W, marks = NULL))
 }
