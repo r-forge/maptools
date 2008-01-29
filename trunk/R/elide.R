@@ -19,6 +19,7 @@ elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   if (!is.numeric(rotate)) stop("rotate not numeric")
   if (!is.null(center) && length(center) != 2)
     stop("center must be numeric of length two")
+  if (!is.logical(unitsq)) stop("unitsq must be logical")
   crds <- coordinates(obj)
   if (is.null(bb)) bb <- bbox(obj)
   if (rotate != 0 && is.null(center)) center <- bb[,1]
@@ -35,7 +36,7 @@ elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
     yr <- bb[2,] + shift[2]
   }
   bb <- NULL
-  if (unitsq) {
+  if (!is.null(scale) && scale && unitsq) {
     bb <- rbind(c(0,1), c(0,1))
     colnames(bb) <- c("min", "max")
   }
