@@ -62,7 +62,7 @@ SEXP Rshapeinfo1(SEXP shpname)
     PROTECT(nms = NEW_CHARACTER(5)); pc++;
     SET_STRING_ELT(nms, 0, COPY_TO_USER_STRING("fname"));
     SET_STRING_ELT(nms, 1, COPY_TO_USER_STRING("type"));
-    SET_STRING_ELT(nms, 1, COPY_TO_USER_STRING("entities"));
+    SET_STRING_ELT(nms, 2, COPY_TO_USER_STRING("entities"));
     SET_STRING_ELT(nms, 3, COPY_TO_USER_STRING("minbounds"));
     SET_STRING_ELT(nms, 4, COPY_TO_USER_STRING("maxbounds"));
     setAttrib(res, R_NamesSymbol, nms);
