@@ -1,5 +1,5 @@
 # Copyright 2000-2001 (c) Nicholas Lewin-Koh 
-# modifications 2001-2005 Roger Bivand
+# modifications 2001-2008 Roger Bivand
 # reads an ESRI shapefile into a map object
 # set the variables for the header info
 
@@ -40,13 +40,15 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
 }
 
 getinfo.shape <- function(filen) {
-  shptype <- 0
-  nRecords <- 0
-  MinBounds <- c(0,0,0,0)
-  MaxBounds <- c(0,0,0,0)
-  shapehead <-.C("Rshapeinfo", as.character(filen),
-               as.integer(shptype), as.integer(nRecords), as.double(MinBounds),
-               as.double(MaxBounds), PACKAGE="maptools")
+  filen <- path.expand(filen)
+#  shptype <- 0
+#  nRecords <- 0
+#  MinBounds <- c(0,0,0,0)
+#  MaxBounds <- c(0,0,0,0)
+#  shapehead <-.C("Rshapeinfo", as.character(filen),
+#               as.integer(shptype), as.integer(nRecords), as.double(MinBounds),
+#               as.double(MaxBounds), PACKAGE="maptools")
+  shapehead <-.Call("Rshapeinfo1", filen, PACKAGE="maptools")
   class(shapehead) <- "shapehead"
   shapehead
 }

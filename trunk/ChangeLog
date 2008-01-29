@@ -1,3 +1,9 @@
+2008-01-20 16:08  rsbivand
+
+	* ChangeLog, DESCRIPTION, NAMESPACE, R/SpatialPolys-methods.R,
+	  R/sp2pbs.R, inst/ChangeLog, man/SpatialLines2PolySet.Rd: pbs to
+	  sp
+
 2007-12-13 18:32  rsbivand
 
 	* DESCRIPTION, R/elide.R: elide

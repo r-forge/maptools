@@ -1,23 +1,17 @@
 # as.ppp method to be used in spatstat:
 
-as.ppp.SpatialPoints = function(X, W = NULL, ..., fatal) {
+as.ppp.SpatialPoints = function(X) {
 	require(spatstat)
-	if (is.null(W))
-		W = owin(bbox(X)[1,], bbox(X)[2,])
-	else
-		W = as.owin(W)
+	W = owin(bbox(X)[1,], bbox(X)[2,])
 	cc = coordinates(X)
 	return(ppp(cc[,1], cc[,2], window = W, marks = NULL))
 }
 
 setAs("SpatialPoints", "ppp", function(from) as.ppp.SpatialPoints(from))
 
-as.ppp.SpatialPointsDataFrame = function(X, W = NULL, ..., fatal) {
+as.ppp.SpatialPointsDataFrame = function(X) {
 	require(spatstat)
-	if (is.null(W))
-		W = owin(bbox(X)[1,], bbox(X)[2,])
-	else
-		W = as.owin(W) # should deal with the case of Spatial owin
+	W = owin(bbox(X)[1,], bbox(X)[2,])
 	if (ncol(X) > 1)
 	  stop("ppp objects only accept a single attribute column; please select one")
 	marks = X[[1]]
