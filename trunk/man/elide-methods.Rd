@@ -44,6 +44,7 @@ elide(obj, ...)
     \item{flip}{translate coordinates on the main diagonal}
     \item{rotate}{default 0, rotate angle degrees clockwise around center}
     \item{center}{default NULL, if not NULL, the rotation center, numeric of length two}
+    \item{unitsq}{logical, default FALSE, if TRUE and scale TRUE, impose unit square bounding box (currently only points)}
 }}
 }
 

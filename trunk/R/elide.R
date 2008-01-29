@@ -9,7 +9,7 @@ if (!isGeneric("elide")) {
 }
 
 elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
-  scale=NULL, flip=FALSE, rotate=0, center=NULL) {
+  scale=NULL, flip=FALSE, rotate=0, center=NULL, unitsq=FALSE) {
   if (length(shift) != 2)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
@@ -34,9 +34,14 @@ elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
     xr <- bb[1,] + shift[1]
     yr <- bb[2,] + shift[2]
   }
+  bb <- NULL
+  if (unitsq) {
+    bb <- rbind(c(0,1), c(0,1))
+    colnames(bb) <- c("min", "max")
+  }
   scale <- scaleCoords(scale=scale, xr=xr, yr=yr)
   crds <- elideCoords(x=x, y=y, xr=xr, yr=yr, reflect=reflect, scale=scale)
-  res <- SpatialPoints(crds)
+  res <- SpatialPoints(crds, bbox=bb)
   res
 }
 
