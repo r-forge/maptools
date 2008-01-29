@@ -40,15 +40,7 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
 }
 
 getinfo.shape <- function(filen) {
-  filen <- path.expand(filen)
-#  shptype <- 0
-#  nRecords <- 0
-#  MinBounds <- c(0,0,0,0)
-#  MaxBounds <- c(0,0,0,0)
-#  shapehead <-.C("Rshapeinfo", as.character(filen),
-#               as.integer(shptype), as.integer(nRecords), as.double(MinBounds),
-#               as.double(MaxBounds), PACKAGE="maptools")
-  shapehead <-.Call("Rshapeinfo1", filen, PACKAGE="maptools")
+  shapehead <-.Call("Rshapeinfo1", as.character(path.expand(filen)), PACKAGE="maptools")
   class(shapehead) <- "shapehead"
   shapehead
 }

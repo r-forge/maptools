@@ -10,7 +10,7 @@ if (!isClass("im"))
 
 as.SpatialPoints.ppp =  function(from) {
     crds <- cbind(from$x, from$y)
-    if (from$window$type == "rectangular") {
+    if (from$window$type == "rectangle") {
         ow <- from$window
         bbox <- rbind(as.double(ow$xrange), as.double(ow$yrange))
         colnames(bbox) <- c("min", "max")

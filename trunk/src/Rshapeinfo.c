@@ -79,7 +79,7 @@ SEXP Rshapeinfo1(SEXP shpname)
 /* -------------------------------------------------------------------- */
     hSHP = SHPOpen(CHAR(STRING_ELT(shpname, 0)), "rb" );
 
-    if( hSHP == NULL ) error("No such file");
+    if( hSHP == NULL ) error("Error opening SHP file");
 
 /* -------------------------------------------------------------------- */
 /*      Print out the file bounds.                                      */

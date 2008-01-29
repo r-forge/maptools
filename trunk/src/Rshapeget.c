@@ -40,7 +40,7 @@ SEXP Rshapeget(SEXP shpnm, SEXP repair)
 
     hSHP = SHPOpen(CHAR(STRING_ELT(shpnm,0)), "rb" );
     if( hSHP == NULL )    
-	error("unable to open file");
+	error("unable to open SHP or SHX file");
 
     qRep = LOGICAL_POINTER(repair)[0];
 
