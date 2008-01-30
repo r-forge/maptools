@@ -36,7 +36,7 @@ elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
     yr <- bb[2,] + shift[2]
   }
   bb <- NULL
-  if (!is.null(scale) && scale && unitsq) {
+  if (!is.null(scale) && is.logical(scale) && scale && unitsq) {
     bb <- rbind(c(0,1), c(0,1))
     colnames(bb) <- c("min", "max")
   }
