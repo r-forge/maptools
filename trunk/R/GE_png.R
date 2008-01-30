@@ -18,16 +18,27 @@
 
 GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
     if (!extends(class(obj), "Spatial")) 
-        stop("is.projected only works for class(es extending) Spatial")
+        stop("GE_SpatialGrid only works for class(es extending) Spatial")
     p4s <- proj4string(obj)
     if (is.na(p4s) || is.projected(obj))
         stop("Spatial* object must be in geographical coordinates")
     xlim <- bbox(obj)[1,]
     ylim <- bbox(obj)[2,]
     s <- ifelse(is.na(asp), cos((mean(ylim) * pi)/180), asp)
-    m_asp <- (diff(ylim)/diff(xlim)) / s
+    res <- Sobj_SpatialGrid(obj, asp=s, maxDim=maxPixels)
+    class(res) <- "GE_SG"
+    res
+}
+
+Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100) {
+    if (!extends(class(obj), "Spatial")) 
+        stop("Sobj_SpatialGrid only works for class(es extending) Spatial")
+    p4s <- proj4string(obj)
+    xlim <- bbox(obj)[1,]
+    ylim <- bbox(obj)[2,]
+    m_asp <- (diff(ylim)/diff(xlim)) / asp
     names(m_asp) <- NULL
-    mywidth <- myheight <- maxPixels
+    mywidth <- myheight <- maxDim
     if (m_asp < 1) {
 	myheight1 <- mywidth * m_asp
         myheight <- ceiling(myheight1)
@@ -47,7 +58,6 @@ GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
 
     res <- list(height=as.integer(myheight), width=as.integer(mywidth),
         SG=mySG, asp=m_asp, xlim=bbox(mySG)[1,], ylim=bbox(mySG)[2,])
-    class(res) <- "GE_SG"
     res
 }
 

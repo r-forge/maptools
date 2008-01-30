@@ -1,18 +1,21 @@
 \name{GE_SpatialGrid}
 \alias{GE_SpatialGrid}
+\alias{Sobj_SpatialGrid}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Create SpatialGrid for PNG output to GE}
 \description{
-  The function sets up metadata in the form of a SpatialGrid object for defining the size and placing of a PNG image overlay in Google Earth.
+  The function sets up metadata in the form of a SpatialGrid object for defining the size and placing of a PNG image overlay in Google Earth. The internal function \code{Sobj\_SpatialGrid} can also be called to build a grid for arbitrary Spatial* objects.
 }
 \usage{
 GE_SpatialGrid(obj, asp = NA, maxPixels = 600)
+Sobj_SpatialGrid(obj, asp=1, maxDim=100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{obj}{a Spatial* object}
   \item{asp}{if NA, will be set to the latitude corrected value}
   \item{maxPixels}{the maximum dimension of the output PNG}
+  \item{maxDim}{the maximum dimension of the output grid}
 }
 \details{
   The function is used together with \code{kmlOverlay} to wrap around the opening of a PNG graphics device, plotting code, and the closing of the device. The computed values take account of the adjustment of the actual data bounding box to an integer number of rows and columns in the image file. 
@@ -33,6 +36,7 @@ The approach may be used as an alternative to writing PNG files from SpatialGrid
 \examples{
 opt_exask <- options(example.ask=FALSE)
 qk <- SpatialPointsDataFrame(quakes[, c(2:1)], quakes)
+summary(Sobj_SpatialGrid(qk)$SG)
 proj4string(qk) <- CRS("+proj=longlat")
 tf <- tempfile()
 SGqk <- GE_SpatialGrid(qk)

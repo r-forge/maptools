@@ -40,7 +40,7 @@ export(Rgshhs)
 exportMethods(coerce, spCbind, spRbind, spChFIDs)
 exportMethods(elide)
 
-export(GE_SpatialGrid, kmlOverlay)
+export(GE_SpatialGrid, kmlOverlay, Sobj_SpatialGrid)
 
 export(pointLabel, gcDestination)
 
