@@ -31,7 +31,12 @@ verbose = TRUE)
   \item{new_belongs}{a ragged list of polygon inclusion used for making SP}
   \item{SP}{a SpatialPolygons object; this is the principal output object, and will become the only output object as the package matures}
 }
-\references{\url{http://www.soest.hawaii.edu/wessel/gshhs/gshhs.html}, \url{http://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html} (only old format - use for information only); data downloaded from \url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_1.5.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
+\references{\url{http://www.soest.hawaii.edu/wessel/gshhs/gshhs.html}, 
+
+
+\url{http://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html} (only old format - use for information only); data downloaded from 
+
+\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_1.5.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
 \author{Roger Bivand}
 
 \note{

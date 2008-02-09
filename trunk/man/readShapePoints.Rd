@@ -7,7 +7,8 @@
   The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile. Both reading and writing can be carried out for 2D and 3D point coordinates.
 }
 \usage{
-readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE, repair=FALSE)
+readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE,
+ repair=FALSE)
 writePointsShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.

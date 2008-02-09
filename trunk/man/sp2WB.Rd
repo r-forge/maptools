@@ -24,7 +24,8 @@ sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
 
 \examples{
 \dontrun{
-xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+ IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
 sp2WB(as(xx, "SpatialPolygons"), filename="NC.map")
 x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])

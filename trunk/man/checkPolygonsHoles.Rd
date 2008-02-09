@@ -22,7 +22,8 @@ checkPolygonsHoles(x)
 \examples{
 library(sp)
 library(gpclib)
-nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=clrk66"))
+nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+ proj4string=CRS("+proj=longlat +ellps=clrk66"))
 pl <- slot(nc1, "polygons")
 sapply(slot(pl[[4]], "Polygons"), function(x) slot(x, "hole"))
 pl[[4]] <- Polygons(list(slot(pl[[4]], "Polygons")[[1]],

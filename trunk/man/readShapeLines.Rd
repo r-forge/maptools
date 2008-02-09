@@ -7,7 +7,8 @@
   The \code{readShapeLines} function reads data from an arc/line shapefile into a \code{SpatialLinesDataFrame} object; the shapefile may be of type polygon, but for just plotting for example coastlines, a SpatialLines object is sufficient. The \code{writeLinesShape} function writes data from a \code{SpatialLinesDataFrame} object to a shapefile.
 }
 \usage{
-readShapeLines(fn, proj4string=CRS(as.character(NA)), verbose=FALSE, repair=FALSE)
+readShapeLines(fn, proj4string=CRS(as.character(NA)), verbose=FALSE,
+ repair=FALSE)
 writeLinesShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -30,7 +31,8 @@ writeLinesShape(x, fn, factor2char = TRUE, max_nchar=254)
 
 
 \examples{
-xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1], proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
+xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1],
+ proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 plot(xx, col="blue")
 summary(xx)
 xxx <- xx[xx$LENGTH > 30000,]
@@ -42,7 +44,8 @@ axx <- readShapeLines(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 plot(xxx, col="black", lwd=4)
 plot(axx, col="yellow", lwd=1, add=TRUE)
 unlink(paste(tmpfl, ".*", sep=""))
-xx <- readShapeLines(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
+xx <- readShapeLines(system.file("shapes/sids.shp", package="maptools")[1],
+ proj4string=CRS("+proj=longlat +datum=NAD27"))
 plot(xx, col="blue")
 }
 \keyword{spatial}

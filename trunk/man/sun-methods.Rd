@@ -76,8 +76,11 @@
 
 
 \details{NOAA used the reference below to develop their Sunrise/Sunset
+
 \url{http://www.srrb.noaa.gov/highlights/sunrise/sunrise.html} and Solar
-Position \url{http://www.srrb.noaa.gov/highlights/sunrise/azel.html}
+Position 
+
+\url{http://www.srrb.noaa.gov/highlights/sunrise/azel.html}
 Calculators.  The algorithms include corrections for atmospheric
 refraction effects.
 

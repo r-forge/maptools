@@ -41,7 +41,8 @@ title("Pacific view with polygon splitting")
 }
 crds <- matrix(c(-1, 1, 1, -1, 50, 50, 52, 52), ncol=2)
 rcrds <- rbind(crds, crds[1,])
-SR <- SpatialPolygons(list(Polygons(list(Polygon(rcrds)), ID="r1")), proj4string=CRS("+proj=longlat"))
+SR <- SpatialPolygons(list(Polygons(list(Polygon(rcrds)), ID="r1")),
+ proj4string=CRS("+proj=longlat"))
 bbox(SR)
 SRr <- recenter(SR)
 bbox(SRr)

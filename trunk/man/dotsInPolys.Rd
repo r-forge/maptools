@@ -35,16 +35,20 @@ x <- read.shape(system.file("shapes/sids.shp", package="maptools")[1])
 ncpolys <- Map2poly(x)
 try1 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), compatible=TRUE)
 plot(ncpolys)
-xx <- lapply(try1, function(x) {if (!is.null(x)) points(as.matrix(rbind(x)), pch=18, col="red")}) # added as.matrix(rbind(x)), thanks to Nicholas Grassly
+xx <- lapply(try1, function(x) {if (!is.null(x)) points(as.matrix(rbind(x)),
+ pch=18, col="red")}) # added as.matrix(rbind(x)), thanks to Nicholas Grassly
 try2 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), f="regular", compatible=TRUE)
 plot(ncpolys)
-xx <- lapply(try2, function(x) {if (!is.null(x)) points(as.matrix(rbind(x)), pch=18, col="red")})
-nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat  +ellps=clrk66"))
+xx <- lapply(try2, function(x) {if (!is.null(x)) points(as.matrix(rbind(x)),
+ pch=18, col="red")})
+nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+ proj4string=CRS("+proj=longlat  +ellps=clrk66"))
 \dontrun{
 library(spgpc)
 pls <- slot(nc_SP, "polygons")
 pls_new <- lapply(pls, checkPolygonsHoles)
-nc_SP <- SpatialPolygonsDataFrame(SpatialPolygons(pls_new, proj4string=CRS(proj4string(nc_SP))), data=as(nc_SP, "data.frame"))
+nc_SP <- SpatialPolygonsDataFrame(SpatialPolygons(pls_new,
+ proj4string=CRS(proj4string(nc_SP))), data=as(nc_SP, "data.frame"))
 }
 try1 <- dotsInPolys(nc_SP, as.integer(nc_SP$SID74))
 plot(nc_SP, axes=TRUE)

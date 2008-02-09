@@ -7,7 +7,8 @@
    The \code{readShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{writePolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile.
 }
 \usage{
-readShapePoly(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), verbose=FALSE, repair=FALSE, force_ring=FALSE)
+readShapePoly(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
+ verbose=FALSE, repair=FALSE, force_ring=FALSE)
 writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -31,9 +32,11 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
 
 \examples{
 library(maptools)
-xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+ IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
-text(coordinates(xx), labels=sapply(slot(xx, "polygons"), function(i) slot(i, "ID")), cex=0.6)
+text(coordinates(xx), labels=sapply(slot(xx, "polygons"),
+ function(i) slot(i, "ID")), cex=0.6)
 as(xx, "data.frame")[1:5, 1:6]
 xxx <- xx[xx$SID74 < 2,]
 plot(xxx, border="red", add=TRUE)

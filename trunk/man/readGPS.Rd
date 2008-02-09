@@ -34,8 +34,10 @@ str(wp0)
 wp0$long <- wp0$V9
 wp0$lat <- as.numeric(as.character(wp0$V8))
 wp0$id <- as.character(wp0$V2)
-wp0$alt <- as.numeric(substring(as.character(wp0$V19), 1, (nchar(as.character(wp0$V19))-1)))
-wp0$time <- as.POSIXct(strptime(paste(as.character(wp0$V3), as.character(wp0$V4)), format="\%d-\%b-\%y \%H:\%M:\%S"))
+wp0$alt <- as.numeric(substring(as.character(wp0$V19), 1,
+ (nchar(as.character(wp0$V19))-1)))
+wp0$time <- as.POSIXct(strptime(paste(as.character(wp0$V3),
+ as.character(wp0$V4)), format="\%d-\%b-\%y \%H:\%M:\%S"))
 str(wp0)
 wp1 <- wp0[,-(1:6)]
 str(wp1)

@@ -34,17 +34,21 @@ PolySet2SpatialPolygons(PS, close_polys=TRUE)
 \examples{
 library(PBSmapping)
 library(maps)
-nor_coast_lines <- map("world", interior=FALSE, plot=FALSE, xlim=c(4,32), ylim=c(58,72))
+nor_coast_lines <- map("world", interior=FALSE, plot=FALSE, xlim=c(4,32),
+ ylim=c(58,72))
 nor_coast_lines <- pruneMap(nor_coast_lines, xlim=c(4,32), ylim=c(58,72))
-nor_coast_lines_sp <- map2SpatialLines(nor_coast_lines, proj4string=CRS("+proj=longlat +datum=wgs84"))
+nor_coast_lines_sp <- map2SpatialLines(nor_coast_lines,
+ proj4string=CRS("+proj=longlat +datum=wgs84"))
 nor_coast_lines_PS <- SpatialLines2PolySet(nor_coast_lines_sp)
 summary(nor_coast_lines_PS)
 plotLines(nor_coast_lines_PS)
 o3 <- PolySet2SpatialLines(nor_coast_lines_PS)
 plot(o3, axes=TRUE)
-nor_coast_poly <- map("world", "norway", fill=TRUE, col="transparent", plot=FALSE, ylim=c(58,72))
+nor_coast_poly <- map("world", "norway", fill=TRUE, col="transparent",
+ plot=FALSE, ylim=c(58,72))
 IDs <- sapply(strsplit(nor_coast_poly$names, ":"), function(x) x[1])
-nor_coast_poly_sp <- map2SpatialPolygons(nor_coast_poly, IDs=IDs, proj4string=CRS("+proj=longlat +datum=wgs84"))
+nor_coast_poly_sp <- map2SpatialPolygons(nor_coast_poly, IDs=IDs,
+ proj4string=CRS("+proj=longlat +datum=wgs84"))
 nor_coast_poly_PS <- SpatialPolygons2PolySet(nor_coast_poly_sp)
 summary(nor_coast_poly_PS)
 plotPolys(nor_coast_poly_PS)

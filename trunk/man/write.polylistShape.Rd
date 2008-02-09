@@ -6,7 +6,8 @@
   The function calls code from shapelib to write a polygon-type shapefile from an S3 polylist object.
 }
 \usage{
-write.polylistShape(polylist, df, file, factor2char = TRUE, strictFilename=FALSE, force = TRUE, max_nchar=254)
+write.polylistShape(polylist, df, file, factor2char = TRUE,
+ strictFilename=FALSE, force = TRUE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -6,7 +6,8 @@
   The function calls code from shapelib to write a point-type shapefile.
 }
 \usage{
-write.pointShape(coordinates, df, file, factor2char = TRUE, strictFilename=FALSE, max_nchar=254)
+write.pointShape(coordinates, df, file, factor2char = TRUE,
+ strictFilename=FALSE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,7 +38,8 @@ balt_orig <- readShapePoints(system.file("shapes/baltim.shp", package="maptools"
 plot(balt_orig)
 balt_cheap <- balt_orig[balt_orig$PRICE < 40,]
 file <- tempfile("")
-write.pointShape(coordinates=coordinates(balt_cheap), df=as(balt_cheap, "data.frame"), file)
+write.pointShape(coordinates=coordinates(balt_cheap),
+ df=as(balt_cheap, "data.frame"), file)
 getinfo.shape(paste(file, ".shp", sep=""))
 balt_new <- readShapePoints(paste(file, ".shp", sep=""))
 plot(balt_new, col="red", pch=16, add=TRUE)

@@ -74,7 +74,8 @@ pointLabel(x, y = NULL, labels = seq(along = x), cex = 1,
 
 \url{http://www.szoraster.com/Cartography/PracticalExperience.htm}
 
-The genetic algorithm code was adapted from the python code at
+The genetic algorithm code was adapted from the python code at 
+
 \url{http://meta.wikimedia.org/wiki/Map_generator}.
 
 The simulated annealing code follows the algorithm and guidelines in:

@@ -6,7 +6,8 @@
   The function calls code from shapelib to write an arc-type shapefile from a list of matrices of line coordinates with no NAs.
 }
 \usage{
-write.linelistShape(linelist, df, file, factor2char = TRUE, strictFilename=FALSE, max_nchar=254)
+write.linelistShape(linelist, df, file, factor2char = TRUE,
+ strictFilename=FALSE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

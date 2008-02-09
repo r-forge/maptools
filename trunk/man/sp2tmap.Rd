@@ -25,7 +25,8 @@ sp2tmap(SP)
 \seealso{\code{\link[foreign]{write.dta}}}
 \examples{
 \dontrun{
-xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+ IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
 tmapdf <- sp2tmap(as(xx, "SpatialPolygons"))
 write.dta(tmapdf, file="NCmap.dta", version=7)

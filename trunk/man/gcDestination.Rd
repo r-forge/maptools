@@ -6,7 +6,8 @@
   Find the destination in geographical coordinates at distance dist and for the given bearing from the starting point given by lon and lat.
 }
 \usage{
-gcDestination(lon, lat, bearing, dist, dist.units = "km", model = NULL, Vincenty = FALSE)
+gcDestination(lon, lat, bearing, dist, dist.units = "km",
+ model = NULL, Vincenty = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,8 +25,14 @@ gcDestination(lon, lat, bearing, dist, dist.units = "km", model = NULL, Vincenty
 \value{
  A matrix of decimal degree coordinates with Eastings in the first column and Northings in the second column. 
 }
-\references{\url{http://www.movable-type.co.uk/scripts/latlong.html#ellipsoid}, \url{http://williams.best.vwh.net/avform.htm}, \url{http://www.movable-type.co.uk/scripts/latlong-vincenty-direct.html}, 
+\references{\url{http://www.movable-type.co.uk/scripts/latlong.html#ellipsoid}, 
+
+\url{http://williams.best.vwh.net/avform.htm}, 
+
+\url{http://www.movable-type.co.uk/scripts/latlong-vincenty-direct.html}, 
+
 Original reference \url{http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf}:
+
 Vincenty, T. 1975.  Direct and inverse solutions of geodesics on 
 the ellipsoid with application of nested equations.
 Survey Review 22(176):88-93}
