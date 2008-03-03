@@ -30,7 +30,7 @@ GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
     res
 }
 
-Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100) {
+Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100, n=NULL) {
     if (!extends(class(obj), "Spatial")) 
         stop("Sobj_SpatialGrid only works for class(es extending) Spatial")
     p4s <- proj4string(obj)
@@ -38,6 +38,10 @@ Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100) {
     ylim <- bbox(obj)[2,]
     m_asp <- (diff(ylim)/diff(xlim)) / asp
     names(m_asp) <- NULL
+    if (!is.null(n)) {
+        if (m_asp < 1) maxDim <- ceiling(sqrt(n/m_asp))
+        else maxDim <- ceiling(sqrt(n*m_asp))
+    }
     mywidth <- myheight <- maxDim
     if (m_asp < 1) {
 	myheight1 <- mywidth * m_asp

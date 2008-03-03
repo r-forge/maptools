@@ -13,7 +13,7 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{fn}{shapefile layer name, without extension}
+  \item{fn}{shapefile layer name, when writing omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{IDvar}{a character string: the name of a column in the shapefile DBF containing the ID values of the shapes - the values will be converted to a character vector}
   \item{proj4string}{Object of class \code{CRS}; holding a valid proj4 string}
   \item{verbose}{default TRUE - report type of shapefile and number of shapes}

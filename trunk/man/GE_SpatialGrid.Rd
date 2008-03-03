@@ -8,14 +8,15 @@
 }
 \usage{
 GE_SpatialGrid(obj, asp = NA, maxPixels = 600)
-Sobj_SpatialGrid(obj, asp=1, maxDim=100)
+Sobj_SpatialGrid(obj, asp=1, maxDim=100, n=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{obj}{a Spatial* object}
   \item{asp}{if NA, will be set to the latitude corrected value}
   \item{maxPixels}{the maximum dimension of the output PNG}
-  \item{maxDim}{the maximum dimension of the output grid}
+  \item{maxDim}{the maximum dimension of the output grid; ignored if \code{n} not NULL}
+  \item{n}{if not NULL, the minimum number of cells in the returned grid}
 }
 \details{
   The function is used together with \code{kmlOverlay} to wrap around the opening of a PNG graphics device, plotting code, and the closing of the device. The computed values take account of the adjustment of the actual data bounding box to an integer number of rows and columns in the image file. 
@@ -37,6 +38,9 @@ The approach may be used as an alternative to writing PNG files from SpatialGrid
 opt_exask <- options(example.ask=FALSE)
 qk <- SpatialPointsDataFrame(quakes[, c(2:1)], quakes)
 summary(Sobj_SpatialGrid(qk)$SG)
+t2 <- Sobj_SpatialGrid(qk, n=10000)$SG
+summary(t2)
+prod(slot(slot(t2, "grid"), "cells.dim"))
 proj4string(qk) <- CRS("+proj=longlat")
 tf <- tempfile()
 SGqk <- GE_SpatialGrid(qk)

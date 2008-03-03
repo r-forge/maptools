@@ -1,3 +1,52 @@
+2008-02-09 13:42  rsbivand
+
+	* DESCRIPTION, man/Rgshhs.Rd, man/SpatialLines2PolySet.Rd,
+	  man/checkPolygonsHoles.Rd, man/dotsInPolys.Rd,
+	  man/gcDestination.Rd, man/map2SpatialPolygons.Rd,
+	  man/nowrapRecenter.Rd, man/pal2SpatialPolygons.Rd,
+	  man/plot.polylist.Rd, man/pointLabel.Rd, man/readGPS.Rd,
+	  man/readShapeLines.Rd, man/readShapePoints.Rd,
+	  man/readShapePoly.Rd, man/sp2WB.Rd, man/sp2tmap.Rd,
+	  man/sun-methods.Rd, man/symbolsInPolys.Rd,
+	  man/unionSpatialPolygons.Rd, man/write.linelistShape.Rd,
+	  man/write.pointShape.Rd, man/write.polylistShape.Rd: line lengths
+	  in help
+
+2008-01-30 21:53  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/GE_png.R, man/GE_SpatialGrid.Rd: SG
+	  creation
+
+2008-01-30 09:26  rsbivand
+
+	* R/elide.R: ppp + getinfo
+
+2008-01-29 12:36  rsbivand
+
+	* R/elide.R: ppp + getinfo
+
+2008-01-29 12:00  rsbivand
+
+	* R/elide.R, man/elide-methods.Rd: ppp + getinfo
+
+2008-01-29 11:37  rsbivand
+
+	* R/: sp_spat1.R, spatstat1.R: ppp + getinfo
+
+2008-01-29 10:52  rsbivand
+
+	* R/shapelib.R, R/sp_spat1.R, src/Rshapeget.c, src/Rshapeinfo.c:
+	  ppp + getinfo
+
+2008-01-29 10:03  rsbivand
+
+	* src/Rshapeinfo.c: ppp + getinfo
+
+2008-01-29 09:50  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/shapelib.R, R/sp_spat1.R,
+	  R/spatstat1.R, src/Rshapeinfo.c: ppp + getinfo
+
 2008-01-20 16:08  rsbivand
 
 	* ChangeLog, DESCRIPTION, NAMESPACE, R/SpatialPolys-methods.R,
