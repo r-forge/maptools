@@ -1,7 +1,7 @@
-# Copyright (c) 2005 Roger Bivand
+# Copyright (c) 2005-8 Roger Bivand
 
 Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0, 
-	shift=FALSE, verbose=TRUE) {
+	shift=FALSE, verbose=TRUE, no.clip = FALSE) {
 	if (!is.character(fn)) stop("file name must be character string")
 	if (length(fn) != 1) stop("file name must be single character string")
 	dolim <- FALSE
@@ -40,7 +40,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		polys[[which(chosen_0 == (Antarctica-1))]] <- crds
 	}
 
-	if (dolim && any(clip == 1)) {
+	if (!no.clip && dolim && any(clip == 1)) {
 		limbb <- cbind(c(lim[1], lim[1], lim[2], lim[2], lim[1]), 
 			c(lim[3], lim[4], lim[4], lim[3], lim[3]))
 		require("gpclib")

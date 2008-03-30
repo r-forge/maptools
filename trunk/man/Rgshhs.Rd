@@ -7,7 +7,7 @@
 }
 \usage{
 Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift=FALSE, 
-verbose = TRUE)
+verbose = TRUE, no.clip = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,6 +18,7 @@ verbose = TRUE)
   \item{minarea}{minimum area in square km to retrieve, default 0}
   \item{shift}{default FALSE, can be used to shift longitudes > 180 degrees to below zero, beware of artefacts involving unhandled polygon splitting at 180 degrees}
   \item{verbose}{default TRUE, print progress reports}
+  \item{no.clip}{default FALSE, if TRUE, do not clip output polygons to bounding box}
 }
 
 \details{
