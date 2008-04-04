@@ -23,7 +23,7 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{delete_null_obj}{if TRUE, defective geometries with no parts will be removed together with their data.frame rows}
   \item{retrieve_ABS_null}{default FALSE, if TRUE and delete_null_obj also 
 TRUE, the function will return a data frame containing the data from any 
-null geometries}
+null geometries inserted by ABS}
   \item{x}{a \code{SpatialPolygonsDataFrame} object}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
