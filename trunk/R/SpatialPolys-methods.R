@@ -1,5 +1,6 @@
 readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), 
-	verbose=FALSE, repair=FALSE, force_ring=FALSE) {
+	verbose=FALSE, repair=FALSE, force_ring=FALSE, delete_null_obj=FALSE,
+	retrieve_ABS_null=FALSE) {
 	Map <- read.shape(filen=fn, verbose=verbose, repair=repair)
 	if (!is.null(IDvar)) {
 		IDvar <- as.character(IDvar)
@@ -8,7 +9,8 @@ readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
 		IDvar <- as.character(Map$att.data[[IDvar]])
 	}
 	.Map2PolyDF(Map, IDs=IDvar, proj4string=proj4string, 
-		force_ring=force_ring)
+		force_ring=force_ring, delete_null_obj=delete_null_obj,
+		retrieve_ABS_null=retrieve_ABS_null)
 }
 
 writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
@@ -20,7 +22,25 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 }
 
 .Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA)),
-	force_ring=FALSE) {
+	force_ring=FALSE, delete_null_obj=FALSE, retrieve_ABS_null=FALSE) {
+# ABS null part shapefiles Graham Williams 080403
+        if (delete_null_obj) {
+	    nullParts <- which(sapply(Map$Shapes, function(x) x$nParts) == 0)
+	    if (length(nullParts) > 0) {
+              if (!retrieve_ABS_null) {
+		for (i in length(nullParts):1)
+	            Map$Shapes[[nullParts[i]]] <- NULL
+                attr(Map$Shapes,'nshps') <- attr(Map$Shapes,'nshps') - 
+                    length(nullParts)
+                Map$att.data <- Map$att.data[-nullParts,]
+                warning(paste("Null objects with the following", 
+                    "indices deleted:", paste(nullParts, collapse=", ")))
+              } else {
+		res <- Map$att.data[nullParts,]
+                return(res)
+              }
+            }
+        }
 	if (is.null(IDs))
 		IDs <- as.character(sapply(Map$Shapes, function(x) x$shpID))
 	SR <- .asSpatialPolygonsShapes(Map$Shapes, IDs, 
