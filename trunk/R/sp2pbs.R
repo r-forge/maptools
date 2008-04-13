@@ -100,8 +100,12 @@ PolySet2SpatialPolygons <- function(PS, close_polys=TRUE) {
     prj <- attr(PS, "projection")
     if (is.null(prj)) stop("unknown coordinate reference system")
     if (prj == "LL") p4s <- "+proj=longlat"
-    else if (prj == "UTM") p4s <- paste("+proj=utm +zone=",
-        attr(prj, "zone"), sep="")
+    else if (prj == "UTM") {
+# zone placing changed
+        zn <- attr(prj, "zone")
+        if (is.null(zn)) zn <- attr(PS, "zone")
+        p4s <- paste("+proj=utm +zone=", zn, sep="")
+    }
     else stop("unknown coordinate reference system")
     hasPID <- "PID" %in% names(PS)
     if (!hasPID) stop("object does not have PID column")
@@ -110,16 +114,20 @@ PolySet2SpatialPolygons <- function(PS, close_polys=TRUE) {
     outPolygons <- vector(mode="list", length=length(res0)) 
     if (hasSID) {
         res1 <- lapply(res0, function(x) split(x, x$SID))
-        if (close_polys) res1 <- lapply(res1, function(x) {
-            n <- nrow(x)
-            if (!isTRUE(identical(x$X[1], x$X[n])) ||
-                !isTRUE(identical(x$Y[1], x$Y[n]))) rbind(x, x[1,])
-            else x
-        })
+        if (close_polys) res1 <- lapply(res1, 
+            function(i) lapply(i, function(x) {
+                n <- nrow(x)
+                if (!isTRUE(identical(x$X[1], x$X[n])) ||
+                    !isTRUE(identical(x$Y[1], x$Y[n]))) rbind(x, x[1,])
+                else x
+            })
+        )
+# extra level added to fix bug found by A Lobos 080413
         for (i in seq(along=outPolygons)) {
             outPolygons[[i]] <- Polygons(lapply(res1[[i]], function(x) 
-                Polygon(cbind(x$X, x$Y))), ID=as.character(i))
+                Polygon(cbind(x$X, x$Y))), ID=names(res1)[i])
         }
+# PIDs added as IDs 080413
     } else {
         if (close_polys) res0 <- lapply(res0, function(x) {
             n <- nrow(x)
