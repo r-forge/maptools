@@ -1,3 +1,30 @@
+2008-04-14 22:33  rsbivand
+
+	* DESCRIPTION: PolySet
+
+2008-04-13 18:47  rsbivand
+
+	* DESCRIPTION, INDEX, R/sp2pbs.R: PBS to SP SID bug
+
+2008-04-10 16:07  rsbivand
+
+	* man/readShapePoly.Rd: tidy
+
+2008-04-04 19:59  rsbivand
+
+	* DESCRIPTION, R/SpatialPolys-methods.R, man/readShapePoly.Rd: ABS
+	  nulls
+
+2008-03-30 21:48  rsbivand
+
+	* DESCRIPTION, R/Rgshhs.R, man/Rgshhs.Rd: GSHHS clip
+
+2008-03-03 22:47  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/GE_png.R, R/shapelib.R, inst/ChangeLog,
+	  man/GE_SpatialGrid.Rd, man/readShapeLines.Rd,
+	  man/readShapePoints.Rd, man/readShapePoly.Rd: makegrid
+
 2008-02-09 13:42  rsbivand
 
 	* DESCRIPTION, man/Rgshhs.Rd, man/SpatialLines2PolySet.Rd,
