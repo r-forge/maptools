@@ -25,16 +25,16 @@ plot.Map                Plot a Map object (deprecated)
 plot.polylist           Plot polygons
 pointLabel              Label placement for points to avoid overlaps
 ppp-class               Virtual class "ppp"
-read.shape              Read shapefile into Map object
 readAsciiGrid           read/write to/from (ESRI) asciigrid format
 readGPS                 GPSbabel read interface
+read.shape              Read shapefile into Map object
 readShapeLines          Read arc shape files into SpatialLinesDataFrame
                         objects
 readShapePoints         Read points shape files into
                         SpatialPointsDataFrame objects
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
-Rgshhs                  Read GSHHS polygons into SpatialPolygons object
+Rgshhs                  Read GSHHS data into sp object
 sp2Mondrian             write map data for Mondrian
 sp2tmap                 Convert SpatialPolygons object for Stata tmap
                         command

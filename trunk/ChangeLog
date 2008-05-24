@@ -1,3 +1,17 @@
+2008-05-24 18:27  rsbivand
+
+	* DESCRIPTION, R/Rgshhs.R, R/sp2pbs.R, inst/share/gshhs_c.b,
+	  inst/share/wdb_borders_c.b, man/Rgshhs.Rd, src/Rgshhs.c,
+	  src/Rgshhs.h: GSHHS support to 1.10
+
+2008-04-14 22:49  rsbivand
+
+	* DESCRIPTION: tidy
+
+2008-04-14 22:35  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2008-04-14 22:33  rsbivand
 
 	* DESCRIPTION: PolySet
