@@ -4,7 +4,7 @@
  *
  * Paul Wessel, SOEST
  *
- *	Copyright (c) 1996-2004 by P. Wessel and W. H. F. Smith
+ *	Copyright (c) 1996-2008 by P. Wessel and W. H. F. Smith
  *	See COPYING file for copying and redistribution conditions.
  *
  *	This program is free software; you can redistribute it and/or modify
@@ -20,8 +20,13 @@
  *
  *	14-SEP-2004.  PW: Version 1.3.  Header is now n * 8 bytes (n = 5)
  *			  For use with version 1.3 of GSHHS
-*	2-MAY-2006.  PW: Version 1.4.  Header is now 32 bytes (all int 4)
+ *	2-MAY-2006.  PW: Version 1.4.  Header is now 32 bytes (all int 4)
  *			  For use with version 1.4 of GSHHS
+ *	31-MAR-2007.  PW: Version 1.5.  no format change
+ *			  For use with version 1.5 of GSHHS
+ *	28-AUG-2007.  PW: Version 1.6.  no format change
+ *			  For use with version 1.6 of GSHHS which now has WDBII
+ *			  borders and rivers.
  */
 /*
 This modification of gshhs.h is Copyright (c) 2005-7 Roger Bivand
@@ -43,7 +48,10 @@ This modification of gshhs.h is Copyright (c) 2005-7 Roger Bivand
 #define SEEK_CUR 1
 #endif
 
-#define GSHHS_DATA_VERSION	4	/* For v1.4 */
+#define GSHHS_DATA_VERSION	6	/* For v1.5 data set */
+#define GSHHS_PROG_VERSION	"1.9"
+
+#define GSHHS_SCL	1.0e-6	/* COnvert micro-degrees to degrees */
 
 
 /* For byte swapping on little-endian systems (GSHHS is bigendian) */

@@ -13,6 +13,9 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	polydata <- .Call("Rgshhs", as.character(fn), as.integer(1), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
 		as.double(minarea), PACKAGE="maptools")
+        line <- median(polydata$line)
+        if (verbose) cat("Data are", ifelse(line == 0, "polygon", "line"),
+                "data\n")
 	chosen_0 <- .Call("Rgshhs", as.character(fn), as.integer(2), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
 		as.double(minarea), PACKAGE="maptools")
@@ -40,7 +43,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		polys[[which(chosen_0 == (Antarctica-1))]] <- crds
 	}
 
-	if (!no.clip && dolim && any(clip == 1)) {
+	if (!no.clip && dolim && any(clip == 1) && line == 0) {
 		limbb <- cbind(c(lim[1], lim[1], lim[2], lim[2], lim[1]), 
 			c(lim[3], lim[4], lim[4], lim[3], lim[3]))
 		require("gpclib")
@@ -80,11 +83,12 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	if (!is.null(which_null)) chosen_0 <- chosen_0[-which_null]
 	chosen_1 <- chosen_0+1
 	levels <- polydata$level[chosen_1]
-	belongs <- matrix(1:length(chosen_1), ncol=1)
-#	belonged_to <- as.numeric(rep(NA, length(chosen_1)))
+	if (line == 0) {
+	  belongs <- matrix(1:length(chosen_1), ncol=1)
+#	  belonged_to <- as.numeric(rep(NA, length(chosen_1)))
 
 
-	if (level > 1 && any(levels > 1)) {
+	  if (level > 1 && any(levels > 1)) {
 	    if (verbose) {
 		cat("Rgshhs: assigning enclosed polygons to their enclosers\n")
 		cat("  level tallies:\n")
@@ -146,20 +150,20 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			}
 		}
 	    }
-	}
+	  }
 
-	if (verbose) cat("Rgshhs: constructing SpatialPolygons ...\n")
-	holes <- !as.logical(levels %% 2)
-	nps <- sapply(polys, length)
-	IDs <- polydata$id[chosen_1[belongs[,1]]]
-	tab <- table(factor(IDs))
-	n <- length(tab)
-	IDss <- names(tab)
-	reg <- match(IDs, IDss)
-	new_belongs <- lapply(1:n, function(x) which(x == reg))
-	Srl <- vector(mode="list", length=n)
-	require("sp")
-	for (i in 1:n) {
+	  if (verbose) cat("Rgshhs: constructing SpatialPolygons ...\n")
+	  holes <- !as.logical(levels %% 2)
+	  nps <- sapply(polys, length)
+	  IDs <- polydata$id[chosen_1[belongs[,1]]]
+	  tab <- table(factor(IDs))
+	  n <- length(tab)
+	  IDss <- names(tab)
+	  reg <- match(IDs, IDss)
+	  new_belongs <- lapply(1:n, function(x) which(x == reg))
+	  Srl <- vector(mode="list", length=n)
+	  require("sp")
+	  for (i in 1:n) {
 		nParts <- length(new_belongs[[i]])
 		srl <- NULL
 		for (j in 1:nParts) {
@@ -178,10 +182,19 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		    }
 		}
 		Srl[[i]] <- Polygons(srl, ID=IDss[i])
-	}
-	res <- as.SpatialPolygons.PolygonsList(Srl, 
+	  }
+	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))
-
-	list(polydata=data.frame(polydata)[chosen_1,], belongs=belongs,
+	  list(polydata=data.frame(polydata)[chosen_1,], belongs=belongs,
 		new_belongs=new_belongs, SP=res)
+	} else {
+	  Sll <- lapply(1:length(polys), function(i) {
+              ID <- as.character(i)
+              Ln <- Line(polys[[i]][[1]])
+              Lines(list(Ln), ID=ID)
+            })
+          res <- SpatialLines(Sll, 
+            proj4string=CRS("+proj=longlat +datum=WGS84"))
+	  list(SP=res)
+	}
 }
