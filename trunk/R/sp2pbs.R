@@ -147,11 +147,16 @@ PolySet2SpatialPolygons <- function(PS, close_polys=TRUE) {
 PolySet2SpatialLines <- function(PS) {
     if (!inherits(PS, "PolySet")) stop("not a PolySet object")
     prj <- attr(PS, "projection")
+    prj <- attr(PS, "projection")
     if (is.null(prj)) stop("unknown coordinate reference system")
     if (prj == "LL") p4s <- "+proj=longlat"
-    else if (prj == "UTM") p4s <- paste("+proj=utm +zone=",
-        attr(prj, "zone"), sep="")
-    else stop("unknown coordinate reference system")
+    else if (prj == "UTM") {
+# apparent change in PBS object attributes
+        zn <- attr(prj, "zone")
+        if (is.null(zn)) zn <- attr(PS, "zone")
+        if (is.null(zn)) stop("no valid zone attribute")
+	p4s <- paste("+proj=utm +zone=", zn, sep="")
+    } else stop("unknown coordinate reference system")
     hasPID <- "PID" %in% names(PS)
     if (!hasPID) stop("object does not have PID column")
     res0 <- split(PS, PS$PID)
