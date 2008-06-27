@@ -1,3 +1,19 @@
+2008-06-27 10:15  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/SpatialLines-methods.R,
+	  R/SpatialPoints-methods.R, R/SpatialPolys-methods.R,
+	  R/maptools.R, R/pcent.R, R/readGPS.R, R/shapelib.R, R/subset.R,
+	  inst/changes, man/readShapePoly.Rd, R/Spatial-methods.R,
+	  man/readShapeSpatial.Rd: readSpatial wrapper
+
+2008-06-19 07:56  rsbivand
+
+	* DESCRIPTION, R/sp2pbs.R: PolySet2SpatialLines UTM zone update
+
+2008-05-24 19:18  rsbivand
+
+	* ChangeLog, INDEX, inst/ChangeLog: GSHHS support to 1.10
+
 2008-05-24 18:27  rsbivand
 
 	* DESCRIPTION, R/Rgshhs.R, R/sp2pbs.R, inst/share/gshhs_c.b,

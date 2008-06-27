@@ -1,7 +1,8 @@
 readShapePoints <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE) {
-	.Map2SPDF(read.shape(filen=fn, verbose=verbose, repair=repair), 
-		proj4string=proj4string)
+	suppressWarnings(Map <- read.shape(filen=fn, verbose=verbose,
+	    repair=repair))
+	suppressWarnings(.Map2SPDF(Map, proj4string=proj4string))
 }
 
 .Map2SPDF <- function(Map, IDs, proj4string=CRS(as.character(NA))) {
@@ -23,8 +24,8 @@ readShapePoints <- function(fn, proj4string=CRS(as.character(NA)),
 writePointsShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	df <- as(x, "data.frame")
 	coords <- coordinates(x)
-	write.pointShape(coordinates=coords, df=df, file=fn,  
-		factor2char = factor2char, max_nchar=max_nchar)
+	suppressWarnings(write.pointShape(coordinates=coords, df=df, file=fn,  
+		factor2char = factor2char, max_nchar=max_nchar))
 }
 
 

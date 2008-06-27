@@ -1,6 +1,7 @@
 # Copyright 2003-5 (c) Roger Bivand
 
 subset.polylist <- function(x, subset, fit.bbox=TRUE, ...) {
+	.Deprecated("", package="maptools", msg="objects other than Spatial objects defined in the sp package are deprecated")
 	if (!inherits(x, "polylist")) stop("x not a polylist object")
 	if (!is.logical(subset)) stop("subset not a logical vector")
 	if (length(x) < 1) stop("zero length polylist")

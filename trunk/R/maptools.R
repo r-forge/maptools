@@ -5,6 +5,7 @@
 plot.polylist <- function(x, col, border=par("fg"), add=FALSE, 
 	xlim=NULL, ylim=NULL, xlab="", ylab="", xpd=NULL, 
 	density=NULL, angle=45, pbg=NULL, forcefill=TRUE, ...) {
+	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
 	if (!inherits(x, "polylist")) stop("Not a polygon list")
 
 	usrpoly <- function(x) {
@@ -285,6 +286,7 @@ shape2bbs <- function(shape) {
 }
 
 Map2lines <- function(Map) {
+	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
 	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'arc')
 		stop("maptype not line/arc")
@@ -310,6 +312,7 @@ Map2lines <- function(Map) {
 }
 
 Map2points <- function(Map) {
+	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
 	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'point')
 		stop("maptype not points")
@@ -330,6 +333,7 @@ Map2points <- function(Map) {
 }
 
 Map2poly <- function(Map, region.id=NULL, quiet=TRUE) {
+	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
 	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'poly')
 		stop("maptype not poly")
@@ -355,6 +359,7 @@ Map2poly <- function(Map, region.id=NULL, quiet=TRUE) {
 
 
 Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
+	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
 	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'poly')
 		stop("maptype not poly")

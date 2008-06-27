@@ -1,14 +1,16 @@
 readShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE) {
-	.shp2LinesDF(read.shape(filen=fn, verbose=verbose, repair=repair), 
-		proj4string=proj4string)
+	suppressWarnings(Map <- read.shape(filen=fn, verbose=verbose,
+	    repair=repair))
+	suppressWarnings(.shp2LinesDF(Map, proj4string=proj4string))
 }
 
 writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	df <- as(x, "data.frame")
 	df <- data.frame(SL_ID=I(row.names(df)), df)
 	pls <- .SpL2lineslist(as(x, "SpatialLines"))
-	write.linelistShape(pls, df, file=fn, factor2char = factor2char, max_nchar=max_nchar)
+	suppressWarnings(write.linelistShape(pls, df, file=fn,
+	    factor2char = factor2char, max_nchar=max_nchar))
 }
 
 

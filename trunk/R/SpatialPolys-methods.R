@@ -1,7 +1,8 @@
 readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE, force_ring=FALSE, delete_null_obj=FALSE,
 	retrieve_ABS_null=FALSE) {
-	Map <- read.shape(filen=fn, verbose=verbose, repair=repair)
+	suppressWarnings(Map <- read.shape(filen=fn, 
+		verbose=verbose, repair=repair))
 	if (!is.null(IDvar)) {
 		IDvar <- as.character(IDvar)
 		if (!IDvar %in% names(Map$att.data))
@@ -18,7 +19,8 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	df <- as(x, "data.frame")
 	df <- data.frame(SP_ID=I(row.names(df)), df)
 	pls <- .SpP2polylist(as(x, "SpatialPolygons"))
-	write.polylistShape(pls, df, file=fn, factor2char = factor2char, max_nchar=max_nchar)
+	suppressWarnings(write.polylistShape(pls, df, file=fn,
+	    factor2char = factor2char, max_nchar=max_nchar))
 }
 
 .Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA)),

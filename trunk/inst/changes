@@ -1,3 +1,4 @@
+0.7-14	(see ChangeLog for more details) Depecating direct access to Map objectswhich will be removed from the namespace very soon. Started on merging readShape* and write*Shape functions
 0.7-1	GSHHS binary file reading support changed from release 1.3 to 1.5 and shipped coarse shorelines changed to 1.5, released 3 April 2007
 0.6-19	changed sp access to *apply and slot
 0.6-18	Change shapelib license from MIT to LGPL

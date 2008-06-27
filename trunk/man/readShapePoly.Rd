@@ -45,7 +45,7 @@ text(coordinates(xx), labels=sapply(slot(xx, "polygons"),
 as(xx, "data.frame")[1:5, 1:6]
 xxx <- xx[xx$SID74 < 2,]
 plot(xxx, border="red", add=TRUE)
-tmpfl <- paste(tempdir(), "xxline", sep="/")
+tmpfl <- paste(tempdir(), "xxpoly", sep="/")
 writePolyShape(xxx, tmpfl)
 getinfo.shape(paste(tmpfl, ".shp", sep=""))
 axx <- readShapePoly(tmpfl, proj4string=CRS("+proj=longlat +ellps=clrk66"))

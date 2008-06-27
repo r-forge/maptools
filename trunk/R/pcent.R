@@ -3,6 +3,7 @@
 
 
 get.Pcent <- function(theMap) {
+  .Deprecated("", package="maptools", msg="exrtact centroid from SpatialPolygons object;\nobjects other than Spatial objects defined in the sp package are deprecated")
   p.cent <- function(poly, flag) {
     cent <- .External("RshpCentrd_2d", poly, as.integer(flag),
       PACKAGE="maptools")

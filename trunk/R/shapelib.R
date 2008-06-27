@@ -6,6 +6,7 @@
 
 read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
   filen <- path.expand(filen)
+  .Deprecated("", package="maptools", msg="use readShapeSpatial:\nobjects other than Spatial objects defined in the sp package are deprecated")
   shinfo <- getinfo.shape(filen)
   if (dbf.data) {
 #    library(foreign)
@@ -55,6 +56,7 @@ print.shapehead <- function(x, ...) {
 #write.pointShape <- function(object, file, coordinates, factor2char=TRUE, 
 write.pointShape <- function(coordinates, df, file, factor2char=TRUE, 
   strictFilename=FALSE, max_nchar=254) {
+  .Deprecated("", package="maptools", msg="use writeSpatialShape:\nobjects other than Spatial objects defined in the sp package are deprecated")
   file <- path.expand(file)
   dirnm <- dirname(file)
   bnm0 <- basename(file)
@@ -256,6 +258,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
 
 write.polylistShape <- function(polylist, df, file, factor2char=TRUE, 
   strictFilename=FALSE, force=TRUE, max_nchar=254) {
+  .Deprecated("", package="maptools", msg="use writeSpatialShape:\nobjects other than Spatial objects defined in the sp package are deprecated")
   file <- path.expand(file)
   dirnm <- dirname(file)
   bnm0 <- basename(file)
@@ -284,6 +287,7 @@ write.polylistShape <- function(polylist, df, file, factor2char=TRUE,
 
 write.linelistShape <- function(linelist, df, file, factor2char=TRUE, 
   strictFilename=FALSE, max_nchar=254) {
+  .Deprecated("", package="maptools", msg="use writeSpatialShape:\nobjects other than Spatial objects defined in the sp package are deprecated")
   file <- path.expand(file)
   dirnm <- dirname(file)
   bnm0 <- basename(file)
