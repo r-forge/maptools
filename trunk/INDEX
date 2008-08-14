@@ -34,6 +34,7 @@ readShapePoints         Read points shape files into
                         SpatialPointsDataFrame objects
 readShapePoly           Read polygon shape files into
                         SpatialPolygonsDataFrame objects
+readShapeSpatial        Read shape files into Spatial*DataFrame objects
 Rgshhs                  Read GSHHS data into sp object
 sp2Mondrian             write map data for Mondrian
 sp2tmap                 Convert SpatialPolygons object for Stata tmap
