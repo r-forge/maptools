@@ -1,10 +1,15 @@
+2008-08-14 11:09  rsbivand
+
+	* DESCRIPTION, INDEX, R/spmaps.R: NULL bug in maps2SP
+
 2008-06-27 10:15  rsbivand
 
 	* DESCRIPTION, NAMESPACE, R/SpatialLines-methods.R,
 	  R/SpatialPoints-methods.R, R/SpatialPolys-methods.R,
 	  R/maptools.R, R/pcent.R, R/readGPS.R, R/shapelib.R, R/subset.R,
 	  inst/changes, man/readShapePoly.Rd, R/Spatial-methods.R,
-	  man/readShapeSpatial.Rd: readSpatial wrapper
+	  man/readShapeSpatial.Rd, ChangeLog, inst/ChangeLog: readSpatial
+	  wrapper
 
 2008-06-19 07:56  rsbivand
 
