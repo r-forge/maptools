@@ -31,7 +31,8 @@
                 io <- io+1
             }
         }
-	if (exists(".spatstat_check") && !.spatstat_check) 
+#	if (exists(".spatstat_check") && !.spatstat_check) 
+        if (!spatstat.options("checkpolygons")) 
         	res <- owin(bbox(SP)[1,], bbox(SP)[2,], poly = opls,
 			check=FALSE)
 # 070718 added check avoidance

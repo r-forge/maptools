@@ -2,6 +2,9 @@
 if (!isClass("ppp"))
 	setClass("ppp")
 
+if (!isClass("psp"))
+	setClass("psp")
+
 if (!isClass("owin"))
 	setClass("owin")
 

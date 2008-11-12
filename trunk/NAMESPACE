@@ -26,7 +26,7 @@ export(gzAzimuth, trackAzimuth)
 
 export(MapGen2SL, ArcObj2SLDF, ContourLines2SLDF, pal2SpatialPolygons)
 
-exportClass(ppp, im)
+exportClass(ppp, im, owin, psp)
 
 exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
 
@@ -34,6 +34,8 @@ export(SpatialPolygons2PolySet, SpatialLines2PolySet, PolySet2SpatialPolygons, P
 
 export(as.ppp.SpatialPoints, as.ppp.SpatialPointsDataFrame, as.SpatialPoints.ppp, as.SpatialPointsDataFrame.ppp, as.SpatialGridDataFrame.ppp)
 export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.SpatialPolygons, as.SpatialGridDataFrame.im, as.im.SpatialGridDataFrame)
+
+export(as.psp.SpatialLinesDataFrame, as.psp.SpatialLines, as.psp.Lines, as.psp.Line)
 
 export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
 

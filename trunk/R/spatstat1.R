@@ -51,3 +51,70 @@ as.owin.SpatialPolygons = function(W, ..., fatal) {
 }
 
 setAs("SpatialPolygons", "owin", function(from) as.owin.SpatialPolygons(from))
+
+# methods for 'as.psp' for sp classes
+
+as.psp.Line <- function(from, ..., window=NULL, marks=NULL, fatal) {
+  xy <- from@coords
+  xrange <- range(xy[,1])
+  yrange <- range(xy[,2])
+  df <- as.data.frame(cbind(xy[-nrow(xy), , drop=FALSE], xy[-1, ,
+drop=FALSE]))
+  if(is.null(window))
+    window <- owin(xrange, yrange)
+  return(as.psp(df, window=window, marks=marks))
+}
+
+setAs("Line", "psp", function(from) as.psp.Line(from))
+  
+as.psp.Lines <- function(from, ..., window=NULL, marks=NULL, fatal) {
+  y <- lapply(from@Lines, as.psp.Line, window=window)
+  z <- superimposePSP(y, window=window)
+  if(!is.null(marks))
+    marks(z) <- marks
+  return(z)
+}
+
+setAs("Lines", "psp", function(from) as.psp.Lines(from))
+
+as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL, fatal) {
+  lin <- from@lines
+  y <- lapply(lin, as.psp.Lines)
+  id <- unlist(lapply(lin, function(s) { s@ID }))
+  if(is.null(marks))
+    for(i in seq(y)) 
+      marks(y[[i]]) <- id[i]
+  if(is.null(window)) {
+    w <- from@bbox
+    window <- owin(w[1,], w[2,])
+  }
+  z <- do.call("superimposePSP", list(y, window=window))
+  if(!is.null(marks))
+    marks(z) <- marks
+  return(z)
+}
+
+setAs("SpatialLines", "psp", function(from) as.psp.SpatialLines(from))
+
+as.psp.SpatialLinesDataFrame <- function(from, ..., window=NULL, marks=NULL, fatal) {
+  y <- as(from, "SpatialLines")
+  z <- as.psp(y, window=window, marks=marks)
+  if(is.null(marks)) {
+    # extract marks from first column of data frame
+    df <- from@data
+    if(is.null(df))
+      return(z)
+    if((nc <- ncol(df)) > 1) 
+      warning(paste(nc-1, "columns of data frame discarded"))
+    marx <- df[,1]
+    nseg.Line  <- function(x) { return(nrow(x@coords)-1) }
+    nseg.Lines <- function(x) { return(unlist(lapply(x@Lines, nseg.Line))) }
+    nrep <- unlist(lapply(y@lines, nseg.Lines))
+    marks(z) <- rep(marx, nrep)
+  }
+  return(z)
+}
+
+setAs("SpatialLinesDataFrame", "psp", function(from) as.psp.SpatialLinesDataFrame(from))
+
+

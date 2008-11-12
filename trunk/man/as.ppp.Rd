@@ -12,6 +12,14 @@
 \alias{as.ppp.SpatialPointsDataFrame}
 \alias{coerce,SpatialPoints,ppp-method}
 \alias{coerce,SpatialPointsDataFrame,ppp-method}
+\alias{as.psp.Line}
+\alias{as.psp.Lines}
+\alias{as.psp.SpatialLines}
+\alias{as.psp.SpatialLinesDataFrame}
+\alias{coerce,Line,psp-method}
+\alias{coerce,Lines,psp-method}
+\alias{coerce,SpatialLines,psp-method}
+\alias{coerce,SpatialLinesDataFrame,psp-method}
 \alias{coerce,im,SpatialGridDataFrame-method}
 \alias{coerce,ppp,SpatialGridDataFrame-method}
 \alias{coerce,ppp,SpatialPointsDataFrame-method}
@@ -29,6 +37,10 @@ S4-style as() coercion works from objects of S4 sp classes to spatstat S3 classe
   \describe{
 \item{coerce}{\code{signature(from = "SpatialPoints", to = "ppp")}}
 \item{coerce}{\code{signature(from = "SpatialPointsDataFrame", to = "ppp")}}
+\item{coerce}{\code{signature(from = "Line", to = "psp")}}
+\item{coerce}{\code{signature(from = "Lines", to = "psp")}}
+\item{coerce}{\code{signature(from = "SpatialLines", to = "psp")}}
+\item{coerce}{\code{signature(from = "SpatialLinesDataFrame", to = "psp")}}
 \item{coerce}{\code{signature(from = "SpatialGridDataFrame", to = "ppp")}}
 \item{coerce}{\code{signature(from = "SpatialPolygons", to = "owin")}}
 \item{coerce}{\code{signature(from = "SpatialPixelsDataFrame", to = "owin")}}
@@ -46,15 +58,22 @@ as.SpatialPoints.ppp(from)
 as.SpatialPointsDataFrame.ppp(from)
 as.SpatialGridDataFrame.ppp(from)
 as.SpatialGridDataFrame.im(from)
+as.psp.Line(from, ..., window=NULL, marks=NULL, fatal)
+as.psp.Lines(from, ..., window=NULL, marks=NULL, fatal)
+as.psp.SpatialLines(from, ..., window=NULL, marks=NULL, fatal)
+as.psp.SpatialLinesDataFrame(from, ..., window=NULL, marks=NULL, fatal)
 }
 \arguments{
-  \item{from}{spatstat object of class ppp or im}
+  \item{from}{object to coerce from}
+  \item{...}{other arguments to be passed through}
+  \item{window}{window as defined in the spatstat package}
+  \item{marks}{marks as defined in the spatstat package}
+  \item{fatal}{formal coercion argument}
 }
-\note{When coercing a SpatialPolygons object to an owin object, full topology
-checking is enabled by default. To avoid checking, set \code{.spatstat_check}
-to FALSE in the global environment. This work-around may not be required 
-from spatstat version 2, and is used at the risk of garbled topology breaking 
-other functions in spatstat.}
+\note{When coercing a SpatialPolygons object to an owin object, full 
+topology checking is enabled by default. To avoid checking, set 
+\code{spatstat.options(checkpolygons=FALSE)} (from spatstat (1.14-6)). 
+To perform the checking later, \code{owinpolycheck(W, verbose=TRUE)}.}
 
 \author{Edzer Pebesma \email{e.pebesma@geo.uu.nl}, Roger Bivand}
 \examples{
@@ -77,6 +96,11 @@ rev_ppp_SPDF <- as.SpatialPointsDataFrame.ppp(zn1a)
 summary(rev_ppp_SPDF)
 rev_ppp_SGDF <- as.SpatialGridDataFrame.ppp(zn1a)
 summary(rev_ppp_SGDF)
+data(meuse.riv)
+mr <- Line(meuse.riv)
+mr_psp <- as(mr, "psp")
+mr_psp
+plot(mr_psp)
 # as.owin(meuse.grid)
 # --- will only work if as.owin is method...
 mg_owin <- as(as(meuse.grid["ffreq"], "SpatialPixelsDataFrame"), "owin")
