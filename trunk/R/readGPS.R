@@ -1,6 +1,6 @@
 # Copyright (c) 2007 Patrick Giraudoux and Roger Bivand
 
-readGPS <- function(i="garmin", f="usb:", type="w", invisible=TRUE) {
+readGPS <- function(i="garmin", f="usb:", type="w", invisible=TRUE, ...) {
     GB <- Sys.which("gpsbabel")
     if (nchar(GB) == 0) stop("gpsbabel not found")
     if (.Platform$OS.type == "windows") 
@@ -10,7 +10,7 @@ readGPS <- function(i="garmin", f="usb:", type="w", invisible=TRUE) {
 	" -o tabsep -F -", sep=""), intern=TRUE)
     if (any(grep("Can't init", gpsdata))) 
 	stop("Cannot read GPS: check connexion")
-    gpsdf <- read.table(con <- textConnection(gpsdata), fill=TRUE)
+    gpsdf <- read.table(con <- textConnection(gpsdata), fill=TRUE, ...)
     close(con)
     gpsdf
 }

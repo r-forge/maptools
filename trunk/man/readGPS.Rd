@@ -6,7 +6,7 @@
   The function reads a data frame from an attached GPS using the external program gpsbabel. The columns of the data frame need to be identified by hand because different GPS order NMEA data in different ways, and the columns should be converted to the correct classes by hand. Once the specifics of a particular GPS are identified, and ways of cleaning erroneous locations are found, the conversion of the output data frame into a usable one may be automated.
 }
 \usage{
-readGPS(i = "garmin", f = "usb:", type="w", invisible=TRUE)
+readGPS(i = "garmin", f = "usb:", type="w", invisible=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,6 +14,7 @@ readGPS(i = "garmin", f = "usb:", type="w", invisible=TRUE)
   \item{f}{INFILE: the appropriate device interface, default "usb:", on Windows for serial interfaces commonly "com4:" or similar}
   \item{type}{"w" waypoints, or "t" track, or others provided in gpsbabel}
   \item{invisible}{Under Windows, do not open an extra window}
+  \item{...}{arguments passed through to \code{read.table}}
 }
 \details{
 The function just wraps: gpsbabel -i INTYPE -f INFILE -o tabsep -F - in system(), and reads the returned character vector of lines into a data frame. On some systems, INFILE may not be readable by ordinary users without extra configuration. The gpsbabel program must be present and on the user's PATH for the function to work. Typically, for a given GPS, the user will have to experiment first to find a set of data-cleaning tricks that work, but from then on they should be repeatable.
