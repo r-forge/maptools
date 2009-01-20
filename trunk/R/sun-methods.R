@@ -47,8 +47,10 @@ setMethod("crepuscule",
                                  solarDep=solarDep, direction=direction)
               if (POSIXct.out) {
                   secs <- res * 86400
-                  Pct <- as.POSIXct(format(dateTime, "%Y-%m-%d"),
-                                    tz=time.ll$tz) + secs
+                  if (is.null(time.ll$tz)) Pct <- as.POSIXct(format(dateTime,
+                       "%Y-%m-%d")) + secs
+                  else Pct <- as.POSIXct(format(dateTime, "%Y-%m-%d"),
+                       tz=time.ll$tz) + secs
                   res <- data.frame(day_frac=res, time=Pct)
               }
               res
@@ -88,8 +90,10 @@ setMethod("sunriset", signature(crds="SpatialPoints", dateTime="POSIXct"),
                                direction=direction)
               if (POSIXct.out) {
                   secs <- res * 86400
-                  Pct <- as.POSIXct(format(dateTime, "%Y-%m-%d"),
-                                    tz=time.ll$tz) + secs
+                  if (is.null(time.ll$tz)) Pct <- as.POSIXct(format(dateTime,
+                       "%Y-%m-%d")) + secs
+                  else Pct <- as.POSIXct(format(dateTime, "%Y-%m-%d"),
+                       tz=time.ll$tz) + secs
                   res <- data.frame(day_frac=res, time=Pct)
               }
               res
@@ -127,8 +131,10 @@ setMethod("solarnoon", signature(crds="SpatialPoints", dateTime="POSIXct"),
                                 dlstime=time.ll$dlstime)
               if (POSIXct.out) {
                   secs <- res * 86400
-                  Pct <- as.POSIXct(format(dateTime, "%Y-%m-%d"),
-                                    tz=time.ll$tz) + secs
+                  if (is.null(time.ll$tz)) Pct <- as.POSIXct(format(dateTime,
+                       "%Y-%m-%d")) + secs
+                  else Pct <- as.POSIXct(format(dateTime, "%Y-%m-%d"),
+                       tz=time.ll$tz) + secs
                   res <- data.frame(day_frac=res, time=Pct)
               }
               res

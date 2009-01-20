@@ -1,3 +1,7 @@
+2009-01-20 15:38  rsbivand
+
+	* DESCRIPTION, R/sun-methods.R: sun NULL tz
+
 2008-11-13 15:06  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/readGPS.R, inst/ChangeLog,
