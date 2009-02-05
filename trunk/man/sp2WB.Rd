@@ -23,11 +23,15 @@ sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
 
 
 \examples{
-\dontrun{
 xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
-sp2WB(as(xx, "SpatialPolygons"), filename="NC.map")
+tf <- tempfile()
+sp2WB(as(xx, "SpatialPolygons"), filename=tf)
+xxx <- readSplus(tf, proj4string=CRS("+proj=longlat +ellps=clrk66"))
+all.equal(xxx, as(xx, "SpatialPolygons"), tolerance=.Machine$double.eps^(1/4),
+ check.attributes=FALSE)
+\dontrun{
 x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
 xp <- as(x, "SpatialPixelsDataFrame")
 pp <- as.SpatialPolygons.SpatialPixels(xp)

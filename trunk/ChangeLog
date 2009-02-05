@@ -1,7 +1,12 @@
+2009-02-05 16:38  rsbivand
+
+	* R/readSplus.R, man/sp2WB.Rd: adding features to readSplus
+
 2009-02-05 14:38  rsbivand
 
 	* DESCRIPTION, NAMESPACE, R/readSplus.R, inst/share/Splus.map,
-	  man/readSplus.Rd: adding readSplus for WinBUGS
+	  man/readSplus.Rd, ChangeLog, inst/ChangeLog: adding readSplus for
+	  WinBUGS
 
 2009-01-20 15:38  rsbivand
 
