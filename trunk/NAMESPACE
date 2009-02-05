@@ -20,7 +20,7 @@ export(readAsciiGrid, writeAsciiGrid)
 
 export(readGPS)
 
-export(sp2WB, sp2tmap, sp2Mondrian)
+export(sp2WB, sp2tmap, sp2Mondrian, readSplus)
 
 export(gzAzimuth, trackAzimuth)
 

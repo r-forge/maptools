@@ -1,6 +1,12 @@
+2009-02-05 14:38  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/readSplus.R, inst/share/Splus.map,
+	  man/readSplus.Rd: adding readSplus for WinBUGS
+
 2009-01-20 15:38  rsbivand
 
-	* DESCRIPTION, R/sun-methods.R: sun NULL tz
+	* DESCRIPTION, R/sun-methods.R, ChangeLog, inst/ChangeLog: sun NULL
+	  tz
 
 2008-11-13 15:06  rsbivand
 
