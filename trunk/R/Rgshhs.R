@@ -190,7 +190,10 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	} else {
 	  Sll <- lapply(1:length(polys), function(i) {
               ID <- as.character(i)
-              Ln <- Line(polys[[i]][[1]])
+              crds <- polys[[i]][[1]]
+		if (shift) crds[,1] <- ifelse(crds[,1] > 180, 
+		    crds[,1] - 360, crds[,1])
+              Ln <- Line(crds)
               Lines(list(Ln), ID=ID)
             })
           res <- SpatialLines(Sll, 

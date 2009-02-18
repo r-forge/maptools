@@ -46,6 +46,8 @@ exportMethods(elide)
 
 export(GE_SpatialGrid, kmlOverlay, Sobj_SpatialGrid)
 
+export(kmlPolygon, kmlLine, getKMLcoordinates)
+
 export(pointLabel, gcDestination)
 
 S3method(plot, Map)

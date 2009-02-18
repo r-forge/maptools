@@ -57,7 +57,7 @@ any warranties. Please make sure to give proper credit when using
 them in any publications. Some of the data sets are purely illustrative 
 and should not be used for substantive research."
 
-Files: inst/shapes/fylk-val.* are copyright Statens Kartverk 2001, and
+Files: inst/shapes/fylk-val* are copyright Statens Kartverk 2001, and
 were released (with a collection of other shapefiles) to the public domain
 in July 2001. The link to the relevant page under http://www.statkart.no
 has now expired, this copy downloaded 13 July 2001.
@@ -65,6 +65,14 @@ has now expired, this copy downloaded 13 July 2001.
 Files: inst/shapes/pointZ.* are a sample of points from a 3D point shapefile
 kindly contributed by Michael Toews to be used here for illustrative purposes;
 this sample is written out using writePointsShape(). 
+
+File: data/wrld_simpl.rda is a modified SpatialPolygonsDataFrame object
+generated from the TM_WORLD_BORDERS_SIMPL-0.2 shapefile downloaded from
+http://mappinghacks.com/data/TM_WORLD_BORDERS_SIMPL-0.2.zip with the 
+attribution: "The world_borders.zip dataset has been superseded by Bjørn 
+Sandvik's improved version, TM_WORLD_BORDERS-0.2.zip, mirrored from 
+thematicmapping.org." The country Polygons objects and the data slot data 
+frame row numbers have been set to the ISO 3166 three letter codes.
 
 All other files are copyright (c) 2001-2004 Roger S. Bivand and Nicholas
 Lewin-Koh, and are subject to the licence at the foot of this file.
