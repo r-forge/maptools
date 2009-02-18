@@ -1,3 +1,18 @@
+2009-02-18 12:58  rsbivand
+
+	* inst/shapes/fylk-val-ll.dbf, inst/shapes/fylk-val-ll.shp,
+	  inst/shapes/fylk-val-ll.shx, data/wrld_simpl.rda: kml writing;
+	  GSHHS lines shift
+
+2009-02-18 12:55  rsbivand
+
+	* ChangeLog, DESCRIPTION, INDEX, NAMESPACE, R/Rgshhs.R,
+	  inst/ChangeLog, inst/LICENSE, inst/share/gshhs_c.b,
+	  man/Rgshhs.Rd, R/getKMLcoordinates.R, R/kmlLine.R,
+	  R/kmlPolygon.R, man/getKMLcoordinates.Rd, man/kmlLine.Rd,
+	  man/kmlPolygon.Rd, man/wrld_simpl.Rd: kml writing; GSHHS lines
+	  shift
+
 2009-02-05 18:45  rsbivand
 
 	* man/asciigrid.Rd: tidy
