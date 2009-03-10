@@ -10,10 +10,15 @@ elide-methods           Methods for Function elide in Package
                         'maptools'
 gcDestination           Find destination in geographical coordinates
 GE_SpatialGrid          Create SpatialGrid for PNG output to GE
+getKMLcoordinates       Get a list of coordinates out of a KML file
 get.Pcent               Polygon centroids
 gpcholes                Hisaji Ono's lake/hole problem
 gzAzimuth               Find azimuth for geographical coordinates
+kmlLine                 Create and write a KML file on the basis of a
+                        given Lines object
 kmlOverlay              Create and write KML file for PNG image overlay
+kmlPolygon              Create and write a KML file on the basis of a
+                        given Polygons object
 Map2poly                Create polygon lists and bounding boxes from
                         imported shapefiles
 map2SpatialPolygons     Convert map objects to sp classes
@@ -53,3 +58,4 @@ unionSpatialPolygons    Aggregate Polygons in a SpatialPolygons object
 write.linelistShape     Write a arc-type shapefile
 write.pointShape        Write a point-type shapefile
 write.polylistShape     Write a polygon-type shapefile
+wrld_simpl              Simplified world country polygons

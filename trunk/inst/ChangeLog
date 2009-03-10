@@ -1,8 +1,12 @@
+2009-03-10 18:23  rsbivand
+
+	* INDEX, LICENSE, inst/LICENSE: data web link
+
 2009-02-18 12:58  rsbivand
 
 	* inst/shapes/fylk-val-ll.dbf, inst/shapes/fylk-val-ll.shp,
-	  inst/shapes/fylk-val-ll.shx, data/wrld_simpl.rda: kml writing;
-	  GSHHS lines shift
+	  inst/shapes/fylk-val-ll.shx, data/wrld_simpl.rda, ChangeLog,
+	  inst/ChangeLog: kml writing; GSHHS lines shift
 
 2009-02-18 12:55  rsbivand
 
