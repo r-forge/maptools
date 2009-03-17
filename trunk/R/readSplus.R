@@ -57,8 +57,16 @@ readSplus<-function(file, proj4string=CRS(as.character(NA)) )
 	lpolys<-.NAmat2xyList(polys2)
 #	llpolys<-unlist(lapply(lpolys, nrow))
 
+	#OpenBUGS seems to put a line with NAs just before the END
+	#We need to remove it
+	if(is.na(polys[nrow(polys),1]))
+		polys<-polys[-nrow(polys),]
+		
+
 #	idx<- c(1, cumsum(2+llpolys[-length(lpolys)]))
         wNA <- which(is.na(polys[, 1]))
+
+
         idx <- c(1, wNA+1)
 	polysIDs<-polys[idx, 1]
 
