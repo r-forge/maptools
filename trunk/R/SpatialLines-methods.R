@@ -51,7 +51,7 @@ writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	}
 	res <- vector(mode="list", length=nParts)
 	for (i in 1:nParts) {
-		res[[i]] <- Line(coords=shape$verts[from[i]:to[i],])
+		res[[i]] <- Line(coords=shape$verts[from[i]:to[i],,drop=FALSE])
 	}
 	Lines <- Lines(res, ID=ID)
 	Lines

@@ -1,6 +1,17 @@
+2009-03-29 17:29  rsbivand
+
+	* LICENSE, R/SpatialLines-methods.R, R/SpatialPolys-methods.R,
+	  inst/LICENSE: drop=FALSE in reading line and polygon shapefiles
+
+2009-03-17 21:43  vir
+
+	* R/readSplus.R: Minor fix to allow for a line with NA's just
+	  before the END.
+
 2009-03-10 18:23  rsbivand
 
-	* INDEX, LICENSE, inst/LICENSE: data web link
+	* INDEX, LICENSE, inst/LICENSE, ChangeLog, inst/ChangeLog: data web
+	  link
 
 2009-02-18 12:58  rsbivand
 

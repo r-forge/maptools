@@ -35,10 +35,6 @@ Further details of Shapelib may be found at its website
 
 http://shapelib.maptools.org/
 
-It is the intention of the package maintainer to migrate to linking 
-against an external shapelib, rather than incoroprating complete files 
-unchanged in this package.
-
 Files: src/Rcentroid.c, src/Rshapeinfo.c, src/maptools.h, and
 src/Rshapeget.c are copyright (c) 2000-2001 by Nicholas Lewin-Koh and are
 subject to the licence at the foot of this file. Some portions of these

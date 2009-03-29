@@ -151,7 +151,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	}
 	srl <- vector(mode="list", length=nParts)
 	for (j in 1:nParts) {
-		crds <- shp$verts[from[j]:to[j],]
+		crds <- shp$verts[from[j]:to[j],,drop=FALSE]
 		if (force_ring) {
 			if (!isTRUE(all.equal(crds[1,], crds[nrow(crds),])))
 				crds <- rbind(crds, crds[1,])
