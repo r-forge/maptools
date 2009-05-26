@@ -6,6 +6,10 @@
 \alias{coerce,SpatialGridDataFrame,owin-method}
 \alias{coerce,SpatialPixelsDataFrame,owin-method}
 \alias{coerce,SpatialPolygons,owin-method}
+\alias{as.SpatialPolygons.tess}
+\alias{as.SpatialPolygons.owin}
+\alias{coerce,tess,SpatialPolygons-method}
+\alias{coerce,owin,SpatialPolygons-method}
 \alias{coerce,SpatialGridDataFrame,im-method}
 \alias{as.ppp.SpatialGridDataFrame}
 \alias{as.ppp.SpatialPoints}
@@ -31,7 +35,7 @@
 
 \title{coercion between sp objects and spatstat objects}
 \description{
-S4-style as() coercion works from objects of S4 sp classes to spatstat S3 classes, but not the reverse. Coercion to sp classes uses direct function calls.
+S4-style as() coercion works between objects of S4 sp classes to spatstat S3 classes; direct function calls may also be used.
 }
 \section{Methods}{
   \describe{
@@ -50,6 +54,8 @@ S4-style as() coercion works from objects of S4 sp classes to spatstat S3 classe
 \item{coerce}{\code{signature(from = "ppp", to = "SpatialGridDataFrame")}}
 \item{coerce}{\code{signature(from = "ppp", to = "SpatialPointsDataFrame")}}
 \item{coerce}{\code{signature(from = "ppp", to = "SpatialPoints")}}
+\item{coerce}{\code{signature(from = "owin", to = "SpatialPolygons")}}
+\item{coerce}{\code{signature(from = "tess", to = "SpatialPolygons")}}
 }
 }
 
@@ -62,9 +68,11 @@ as.psp.Line(from, ..., window=NULL, marks=NULL, fatal)
 as.psp.Lines(from, ..., window=NULL, marks=NULL, fatal)
 as.psp.SpatialLines(from, ..., window=NULL, marks=NULL, fatal)
 as.psp.SpatialLinesDataFrame(from, ..., window=NULL, marks=NULL, fatal)
+as.SpatialPolygons.tess(x)
+as.SpatialPolygons.owin(x)
 }
 \arguments{
-  \item{from}{object to coerce from}
+  \item{from, x}{object to coerce from}
   \item{...}{other arguments to be passed through}
   \item{window}{window as defined in the spatstat package}
   \item{marks}{marks as defined in the spatstat package}
@@ -101,8 +109,6 @@ mr <- Line(meuse.riv)
 mr_psp <- as(mr, "psp")
 mr_psp
 plot(mr_psp)
-# as.owin(meuse.grid)
-# --- will only work if as.owin is method...
 mg_owin <- as(as(meuse.grid["ffreq"], "SpatialPixelsDataFrame"), "owin")
 mg_owin
 ho_sp <- SpatialPolygons(list(Polygons(list(Polygon(cbind(c(0,1,1,0,0),
@@ -116,6 +122,12 @@ plot(pp)
 ho_orig <- owin(poly=list(list(x=c(0,1,1,0), y=c(0,0,1,1)),
   list(x=c(0.6,0.4,0.4,0.6), y=c(0.2,0.2,0.4,0.4))))
 identical(ho, ho_orig)
+ho_sp1 <- as(ho, "SpatialPolygons")
+all.equal(ho_sp, ho_sp1, check.attributes=FALSE)
+A <- tess(xgrid=0:4,ygrid=0:4)
+A_sp <- as(A, "SpatialPolygons")
+plot(A_sp)
+text(coordinates(A_sp), sapply(slot(A_sp, "polygons"), slot, "ID"), cex=0.6)
 mg_dist <- meuse.grid["dist"]
 fullgrid(mg_dist) <- TRUE
 image(mg_dist, axes=TRUE)

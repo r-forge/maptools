@@ -11,6 +11,10 @@ if (!isClass("owin"))
 if (!isClass("im"))
     setClass("im")
 
+if (!isClass("tess"))
+    setClass("tess")
+
+
 as.SpatialPoints.ppp =  function(from) {
     mult <- 1
     if (!is.null(from$window$units) && !is.null(from$window$units$multiplier))

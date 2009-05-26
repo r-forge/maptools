@@ -55,7 +55,45 @@ as.owin.SpatialPolygons = function(W, ..., fatal) {
 
 setAs("SpatialPolygons", "owin", function(from) as.owin.SpatialPolygons(from))
 
-# methods for 'as.psp' for sp classes
+# methods for coercion to Spatial Polygons by Adrian Baddeley
+
+owin2Polygons <- function(x, id="1") {
+  stopifnot(is.owin(x))
+  x <- as.polygonal(x)
+  closering <- function(df) { df[c(seq(nrow(df)), 1), ] }
+  pieces <- lapply(x$bdry,
+                   function(p) {
+                     Polygon(coords=closering(cbind(p$x,p$y)),
+                             hole=is.hole.xypolygon(p))  })
+  z <- Polygons(pieces, id)
+  return(z)
+}
+
+as.SpatialPolygons.tess <- function(x) {
+  stopifnot(is.tess(x))
+  y <- tiles(x)
+  nam <- names(y)
+  z <- list()
+  for(i in seq(y))
+    z[[i]] <- owin2Polygons(y[[i]], nam[i])
+  return(SpatialPolygons(z))
+}
+
+setAs("tess", "SpatialPolygons", function(from) as.SpatialPolygons.tess(from))
+
+
+as.SpatialPolygons.owin <- function(x) {
+  stopifnot(is.owin(x))
+  y <- owin2Polygons(x)
+  z <- SpatialPolygons(list(y))
+  return(z)
+}
+
+setAs("owin", "SpatialPolygons", function(from) as.SpatialPolygons.owin(from))
+
+
+
+# methods for 'as.psp' for sp classes by Adrian Baddeley
 
 as.psp.Line <- function(from, ..., window=NULL, marks=NULL, fatal) {
   xy <- from@coords

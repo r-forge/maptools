@@ -1,3 +1,8 @@
+2009-04-08 19:29  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/spatstat1.R, inst/ChangeLog:
+	  improvements to spatstat support - Adrian Baddeley
+
 2009-03-29 17:32  rsbivand
 
 	* ChangeLog, DESCRIPTION, inst/ChangeLog: drop=FALSE in reading
