@@ -1,3 +1,9 @@
+2009-05-26 12:22  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/sp_spat1.R, R/spatstat1.R,
+	  inst/ChangeLog, man/as.ppp.Rd: coercion from owin/tess to
+	  SpatialPolygons
+
 2009-04-08 19:29  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/spatstat1.R, inst/ChangeLog:

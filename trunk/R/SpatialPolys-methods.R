@@ -26,8 +26,10 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 .Map2PolyDF <- function(Map, IDs, proj4string=CRS(as.character(NA)),
 	force_ring=FALSE, delete_null_obj=FALSE, retrieve_ABS_null=FALSE) {
 # ABS null part shapefiles Graham Williams 080403
+# birds NULL part Allen H. Hurlbert 090610
+        nullParts <- sapply(Map$Shapes, function(x) x$nParts) == 0
         if (delete_null_obj) {
-	    nullParts <- which(sapply(Map$Shapes, function(x) x$nParts) == 0)
+	    nullParts <- which(nullParts)
 	    if (length(nullParts) > 0) {
               if (!retrieve_ABS_null) {
 		for (i in length(nullParts):1)
@@ -42,7 +44,11 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
                 return(res)
               }
             }
-        }
+        } else {
+# birds NULL part Allen H. Hurlbert 090610
+            if (any(nullParts))
+               stop(paste("NULL geometry found:", paste(which(nullParts), collapse=", "), "\n               consider using delete_null_obj=TRUE"))
+	}
 	if (is.null(IDs))
 		IDs <- as.character(sapply(Map$Shapes, function(x) x$shpID))
 	SR <- .asSpatialPolygonsShapes(Map$Shapes, IDs, 
