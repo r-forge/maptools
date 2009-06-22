@@ -1,3 +1,8 @@
+2009-06-22 16:52  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/SpatialPolys-methods.R, inst/ChangeLog:
+	  changed all.equal to identical in closed ring forcing
+
 2009-06-10 16:33  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/SpatialPolys-methods.R, inst/ChangeLog:
