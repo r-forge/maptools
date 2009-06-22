@@ -1,3 +1,8 @@
+2009-06-10 16:33  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/SpatialPolys-methods.R, inst/ChangeLog:
+	  more NULL geometry trapping
+
 2009-05-26 12:22  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/sp_spat1.R, R/spatstat1.R,
