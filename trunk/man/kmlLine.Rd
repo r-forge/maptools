@@ -32,6 +32,8 @@ y <- kmlLine(kmlname="", kmldescription="")
 
 For a passed \code{Lines} object the function generates a <Style> tag whereby its id attribute is set to the passed object's ID.
 
+Note that the geometries should be in geographical coordinates with datum WGS84.
+
 The resulting KML line will be embedded in \code{<Placemark><MultiGeometry><LineString>}.
 }
 

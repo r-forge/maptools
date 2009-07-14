@@ -20,6 +20,7 @@ kmlOverlay(obj, kmlfile = NULL, imagefile = NULL, name = "R image")
 
 The approach may be used as an alternative to writing PNG files from SpatialGrid and SpatialPixel objects in \pkg{rgdal} using \code{writeGDAL}, and to writing KML files using \code{writeOGR} for vector data objects. The output PNG files are likely to be very much smaller than large vector data KML files, and hinder the retrieval of exact positional information.
 
+Note that the geometries should be in geographical coordinates with datum WGS84.
 }
 \value{
 x is a character vector containing the generated lines of the kml file

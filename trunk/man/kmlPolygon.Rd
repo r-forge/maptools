@@ -37,6 +37,8 @@ The conversion can also handle polygons which are marked as holes inside of the 
 
 For a passed \code{Polygons} object the function generates a <Style> tag whereby its id attribute is set to the passed object's ID.
 
+Note that the geometries should be in geographical coordinates with datum WGS84.
+
 The resulting KML polygon will be embedded in \code{<Placemark><MultiGeometry><Polygon>}.
 }
 

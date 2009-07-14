@@ -22,6 +22,8 @@ Sobj_SpatialGrid(obj, asp=1, maxDim=100, n=NULL)
   The function is used together with \code{kmlOverlay} to wrap around the opening of a PNG graphics device, plotting code, and the closing of the device. The computed values take account of the adjustment of the actual data bounding box to an integer number of rows and columns in the image file. 
 
 The approach may be used as an alternative to writing PNG files from SpatialGrid and SpatialPixel objects in \pkg{rgdal} using \code{writeGDAL}, and to writing KML files using \code{writeOGR} for vector data objects. The output PNG files are likely to be very much smaller than large vector data KML files, and hinder the retrieval of exact positional information.
+
+Note that the geometries should be in geographical coordinates with datum WGS84 for export to KML.
 }
 \value{
   returns an S3 object of class \code{\dQuote{GE_SG}} with components:
