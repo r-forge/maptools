@@ -48,7 +48,7 @@ The following color specifications are allowed: \code{'red'}, \code{2}, or as he
 }
 
 \author{Hans-J. Bibiko}
-\seealso{\code{\link{kmlOverlay}}, \code{\link{kmlPolygon}}, \code{\link[sp]{Lines}}}
+\seealso{\code{\link{kmlOverlay}}, \code{\link{kmlPolygon}}, \code{\link[sp]{Line}}}
 
 \examples{
 xx <- readShapeSpatial(system.file("shapes/fylk-val-ll.shp",

@@ -1,3 +1,14 @@
+2009-09-17 10:22  rsbivand
+
+	* DESCRIPTION, man/GE_SpatialGrid.Rd, man/Map2poly.Rd,
+	  man/SpatialLines2PolySet.Rd, man/asciigrid.Rd, man/kmlLine.Rd,
+	  man/kmlOverlay.Rd, man/nowrapRecenter.Rd: fix documentation links
+
+2009-07-14 11:17  rsbivand
+
+	* man/: GE_SpatialGrid.Rd, kmlLine.Rd, kmlOverlay.Rd,
+	  kmlPolygon.Rd: KML WGS84 notes added
+
 2009-06-22 16:52  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/SpatialPolys-methods.R, inst/ChangeLog:

@@ -29,7 +29,7 @@ PolySet2SpatialPolygons(PS, close_polys=TRUE)
 \author{Roger Bivand and Andrew Niccolai}
 
 
-\seealso{\code{\link[PBSmapping]{as.PolySet}}, \code{\link{MapGen2SL}}}
+\seealso{\code{\link[PBSmapping]{PolySet}}, \code{\link{MapGen2SL}}}
 
 \examples{
 library(PBSmapping)

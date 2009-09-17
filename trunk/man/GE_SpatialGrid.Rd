@@ -26,7 +26,7 @@ The approach may be used as an alternative to writing PNG files from SpatialGrid
 Note that the geometries should be in geographical coordinates with datum WGS84 for export to KML.
 }
 \value{
-  returns an S3 object of class \code{\dQuote{GE_SG}} with components:
+  returns an S3 object of class \code{GE_SG} with components:
   \item{height}{Integer raster height for png call}
   \item{width}{Integer raster width for png call}
   \item{SG}{a SpatialGrid object with the grid topology of the output PNG}

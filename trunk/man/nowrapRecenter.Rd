@@ -24,7 +24,7 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps, 2))
 \author{Roger Bivand}
 
 
-\seealso{\code{\link[sp]{recenter}}, \code{\link[sp]{nowrapSpatialLines}}}
+\seealso{\code{\link[sp]{recenter-methods}}, \code{\link[sp]{nowrapSpatialLines}}}
 
 \examples{
 library(gpclib)

@@ -10,7 +10,7 @@ kmlOverlay(obj, kmlfile = NULL, imagefile = NULL, name = "R image")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{obj}{a \code{\dQuote{GE_SG}} object from \code{GE_SpatialGrid}}
+  \item{obj}{a \code{GE_SG} object from \code{GE_SpatialGrid}}
   \item{kmlfile}{if not NULL the name of the kml file to be written}
   \item{imagefile}{the name of the PNG file containing the image - this should be either relative (same directory as kml file) or abosolute (fully qualified)}
   \item{name}{the name used to describe the image overlay in GE}
