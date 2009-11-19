@@ -1,8 +1,20 @@
+2009-11-19 21:11  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/DP.R, man/spCbind-methods.Rd,
+	  man/spRbind-methods.Rd, man/thinnedSpatialPoly.Rd: adding
+	  thinnedSpatialPoly
+
+2009-11-05 17:26  edzer
+
+	* R/sp_bind.R, man/spChFIDs-methods.Rd: moved spChFID method,
+	  functions and docs to package sp
+
 2009-09-17 10:22  rsbivand
 
 	* DESCRIPTION, man/GE_SpatialGrid.Rd, man/Map2poly.Rd,
 	  man/SpatialLines2PolySet.Rd, man/asciigrid.Rd, man/kmlLine.Rd,
-	  man/kmlOverlay.Rd, man/nowrapRecenter.Rd: fix documentation links
+	  man/kmlOverlay.Rd, man/nowrapRecenter.Rd, ChangeLog,
+	  inst/ChangeLog: fix documentation links
 
 2009-07-14 11:17  rsbivand
 

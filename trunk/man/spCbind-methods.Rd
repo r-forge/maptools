@@ -30,7 +30,7 @@
 
 \author{Roger Bivand}
 
-\seealso{\code{\link{spChFIDs-methods}}, \code{\link{spRbind-methods}}}
+\seealso{\code{\link[sp]{spChFIDs-methods}}, \code{\link{spRbind-methods}}}
 
 \examples{
 xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], 

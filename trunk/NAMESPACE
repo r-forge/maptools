@@ -41,7 +41,8 @@ export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygon
 
 export(Rgshhs)
 
-exportMethods(coerce, spCbind, spRbind, spChFIDs)
+exportMethods(coerce, spCbind, spRbind)
+
 exportMethods(elide)
 
 export(GE_SpatialGrid, kmlOverlay, Sobj_SpatialGrid)
@@ -49,6 +50,7 @@ export(GE_SpatialGrid, kmlOverlay, Sobj_SpatialGrid)
 export(kmlPolygon, kmlLine, getKMLcoordinates)
 
 export(pointLabel, gcDestination)
+export(thinnedSpatialPoly)
 
 S3method(plot, Map)
 S3method(plot, polylist)
