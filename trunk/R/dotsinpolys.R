@@ -3,7 +3,7 @@
 dotsInPolys <- function(pl, x, f="random", offset, compatible=FALSE) {
     if (!is.character(f)) stop("f must be a character string")
     if (f != "random" && f != "regular") stop(paste(f, "not supported"))
-    if (inherits(pl, "polylist")) pl <- .polylist2SpP(pl)
+#    if (inherits(pl, "polylist")) pl <- .polylist2SpP(pl)
     if (!is(pl, "SpatialPolygons")) stop("unknown class of input polygons")
     pls <- slot(pl, "polygons")
     IDs <- sapply(pls, function(i) slot(i, "ID"))
@@ -49,7 +49,7 @@ dotsInPolys <- function(pl, x, f="random", offset, compatible=FALSE) {
 }
 
 symbolsInPolys <- function(pl, dens, symb="+", compatible=FALSE) {
-    if (inherits(pl, "polylist")) pl <- .polylist2SpP(pl)
+#    if (inherits(pl, "polylist")) pl <- .polylist2SpP(pl)
     if (!is(pl, "SpatialPolygons")) stop("unknown class of input polygons")
     if (!is(pl, "SpatialPolygons")) stop("unknown class of input polygons")
     pls <- slot(pl, "polygons")

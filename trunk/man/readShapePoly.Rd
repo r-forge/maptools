@@ -47,7 +47,7 @@ xxx <- xx[xx$SID74 < 2,]
 plot(xxx, border="red", add=TRUE)
 tmpfl <- paste(tempdir(), "xxpoly", sep="/")
 writePolyShape(xxx, tmpfl)
-getinfo.shape(paste(tmpfl, ".shp", sep=""))
+maptools:::getinfo.shape(paste(tmpfl, ".shp", sep=""))
 axx <- readShapePoly(tmpfl, proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xxx, border="black", lwd=4)
 plot(axx, border="yellow", lwd=1, add=TRUE)

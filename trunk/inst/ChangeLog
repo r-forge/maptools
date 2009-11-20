@@ -1,8 +1,27 @@
+2009-11-20 13:26  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/dotsinpolys.R,
+	  inst/old_man/Map2poly.Rd, inst/old_man/get.Pcent.Rd,
+	  inst/old_man/maptools.Rd, inst/old_man/plot.Map.Rd,
+	  inst/old_man/plot.polylist.Rd, inst/old_man/read.shape.Rd,
+	  inst/old_man/subset.polylist.Rd,
+	  inst/old_man/write.linelistShape.Rd,
+	  inst/old_man/write.pointShape.Rd,
+	  inst/old_man/write.polylistShape.Rd, man/Map2poly.Rd,
+	  man/dotsInPolys.Rd, man/get.Pcent.Rd, man/holepolys.Rd,
+	  man/maptools.Rd, man/plot.Map.Rd, man/plot.polylist.Rd,
+	  man/read.shape.Rd, man/readShapeLines.Rd, man/readShapePoints.Rd,
+	  man/readShapePoly.Rd, man/readShapeSpatial.Rd,
+	  man/subset.polylist.Rd, man/symbolsInPolys.Rd,
+	  man/write.linelistShape.Rd, man/write.pointShape.Rd,
+	  man/write.polylistShape.Rd, man/leglabs.Rd: moving deprecated
+	  functions from namespace
+
 2009-11-19 21:11  rsbivand
 
 	* DESCRIPTION, NAMESPACE, R/DP.R, man/spCbind-methods.Rd,
-	  man/spRbind-methods.Rd, man/thinnedSpatialPoly.Rd: adding
-	  thinnedSpatialPoly
+	  man/spRbind-methods.Rd, man/thinnedSpatialPoly.Rd, ChangeLog,
+	  inst/ChangeLog: adding thinnedSpatialPoly
 
 2009-11-05 17:26  edzer
 

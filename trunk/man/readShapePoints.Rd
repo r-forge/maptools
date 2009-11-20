@@ -36,7 +36,7 @@ summary(xx)
 xxx <- xx[xx$PRICE < 40,]
 tmpfl <- paste(tempdir(), "xxpts", sep="/")
 writePointsShape(xxx, tmpfl)
-getinfo.shape(paste(tmpfl, ".shp", sep=""))
+maptools:::getinfo.shape(paste(tmpfl, ".shp", sep=""))
 axx <- readShapePoints(tmpfl)
 plot(axx, col="red", add=TRUE)
 unlink(paste(tmpfl, ".*", sep=""))

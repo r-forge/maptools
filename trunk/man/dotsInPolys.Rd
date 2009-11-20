@@ -10,7 +10,7 @@ dotsInPolys(pl, x, f = "random", offset, compatible = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{pl}{list of polygons of class \code{polylist}, or an object of class SpatialPolygons or SpatialPolygonsDataFrame}
+  \item{pl}{an object of class SpatialPolygons or SpatialPolygonsDataFrame}
   \item{x}{integer vector of counts of same length as pl for dots}
   \item{f}{type of sampling used to place points in polygons, either "random" or "regular"}
 \item{offset}{ for regular sampling only: the offset (position) of the regular
@@ -31,16 +31,6 @@ not random}
 
 \seealso{\code{\link[sp]{spsample}}}
 \examples{
-x <- read.shape(system.file("shapes/sids.shp", package="maptools")[1])
-ncpolys <- Map2poly(x)
-try1 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), compatible=TRUE)
-plot(ncpolys)
-xx <- lapply(try1, function(x) {if (!is.null(x)) points(as.matrix(rbind(x)),
- pch=18, col="red")}) # added as.matrix(rbind(x)), thanks to Nicholas Grassly
-try2 <- dotsInPolys(ncpolys, as.integer(x$att.data$SID74), f="regular", compatible=TRUE)
-plot(ncpolys)
-xx <- lapply(try2, function(x) {if (!is.null(x)) points(as.matrix(rbind(x)),
- pch=18, col="red")})
 nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat  +ellps=clrk66"))
 \dontrun{

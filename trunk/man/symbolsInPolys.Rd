@@ -10,7 +10,7 @@ symbolsInPolys(pl, dens, symb = "+", compatible = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{pl}{list of polygons of class \code{polylist}}
+  \item{pl}{an object of class SpatialPolygons or SpatialPolygonsDataFrame}
   \item{dens}{number of symbol plotting points per unit area; either a single numerical value for all polygons, or a numeric vector the same length as pl with values for each polygon}
   \item{symb}{plotting symbol; either a single value for all polygons, or a vector the same length as pl with values for each polygon}
   \item{compatible}{what to return, if TRUE a a list of matrices of point coordinates, one matrix for each member of pl, with a \code{symb} attribute, if false a SpatialPointsDataFrame with a \code{symb} column}
@@ -30,13 +30,6 @@ The function returns a list of matrices of point coordinates, one matrix for eac
 \seealso{\code{\link[sp]{spsample}}}
 
 \examples{
-x <- read.shape(system.file("shapes/sids.shp", package="maptools")[1])
-ncpolys <- Map2poly(x)
-np <- sapply(ncpolys, function(x) attr(x, "nPart"))
-symbs <- c("-", "+", "x")
-try1 <- symbolsInPolys(ncpolys, 100, symb=symbs[np], compatible=TRUE)
-plot(ncpolys)
-xx <- lapply(try1, function(x) {if (!is.null(x)) points(x, pch=attr(x, "symb"))})
 nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat +ellps=clrk66"))
 \dontrun{

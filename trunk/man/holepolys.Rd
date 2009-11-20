@@ -40,8 +40,8 @@ example script.
 
 \examples{
 data(gpcholes)
-plot(hole2pl, col="red", pbg="white", border="blue", forcefill=FALSE)
-plot(hole1pl, col="red", pbg="white", border="blue", forcefill=FALSE)
+maptools:::plot.polylist(hole2pl, col="red", pbg="white", border="blue", forcefill=FALSE)
+maptools:::plot.polylist(hole1pl, col="red", pbg="white", border="blue", forcefill=FALSE)
 }
 
 \keyword{datasets}
