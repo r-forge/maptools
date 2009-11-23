@@ -3,13 +3,13 @@ useDynLib(maptools)
 import(sp)
 import(foreign)
 
-export(leglabs, dotsInPolys, symbolsInPolys) 
+export(leglabs, dotsInPolys, symbolsInPolys, getinfo.shape, print.shapehead) 
         # plotpolys, shape2poly, shape2lines, 
 	# shape2points, shape2bbs, Map2poly, Map2poly1, Map2lines, Map2points, 
-	# Map2bbs, convert.pl, get.Pcent, read.shape, getinfo.shape,
+	# Map2bbs, convert.pl, get.Pcent, read.shape,
 	# plot.Map, plot.polylist, subset.polylist, maptools, dotsInPolys,
 	# symbolsInPolys, write.pointShape, write.polylistShape, 
-	# write.linelistShape, print.shapehead)
+	# write.linelistShape)
 
 export(readShapePoints, readShapeLines, readShapePoly)
 
@@ -56,7 +56,7 @@ export(thinnedSpatialPoly)
 #S3method(plot, Map)
 #S3method(plot, polylist)
 #S3method(subset, polylist)
-#S3method(print, shapehead)
+S3method(print, shapehead)
 #S3method(as.ppp, SpatialPoints)
 #S3method(as.ppp, SpatialPointsDataFrame)
 #S3method(as.owin, SpatialGridDataFrame)

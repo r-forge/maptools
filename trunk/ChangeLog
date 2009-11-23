@@ -1,3 +1,11 @@
+2009-11-23 12:49  rsbivand
+
+	* man/getinfo.shape.Rd: reinstate getinfo.shape
+
+2009-11-23 12:45  rsbivand
+
+	* NAMESPACE: reinstate getinfo.shape
+
 2009-11-20 13:26  rsbivand
 
 	* DESCRIPTION, NAMESPACE, R/dotsinpolys.R,
@@ -14,8 +22,8 @@
 	  man/readShapePoly.Rd, man/readShapeSpatial.Rd,
 	  man/subset.polylist.Rd, man/symbolsInPolys.Rd,
 	  man/write.linelistShape.Rd, man/write.pointShape.Rd,
-	  man/write.polylistShape.Rd, man/leglabs.Rd: moving deprecated
-	  functions from namespace
+	  man/write.polylistShape.Rd, man/leglabs.Rd, ChangeLog,
+	  inst/ChangeLog: moving deprecated functions from namespace
 
 2009-11-19 21:11  rsbivand
 
