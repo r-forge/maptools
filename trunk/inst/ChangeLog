@@ -1,6 +1,12 @@
+2009-12-03 08:31  rsbivand
+
+	* ChangeLog, DESCRIPTION, data/gpcholes.rda, man/holepolys.Rd: hole
+	  example format change
+
 2009-11-23 12:49  rsbivand
 
-	* man/getinfo.shape.Rd: reinstate getinfo.shape
+	* man/getinfo.shape.Rd, ChangeLog, inst/ChangeLog: reinstate
+	  getinfo.shape
 
 2009-11-23 12:45  rsbivand
 

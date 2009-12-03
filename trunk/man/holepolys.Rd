@@ -40,8 +40,10 @@ example script.
 
 \examples{
 data(gpcholes)
-maptools:::plot.polylist(hole2pl, col="red", pbg="white", border="blue", forcefill=FALSE)
-maptools:::plot.polylist(hole1pl, col="red", pbg="white", border="blue", forcefill=FALSE)
+opar <- par(mfrow=c(1,2))
+plot(SpatialPolygons(list(h2pl)), col="red", pbg="white", border="blue")
+plot(SpatialPolygons(list(h1pl)), col="red", pbg="white", border="blue")
+par(opar)
 }
 
 \keyword{datasets}

@@ -1,6 +1,7 @@
 2009-11-23 12:49  rsbivand
 
-	* man/getinfo.shape.Rd: reinstate getinfo.shape
+	* man/getinfo.shape.Rd, ChangeLog, inst/ChangeLog: reinstate
+	  getinfo.shape
 
 2009-11-23 12:45  rsbivand
 
