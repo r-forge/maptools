@@ -1,7 +1,11 @@
+2009-12-03 08:34  rsbivand
+
+	* INDEX: hole example format change
+
 2009-12-03 08:31  rsbivand
 
-	* ChangeLog, DESCRIPTION, data/gpcholes.rda, man/holepolys.Rd: hole
-	  example format change
+	* ChangeLog, DESCRIPTION, data/gpcholes.rda, man/holepolys.Rd,
+	  inst/ChangeLog: hole example format change
 
 2009-11-23 12:49  rsbivand
 
