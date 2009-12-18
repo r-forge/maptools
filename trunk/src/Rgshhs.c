@@ -1,5 +1,8 @@
 /*	$Id$
  *
+ *	Copyright (c) 1996-2009 by P. Wessel and W. H. F. Smith
+ *	See COPYING file for copying and redistribution conditions.
+ *
  * PROGRAM:	gshhs.c
  * AUTHOR:	Paul Wessel (pwessel@hawaii.edu)
  * CREATED:	JAN. 28, 1996
@@ -16,6 +19,11 @@
  *		1.7 11-NOV-2006: Fixed bug in computing level (&& vs &)
  *		1.8 31-MAR-2007: Updated to deal with latest GSHHS database (1.5)
  *		1.9 27-AUG-2007: Handle line data as well as polygon data
+ *		1.10 15-FEB-2008: Updated to deal with latest GSHHS database (1.6)
+ *		1.12 15-JUN-2009: Now contains information on container polygon,
+ *				the polygons ancestor in the full resolution, and
+ *				a flag to tell if a lake is a riverlake.
+ *				Updated to deal with latest GSHHS database (2.0)
  *
  *	Copyright (c) 1996-2004 by P. Wessel and W. H. F. Smith
  *	See COPYING file for copying and redistribution conditions.
@@ -32,7 +40,7 @@
  *	Contact info: www.soest.hawaii.edu/pwessel */
 
 /*
- * This modification of gshhs.c is Copyright (c) 2005-7 Roger Bivand
+ * This modification of gshhs.c is Copyright (c) 2005-9 Roger Bivand
  * Modification to swap function taken from Rsystat.c in foreign 071117
 */
 
@@ -158,7 +166,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 /*		    }*/
 		    Level = h.flag & 255;
 		    version = (h.flag >> 8) & 255;
-		    if (version != GSHHS_DATA_VERSION) 
+		    if (version != GSHHS_DATA_RELEASE) 
 			error("Data not same version as software");
 		    greenwich = (h.flag >> 16) & 255;
 		    src = (h.flag >> 24) & 255;

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read GSHHS data into sp object}
 \description{
-  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 1.11 of July 3, 2008 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_1.11.zip}). If the data are line data, the borders or river lines will be read into a SpatialLines object. The data are provided in integer form as millionths of decimal degrees. Reading of much earlier versions of the GSHHS binary files will fail with an error message. The netCDF GSHHS files distributed with GMT >= 4.2 cannot be read as they are in a very different format.
+  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 2.0 of July 15, 2009 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.0.zip}). If the data are line data, the borders or river lines will be read into a SpatialLines object. The data are provided in integer form as millionths of decimal degrees. Reading of much earlier versions of the GSHHS binary files will fail with an error message. The netCDF GSHHS files distributed with GMT >= 4.2 cannot be read as they are in a very different format.
 }
 \usage{
 Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift=FALSE, 
@@ -11,7 +11,7 @@ verbose = TRUE, no.clip = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{fn}{filename or full path to GSHHS 1.11 file to be read}
+  \item{fn}{filename or full path to GSHHS 2.0 file to be read}
   \item{xlim}{longitude limits within 0-360 in most cases, negative longitudes are also found east of the Atlantic, but the Americas are recorded as positive values}
   \item{ylim}{latitude limits}
   \item{level}{maximum GSHHS level to include, defaults to 4 (everything), setting 1 will only retrieve land, no lakes}
@@ -34,12 +34,7 @@ verbose = TRUE, no.clip = FALSE)
   for line data, a list with the following component:
   \item{SP}{a SpatialLines object}
 }
-\references{\url{http://www.soest.hawaii.edu/wessel/gshhs/gshhs.html}, 
-
-
-\url{http://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html} (only old format - use for information only); data downloaded from 
-
-\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_1.10.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
+\references{\url{http://www.soest.hawaii.edu/pwessel/gshhs/index.html}, \url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.0.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
 \author{Roger Bivand}
 
 \note{

@@ -28,6 +28,23 @@
 \item{obj = "SpatialPolygonsDataFrame", x = "SpatialPolygonsDataFrame"}{rbind two SpatialPolygonsDataFrame objects}
 }}
 
+\note{
+In addition to the \code{spRbind}-methods, there are also 
+\code{rbind}-methods for Spatial* objects. The differences are:
+
+\enumerate{
+ \item{\code{spRbind}-methods can bind 2 objects, whereas \code{rbind}-methods 
+     can bind multiple object}
+ \item{some \code{rbind} can accept objects with duplicated IDs, for all 
+     \code{spRbind}-methods these have to be modified explicitly, e.g. by 
+     calling \code{\link[sp]{spChFIDs-methods}}}
+ \item{in \code{spRbind} for \code{Spatial*DataFrame}s, data is extracted
+     by \code{as(x,"data.frame")}. Because of this, the coordinates will
+     be added back to the new object when applying \code{spRbind} on 
+     \code{SpatialPointsDataFrame}s. }
+}
+}
+
 \author{Roger Bivand}
 
 \seealso{\code{\link[sp]{spChFIDs-methods}}, \code{\link{spCbind-methods}}}
