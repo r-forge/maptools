@@ -1,3 +1,7 @@
+2009-12-21 13:39  rsbivand
+
+	* ChangeLog, INDEX: adding CCmaps
+
 2009-12-21 13:35  rsbivand
 
 	* DESCRIPTION, NAMESPACE, R/CCmaps.R, man/CCmaps.Rd, src/Rgshhs.c:
