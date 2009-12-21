@@ -1,6 +1,7 @@
 as.owin.SpatialGridDataFrame
                         coercion between sp objects and spatstat
                         objects
+CCmaps                  Conditioned choropleth maps
 checkPolygonsHoles      Check holes in Polygons objects
 ContourLines2SLDF       Converter functions to build
                         SpatialLinesDataFrame objects

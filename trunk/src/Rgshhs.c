@@ -79,8 +79,9 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 {
 	FILE *fp;
 	double w, e, s, n, area, lon, lat;
-	char source, kind[2] = {'P', 'L'}, *name[2] = {"polygon", "line"};
+	char source, kind[2] = {'P', 'L'};
 	char msg[255];
+	char *name[2] = {"polygon", "line"}, container[8], ancestor[8];
 	int k, line, max_east = 270000000, info, n_read, /*flip,*/ Level, version, greenwich, src;
 	struct POINT p;
 	struct GSHHS h;
@@ -111,9 +112,9 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 
 		rewind(fp);
 
-		PROTECT(res = NEW_LIST(12)); pc++;
+		PROTECT(res = NEW_LIST(14)); pc++;
 
-		PROTECT(resnames = NEW_CHARACTER(12)); pc++;
+		PROTECT(resnames = NEW_CHARACTER(14)); pc++;
 		SET_STRING_ELT(resnames, 0, COPY_TO_USER_STRING("id"));
 		SET_STRING_ELT(resnames, 1, COPY_TO_USER_STRING("n"));
 		SET_STRING_ELT(resnames, 2, COPY_TO_USER_STRING("level"));
@@ -126,6 +127,8 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		SET_STRING_ELT(resnames, 9, COPY_TO_USER_STRING("south"));
 		SET_STRING_ELT(resnames, 10, COPY_TO_USER_STRING("north"));
 		SET_STRING_ELT(resnames, 11, COPY_TO_USER_STRING("line"));
+		SET_STRING_ELT(resnames, 12, COPY_TO_USER_STRING("container"));
+		SET_STRING_ELT(resnames, 13, COPY_TO_USER_STRING("ancestor"));
 		setAttrib(res, R_NamesSymbol, resnames);
 
 		SET_VECTOR_ELT(res, 0, NEW_INTEGER(npols));
@@ -140,6 +143,8 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		SET_VECTOR_ELT(res, 9, NEW_NUMERIC(npols));
 		SET_VECTOR_ELT(res, 10, NEW_NUMERIC(npols));
 		SET_VECTOR_ELT(res, 11, NEW_INTEGER(npols));
+		SET_VECTOR_ELT(res, 12, NEW_INTEGER(npols));
+		SET_VECTOR_ELT(res, 13, NEW_INTEGER(npols));
 
 		fpos =  (signed int) ftell(fp);
 		n_read = fread ((void *)&h, (size_t)sizeof (struct GSHHS), 
@@ -163,6 +168,8 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 			h.greenwich = swabi2 ((unsigned int)h.greenwich);
 			h.source = swabi2 ((unsigned int)h.source);*/
 			swapb (&h.flag, sizeof(int));
+                        swapb (&h.ancestor, sizeof(int));
+                        swapb (&h.container, sizeof(int));
 /*		    }*/
 		    Level = h.flag & 255;
 		    version = (h.flag >> 8) & 255;
@@ -194,6 +201,8 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		    NUMERIC_POINTER(VECTOR_ELT(res, 9))[i] = s;
 		    NUMERIC_POINTER(VECTOR_ELT(res, 10))[i] = n;
 		    INTEGER_POINTER(VECTOR_ELT(res, 11))[i] = (signed int) line;
+		    INTEGER_POINTER(VECTOR_ELT(res, 12))[i] = (signed int) h.container;
+		    INTEGER_POINTER(VECTOR_ELT(res, 13))[i] = (signed int) h.ancestor;
 
 		    fseek (fp, (long)(h.n * sizeof(struct POINT)), SEEK_CUR);
 

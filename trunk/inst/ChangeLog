@@ -1,6 +1,21 @@
+2009-12-21 13:39  rsbivand
+
+	* ChangeLog, INDEX: adding CCmaps
+
+2009-12-21 13:35  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/CCmaps.R, man/CCmaps.Rd, src/Rgshhs.c:
+	  adding CCmaps
+
+2009-12-18 22:56  rsbivand
+
+	* inst/share/gshhs_c.b, inst/share/wdb_borders_c.b, man/Rgshhs.Rd,
+	  man/spRbind-methods.Rd, src/Rgshhs.c, src/Rgshhs.h: GSHHS upgrade
+	  to 2.0
+
 2009-12-03 08:34  rsbivand
 
-	* INDEX: hole example format change
+	* INDEX, ChangeLog, inst/ChangeLog: hole example format change
 
 2009-12-03 08:31  rsbivand
 

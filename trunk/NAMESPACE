@@ -2,6 +2,7 @@ useDynLib(maptools)
 
 import(sp)
 import(foreign)
+importFrom(lattice, strip.custom)
 
 export(leglabs, dotsInPolys, symbolsInPolys, getinfo.shape, print.shapehead) 
         # plotpolys, shape2poly, shape2lines, 
@@ -41,6 +42,8 @@ export(as.psp.SpatialLinesDataFrame, as.psp.SpatialLines, as.psp.Lines, as.psp.L
 export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
 
 export(Rgshhs)
+
+export(CCmaps)
 
 exportMethods(coerce, spCbind, spRbind)
 
