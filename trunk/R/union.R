@@ -1,6 +1,12 @@
 unionSpatialPolygons <- function(SpP, IDs, threshold=NULL) {
+    if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
+    rgeosI <- rgeosStatus()
+    if (rgeosI) {
+        require(rgeos)
+        res <- unionSpatialPolygonsGEOS(SpP=SpP, IDs=IDs, threshold=threshold)
+    } else {
+        stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)
-	if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
 	pl <- slot(SpP, "polygons")
 	proj4CRS <- CRS(proj4string(SpP))
 	SrnParts <- sapply(pl, function(x) length(slot(x, "Polygons")))
@@ -53,6 +59,7 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL) {
 		}
 	}
 	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4CRS)
-	res
+    }
+    res
 }
 

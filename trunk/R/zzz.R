@@ -3,6 +3,6 @@
 #}
 ## .noGenerics <- TRUE
 #maptools()
-
-".onLoad" <- function(lib, pkg) require(methods)
-
+#
+#".onLoad" <- function(lib, pkg) require(methods)
+#

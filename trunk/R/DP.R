@@ -101,9 +101,15 @@ dp_func <- function(points, tolerance) {
 
 thinnedSpatialPoly <- function(SP, tolerance, minarea=0) {
     stopifnot(inherits(SP, "SpatialPolygons"))
-    pls <- slot(SP, "polygons")
-    pls_dp <- vector(mode="list", length=length(pls))
-    for (i in 1:length(pls)) {
+    rgeosI <- rgeosStatus()
+    if (rgeosI) {
+        require(rgeos)
+        res <- thinnedSpatialPolyGEOS(SP=SP, tolerance=tolerance,
+            minarea=minarea)
+    } else {
+      pls <- slot(SP, "polygons")
+      pls_dp <- vector(mode="list", length=length(pls))
+      for (i in 1:length(pls)) {
         Pls <- slot(pls[[i]], "Polygons")
         Pls_dp <- vector(mode="list", length=length(Pls))
         for (j in 1:length(Pls)) {
@@ -119,8 +125,9 @@ thinnedSpatialPoly <- function(SP, tolerance, minarea=0) {
         if (all(!Keep)) Keep[which.max(areas)] <- TRUE
         Pls_dp <- Pls_dp[Keep]
         pls_dp[[i]] <- Polygons(Pls_dp, ID=slot(pls[[i]], "ID"))
+      }
+      res <- SpatialPolygons(pls_dp, proj4string=CRS(proj4string(SP)))
     }
-    res <- SpatialPolygons(pls_dp, proj4string=CRS(proj4string(SP)))
     if (is(SP, "SpatialPolygonsDataFrame"))
         res <- SpatialPolygonsDataFrame(res, data=slot(SP, "data"))
     res

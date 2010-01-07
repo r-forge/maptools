@@ -44,6 +44,8 @@ Please also note that limitations on the use of gpclib are very unclear, as exac
 }
 
 \examples{
+gpclibPermit()
+require(gpclib)
 gshhs.c.b <- system.file("share/gshhs_c.b", package="maptools")
 NZx <- c(160,180)
 NZy <- c(-50,-30)

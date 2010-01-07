@@ -23,6 +23,13 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
 		as.double(minarea), PACKAGE="maptools")
 	else clip <- NULL
+        rgeosI <- rgeosStatus()
+        if (rgeosI) {
+            require(rgeos)
+        } else {
+            stopifnot(isTRUE(gpclibPermitStatus()))
+	    require("gpclib")
+        }
 	polys <- .Call("Rgshhs", as.character(fn), as.integer(5), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
 		as.double(minarea), PACKAGE="maptools")
@@ -44,15 +51,42 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	}
 
 	if (!no.clip && dolim && any(clip == 1) && line == 0) {
-		limbb <- cbind(c(lim[1], lim[1], lim[2], lim[2], lim[1]), 
-			c(lim[3], lim[4], lim[4], lim[3], lim[3]))
-		require("gpclib")
+	    limbb <- cbind(c(lim[1], lim[1], lim[2], lim[2], lim[1]), 
+		c(lim[3], lim[4], lim[4], lim[3], lim[3]))
+	    which_null <- NULL
+	    opolys <- vector(mode="list", length=length(polys))
+	    ic <- 1
+	    if (verbose) cat("Rgshhs: clipping", sum(clip), "of", 
+		length(polys), "polygons ...\n")
+            if (rgeosI) {
+		limgp <- Polygons(list(Polygon(limbb)), ID="0")
+		for (i in seq(along=polys)) {
+		    if (clip[i] == 1) {
+                        tp <- Polygons(list(Polygon(polys[[i]])), ID="1")
+                        rp0 <- PolygonsIntersections(tp, limgp)
+                        rp <- NULL
+                        if (!is.null(rp0)) 
+                            rp <- lapply(slot(rp0, "Polygons"), slot, "coords")
+			l <- length(rp)
+			if (l > 0) {
+		            outl <- vector(mode="list", length=l)
+			    for (j in 1:l) 
+				outl[[j]] <- as(rp[j], "matrix")
+			    opolys[[ic]] <- outl
+			    if (i < length(polys)) ic <- ic+1
+			} else {
+			    which_null <- c(which_null, i)
+			    if (verbose) cat("null polygon: [[", i,
+                                "]]\n", sep="");
+			}
+		    } else {
+			opolys[[ic]] <- list(polys[[i]])
+			if (i < length(polys)) ic <- ic+1
+		    }
+		}
+		polys <- opolys[1:ic]
+            } else {
 		limgp <- as(limbb, "gpc.poly")
-		which_null <- NULL
-		opolys <- vector(mode="list", length=length(polys))
-		ic <- 1
-		if (verbose) cat("Rgshhs: clipping", sum(clip), "of", 
-			length(polys), "polygons ...\n")
 		for (i in seq(along=polys)) {
 			if (clip[i] == 1) {
 				tp <- as(polys[[i]], "gpc.poly")
@@ -75,6 +109,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			}
 		}
 		polys <- opolys[1:ic]
+            }
 	} else {
 		for (i in seq(along=polys)) polys[[i]] <- list(polys[[i]])
 		which_null <- NULL
@@ -82,8 +117,73 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 
 	if (!is.null(which_null)) chosen_0 <- chosen_0[-which_null]
 	chosen_1 <- chosen_0+1
-	levels <- polydata$level[chosen_1]
 	if (line == 0) {
+	 levels <- polydata$level[chosen_1]
+         if (rgeosI) {
+          ids <- polydata$id[chosen_1]
+          containers <- polydata$container[chosen_1]
+          ancestors <- polydata$ancestor[chosen_1]
+          tl <- as.list(table(levels))
+          ntl <- as.integer(names(tl))
+          mntl <- match(1:4, ntl)
+          l1 <- which(levels == 1L)
+          if (length(l1) > 0) {
+              c1 <- which(containers == -1L)
+              if (any(l1 != c1)) warning("containers and levels not coherent")
+              if (!is.na(mntl[4])) {
+                  wl4 <- which(levels == 4L)
+                  cw4 <- containers[wl4]
+                  mcw4 <- match(cw4, ids)
+                  containers[wl4] <- containers[mcw4]
+              }
+              if (!is.na(mntl[3])) {
+                  wl3 <- which(levels == 3L)
+                  cw3 <- containers[wl3]
+                  mcw3 <- match(cw3, ids)
+                  containers[wl3] <- containers[mcw3]
+              }
+              IDs <- ids[l1]
+              if (is.na(mntl[2])) {
+                  belongs <- as.list(l1)
+              } else {
+                  belongs <- lapply(1:length(IDs), function(i)
+                      c(i, which(containers == IDs[i])))
+              }
+          } else {
+              stop("no shoreline in selection")
+          }
+	  holes <- !as.logical(levels %% 2)
+	  nps <- sapply(polys, length)
+          n <- length(belongs)
+          Srl <- vector(mode="list", length=n)
+	  for (i in 1:n) {
+		nParts <- length(belongs[[i]])
+		srl <- NULL
+		for (j in 1:nParts) {
+		    this <- belongs[[i]][j]
+		    for (k in 1:nps[this]) {
+			crds <- polys[[this]][[k]]
+			if (!identical(crds[1,], crds[nrow(crds),])) {
+			    crds <- rbind(crds, crds[1,,drop=FALSE])
+			    if (verbose) 
+			        cat("  closing polygon", this, ":", k, "\n")
+			}
+			if (shift) crds[,1] <- ifelse(crds[,1] > 180, 
+			    crds[,1] - 360, crds[,1])
+			jres <- list(Polygon(crds, hole=holes[this]))
+			srl <- c(srl, jres)
+		    }
+		}
+                pls0 <- Polygons(srl, ID=IDs[i])
+		Srl[[i]] <- checkPolygonsGEOS(pls0)
+message("using rgeos")
+	  }
+	  res <- as.SpatialPolygons.PolygonsList(Srl, 
+		proj4string=CRS("+proj=longlat +datum=WGS84"))
+
+	  list(polydata=data.frame(polydata)[chosen_1,], belongs=belongs,
+              SP=res)
+         } else {
 	  belongs <- matrix(1:length(chosen_1), ncol=1)
 #	  belonged_to <- as.numeric(rep(NA, length(chosen_1)))
 
@@ -98,7 +198,6 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	    mlevel <- as.integer(max(levels))
 	    belongs <- matrix(rep(1:length(chosen_1), mlevel), ncol=mlevel)
 	    first_time <- TRUE
-	    require("gpclib")
 	    for (il in mlevel:2) {
 		w_il <- which(levels == il)
 		w_il_1 <- which(levels == (il-1))
@@ -187,6 +286,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		proj4string=CRS("+proj=longlat +datum=WGS84"))
 	  list(polydata=data.frame(polydata)[chosen_1,], belongs=belongs,
 		new_belongs=new_belongs, SP=res)
+         }
 	} else {
 	  Sll <- lapply(1:length(polys), function(i) {
               ID <- as.character(i)

@@ -27,8 +27,8 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps, 2))
 \seealso{\code{\link[sp]{recenter-methods}}, \code{\link[sp]{nowrapSpatialLines}}}
 
 \examples{
-library(gpclib)
 \dontrun{
+gpclibPermit()
 library(maps)
 world <- map("world", fill=TRUE, col="transparent", plot=FALSE)
 worldSpP <- map2SpatialPolygons(world, world$names, CRS("+proj=longlat"))

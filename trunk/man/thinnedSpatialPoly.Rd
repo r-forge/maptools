@@ -4,7 +4,7 @@
 \title{Douglas-Peuker line generalization for Spatial Polygons}
 
 \description{
-The function applies the implementation of the Douglas-Peuker algorithm for line generalization or simplification (originally from shapefiles) to objects inheriting from Spatial Polygons. It does not preserve topology, so is suitable for visualisation, but not for the subsequent analysis of the polygon boundaries, as artefacts may be created, and boundaries of neighbouring entities may be generalized differently.
+The function applies the implementation of the Douglas-Peuker algorithm for line generalization or simplification (originally from shapefiles) to objects inheriting from Spatial Polygons. It does not preserve topology, so is suitable for visualisation, but not for the subsequent analysis of the polygon boundaries, as artefacts may be created, and boundaries of neighbouring entities may be generalized differently. If the rgeos package is available, \code{thinnedSpatialPolyGEOS} will be used with partial topology preservation instead of the R implementation here by passing arguments through.
 }
 \usage{
 thinnedSpatialPoly(SP, tolerance, minarea=0)
@@ -23,6 +23,8 @@ represent a digitized line or its caricature.
 \author{Ben Stabler, Michael Friendly, Roger Bivand}
 
 \note{Warnings reporting: Non-finite label point detected and replaced, reflect the changes in the geometries of the polygons induced by line generalization.}
+
+\seealso{\code{\link[rgeos]{thinnedSpatialPolyGEOS}}}
 
 \examples{
 xx <- readShapeSpatial(system.file("shapes/sids.shp", package="maptools")[1],

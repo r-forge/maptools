@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Aggregate Polygons in a SpatialPolygons object}
 \description{
-  The function aggregates Polygons in a SpatialPolygons object, according to the IDs vector specifying which input Polygons belong to which output Polygons; internal boundaries are dissolved using the gpclib package union() function.
+  The function aggregates Polygons in a SpatialPolygons object, according to the IDs vector specifying which input Polygons belong to which output Polygons; internal boundaries are dissolved using the gpclib package union() function. If the rgeos package is available, \code{unionSpatialPolygonsGEOS} will be used with partial topology preservation instead of the R implementation here by passing arguments through.
 }
 \usage{
 unionSpatialPolygons(SpP, IDs, threshold=NULL)
@@ -20,10 +20,10 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL)
 }
 
 \author{Roger Bivand}
-
+\seealso{\code{\link[rgeos]{unionSpatialPolygonsGEOS}}}
 \examples{
-library(sp)
-library(gpclib)
+gpclibPermit()
+require(gpclib)
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat +datum=NAD27"))
 lps <- coordinates(nc1)

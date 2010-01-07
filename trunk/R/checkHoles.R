@@ -1,9 +1,23 @@
+gpclibPermit <- function() {
+    if (require("gpclib", quietly = TRUE, warn.conflicts = FALSE))
+        assign("gpclib", TRUE, envir=.MAPTOOLS_CACHE)
+    get("gpclib", envir=.MAPTOOLS_CACHE)
+}
+
+gpclibPermitStatus <- function() get("gpclib", envir=.MAPTOOLS_CACHE)
+
+rgeosStatus <- function() get("rgeos", envir=.MAPTOOLS_CACHE)
+
 checkPolygonsHoles <- function(x) {
+    if (rgeosStatus()) {
+        require(rgeos)
+        return(checkPolygonsGEOS(x))
+    } else {
+        stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)
 	if (!is(x, "Polygons")) stop("not an Polygons object")
 	pls <- slot(x, "Polygons")
 	nParts <- length(pls)
-#	proj4CRS <- CRS(proj4string(x))
 	ID <- slot(x, "ID")
 	gpc <- as(slot(pls[[1]], "coords"), "gpc.poly")
 	if (nParts > 1) for (i in 2:nParts) gpc <- append.poly(gpc, 
@@ -22,12 +36,11 @@ checkPolygonsHoles <- function(x) {
 		rD <- .ringDirxy_gpc(crds)
 		if (rD == 1 & hole) crds <- crds[nrow(crds):1,]
 		if (rD == -1 & !hole)  crds <- crds[nrow(crds):1,]
-		Srl[[j]] <- Polygon(coords=crds, 
-#proj4string=proj4CRS, 
-hole=hole)
+		Srl[[j]] <- Polygon(coords=crds, hole=hole)
 	}
 	res <- Polygons(Srl, ID=ID)
 	res
+    }
 }
 
 .ringDirxy_gpc <- function(xy) {

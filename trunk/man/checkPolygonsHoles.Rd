@@ -1,27 +1,34 @@
 \name{checkPolygonsHoles}
 \alias{checkPolygonsHoles}
+\alias{rgeosStatus}
+\alias{gpclibPermit}
+\alias{gpclibPermitStatus}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Check holes in Polygons objects}
 \description{
-  The function checks holes in Polygons objects, using an intersection between a gpclib package gpc.poly object with one or more polygon contours and its bounding box to set the hole flag. The function will set single polygon contours to hole=FALSE, and if multiple polygon contours are holes, will set them TRUE.
+  The function checks holes in Polygons objects. Use of the rgeos package functions is prefered, and if rgeos is available, they will be used automatically. In this case, member Polygon objects are checked against each other for containment, and the returned Polygons object has component hole slots set appropriately. In addition, the output Polygons object may be provided with a comment string, encoding the external and internal rings. For gpclib use, see details below.
 }
 \usage{
 checkPolygonsHoles(x)
+gpclibPermitStatus()
+gpclibPermit()
+rgeosStatus()
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{An Polygons object as defined in package sp}
 }
+\details{
+If the gpclib package is used, an intersection between a gpc.poly object with one or more polygon contours and its bounding box is used to set the hole flag. The function will set single polygon contours to hole=FALSE, and if multiple polygon contours are holes, will set them TRUE. The \code{gpclibPermit} function is used to choose to permit the use of gpclib if installed, and \code{gpclibPermitStatus} reports its status. The licence for gpclib is not Free or Open Source and explicitly forbids commercial use. See \code{library(help=gpclib)}.}
 
 \value{
   An Polygons object re-created from the input object.
 }
 
 \author{Roger Bivand}
-
+\seealso{\code{\link[rgeos]{checkPolygonsGEOS}}}
 \examples{
-library(sp)
-library(gpclib)
+gpclibPermit()
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat +ellps=clrk66"))
 pl <- slot(nc1, "polygons")
