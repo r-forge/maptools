@@ -1,6 +1,18 @@
+2010-01-07 19:03  rsbivand
+
+	* R/AAA.R, R/Rgshhs.R, man/Rgshhs.Rd: rgeos integration
+
+2010-01-07 13:10  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/DP.R, R/Rgshhs.R, R/checkHoles.R,
+	  R/nowrapRecenter.R, R/union.R, R/zzz.R, man/Rgshhs.Rd,
+	  man/checkPolygonsHoles.Rd, man/nowrapRecenter.Rd,
+	  man/thinnedSpatialPoly.Rd, man/unionSpatialPolygons.Rd, R/AAA.R:
+	  rgeos integration
+
 2009-12-21 13:39  rsbivand
 
-	* ChangeLog, INDEX: adding CCmaps
+	* ChangeLog, INDEX, inst/ChangeLog: adding CCmaps
 
 2009-12-21 13:35  rsbivand
 

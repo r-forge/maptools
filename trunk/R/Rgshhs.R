@@ -1,4 +1,4 @@
-# Copyright (c) 2005-8 Roger Bivand
+# Copyright (c) 2005-2010 Roger Bivand
 
 Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0, 
 	shift=FALSE, verbose=TRUE, no.clip = FALSE) {
@@ -71,7 +71,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			if (l > 0) {
 		            outl <- vector(mode="list", length=l)
 			    for (j in 1:l) 
-				outl[[j]] <- as(rp[j], "matrix")
+				outl[[j]] <- as(rp[[j]], "matrix")
 			    opolys[[ic]] <- outl
 			    if (i < length(polys)) ic <- ic+1
 			} else {
@@ -176,7 +176,6 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		}
                 pls0 <- Polygons(srl, ID=IDs[i])
 		Srl[[i]] <- checkPolygonsGEOS(pls0)
-message("using rgeos")
 	  }
 	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))
