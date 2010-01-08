@@ -137,7 +137,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
                   containers[wl4] <- containers[mcw4]
               }
               if (!is.na(mntl[3])) {
-                  wl3 <- which(levels == 3L)
+                  wl3 <- which(levels == 3L | levels == 4L)
                   cw3 <- containers[wl3]
                   mcw3 <- match(cw3, ids)
                   containers[wl3] <- containers[mcw3]
@@ -175,7 +175,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		    }
 		}
                 pls0 <- Polygons(srl, ID=IDs[i])
-		Srl[[i]] <- checkPolygonsGEOS(pls0)
+#		Srl[[i]] <- checkPolygonsGEOS(pls0)
+                Srl[[i]] <- pls0
 	  }
 	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))

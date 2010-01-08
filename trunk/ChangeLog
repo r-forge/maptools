@@ -1,3 +1,11 @@
+2010-01-08 10:46  rsbivand
+
+	* R/Rgshhs.R: hole assignment in GSHHS
+
+2010-01-07 19:07  rsbivand
+
+	* ChangeLog, inst/ChangeLog: rgeos integration
+
 2010-01-07 19:03  rsbivand
 
 	* R/AAA.R, R/Rgshhs.R, man/Rgshhs.Rd: rgeos integration
