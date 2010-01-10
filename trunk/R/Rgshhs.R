@@ -175,8 +175,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		    }
 		}
                 pls0 <- Polygons(srl, ID=IDs[i])
-#		Srl[[i]] <- checkPolygonsGEOS(pls0)
-                Srl[[i]] <- pls0
+		Srl[[i]] <- checkPolygonsGEOS(pls0)
+#                Srl[[i]] <- pls0
 	  }
 	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))
