@@ -1,6 +1,10 @@
+2010-01-10 20:37  rsbivand
+
+	* R/Rgshhs.R: gshhs hole fix
+
 2010-01-08 10:46  rsbivand
 
-	* R/Rgshhs.R: hole assignment in GSHHS
+	* R/Rgshhs.R, ChangeLog, inst/ChangeLog: hole assignment in GSHHS
 
 2010-01-07 19:07  rsbivand
 
