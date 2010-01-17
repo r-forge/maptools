@@ -7,7 +7,7 @@
     cat(paste("\n\tNote: polygon geometry computations in maptools\n",
               "\tdepend on the package gpclib, which has a\n",
               "\trestricted licence. It is disabled by default;\n",
-              "\tto enable gpclib, type", sQuote("gpclibPermit()"), "\n"))
+              "\tto enable gpclib, type gpclibPermit()\n"))
     cat("\nChecking rgeos availability as gpclib substitute:\n")
     rgeosI <- require(rgeos, quietly = TRUE, warn.conflicts = FALSE)
     cat(rgeosI, "\n")

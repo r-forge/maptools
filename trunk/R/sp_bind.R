@@ -92,7 +92,9 @@ setMethod("spRbind", signature(obj="SpatialPoints", x="SpatialPoints"),
 
 rbindSpatialPointsDataFrame <- function(obj, x) {
     SP <- spRbind(as(obj, "SpatialPoints"), as(x, "SpatialPoints"))
-    df <- rbind(as(obj, "data.frame"), as(x, "data.frame"))
+#    df <- rbind(as(obj, "data.frame"), as(x, "data.frame"))
+#    stopped adding coordinates as variables; Steve Eick 100117
+    df <- rbind(slot(obj, "data"), slot(x, "data"))
     SpatialPointsDataFrame(SP, data=df)
 }
 

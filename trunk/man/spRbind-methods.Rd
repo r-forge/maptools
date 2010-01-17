@@ -38,12 +38,8 @@ In addition to the \code{spRbind}-methods, there are also
  \item{some \code{rbind} can accept objects with duplicated IDs, for all 
      \code{spRbind}-methods these have to be modified explicitly, e.g. by 
      calling \code{\link[sp]{spChFIDs-methods}}}
- \item{in \code{spRbind} for \code{Spatial*DataFrame}s, data is extracted
-     by \code{as(x,"data.frame")}. Because of this, the coordinates will
-     be added back to the new object when applying \code{spRbind} on 
-     \code{SpatialPointsDataFrame}s. }
-}
-}
+
+}}
 
 \author{Roger Bivand}
 
