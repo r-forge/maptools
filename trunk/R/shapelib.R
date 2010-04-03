@@ -16,9 +16,10 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
     dn <- dirname(filen)
     sbn <- strsplit(bn, "\\.")[[1]]
     lsbn <- length(sbn)
-    if (lsbn > 1 && tolower(sbn[lsbn]) != "dbf") sbn[lsbn] <- "dbf"
+    if (lsbn > 1 && tolower(sbn[lsbn]) == "shp") sbn[lsbn] <- "dbf"
     filen1 <- paste(sbn, collapse=".")
-    if (length(grep("\\.dbf$", filen1) == 0)) paste(filen1, "dbf", sep=".")
+    if (length(grep("\\.dbf$", filen1)) == 0)
+        filen1 <- paste(filen1, "dbf", sep=".")
     if (length(dn) > 0) {
         filen1 <- paste(dn, filen1, sep=.Platform$file.sep)
     }
