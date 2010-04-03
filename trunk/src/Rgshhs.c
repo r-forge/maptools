@@ -79,14 +79,14 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 {
 	FILE *fp;
 	double w, e, s, n, area, lon, lat;
-	char source, kind[2] = {'P', 'L'};
+	char source;
 	char msg[255];
-	char *name[2] = {"polygon", "line"}, container[8], ancestor[8];
-	int k, line, max_east = 270000000, info, n_read, /*flip,*/ Level, version, greenwich, src;
+	char *name[2] = {"polygon", "line"};
+	int k, line, max_east = 270000000, n_read, /*flip,*/ Level, version, greenwich, src;
 	struct POINT p;
 	struct GSHHS h;
 	int npols, pc=0;
-	SEXP res, resnames, resa, plist, choice, chosen, clip, subset;
+	SEXP res, resnames, plist, choice, chosen, clip, subset;
 	int i, ipols;
 	signed int fpos;
 	double bb[4], bbi[4];
@@ -100,6 +100,8 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 	}
 
 	npols = getNpols(fp);
+        line = 0;
+        res = R_NilValue;
 	if (INTEGER_POINTER(mode)[0] == 0) {
 		fclose (fp);
 
@@ -353,12 +355,13 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		    return(plist);
 		}
 	}
+        error("shouldn't be here");
+        return(R_NilValue);
 }
 
 int getNpols(FILE *fp) {
 	struct GSHHS h;
-	int n_read, /*flip,*/ version;
-	int npols;
+	int n_read/*, flip, version*/;
 	int n;
 
 	n_read = fread ((void *)&h, (size_t)sizeof (struct GSHHS), 

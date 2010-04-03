@@ -39,7 +39,7 @@ xxx <- xx[xx$LENGTH > 30000,]
 plot(xxx, col="red", add=TRUE)
 tmpfl <- paste(tempdir(), "xxline", sep="/")
 writeLinesShape(xxx, tmpfl)
-maptools:::getinfo.shape(paste(tmpfl, ".shp", sep=""))
+getinfo.shape(paste(tmpfl, ".shp", sep=""))
 axx <- readShapeLines(tmpfl, proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 plot(xxx, col="black", lwd=4)
 plot(axx, col="yellow", lwd=1, add=TRUE)

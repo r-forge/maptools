@@ -10,7 +10,19 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
   shinfo <- getinfo.shape(filen)
   if (dbf.data) {
 #    library(foreign)
-    df <- read.dbf(filen)
+# filename wrong assumption BDR 100403
+#    df <- read.dbf(filen)
+    bn <- basename(filen)
+    dn <- dirname(filen)
+    sbn <- strsplit(bn, "\\.")[[1]]
+    lsbn <- length(sbn)
+    if (lsbn > 1 && tolower(sbn[lsbn]) != "dbf") sbn[lsbn] <- "dbf"
+    filen1 <- paste(sbn, collapse=".")
+    if (length(grep("\\.dbf$", filen1) == 0)) paste(filen1, "dbf", sep=".")
+    if (length(dn) > 0) {
+        filen1 <- paste(dn, filen1, sep=.Platform$file.sep)
+    }
+    df <- read.dbf(filen1)
     ndf <- as.integer(nrow(df))
   } else ndf <- as.integer(NA)
   if (shinfo[[2]] == 8) {

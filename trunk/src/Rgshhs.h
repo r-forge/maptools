@@ -40,7 +40,7 @@ This modification of gshhs.h is Copyright (c) 2005-9 Roger Bivand
 
 #ifndef _GSHHS
 #define _GSHHS
-#define _POSIX_SOURCE 1		/* GSHHS code is POSIX compliant */
+/* RSB #define _POSIX_SOURCE 1		 GSHHS code is POSIX compliant */
 
 /*#include <stdio.h>
 #include <stdlib.h>
