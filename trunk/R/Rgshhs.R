@@ -25,7 +25,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	else clip <- NULL
         rgeosI <- rgeosStatus()
         if (rgeosI) {
-            require(rgeos)
+#            require(rgeos)
         } else {
             stopifnot(isTRUE(gpclibPermitStatus()))
 	    require("gpclib")
@@ -63,7 +63,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		for (i in seq(along=polys)) {
 		    if (clip[i] == 1) {
                         tp <- Polygons(list(Polygon(polys[[i]])), ID="1")
-                        rp0 <- PolygonsIntersections(tp, limgp)
+                        rp0 <- NULL
+#                        rp0 <- PolygonsIntersections(tp, limgp)
                         rp <- NULL
                         if (!is.null(rp0)) 
                             rp <- lapply(slot(rp0, "Polygons"), slot, "coords")
@@ -175,8 +176,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		    }
 		}
                 pls0 <- Polygons(srl, ID=IDs[i])
-		Srl[[i]] <- checkPolygonsGEOS(pls0)
-#                Srl[[i]] <- pls0
+#		Srl[[i]] <- checkPolygonsGEOS(pls0)
+                Srl[[i]] <- pls0
 	  }
 	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))

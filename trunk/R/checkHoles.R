@@ -10,8 +10,8 @@ rgeosStatus <- function() get("rgeos", envir=.MAPTOOLS_CACHE)
 
 checkPolygonsHoles <- function(x) {
     if (rgeosStatus()) {
-        require(rgeos)
-        return(checkPolygonsGEOS(x))
+#        require(rgeos)
+#        return(checkPolygonsGEOS(x))
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)

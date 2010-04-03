@@ -1,7 +1,7 @@
 nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)) {
     rgeosI <- rgeosStatus()
     if (rgeosI) {
-        require(rgeos)
+#        require(rgeos)
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)
@@ -37,12 +37,12 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)
                  bbmatE <- matrix(c(rep(offset+eps[2], 2), rep(bb$x[2], 2), 
                      offset+eps[2], bb$y[1], rep(bb$y[2], 2), 
                      rep(bb$y[1], 2)), ncol=2)
-                 resW <- PolygonsIntersections(obj,
-                     Polygons(list(Polygon(bbmatW)), ID="W"))
-                 resE <- PolygonsIntersections(obj,
-                     Polygons(list(Polygon(bbmatE)), ID="E"))
-                 res <- Polygons(c(slot(resW, "Polygons"),
-                     slot(resE, "Polygons")), ID=slot(obj, "ID"))
+#                 resW <- PolygonsIntersections(obj,
+#                     Polygons(list(Polygon(bbmatW)), ID="W"))
+#                 resE <- PolygonsIntersections(obj,
+#                     Polygons(list(Polygon(bbmatE)), ID="E"))
+#                 res <- Polygons(c(slot(resW, "Polygons"),
+#                     slot(resE, "Polygons")), ID=slot(obj, "ID"))
             } else {
 		pls <- slot(obj, "Polygons")
 		nParts <- length(pls)

@@ -2,8 +2,8 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE) {
     if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
     rgeosI <- rgeosStatus()
     if (rgeosI && !avoidGEOS) {
-        require(rgeos)
-        res <- unionSpatialPolygonsGEOS(SpP=SpP, IDs=IDs, threshold=threshold)
+#        require(rgeos)
+#        res <- unionSpatialPolygonsGEOS(SpP=SpP, IDs=IDs, threshold=threshold)
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)

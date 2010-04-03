@@ -1,6 +1,12 @@
+2010-04-03 21:24  rsbivand
+
+	* DESCRIPTION, R/DP.R, R/Rgshhs.R, R/checkHoles.R,
+	  R/nowrapRecenter.R, R/union.R: hide rgeos
+
 2010-04-03 18:22  rsbivand
 
-	* R/shapelib.R: DBF filename, GSHHS C code errors addressed
+	* R/shapelib.R, ChangeLog, inst/ChangeLog: DBF filename, GSHHS C
+	  code errors addressed
 
 2010-04-03 18:01  rsbivand
 
