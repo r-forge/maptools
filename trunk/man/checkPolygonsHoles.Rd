@@ -26,7 +26,7 @@ If the gpclib package is used, an intersection between a gpc.poly object with on
 }
 
 \author{Roger Bivand}
-\seealso{\code{\link[rgeos]{checkPolygonsGEOS}}}
+%\seealso{\code{\link[rgeos]{checkPolygonsGEOS}}}
 \examples{
 gpclibPermit()
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],

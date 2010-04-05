@@ -24,7 +24,7 @@ represent a digitized line or its caricature.
 
 \note{Warnings reporting: Non-finite label point detected and replaced, reflect the changes in the geometries of the polygons induced by line generalization.}
 
-\seealso{\code{\link[rgeos]{thinnedSpatialPolyGEOS}}}
+%\seealso{\code{\link[rgeos]{thinnedSpatialPolyGEOS}}}
 
 \examples{
 xx <- readShapeSpatial(system.file("shapes/sids.shp", package="maptools")[1],

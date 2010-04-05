@@ -23,7 +23,7 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE)
 \section{Warning}{When using GEOS Unary Union, it has been found that some polygons are not dissolved correctly when the absolute values of the coordinates are very small. No work-around is available at present.}
 
 \author{Roger Bivand}
-\seealso{\code{\link[rgeos]{unionSpatialPolygonsGEOS}}}
+%\seealso{\code{\link[rgeos]{unionSpatialPolygonsGEOS}}}
 \examples{
 gpclibPermit()
 require(gpclib)
