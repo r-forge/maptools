@@ -1,7 +1,18 @@
+2010-04-12 08:55  rsbivand
+
+	* DESCRIPTION: tidy
+
+2010-04-05 12:42  rsbivand
+
+	* DESCRIPTION, man/checkPolygonsHoles.Rd,
+	  man/thinnedSpatialPoly.Rd, man/unionSpatialPolygons.Rd: comment
+	  out links to rgeos
+
 2010-04-03 21:24  rsbivand
 
 	* DESCRIPTION, R/DP.R, R/Rgshhs.R, R/checkHoles.R,
-	  R/nowrapRecenter.R, R/union.R: hide rgeos
+	  R/nowrapRecenter.R, R/union.R, ChangeLog, inst/ChangeLog: hide
+	  rgeos
 
 2010-04-03 18:22  rsbivand
 
