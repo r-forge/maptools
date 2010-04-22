@@ -7,6 +7,8 @@
 read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
   filen <- path.expand(filen)
   .Deprecated("", package="maptools", msg="use readShapeSpatial:\nobjects other than Spatial objects defined in the sp package are deprecated")
+  if (length(grep("\\.shp$", tolower(filen))) == 0)
+    filen <- paste(filen, "shp", sep=".")
   shinfo <- getinfo.shape(filen)
   if (dbf.data) {
 #    library(foreign)
