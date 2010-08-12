@@ -13,7 +13,7 @@ kmlLine <- function(obj = NULL, kmlfile = NULL, name = "R Line",
         stop("obj must be of class 'Lines' or 'SpatialLinesDataFrame' [package 'sp']")
     if (class(obj) == "SpatialLinesDataFrame") {
         if (length(obj@lines) > 1) 
-            warning(paste("Only the first Polygons object with the ID '", 
+            warning(paste("Only the first Lines object with the ID '", 
               obj@lines[[1]]@ID, "' is taken from 'obj'", 
               sep = ""))
         obj <- obj@lines[[1]]

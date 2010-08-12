@@ -1,17 +1,16 @@
 \name{gpcholes}
 \alias{gpcholes}
-\alias{hole1pl}
-\alias{hole2pl}
+\alias{h1pl}
+\alias{h2pl}
 
 \docType{data}
 \title{Hisaji Ono's lake/hole problem}
 \description{
   How to plot polygons with holes - holes are encoded by coordinates going anticlockwise, and overplotting is avoided by re-ordering the order in which polygons are plotted.
+
+This example is retained for historical interest only, other solutions are present in the sp package.
 }
 \usage{data(gpcholes)}
-\format{
-  The format is class \code{"polylist"}.
-}
 
 \details{
 
@@ -30,7 +29,7 @@ example script.
 
  Does anyone know how to solve this situation?"
 
-*(hole1pl has reversed the y component of polygon 1, to make its ring direction clockwise, hole2pl reverses the order of the two polygons in holepoly1@pts)*
+*(h1pl has reversed the y component of polygon 1, to make its ring direction clockwise, h2pl reverses the order of the two polygons in holepoly1@pts)*
 
 }
 
