@@ -1,6 +1,11 @@
+2010-08-26 12:32  rsbivand
+
+	* DESCRIPTION, R/readGPS.R: check Sys.which value
+
 2010-08-12 17:08  rsbivand
 
-	* R/kmlLine.R, man/holepolys.Rd, DESCRIPTION: data docs fix
+	* R/kmlLine.R, man/holepolys.Rd, DESCRIPTION, ChangeLog,
+	  inst/ChangeLog: data docs fix
 
 2010-04-22 04:47  rsbivand
 
