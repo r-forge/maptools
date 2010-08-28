@@ -19,7 +19,11 @@ as.SpatialPoints.ppp =  function(from) {
     mult <- 1
     if (!is.null(from$window$units) && !is.null(from$window$units$multiplier))
         mult <- from$window$units$multiplier
-    crds <- cbind(mult*as.double(from$x), mult*as.double(from$y))
+    mx <- mult*from$x
+    storage.mode(mx) <- "double"
+    my <- mult*from$y
+    storage.mode(my) <- "double"
+    crds <- cbind(mx, my)
     if (from$window$type == "rectangle") {
         ow <- from$window
         bbox <- rbind(mult*as.double(ow$xrange), mult*as.double(ow$yrange))

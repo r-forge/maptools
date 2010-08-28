@@ -10,18 +10,19 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	else lim <- c(-180, 360)
 	if (!is.null(ylim)) lim <- c(lim, ylim)
 	else lim <- c(lim, c(-90, 90))
+        storage.mode(minarea) <- "double"
 	polydata <- .Call("Rgshhs", as.character(fn), as.integer(1), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
-		as.double(minarea), PACKAGE="maptools")
+		minarea, PACKAGE="maptools")
         line <- median(polydata$line)
         if (verbose) cat("Data are", ifelse(line == 0, "polygon", "line"),
                 "data\n")
 	chosen_0 <- .Call("Rgshhs", as.character(fn), as.integer(2), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
-		as.double(minarea), PACKAGE="maptools")
+		minarea, PACKAGE="maptools")
 	if (dolim) clip <- .Call("Rgshhs", as.character(fn), as.integer(3), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
-		as.double(minarea), PACKAGE="maptools")
+		minarea, PACKAGE="maptools")
 	else clip <- NULL
         rgeosI <- rgeosStatus()
         if (rgeosI) {
@@ -32,7 +33,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
         }
 	polys <- .Call("Rgshhs", as.character(fn), as.integer(5), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
-		as.double(minarea), PACKAGE="maptools")
+		minarea, PACKAGE="maptools")
 
 	Antarctica <- which(polydata$area[(chosen_0+1)] > 1.3e+07 & 
 		polydata$area[(chosen_0+1)] < 1.4e+07)

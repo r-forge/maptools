@@ -1,3 +1,12 @@
+2010-08-28 12:34  rsbivand
+
+	* R/: Rgshhs.R, maptools.R, shapelib.R, sp2pbs.R, sp_spat1.R,
+	  union.R: as.double to storage.mode
+
+2010-08-26 12:36  rsbivand
+
+	* ChangeLog, inst/ChangeLog: check Sys.which value
+
 2010-08-26 12:32  rsbivand
 
 	* DESCRIPTION, R/readGPS.R: check Sys.which value

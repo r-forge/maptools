@@ -424,7 +424,8 @@ Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
 	n <- length(pl)
 	bbs <- matrix(0, nrow=n, ncol=4)
 	for (i in 1:n) bbs[i,] <- bbox1(pl[[i]])
-	res <- .Call("mtInsiders", as.integer(n), as.double(bbs), 
+        storage.mode(bbs) <- "double"
+	res <- .Call("mtInsiders", as.integer(n), bbs, 
 		PACKAGE="maptools")
 	res1 <- vector(mode="list", length=n)
 
@@ -881,8 +882,9 @@ convert.pl <- function(pl) {
 
 .RingCentrd_2d <- function(plmat) {
 	nVert <- nrow(plmat)
-	res <- .C("RFindCG", as.integer(nVert), as.double(plmat[,1]), 
-		as.double(plmat[,2]), as.double(0), as.double(0), 
+        storage.mode(plmat) <- "double"
+	res <- .C("RFindCG", as.integer(nVert), plmat[,1], 
+		plmat[,2], as.double(0), as.double(0), 
 		as.double(0), PACKAGE="maptools")
 
 #	x_base <- plmat[1,1]
@@ -910,6 +912,8 @@ convert.pl <- function(pl) {
 .ringDirxy <- function(xy) {
 	a <- xy[,1]
 	b <- xy[,2]
+        storage.mode(a) <- "double"
+        storage.mode(b) <- "double"
 	nvx <- length(b)
 
 #	if((a[1] == a[nvx]) && (b[1] == b[nvx])) {
@@ -943,7 +947,7 @@ convert.pl <- function(pl) {
 #   	}
 #	v3 = ( (dx0 * dy1) - (dx1 * dy0) )
 
-	res <- .C("RFindCG", as.integer(nvx), as.double(a), as.double(b), 
+	res <- .C("RFindCG", as.integer(nvx), a, b, 
 		as.double(0), as.double(0), as.double(0), PACKAGE="maptools")
 
 	if ( res[[6]] > 0 ) return(as.integer(-1))

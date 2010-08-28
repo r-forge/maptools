@@ -91,7 +91,8 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
     stop("different number of rows in coordinates and data frame")
 #  library(foreign)
   write.dbf(df, paste(file, ".dbf", sep=""), factor2char=factor2char, max_nchar=max_nchar)
-  res <- .Call("shpwritepoint", as.character(file), as.double(coordinates),
+  storage.mode(coordinates) <- "double"
+  res <- .Call("shpwritepoint", as.character(file), coordinates,
     as.integer(ncolcrds), PACKAGE="maptools")
   invisible(res)
 }

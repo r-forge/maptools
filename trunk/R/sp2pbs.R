@@ -25,8 +25,8 @@ SpatialPolygons2PolySet <- function(SpP) {
 	PID <- as.integer(PID)
 	SID <- as.integer(SID)
 	POS <- as.integer(POS)
-	X <- as.double(X)
-	Y <- as.double(Y)
+        storage.mode(X) <- "double"
+        storage.mode(Y) <- "double"
 	require(PBSmapping)
 	pj <- .pbsproj(SpP)
 	zn <- NULL
@@ -64,8 +64,8 @@ SpatialLines2PolySet <- function(SL) {
 	PID <- as.integer(PID)
 	SID <- as.integer(SID)
 	POS <- as.integer(POS)
-	X <- as.double(X)
-	Y <- as.double(Y)
+        storage.mode(X) <- "double"
+        storage.mode(Y) <- "double"
 	require(PBSmapping)
 	pj <- .pbsproj(SL)
 	zn <- NULL
