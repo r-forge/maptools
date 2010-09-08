@@ -1,8 +1,9 @@
 readShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
-	verbose=FALSE, repair=FALSE) {
+	verbose=FALSE, repair=FALSE, delete_null_obj=FALSE) {
 	suppressWarnings(Map <- read.shape(filen=fn, verbose=verbose,
 	    repair=repair))
-	suppressWarnings(.shp2LinesDF(Map, proj4string=proj4string))
+	suppressWarnings(.shp2LinesDF(Map, proj4string=proj4string,
+            delete_null_obj=delete_null_obj))
 }
 
 writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
@@ -14,11 +15,34 @@ writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 }
 
 
-.shp2LinesDF <- function(shp, proj4string=CRS(as.character(NA)), IDs) {
+.shp2LinesDF <- function(shp, proj4string=CRS(as.character(NA)), IDs,
+        delete_null_obj=FALSE) {
 	if (class(shp) != "Map") stop("shp not a Map object")
 	shp.type <- attr(shp$Shapes, "shp.type")
 	if (!shp.type %in% c("arc", "poly")) 
 		stop("not an arc or poly Map object")
+# birds NULL part Allen H. Hurlbert 090610 copied from .Map2PolyDF
+# Harlan Harris 100907
+        nullParts <- sapply(shp$Shapes, function(x) x$nParts) == 0
+        if (delete_null_obj) {
+	    nullParts <- which(nullParts)
+	    if (length(nullParts) > 0) {
+		for (i in length(nullParts):1)
+	            shp$Shapes[[nullParts[i]]] <- NULL
+                attr(shp$Shapes,'nshps') <- attr(shp$Shapes,'nshps') - 
+                    length(nullParts)
+                shp$att.data <- shp$att.data[-nullParts,]
+                warning(paste("Null objects with the following", 
+                    "indices deleted:", paste(nullParts, collapse=", ")))
+              }
+        } else {
+# birds NULL part Allen H. Hurlbert 090610
+# Harlan Harris 100907
+            if (any(nullParts))
+               stop(paste("NULL geometry found:", paste(which(nullParts),
+                   collapse=", "),
+                   "\n               consider using delete_null_obj=TRUE"))
+	}
 	df <- shp$att.data
 	shapes <- shp$Shapes
 	n <- length(shapes)
