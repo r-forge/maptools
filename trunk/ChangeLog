@@ -1,7 +1,13 @@
+2010-09-08 18:36  rsbivand
+
+	* DESCRIPTION, R/SpatialLines-methods.R, man/readShapeLines.Rd,
+	  man/readShapePoly.Rd, man/readShapeSpatial.Rd: zero nParts for
+	  lines
+
 2010-08-28 12:34  rsbivand
 
-	* R/: Rgshhs.R, maptools.R, shapelib.R, sp2pbs.R, sp_spat1.R,
-	  union.R: as.double to storage.mode
+	* R/Rgshhs.R, R/maptools.R, R/shapelib.R, R/sp2pbs.R, R/sp_spat1.R,
+	  R/union.R, ChangeLog, inst/ChangeLog: as.double to storage.mode
 
 2010-08-26 12:36  rsbivand
 
