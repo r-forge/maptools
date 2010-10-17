@@ -11,15 +11,16 @@ as.ppp.SpatialPoints = function(X) {
 
 setAs("SpatialPoints", "ppp", function(from) as.ppp.SpatialPoints(from))
 
+# Mike Sumner 20101011
 as.ppp.SpatialPointsDataFrame = function(X) {
 	require(spatstat)
 	bb <- bbox(X)
         colnames(bb) <- NULL
 	W  <- owin(bb[1,], bb[2,])
 	nc <- ncol(X)
-        marks <- if(nc == 0) NULL else X[[1]]
-        if(nc > 1)
-          warning(paste(nc-1, "columns of data frame discarded"))
+        marks <- if(nc == 0) NULL else slot(X, "data")
+#        if(nc > 1)
+#          warning(paste(nc-1, "columns of data frame discarded"))
 	cc <- coordinates(X)
 	return(ppp(cc[,1], cc[,2], window = W, marks = marks, check=FALSE))
 }
