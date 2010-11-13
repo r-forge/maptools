@@ -1,3 +1,16 @@
+2010-11-13 16:54  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/Rgshhs.R, man/Rgshhs.Rd: adding
+	  getRgshhsMap
+
+2010-10-17 20:29  rsbivand
+
+	* DESCRIPTION, R/spatstat1.R: ppp marks as data.frame not vector
+
+2010-09-08 19:12  rsbivand
+
+	* ChangeLog, inst/ChangeLog: zero nParts for lines
+
 2010-09-08 18:36  rsbivand
 
 	* DESCRIPTION, R/SpatialLines-methods.R, man/readShapeLines.Rd,

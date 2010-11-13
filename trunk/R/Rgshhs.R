@@ -1,4 +1,4 @@
-# Copyright (c) 2005-2010 Roger Bivand
+# Copyright (c) 2005-2010 Roger Bivand and Karl Ove Hufthammer
 
 Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0, 
 	shift=FALSE, verbose=TRUE, no.clip = FALSE) {
@@ -303,3 +303,53 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	  list(SP=res)
 	}
 }
+
+# contributed 101018 by Karl Ove Hufthammer
+
+getRgshhsMap = function (fn = system.file("share/gshhs_c.b", package = "maptools"), xlim, ylim, level = 1, shift = TRUE, verbose = TRUE, no.clip = FALSE) 
+{
+    # First try fetching the map directly, possibly with negative coordinates.
+    # Note that some polygons with longitude < 0 use negative coordinates 
+    # (e.g., Great Britain), and some use positve coordinates (e.g., Ireland).
+    #    
+    # (Must use 'try' here, because for example xlim=c(-40,-10)
+    # results in an error, while xlim=c(-40,-5) does not.)
+    map1 = try(Rgshhs(fn, xlim = xlim, ylim = ylim, shift = shift, 
+                    level = level, verbose=verbose, no.clip = no.clip)$SP)
+    
+    # Now try fetching the same area using positive coordinates.
+    xl.west = (xlim + 360)%%360
+    if (xl.west[2] < xl.west[1])
+        xl.west[2] = 360
+    map2 = Rgshhs(fn, xlim = xl.west, ylim = ylim, shift = shift, 
+            level = level, verbose=verbose, no.clip = no.clip)$SP
+    
+    # If there where no polygons with negative coordinates, just
+    # use the positive coordinates.
+    if (class(map1) == "try-error") 
+        map.union = map2 else { # Else merge the two maps into one.
+        
+        # First store the original polygon IDs in data frames.
+        df1 = data.frame(polyID = row.names(map1))
+        row.names(df1) = df1$polyID
+        map1.spdf = SpatialPolygonsDataFrame(map1, df1)
+        
+        df2 = data.frame(polyID = row.names(map2))
+        row.names(df2) = df2$polyID
+        map2.spdf = SpatialPolygonsDataFrame(map2, df2)
+        
+        # Generate new polygon IDs to avoid duplicate IDs when
+        # rbinding the two maps.
+        row.names(map1.spdf) = as.character(seq_along(map1@polygons))
+        row.names(map2.spdf) = as.character(length(map1@polygons) + 
+                        seq_along(map2@polygons))
+        map.merged = rbind(map1.spdf, map2.spdf)
+        
+        # Finally, combine all the polygons, using the
+        # original polyon IDs.
+        map.union = unionSpatialPolygons(map.merged, map.merged$polyID)
+    }
+    map.union
+}
+
+

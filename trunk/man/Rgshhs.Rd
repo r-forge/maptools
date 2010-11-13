@@ -1,13 +1,20 @@
 \name{Rgshhs}
 \alias{Rgshhs}
+\alias{getRgshhsMap}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read GSHHS data into sp object}
 \description{
-  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 2.0 of July 15, 2009 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.0.zip}). If the data are line data, the borders or river lines will be read into a SpatialLines object. The data are provided in integer form as millionths of decimal degrees. Reading of much earlier versions of the GSHHS binary files will fail with an error message. The netCDF GSHHS files distributed with GMT >= 4.2 cannot be read as they are in a very different format.
+  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 2.0 of July 15, 2009 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.0.zip}). 
+
+The \code{getRgshhsMap} function calls \code{Rgshhs} internally to simplify the interface by returning only a SpatialPolygons object rather than a more complex list, and by calling \code{Rgshhs} twice either side of longitude 0 degrees for values of \dQuote{xlim} straddling 0, then merging the polygons retrieved.
+
+If the data are line data, the borders or river lines will be read into a SpatialLines object. The data are provided in integer form as millionths of decimal degrees. Reading of much earlier versions of the GSHHS binary files will fail with an error message. The netCDF GSHHS files distributed with GMT >= 4.2 cannot be read as they are in a very different format.
 }
 \usage{
-Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift=FALSE, 
+Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift = FALSE, 
 verbose = TRUE, no.clip = FALSE)
+getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
+ xlim, ylim, level = 1, shift = TRUE, verbose = TRUE, no.clip = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -31,6 +38,7 @@ verbose = TRUE, no.clip = FALSE)
   \item{belongs}{a matrix showing which polygon belongs to (is included in) which polygon, going from the highest level among the selected polygons down to 1 (land); levels are: 1 land, 2 lake, 3 island\_in\_lake, 4 pond\_in\_island\_in\_lake.}
   \item{new_belongs}{a ragged list of polygon inclusion used for making SP}
   \item{SP}{a SpatialPolygons object; this is the principal output object, and will become the only output object as the package matures}
+  the \code{getRgshhsMap} returns only a SpatialPolygons object;
   for line data, a list with the following component:
   \item{SP}{a SpatialLines object}
 }
@@ -48,6 +56,10 @@ By default, if the rgeos package is available, it is used for topology operation
 gpclibPermit()
 require(gpclib)
 gshhs.c.b <- system.file("share/gshhs_c.b", package="maptools")
+WEx <- c(-12, 3)
+WEy <- c(48, 59)
+WE <- getRgshhsMap(gshhs.c.b, xlim=WEx, ylim=WEy)
+plot(WE, col="khaki", xlim=WEx, ylim=WEy, xaxs="i", yaxs="i", axes=TRUE)
 NZx <- c(160,180)
 NZy <- c(-50,-30)
 NZ <- Rgshhs(gshhs.c.b, xlim=NZx, ylim=NZy)

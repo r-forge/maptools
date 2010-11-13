@@ -43,7 +43,7 @@ export(gpclibPermit, gpclibPermitStatus)
 
 export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
 
-export(Rgshhs)
+export(Rgshhs, getRgshhsMap)
 
 export(CCmaps)
 
