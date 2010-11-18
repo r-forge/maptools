@@ -431,7 +431,7 @@
     jc <- .cent2000JD(jd)
     newt <- .cent2000JD(.julianD2000(jc) + 0.5 + ll[, 1] / 360)
     eqtime <- .eqTime(newt)
-#    solarNoonDec <- .sunDeclination(newt)
+    ## solarNoonDec <- .sunDeclination(newt)
     solNoonUTC <- 720 + (ll[, 1] * 4) - eqtime
     solarnoon <- solNoonUTC + (60 * timezone) + (dlstime * 60)
     solarnoon / 1440
@@ -457,7 +457,7 @@
     timenow <- hh + minutes / 60 + seconds / 3600 + zone
     jd <- .julianD(year, month, day)
     jc <- .cent2000JD(jd + timenow / 24)
-#    earthRadVec <- r <- .sunRadVec(jc)
+    ## earthRadVec <- r <- .sunRadVec(jc)
     solarDec <- .sunDeclination(jc)
     eqtime <- .eqTime(jc)
     solarTimefix <- eqtime - 4 * ll[, 1] + 60 * zone

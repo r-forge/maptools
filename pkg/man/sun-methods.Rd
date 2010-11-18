@@ -42,10 +42,12 @@
          proj4string=CRS("+proj=longlat +datum=WGS84"),
          direction=c("sunrise", "sunset"), POSIXct.out=FALSE)
 \S4method{solarnoon}{SpatialPoints,POSIXct}(crds, dateTime, POSIXct.out=FALSE)
-\S4method{solarnoon}{matrix,POSIXct}(crds, dateTime, proj4string=CRS("+proj=longlat +datum=WGS84"),
+\S4method{solarnoon}{matrix,POSIXct}(crds, dateTime,
+          proj4string=CRS("+proj=longlat +datum=WGS84"),
           POSIXct.out=FALSE)
 \S4method{solarpos}{SpatialPoints,POSIXct}(crds, dateTime, ...)
-\S4method{solarpos}{matrix,POSIXct}(crds, dateTime, proj4string=CRS("+proj=longlat +datum=WGS84"), ...)
+\S4method{solarpos}{matrix,POSIXct}(crds, dateTime,
+         proj4string=CRS("+proj=longlat +datum=WGS84"), ...)
 
 }
 
@@ -75,43 +77,54 @@
 }
 
 
-\details{NOAA used the reference below to develop their Sunrise/Sunset
+\details{
 
-\url{http://www.srrb.noaa.gov/highlights/sunrise/sunrise.html} and Solar
-Position 
+  NOAA used the reference below to develop their Sunrise/Sunset
 
-\url{http://www.srrb.noaa.gov/highlights/sunrise/azel.html}
-Calculators.  The algorithms include corrections for atmospheric
-refraction effects.
+  \url{http://www.srrb.noaa.gov/highlights/sunrise/sunrise.html} and Solar
+  Position 
 
-Input can consist of one location and at least one POSIXct times, or one
-POSIXct time and at least one location.  \var{solarDep} is recycled as
-needed.
+  \url{http://www.srrb.noaa.gov/highlights/sunrise/azel.html}
+  Calculators.  The algorithms include corrections for atmospheric
+  refraction effects.
 
-Do not use the daylight savings time zone string for supplying
-\var{dateTime}, as many OS will not be able to properly set it to
-standard time when needed.}
+  Input can consist of one location and at least one POSIXct times, or one
+  POSIXct time and at least one location.  \var{solarDep} is recycled as
+  needed.
+
+  Do not use the daylight savings time zone string for supplying
+  \var{dateTime}, as many OS will not be able to properly set it to
+  standard time when needed.
+
+}
 
 
 \section{Warning}{Compared to NOAA's original Javascript code, the
-sunrise and sunset estimates from this translation may differ by +/- 1
-minute, based on tests using selected locations spanning the globe.
-This translation does not include calculation of prior or next
-sunrises/sunsets for locations above the Arctic Circle or below the
-Antarctic Circle.}
+  sunrise and sunset estimates from this translation may differ by +/- 1
+  minute, based on tests using selected locations spanning the globe.
+  This translation does not include calculation of prior or next
+  sunrises/sunsets for locations above the Arctic Circle or below the
+  Antarctic Circle.}
 
 
-\value{\code{crepuscule}, \code{sunriset}, and \code{solarnoon} return a
+\value{
+
+  \code{crepuscule}, \code{sunriset}, and \code{solarnoon} return a
   numeric vector with the time of day at which the event occurs,
   expressed as a fraction, if POSIXct.out is FALSE; otherwise they
   return a data frame with both the fraction and the corresponding
-  POSIXct date and time. \code{solarpos} returns a matrix with the solar
-  azimuth (in degrees from North), and elevation.}
+  POSIXct date and time.
+
+  \code{solarpos} returns a matrix with the solar azimuth (in degrees
+  from North), and elevation.
+
+}
 
 
 \note{NOAA notes that \dQuote{for latitudes greater than 72 degrees N
-and S, calculations are accurate to within 10 minutes.  For latitudes
-less than +/- 72 degrees accuracy is approximately one minute.}}
+    and S, calculations are accurate to within 10 minutes.  For
+    latitudes less than +/- 72 degrees accuracy is approximately one
+    minute.}}
 
 
 \references{

@@ -40,6 +40,7 @@ setMethod("crepuscule",
               time.ll <- .timeData(eq.ll$dateTime)
               lon <- eq.ll$crds[, 1]
               lat <- eq.ll$crds[, 2]
+              direction <- match.arg(direction)
               res <- .crepuscule(lon=lon, lat=lat, year=time.ll$year,
                                  month=time.ll$month, day=time.ll$day,
                                  timezone=time.ll$timezone,
@@ -61,6 +62,7 @@ setMethod("crepuscule", signature(crds="matrix", dateTime="POSIXct"),
                    proj4string=CRS("+proj=longlat +datum=WGS84"), solarDep,
                    direction=c("dawn", "dusk"), POSIXct.out=FALSE) {
               crds.sp <- SpatialPoints(crds, proj4string=proj4string)
+              direction <- match.arg(direction)
               crepuscule(crds.sp, dateTime=dateTime, solarDep=solarDep,
                          direction=direction, POSIXct.out=POSIXct.out)
           })
@@ -83,6 +85,7 @@ setMethod("sunriset", signature(crds="SpatialPoints", dateTime="POSIXct"),
               time.ll <- .timeData(eq.ll$dateTime)
               lon <- eq.ll$crds[, 1]
               lat <- eq.ll$crds[, 2]
+              direction <- match.arg(direction)
               res <- .sunriset(lon=lon, lat=lat, year=time.ll$year,
                                month=time.ll$month, day=time.ll$day,
                                timezone=time.ll$timezone,
@@ -104,6 +107,7 @@ setMethod("sunriset", signature(crds="matrix", dateTime="POSIXct"),
                    proj4string=CRS("+proj=longlat +datum=WGS84"),
                    direction=c("sunrise", "sunset"), POSIXct.out=FALSE) {
               crds.sp <- SpatialPoints(crds, proj4string=proj4string)
+              direction <- match.arg(direction)
               sunriset(crds.sp, dateTime=dateTime,
                        direction=direction, POSIXct.out=POSIXct.out)
           })
