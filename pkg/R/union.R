@@ -2,8 +2,8 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE) {
     if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
     rgeosI <- rgeosStatus()
     if (rgeosI && !avoidGEOS) {
-#        require(rgeos)
-#        res <- gUnionCascaded(SpP=SpP, IDs=IDs)
+        require(rgeos)
+        res <- gUnionCascaded(spgeom=SpP, id=IDs)
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)

@@ -9,8 +9,7 @@
               "\trestricted licence. It is disabled by default;\n",
               "\tto enable gpclib, type gpclibPermit()\n"))
     cat("\nChecking rgeos availability as gpclib substitute:\n")
-#    rgeosI <- require(rgeos, quietly = TRUE, warn.conflicts = FALSE)
-    rgeosI <- FALSE
+    rgeosI <- "rgeos" %in% .packages(all = TRUE)
     cat(rgeosI, "\n")
     assign("rgeos", rgeosI, envir=.MAPTOOLS_CACHE)
 }

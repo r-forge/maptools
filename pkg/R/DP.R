@@ -99,13 +99,12 @@ dp_func <- function(points, tolerance) {
 }
 
 
-thinnedSpatialPoly <- function(SP, tolerance, minarea=0) {
+thinnedSpatialPoly <- function(SP, tolerance, minarea=0, topologyPreserve=FALSE, avoidGEOS=FALSE) {
     stopifnot(inherits(SP, "SpatialPolygons"))
     rgeosI <- rgeosStatus()
-    if (rgeosI) {
-#        require(rgeos)
-#        res <- thinnedSpatialPolyGEOS(SP=SP, tolerance=tolerance,
-#            minarea=minarea)
+    if (rgeosI && !avoidGEOS) {
+        require(rgeos)
+        res <- gSimplify(spgeom=SP, tol=tolerance, topologyPreserve=topologyPreserve)
     } else {
       pls <- slot(SP, "polygons")
       pls_dp <- vector(mode="list", length=length(pls))

@@ -1,17 +1,17 @@
 gpclibPermit <- function() {
-    if (require("gpclib", quietly = TRUE, warn.conflicts = FALSE))
+    if ("gpclib" %in% .packages(all = TRUE))
         assign("gpclib", TRUE, envir=.MAPTOOLS_CACHE)
-    get("gpclib", envir=.MAPTOOLS_CACHE)
+    gpclibPermitStatus()
 }
 
 gpclibPermitStatus <- function() get("gpclib", envir=.MAPTOOLS_CACHE)
 
 rgeosStatus <- function() get("rgeos", envir=.MAPTOOLS_CACHE)
 
-checkPolygonsHoles <- function(x) {
-    if (rgeosStatus()) {
-#        require(rgeos)
-#        return(checkPolygonsGEOS(x))
+checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE) {
+    if (rgeosStatus() && !avoidGEOS) {
+        require(rgeos)
+        return(checkPolygonsGEOS(x, properly=properly))
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)
@@ -83,3 +83,60 @@ checkPolygonsHoles <- function(x) {
    	else return(as.integer(-1))
 }
 
+
+checkPolygonsGEOS <- function(obj, properly=TRUE) {
+    if (!is(obj, "Polygons")) 
+        stop("not a Polygons object")
+    comm <- try(createPolygonsComment(obj), silent=TRUE)
+    if (class(comm) != "try-error" &&
+        suppressWarnings(gIsValid(SpatialPolygons(list(obj))))) {
+        comment(obj) <- comm
+        return(obj)
+    }
+    pls <- slot(obj, "Polygons")
+    n <- length(pls)
+    if (n < 1) stop("Polygon list of zero length")
+    uniqs <- rep(TRUE, n)
+    SP <- SpatialPolygons(lapply(1:n, function(i) 
+        Polygons(list(pls[[i]]), ID=i)))
+    for (i in 1:n) {
+        res <- gEquals(SP[i,], SP[uniqs,], byid=TRUE)
+        res[i] <- FALSE
+        if (any(res)) {
+            wres <- which(res)
+            uniqs[wres[wres > i]] <- FALSE
+        }
+    }
+    if (any(!uniqs)) warning(paste("Duplicate Polygon objects dropped:",
+        paste(wres, collapse=" ")))
+    pls <- pls[uniqs]
+    n <- length(pls)
+    if (n < 1) stop("Polygon list of zero length")
+    if (n == 1) {
+        oobj <- Polygons(pls, ID=slot(obj, "ID"))
+        comment(oobj) <- createPolygonsComment(oobj)
+        return(oobj)
+    }
+    areas <- sapply(pls, slot, "area")
+    pls <- pls[order(areas, decreasing=TRUE)]
+    oholes <- sapply(pls, function(x) slot(x, "hole"))
+    holes <- rep(FALSE, n)
+    SP <- SpatialPolygons(lapply(1:n, function(i) 
+        Polygons(list(pls[[i]]), ID=i)))
+    for (i in 1:(n-1)) {
+        if (properly) res <- gContainsProperly(SP[i,], SP[-(1:i),], byid=TRUE)
+        else res <- gContains(SP[i,], SP[-(1:i),], byid=TRUE)
+        wres <- which(res)
+        if (length(wres) > 0) {
+            nres <- as.integer(rownames(res))
+            holes[nres[wres]] <- ! holes[nres[wres]]
+        }
+    }
+    for (i in 1:n) {
+        if (oholes[i] != holes[i])
+        pls[[i]] <- Polygon(slot(pls[[i]], "coords"), hole=holes[i])
+    }
+    oobj <- Polygons(pls, ID=slot(obj, "ID"))
+    comment(oobj) <- createPolygonsComment(oobj)
+    oobj    
+}

@@ -1,7 +1,8 @@
 # Copyright (c) 2005-2010 Roger Bivand and Karl Ove Hufthammer
 
 Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0, 
-	shift=FALSE, verbose=TRUE, no.clip = FALSE) {
+	shift=FALSE, verbose=TRUE, no.clip = FALSE, properly=FALSE,
+        avoidGEOS=FALSE) {
 	if (!is.character(fn)) stop("file name must be character string")
 	if (length(fn) != 1) stop("file name must be single character string")
 	dolim <- FALSE
@@ -25,8 +26,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		minarea, PACKAGE="maptools")
 	else clip <- NULL
         rgeosI <- rgeosStatus()
-        if (rgeosI) {
-#            require(rgeos)
+        if (rgeosI && !avoidGEOS) {
+            require(rgeos)
         } else {
             stopifnot(isTRUE(gpclibPermitStatus()))
 	    require("gpclib")
@@ -59,13 +60,15 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	    ic <- 1
 	    if (verbose) cat("Rgshhs: clipping", sum(clip), "of", 
 		length(polys), "polygons ...\n")
-            if (rgeosI) {
-		limgp <- Polygons(list(Polygon(limbb)), ID="0")
+            if (rgeosI && !avoidGEOS) {
+		limgp <- SpatialPolygons(list(Polygons(list(Polygon(limbb)),
+                    ID="0")))
 		for (i in seq(along=polys)) {
 		    if (clip[i] == 1) {
-                        tp <- Polygons(list(Polygon(polys[[i]])), ID="1")
+                        tp <- SpatialPolygons(list(Polygons(list(Polygon(
+                            polys[[i]])), ID="1")))
                         rp0 <- NULL
-#                        rp0 <- PolygonsIntersections(tp, limgp)
+                        rp0 <- slot(gIntersection(tp, limgp), "polygons")[[1]]
                         rp <- NULL
                         if (!is.null(rp0)) 
                             rp <- lapply(slot(rp0, "Polygons"), slot, "coords")
@@ -121,7 +124,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	chosen_1 <- chosen_0+1
 	if (line == 0) {
 	 levels <- polydata$level[chosen_1]
-         if (rgeosI) {
+         if (rgeosI && !avoidGEOS) {
           ids <- polydata$id[chosen_1]
           containers <- polydata$container[chosen_1]
           ancestors <- polydata$ancestor[chosen_1]
@@ -172,13 +175,13 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			}
 			if (shift) crds[,1] <- ifelse(crds[,1] > 180, 
 			    crds[,1] - 360, crds[,1])
-			jres <- list(Polygon(crds, hole=holes[this]))
+			jres <- list(Polygon(crds))
 			srl <- c(srl, jres)
 		    }
 		}
                 pls0 <- Polygons(srl, ID=IDs[i])
-#		Srl[[i]] <- checkPolygonsGEOS(pls0)
-                Srl[[i]] <- pls0
+		Srl[[i]] <- checkPolygonsGEOS(pls0, properly=properly)
+#                Srl[[i]] <- pls0
 	  }
 	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))
@@ -306,7 +309,9 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 
 # contributed 101018 by Karl Ove Hufthammer
 
-getRgshhsMap = function (fn = system.file("share/gshhs_c.b", package = "maptools"), xlim, ylim, level = 1, shift = TRUE, verbose = TRUE, no.clip = FALSE) 
+getRgshhsMap = function (fn = system.file("share/gshhs_c.b",
+ package = "maptools"), xlim, ylim, level = 1, shift = TRUE,
+ verbose = TRUE, no.clip = FALSE, properly=FALSE, avoidGEOS=FALSE) 
 {
     # First try fetching the map directly, possibly with negative coordinates.
     # Note that some polygons with longitude < 0 use negative coordinates 
@@ -315,14 +320,16 @@ getRgshhsMap = function (fn = system.file("share/gshhs_c.b", package = "maptools
     # (Must use 'try' here, because for example xlim=c(-40,-10)
     # results in an error, while xlim=c(-40,-5) does not.)
     map1 = try(Rgshhs(fn, xlim = xlim, ylim = ylim, shift = shift, 
-                    level = level, verbose=verbose, no.clip = no.clip)$SP)
+                    level = level, verbose=verbose, no.clip = no.clip,
+                    properly=properly, avoidGEOS=avoidGEOS)$SP)
     
     # Now try fetching the same area using positive coordinates.
     xl.west = (xlim + 360)%%360
     if (xl.west[2] < xl.west[1])
         xl.west[2] = 360
     map2 = Rgshhs(fn, xlim = xl.west, ylim = ylim, shift = shift, 
-            level = level, verbose=verbose, no.clip = no.clip)$SP
+            level = level, verbose=verbose, no.clip = no.clip,
+            properly=properly, avoidGEOS=avoidGEOS)$SP
     
     # If there where no polygons with negative coordinates, just
     # use the positive coordinates.
@@ -330,11 +337,11 @@ getRgshhsMap = function (fn = system.file("share/gshhs_c.b", package = "maptools
         map.union = map2 else { # Else merge the two maps into one.
         
         # First store the original polygon IDs in data frames.
-        df1 = data.frame(polyID = row.names(map1))
+        df1 = data.frame(polyID = row.names(map1), stringsAsFactors=FALSE)
         row.names(df1) = df1$polyID
         map1.spdf = SpatialPolygonsDataFrame(map1, df1)
         
-        df2 = data.frame(polyID = row.names(map2))
+        df2 = data.frame(polyID = row.names(map2), stringsAsFactors=FALSE)
         row.names(df2) = df2$polyID
         map2.spdf = SpatialPolygonsDataFrame(map2, df2)
         

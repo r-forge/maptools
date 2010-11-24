@@ -1,7 +1,7 @@
-nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)) {
+nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/2), 2), avoidGEOS=FALSE) {
     rgeosI <- rgeosStatus()
     if (rgeosI) {
-#        require(rgeos)
+        require(rgeos)
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)
@@ -15,7 +15,7 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)
 	if (inout) {
 		pls <- slot(obj, "polygons")
 		Srl <- lapply(pls, .nowrapPolygons, offset=offset, eps=eps,
-                    rgeosI=rgeosI)
+                    rgeosI=rgeosI, avoidGEOS=avoidGEOS)
 		res <- as.SpatialPolygons.PolygonsList(Srl,
 			proj4string=CRS(proj4string(obj)))
 	} else res <- obj
@@ -23,12 +23,20 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)
 }
 
 .nowrapPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2),
-     rgeosI) {
+     rgeosI, avoidGEOS=FALSE) {
 	if (!is(obj, "Polygons")) stop("not an Polygons object")
 	bbo <- bbox(obj)
 	inout <- bbo[1,1] < offset && bbo[1,2] >= offset
 	if (inout) {
-            if (rgeosI) {
+            if (rgeosI && !avoidGEOS) {
+                 comm <- try(createPolygonsComment(obj), silent=TRUE)
+                 isV <- try(gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
+                 if (class(comm) != "try-error" && class(isV) != "try-error" 
+                     && isV) {
+                     comment(obj) <- comm
+                 } else {
+                     stop(paste("invalid Polygons object:", slot(obj, "ID")))
+                 }
                  bb <- bbox(obj)
                  bb <- list(x=bb[1,], y=bb[2,])
                  bbmatW <- matrix(c(rep(bb$x[1], 2), rep(offset-eps[1], 2), 
@@ -37,12 +45,14 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)
                  bbmatE <- matrix(c(rep(offset+eps[2], 2), rep(bb$x[2], 2), 
                      offset+eps[2], bb$y[1], rep(bb$y[2], 2), 
                      rep(bb$y[1], 2)), ncol=2)
-#                 resW <- PolygonsIntersections(obj,
-#                     Polygons(list(Polygon(bbmatW)), ID="W"))
-#                 resE <- PolygonsIntersections(obj,
-#                     Polygons(list(Polygon(bbmatE)), ID="E"))
-#                 res <- Polygons(c(slot(resW, "Polygons"),
-#                     slot(resE, "Polygons")), ID=slot(obj, "ID"))
+                 SPobj <- SpatialPolygons(list(obj))
+                 resW <- gIntersection(SPobj, SpatialPolygons(list(Polygons(
+                     list(Polygon(bbmatW)), ID="W"))))
+                 resE <- gIntersection(SPobj, SpatialPolygons(list(Polygons(
+                     list(Polygon(bbmatE)), ID="E"))))
+                 cparts <- c(slot(slot(resW, "polygons")[[1]], "Polygons"),
+                     slot(slot(resE, "polygons")[[1]], "Polygons"))
+                 res <- Polygons(cparts, ID=slot(obj, "ID"))
             } else {
 		pls <- slot(obj, "Polygons")
 		nParts <- length(pls)
@@ -79,7 +89,7 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)
 	res
 }
 
-nowrapRecenter <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2)) {
-	res <- recenter(nowrapSpatialPolygons(obj, offset=offset, eps=eps))
+nowrapRecenter <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/2), 2), avoidGEOS=FALSE) {
+	res <- recenter(nowrapSpatialPolygons(obj, offset=offset, eps=eps, avoidGEOS=avoidGEOS))
 	res
 }

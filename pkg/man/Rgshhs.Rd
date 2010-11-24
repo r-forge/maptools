@@ -12,9 +12,10 @@ If the data are line data, the borders or river lines will be read into a Spatia
 }
 \usage{
 Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift = FALSE, 
-verbose = TRUE, no.clip = FALSE)
+verbose = TRUE, no.clip = FALSE, properly=FALSE, avoidGEOS=FALSE)
 getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
- xlim, ylim, level = 1, shift = TRUE, verbose = TRUE, no.clip = FALSE)
+ xlim, ylim, level = 1, shift = TRUE, verbose = TRUE, no.clip = FALSE,
+ properly=FALSE, avoidGEOS=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +27,8 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
   \item{shift}{default FALSE, can be used to shift longitudes > 180 degrees to below zero, beware of artefacts involving unhandled polygon splitting at 180 degrees}
   \item{verbose}{default TRUE, print progress reports}
   \item{no.clip}{default FALSE, if TRUE, do not clip output polygons to bounding box}
+  \item{properly}{default FALSE, if TRUE use \code{\link[rgeos]{gContainsProperly}} rather than \code{\link[rgeos]{gContains}}, here FALSE because clip rectangle touches clipped objects, so they are not properly contained}
+  \item{avoidGEOS}{default FALSE; if TRUE force use of \pkg{gpclib} even when \pkg{rgeos} is available}
 }
 
 \details{
@@ -54,7 +57,6 @@ By default, if the rgeos package is available, it is used for topology operation
 
 \examples{
 gpclibPermit()
-require(gpclib)
 gshhs.c.b <- system.file("share/gshhs_c.b", package="maptools")
 WEx <- c(-12, 3)
 WEy <- c(48, 59)
