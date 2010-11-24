@@ -1,5 +1,6 @@
 unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE) {
     if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
+    if (storage.mode(IDs) != "character") IDs <- as.character(IDs)
     rgeosI <- rgeosStatus()
     if (rgeosI && !avoidGEOS) {
         require(rgeos)
