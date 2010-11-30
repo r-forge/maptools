@@ -83,7 +83,7 @@ topology checking is enabled by default. To avoid checking, set
 \code{spatstat.options(checkpolygons=FALSE)} (from spatstat (1.14-6)). 
 To perform the checking later, \code{owinpolycheck(W, verbose=TRUE)}.}
 
-\author{Edzer Pebesma \email{e.pebesma@geo.uu.nl}, Roger Bivand}
+\author{Edzer Pebesma \email{edzer.pebesma@uni-muenster.de}, Roger Bivand}
 \examples{
 library(spatstat)
 data(meuse)

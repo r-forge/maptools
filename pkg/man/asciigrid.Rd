@@ -34,7 +34,7 @@ to write the numeric data }
 }
 \note{In ArcGIS 8, it was not in general necessary to set the \code{dec} argument; it is not necessary in a mixed environment with ArcView 3.2 (R writes and ArcView reads "."), but inter-operation with ArcGIS 9 requires care because the defaults used by ArcGIS seem to be misleading, and it may be necessary to override what appear to be platform defaults by setting the argument.}
 \seealso{ \code{\link[sp]{image}}, \code{\link[graphics]{image}} }
-\author{Edzer J.\ Pebesma, e.pebesma@geo.uu.nl}
+\author{Edzer Pebesma, edzer.pebesma@uni-muenster.de}
 \examples{
 x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
 summary(x)
