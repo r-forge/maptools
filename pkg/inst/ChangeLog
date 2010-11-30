@@ -1,3 +1,24 @@
+2010-11-30 00:10  edzer
+
+	* man/as.ppp.Rd, man/asciigrid.Rd: updated email address
+
+2010-11-24 13:40  rsbivand
+
+	* R/union.R: preparing for rgeos release
+
+2010-11-24 12:32  rsbivand
+
+	* R/union.R, man/unionSpatialPolygons.Rd: preparing for rgeos
+	  release
+
+2010-11-24 09:11  rsbivand
+
+	* ChangeLog: preparing for rgeos release
+
+2010-11-24 09:09  rsbivand
+
+	* inst/ChangeLog: preparing for rgeos release
+
 2010-11-24 09:08  rsbivand
 
 	* DESCRIPTION, R/AAA.R, R/DP.R, R/Rgshhs.R, R/checkHoles.R,
