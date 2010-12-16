@@ -31,7 +31,7 @@ name <- c("Mecca", "Anchorage", "Washington")
 long <- c(39.823333, -149.883333, -77.0166667)
 lat <- c(21.423333, 61.2166667, 38.9)
 x <- cbind(long, lat)
-rownames(x) <- name
+row.names(x) <- name
 crib <- c(-9.098363, 56.575960)
 r1 <- gzAzimuth(x[2:3,], x[1,])
 r1

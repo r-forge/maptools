@@ -24,7 +24,7 @@ readSplus(file, proj4string = CRS(as.character(NA)))
 \examples{
 geobugs <- readSplus(system.file("share/Splus.map", package="maptools"))
 plot(geobugs, axes=TRUE, col=1:3)
-rownames(geobugs)
+row.names(geobugs)
 pls <- slot(geobugs, "polygons")
 sapply(pls, function(i) sapply(slot(i, "Polygons"), slot, "hole"))
 pls1 <- lapply(pls, checkPolygonsHoles)

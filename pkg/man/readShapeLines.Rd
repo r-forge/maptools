@@ -22,7 +22,7 @@ writeLinesShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
 }
-\details{The shpID values of the shapefile will be used as \code{Lines} ID values; when writing shapefiles, the object data slot rownames are added to the DBF file as column SL\_ID.}
+\details{The shpID values of the shapefile will be used as \code{Lines} ID values; when writing shapefiles, the object data slot row.names are added to the DBF file as column SL\_ID.}
 
 \value{
   a SpatialLinesDataFrame object
