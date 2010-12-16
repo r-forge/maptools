@@ -31,6 +31,6 @@ nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
 lps <- coordinates(nc1)
 ID <- cut(lps[,1], quantile(lps[,1]), include.lowest=TRUE)
 reg4 <- unionSpatialPolygons(nc1, ID)
-sapply(slot(reg4, "polygons"), function(i) slot(i, "ID"))
+rownames(reg4)
 }
 \keyword{spatial}

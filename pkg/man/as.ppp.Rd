@@ -127,7 +127,7 @@ all.equal(ho_sp, ho_sp1, check.attributes=FALSE)
 A <- tess(xgrid=0:4,ygrid=0:4)
 A_sp <- as(A, "SpatialPolygons")
 plot(A_sp)
-text(coordinates(A_sp), sapply(slot(A_sp, "polygons"), slot, "ID"), cex=0.6)
+text(coordinates(A_sp), rownames(A_sp), cex=0.6)
 mg_dist <- meuse.grid["dist"]
 fullgrid(mg_dist) <- TRUE
 image(mg_dist, axes=TRUE)
