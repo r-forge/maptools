@@ -175,7 +175,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 /*		    }*/
 		    Level = h.flag & 255;
 		    version = (h.flag >> 8) & 255;
-		    if (version != GSHHS_DATA_RELEASE) 
+		    if (!(version == 7 || version == 8)) 
 			error("Data not same version as software");
 		    greenwich = (h.flag >> 16) & 255;
 		    src = (h.flag >> 24) & 255;

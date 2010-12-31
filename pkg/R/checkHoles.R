@@ -84,12 +84,13 @@ checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE) {
 }
 
 
-checkPolygonsGEOS <- function(obj, properly=TRUE) {
+checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE) {
     if (!is(obj, "Polygons")) 
         stop("not a Polygons object")
     comm <- try(createPolygonsComment(obj), silent=TRUE)
-    if (class(comm) != "try-error" &&
-        suppressWarnings(gIsValid(SpatialPolygons(list(obj))))) {
+#    isVal <- try(gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
+#    if (class(isVal) == "try-error") isVal <- FALSE
+    if (class(comm) != "try-error" && !force) {
         comment(obj) <- comm
         return(obj)
     }
