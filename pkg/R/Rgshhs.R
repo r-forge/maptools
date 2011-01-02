@@ -2,7 +2,7 @@
 
 Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0, 
 	shift=FALSE, verbose=TRUE, no.clip = FALSE, properly=FALSE,
-        avoidGEOS=FALSE) {
+        avoidGEOS=FALSE, checkPolygons=FALSE) {
 	if (!is.character(fn)) stop("file name must be character string")
 	if (length(fn) != 1) stop("file name must be single character string")
 	dolim <- FALSE
@@ -175,19 +175,26 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			}
 			if (shift) crds[,1] <- ifelse(crds[,1] > 180, 
 			    crds[,1] - 360, crds[,1])
-			jres <- list(Polygon(crds))
+			if (checkPolygons) {
+                            jres <- list(Polygon(crds))
+                        } else {
+                            jres <- list(Polygon(crds, hole=holes[this]))
+                        }
 			srl <- c(srl, jres)
 		    }
 		}
                 pls0 <- Polygons(srl, ID=IDs[i])
-		Srl[[i]] <- checkPolygonsGEOS(pls0, properly=properly)
-#                Srl[[i]] <- pls0
+		if (checkPolygons) {
+                    Srl[[i]] <- checkPolygonsGEOS(pls0, properly=properly)
+                } else {
+                    Srl[[i]] <- pls0
+                }
 	  }
 	  res <- as.SpatialPolygons.PolygonsList(Srl, 
 		proj4string=CRS("+proj=longlat +datum=WGS84"))
+          polydata <- data.frame(polydata)[chosen_1,]
 
-	  list(polydata=data.frame(polydata)[chosen_1,], belongs=belongs,
-              SP=res)
+	  return(list(polydata=polydata, belongs=belongs, SP=res))
          } else {
 	  belongs <- matrix(1:length(chosen_1), ncol=1)
 #	  belonged_to <- as.numeric(rep(NA, length(chosen_1)))
@@ -311,7 +318,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 
 getRgshhsMap = function (fn = system.file("share/gshhs_c.b",
  package = "maptools"), xlim, ylim, level = 1, shift = TRUE,
- verbose = TRUE, no.clip = FALSE, properly=FALSE, avoidGEOS=FALSE) 
+ verbose = TRUE, no.clip = FALSE, properly=FALSE, avoidGEOS=FALSE, checkPolygons=FALSE) 
 {
     # First try fetching the map directly, possibly with negative coordinates.
     # Note that some polygons with longitude < 0 use negative coordinates 
@@ -321,7 +328,8 @@ getRgshhsMap = function (fn = system.file("share/gshhs_c.b",
     # results in an error, while xlim=c(-40,-5) does not.)
     map1 = try(Rgshhs(fn, xlim = xlim, ylim = ylim, shift = shift, 
                     level = level, verbose=verbose, no.clip = no.clip,
-                    properly=properly, avoidGEOS=avoidGEOS)$SP)
+                    properly=properly, avoidGEOS=avoidGEOS,
+                    checkPolygons=checkPolygons)$SP)
     
     # Now try fetching the same area using positive coordinates.
     xl.west = (xlim + 360)%%360
@@ -329,7 +337,8 @@ getRgshhsMap = function (fn = system.file("share/gshhs_c.b",
         xl.west[2] = 360
     map2 = Rgshhs(fn, xlim = xl.west, ylim = ylim, shift = shift, 
             level = level, verbose=verbose, no.clip = no.clip,
-            properly=properly, avoidGEOS=avoidGEOS)$SP
+            properly=properly, avoidGEOS=avoidGEOS,
+            checkPolygons=checkPolygons)$SP
     
     # If there where no polygons with negative coordinates, just
     # use the positive coordinates.

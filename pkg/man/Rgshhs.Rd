@@ -12,10 +12,11 @@ If the data are line data, the borders or river lines will be read into a Spatia
 }
 \usage{
 Rgshhs(fn, xlim = NULL, ylim = NULL, level = 4, minarea = 0, shift = FALSE, 
-verbose = TRUE, no.clip = FALSE, properly=FALSE, avoidGEOS=FALSE)
+verbose = TRUE, no.clip = FALSE, properly=FALSE, avoidGEOS=FALSE, 
+checkPolygons=FALSE)
 getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
  xlim, ylim, level = 1, shift = TRUE, verbose = TRUE, no.clip = FALSE,
- properly=FALSE, avoidGEOS=FALSE)
+ properly=FALSE, avoidGEOS=FALSE, checkPolygons=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +30,7 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
   \item{no.clip}{default FALSE, if TRUE, do not clip output polygons to bounding box}
   \item{properly}{default FALSE, if TRUE use \code{\link[rgeos]{gContainsProperly}} rather than \code{\link[rgeos]{gContains}}, here FALSE because clip rectangle touches clipped objects, so they are not properly contained}
   \item{avoidGEOS}{default FALSE; if TRUE force use of \pkg{gpclib} even when \pkg{rgeos} is available}
+  \item{checkPolygons}{default FALSE, if TRUE, check using GEOS, which may re-order the member Polygon objects with respect to the returned polydata data frame rows}
 }
 
 \details{
