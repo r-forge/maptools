@@ -36,9 +36,9 @@
  * DEALINGS IN THE SOFTWARE.
  ******************************************************************************
  *
- * $Log$
- * Revision 1.1  2005/09/01 18:21:44  rsbivand
- * Initial revision
+ * $Log: shapefil.h,v $
+ * Revision 1.1.1.1  2005/09/01 18:21:44  rsbivand
+ * Initial import.
  *
  * Revision 1.14  2005/03/14 15:21:29  fwarmerdam
  * updated

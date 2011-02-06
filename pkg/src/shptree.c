@@ -33,7 +33,7 @@
  * DEALINGS IN THE SOFTWARE.
  ******************************************************************************
  *
- * $Log$
+ * $Log: shptree.c,v $
  * Revision 1.2  2007/11/10 13:17:42  rsbivand
  * assert
  *

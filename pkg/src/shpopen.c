@@ -33,7 +33,7 @@
  * DEALINGS IN THE SOFTWARE.
  ******************************************************************************
  *
- * $Log$
+ * $Log: shpopen.c,v $
  * Revision 1.3  2007/11/16 09:12:40  rsbivand
  * GSHHS to 1.5
  *
