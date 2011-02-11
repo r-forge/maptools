@@ -68,7 +68,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
                         tp <- SpatialPolygons(list(Polygons(list(Polygon(
                             polys[[i]])), ID="1")))
                         rp0 <- NULL
-                        rp0 <- slot(gIntersection(tp, limgp), "polygons")[[1]]
+                        gI <- gIntersection(tp, limgp)
+                        if (!is.null(gI)) rp0 <- slot(gI, "polygons")[[1]]
                         rp <- NULL
                         if (!is.null(rp0)) 
                             rp <- lapply(slot(rp0, "Polygons"), slot, "coords")
