@@ -17,8 +17,8 @@ gcDestination <- function(lon, lat, bearing, dist, dist.units = "km",
     if (!is.numeric(dist)) stop("dist not numeric")
 
     if (length(lon) != length(lat)) stop("lon and lat differ in length")
-    if (length(bearing) > 1 && length(lon) > 1) stop("length mismatch")
-    if (length(bearing) > 1 && length(dist) > 1) stop("length mismatch")
+    if (length(bearing) > 1L && length(lon) > 1L) stop("length mismatch")
+    if (length(bearing) > 1L && length(dist) > 1L) stop("length mismatch")
 
     as.radians <- function(degrees) degrees * pi / 180
     as.degrees <- function(radians) radians * 180 / pi

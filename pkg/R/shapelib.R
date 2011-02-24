@@ -7,7 +7,7 @@
 read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
   filen <- path.expand(filen)
   .Deprecated("", package="maptools", msg="use readShapeSpatial:\nobjects other than Spatial objects defined in the sp package are deprecated")
-  if (length(grep("\\.shp$", tolower(filen))) == 0)
+  if (length(grep("\\.shp$", tolower(filen))) == 0L)
     filen <- paste(filen, "shp", sep=".")
   shinfo <- getinfo.shape(filen)
   if (dbf.data) {
@@ -20,9 +20,9 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
     lsbn <- length(sbn)
     if (lsbn > 1 && tolower(sbn[lsbn]) == "shp") sbn[lsbn] <- "dbf"
     filen1 <- paste(sbn, collapse=".")
-    if (length(grep("\\.dbf$", filen1)) == 0)
+    if (length(grep("\\.dbf$", filen1)) == 0L)
         filen1 <- paste(filen1, "dbf", sep=".")
-    if (length(dn) > 0) {
+    if (length(dn) > 0L) {
         filen1 <- paste(dn, filen1, sep=.Platform$file.sep)
     }
     df <- read.dbf(filen1)
@@ -100,7 +100,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
 .isValidPolylist <- function(polylist, verbose=FALSE) {
   if (!inherits(polylist, "polylist")) stop("not a polylist object")
   res <- TRUE
-  if (length(polylist) < 1) {
+  if (length(polylist) < 1L) {
     if (verbose) cat("zero length polylist\n")
     res <- FALSE
   }
@@ -164,13 +164,13 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
 
 .makePolylistValid <- function(polylist) {
   if (!inherits(polylist, "polylist")) stop("not a polylist object")
-  if (length(polylist) < 1) stop("zero length polylist")
+  if (length(polylist) < 1L) stop("zero length polylist")
   n <- length(polylist)
   if (is.null(attr(polylist, "nDims")) || 
     !is.integer(attr(polylist, "nDims")) || 
     (attr(polylist, "nDims") < 2 || attr(polylist, "nDims") > 3)) {
     nD <- unique(sapply(polylist, function(x) dim(x)[2]))
-    if (length(nD) > 1) stop("multiple dimension polylist components")
+    if (length(nD) > 1L) stop("multiple dimension polylist components")
     nD <- as.integer(nD)
     attr(polylist, "nDims") <- nD
   }
@@ -187,7 +187,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
       if (any(is.na(c(polylist[[i]])))) {
 	xy <- polylist[[i]]
         NAs <- unclass(attr(na.omit(xy), "na.action"))
-	nParts <- length(NAs) + 1
+	nParts <- length(NAs) + 1L
 	from <- integer(nParts)
 	to <- integer(nParts)
 	from[1] <- 1
@@ -229,7 +229,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
       if (any(is.na(c(polylist[[i]])))) {
 	xy <- polylist[[i]]
         NAs <- unclass(attr(na.omit(xy), "na.action"))
-	nParts <- length(NAs) + 1
+	nParts <- length(NAs) + 1L
 	from <- integer(nParts)
 	to <- integer(nParts)
 	from[1] <- 1
@@ -286,7 +286,7 @@ write.polylistShape <- function(polylist, df, file, factor2char=TRUE,
   if (strictFilename && nchar(basename(file)) > 8) 
     stop("shapefile names must conform to the 8.3 format")
   if (!inherits(polylist, "polylist")) stop("not a polylist object")
-  if (length(polylist) < 1) stop("zero length polylist")
+  if (length(polylist) < 1L) stop("zero length polylist")
   if (nrow(df) != length(polylist))
     stop("different number of rows in polylist and data frame")
   if (!.isValidPolylist(polylist)) {
@@ -314,7 +314,7 @@ write.linelistShape <- function(linelist, df, file, factor2char=TRUE,
   file <- paste(dirnm, bnm, sep=.Platform$file.sep)
   if (strictFilename && nchar(basename(file)) > 8) 
     stop("shapefile names must conform to the 8.3 format")
-  if (length(linelist) < 1) stop("zero length linelist")
+  if (length(linelist) < 1L) stop("zero length linelist")
   if (nrow(df) != length(linelist))
     stop("different number of rows in linelist and data frame")
   if (!any(sapply(linelist, function(x) is.integer(attr(x, "nParts"))))) {

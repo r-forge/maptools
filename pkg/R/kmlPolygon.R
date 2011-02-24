@@ -12,7 +12,7 @@ kmlPolygon <- function(obj = NULL, kmlfile = NULL, name = "R Polygon",
     if (class(obj) != "Polygons" && class(obj) != "SpatialPolygonsDataFrame") 
         stop("obj must be of class 'Polygons' or 'SpatialPolygonsDataFrame' [package 'sp']")
     if (class(obj) == "SpatialPolygonsDataFrame") {
-        if (length(obj@polygons) > 1) 
+        if (length(obj@polygons) > 1L) 
             warning(paste("Only the first Polygons object with the ID '", 
               obj@polygons[[1]]@ID, "' is taken from 'obj'", 
               sep = ""))
@@ -79,8 +79,8 @@ kmlPolygon <- function(obj = NULL, kmlfile = NULL, name = "R Polygon",
         # which contains these holes regardingless plotOrder;
         # TODO: rearrange holes according to 'their' polygons automatically via
         # hole.in.which.polygon?
-        holeFlag <- ifelse((i + 1) <= length(obj@Polygons), 
-            obj@Polygons[[i + 1]]@hole, FALSE)
+        holeFlag <- ifelse((i + 1L) <= length(obj@Polygons), 
+            obj@Polygons[[i + 1L]]@hole, FALSE)
         if (!holeFlag) 
             kml <- append(kml, "</Polygon>")
     }

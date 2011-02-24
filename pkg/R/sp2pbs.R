@@ -82,7 +82,7 @@ SpatialLines2PolySet <- function(SL) {
 	p4str <- proj4string(Sobj)
 	if (is.na(p4str)) return("1")
 	res <- grep("longlat", p4str, fixed=TRUE)
-	if (length(res) > 0) return("LL")
+	if (length(res) > 0L) return("LL")
 	res <- regexpr("utm", p4str, fixed=TRUE)
 	if (res > 0) {
 		val <- "UTM"

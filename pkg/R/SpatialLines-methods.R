@@ -26,7 +26,7 @@ writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
         nullParts <- sapply(shp$Shapes, function(x) x$nParts) == 0
         if (delete_null_obj) {
 	    nullParts <- which(nullParts)
-	    if (length(nullParts) > 0) {
+	    if (length(nullParts) > 0L) {
 		for (i in length(nullParts):1)
 	            shp$Shapes[[nullParts[i]]] <- NULL
                 attr(shp$Shapes,'nshps') <- attr(shp$Shapes,'nshps') - 

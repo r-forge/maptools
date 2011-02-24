@@ -14,8 +14,8 @@ readSplus<-function(file, proj4string=CRS(as.character(NA)) )
         xscale <- 1
         yscale <- 1
         scales <- grep("cale", lns[(offset+1):(offset+2)])
-	if (length(scales) > 0) {
-            if (length(scales) < 2) 
+	if (length(scales) > 0L) {
+            if (length(scales) < 2L) 
                 stop("Only one scale given")
             xsc <- grep("x|X", lns[(offset+1):(offset+2)])
             ysc <- grep("y|Y", lns[(offset+1):(offset+2)])

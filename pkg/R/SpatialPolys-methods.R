@@ -30,7 +30,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
         nullParts <- sapply(Map$Shapes, function(x) x$nParts) == 0
         if (delete_null_obj) {
 	    nullParts <- which(nullParts)
-	    if (length(nullParts) > 0) {
+	    if (length(nullParts) > 0L) {
               if (!retrieve_ABS_null) {
 		for (i in length(nullParts):1)
 	            Map$Shapes[[nullParts[i]]] <- NULL
@@ -112,9 +112,9 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
     x <- as.character(x)
     which.nas <- which(is.na(x))
     which.blanks <- which(x == "")
-    if (length(which.blanks) > 0) 
+    if (length(which.blanks) > 0L) 
         x[which.blanks] <- -Inf
-    if (length(which.nas) > 0) 
+    if (length(which.nas) > 0L) 
         x[which.nas] <- Inf
     delimited <- gsub("([+-]{0,1}[0-9.]+([eE][+-]{0,1}[0-9.]+){0,1})", 
         paste(delim, "\\1", delim, sep = ""), x)
@@ -136,7 +136,7 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
     rank.overall <- ifelse(is.na(rank.character), rank.numeric, 
         rank.character)
     order.frame <- as.data.frame(rank.overall)
-    if (length(which.nas) > 0) 
+    if (length(which.nas) > 0L) 
         order.frame[which.nas, ] <- Inf
     retval <- do.call("order", order.frame)
     return(retval)

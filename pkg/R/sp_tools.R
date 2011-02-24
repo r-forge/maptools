@@ -2,7 +2,7 @@ MapGen2SL <- function(file, proj4string=CRS(as.character(NA))) {
 	con <- file(file, "r")
 	hold <- readLines(con)
 	close(con)
-	if (length(hold) == 500000) warning("500,000 point limit reached")
+	if (length(hold) == 500000L) warning("500,000 point limit reached")
 	starts <- which(hold == "# -b")
 	n <- length(starts)
 	if (n < 1) stop("Not a Mapgen format file")
@@ -43,7 +43,7 @@ ArcObj2SLDF <- function(arc, proj4string=CRS(as.character(NA)), IDs) {
 }
 
 ContourLines2SLDF <- function(cL, proj4string=CRS(as.character(NA))) {
-	if (length(cL) < 1) stop("cL too short")
+	if (length(cL) < 1L) stop("cL too short")
 	cLstack <- tapply(1:length(cL), sapply(cL, function(x) x[[1]]), 
 		function(x) x, simplify=FALSE)
 	df <- data.frame(level=names(cLstack))

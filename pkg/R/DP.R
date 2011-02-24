@@ -53,7 +53,7 @@ dp_func <- function(points, tolerance) {
  simplify <- function(start, end, tol=tolerance) {
 
   #Calculate intermediate point distances 
-  if (length(points$x[start:end]) > 2) {
+  if (length(points$x[start:end]) > 2L) {
 
  	#Avoid Inf slope
  	if( points$x[start] ==  points$x[end] )  

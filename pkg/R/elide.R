@@ -10,14 +10,14 @@ if (!isGeneric("elide")) {
 
 elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, flip=FALSE, rotate=0, center=NULL, unitsq=FALSE) {
-  if (length(shift) != 2)
+  if (length(shift) != 2L)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
   if (!is.logical(reflect)) stop("reflect must be logical")
-  if (length(reflect) != 2) stop("Two coordinate reflect required")
+  if (length(reflect) != 2L) stop("Two coordinate reflect required")
   if (!is.logical(flip)) stop("flip must be logical")
   if (!is.numeric(rotate)) stop("rotate not numeric")
-  if (!is.null(center) && length(center) != 2)
+  if (!is.null(center) && length(center) != 2L)
     stop("center must be numeric of length two")
   if (!is.logical(unitsq)) stop("unitsq must be logical")
   crds <- coordinates(obj)
@@ -100,14 +100,14 @@ elideCoords <- function(x, y, xr, yr, reflect, scale, rotate, center) {
 
 elide.lines <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, inverse=FALSE, flip=FALSE, rotate=0, center=NULL) {
-  if (length(shift) != 2)
+  if (length(shift) != 2L)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
   if (!is.logical(reflect)) stop("reflect must be logical")
-  if (length(reflect) != 2) stop("Two coordinate reflect required")
+  if (length(reflect) != 2L) stop("Two coordinate reflect required")
   if (!is.logical(flip)) stop("flip must be logical")
   if (!is.numeric(rotate)) stop("rotate not numeric")
-  if (!is.null(center) && length(center) != 2)
+  if (!is.null(center) && length(center) != 2L)
     stop("center must be numeric of length two")
   if (is.null(bb)) bb <- bbox(obj)
   if (rotate != 0 && is.null(center)) center <- bb[,1]
@@ -158,14 +158,14 @@ setMethod("elide", signature(obj="SpatialLinesDataFrame"), elide.linesdf)
 
 elide.polygons <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, inverse=FALSE, flip=FALSE, rotate=0, center=NULL) {
-  if (length(shift) != 2)
+  if (length(shift) != 2L)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
   if (!is.logical(reflect)) stop("reflect must be logical")
-  if (length(reflect) != 2) stop("Two coordinate reflect required")
+  if (length(reflect) != 2L) stop("Two coordinate reflect required")
   if (!is.logical(flip)) stop("flip must be logical")
   if (!is.numeric(rotate)) stop("rotate not numeric")
-  if (!is.null(center) && length(center) != 2)
+  if (!is.null(center) && length(center) != 2L)
     stop("center must be numeric of length two")
   if (is.null(bb)) bb <- bbox(obj)
   if (rotate != 0 && is.null(center)) center <- bb[,1]

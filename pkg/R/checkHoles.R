@@ -128,7 +128,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE) {
         if (properly) res <- gContainsProperly(SP[i,], SP[-(1:i),], byid=TRUE)
         else res <- gContains(SP[i,], SP[-(1:i),], byid=TRUE)
         wres <- which(res)
-        if (length(wres) > 0) {
+        if (length(wres) > 0L) {
             nres <- as.integer(rownames(res))
             holes[nres[wres]] <- ! holes[nres[wres]]
         }

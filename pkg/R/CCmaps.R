@@ -5,7 +5,7 @@ CCmaps <- function(obj, zcol=NULL, cvar=NULL, cvar.names=NULL,
 	stopifnot(is(obj, "SpatialPolygonsDataFrame")) 
 	stopifnot(!is.null(zcol), !is.null(cvar))
 	n <- length(slot(obj, "polygons"))
-	stopifnot(length(zcol) == 1)
+	stopifnot(length(zcol) == 1L)
 	ncc <- length(cvar)
 	stopifnot(ncc <= 2, ncc > 0)
 	if (is.null(cvar.names)) cvar.names <- names(cvar)

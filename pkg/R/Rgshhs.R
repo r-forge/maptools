@@ -4,7 +4,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	shift=FALSE, verbose=TRUE, no.clip = FALSE, properly=FALSE,
         avoidGEOS=FALSE, checkPolygons=FALSE) {
 	if (!is.character(fn)) stop("file name must be character string")
-	if (length(fn) != 1) stop("file name must be single character string")
+	if (length(fn) != 1L) stop("file name must be single character string")
 	dolim <- FALSE
 	dolim <- (!is.null(xlim) || !is.null(ylim))
 	if (!is.null(xlim)) lim <- xlim
@@ -38,7 +38,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 
 	Antarctica <- which(polydata$area[(chosen_0+1)] > 1.3e+07 & 
 		polydata$area[(chosen_0+1)] < 1.4e+07)
-	if (length(Antarctica) == 1) {
+	if (length(Antarctica) == 1L) {
 		if (verbose) cat("Polygon", which(chosen_0 == (Antarctica-1)), 
 			"is Antarctica\n")
 		if (verbose) cat("  area", polydata$area[Antarctica], "\n")
@@ -133,7 +133,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
           ntl <- as.integer(names(tl))
           mntl <- match(1:4, ntl)
           l1 <- which(levels == 1L)
-          if (length(l1) > 0) {
+          if (length(l1) > 0L) {
               c1 <- which(containers == -1L)
               if (any(l1 != c1)) warning("containers and levels not coherent")
               if (!is.na(mntl[4])) {
@@ -214,8 +214,8 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	    for (il in mlevel:2) {
 		w_il <- which(levels == il)
 		w_il_1 <- which(levels == (il-1))
-		if (length(w_il) > 0) {
-			if (length(w_il_1) == 1) {
+		if (length(w_il) > 0L) {
+			if (length(w_il_1) == 1L) {
 			    belongs[w_il, (il-1)] <- w_il_1
 			    if (!first_time) {
 				prom <- which(!is.na(match(belongs[,il], w_il)))
@@ -228,7 +228,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			    for (i in 1:length(w_il_1)) {
 				ii <- w_il_1[i]
 				lp1 <- as(polys[[ii]][[1]], "gpc.poly")
-				if (length(polys[[ii]]) > 1) {
+				if (length(polys[[ii]]) > 1L) {
 				    for (j in 2:length(polys[[ii]])) {
 					lpj <- as(polys[[ii]][[j]], "gpc.poly")
 					lp1 <- append.poly(lp1, lpj)
@@ -239,7 +239,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 			    for (i in 1:length(w_il)) {
 				ii <- w_il[i]
 				lp1 <- as(polys[[ii]][[1]], "gpc.poly")
-				if (length(polys[[ii]]) > 1) {
+				if (length(polys[[ii]]) > 1L) {
 				    for (j in 2:length(polys[[ii]])) {
 					lpj <- as(polys[[ii]][[j]], "gpc.poly")
 					lp1 <- append.poly(lp1, lpj)
@@ -247,7 +247,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 				}
 				for (j in 1:length(l_1)) {
 				    tp <- gpclib:::intersect(l_1[[j]], lp1)
-				    if (length(tp@pts) > 0) {
+				    if (length(tp@pts) > 0L) {
 					belongs[w_il[i], (il-1)] <- w_il_1[j]
 			    		if (!first_time) {
 					    prom <- which(!is.na(match(

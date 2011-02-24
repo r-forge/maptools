@@ -77,7 +77,7 @@ writeAsciiGrid <- function(x, fname, attr = 1, na.value = -9999,
 		stop("can only write SpatialGridDataFrame objects to asciigrid")
 	x = as(x, "SpatialGridDataFrame")
 	gp = gridparameters(x)
-	if (length(gp$cells.dim) != 2)
+	if (length(gp$cells.dim) != 2L)
 		stop("asciigrid only supports 2D grids")
 #	if (gp$cellsize[1] != gp$cellsize[2])
 	if (diff(gp$cellsize) < .Machine$double.eps ^ 0.5)

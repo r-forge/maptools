@@ -28,7 +28,7 @@ plot.polylist <- function(x, col, border=par("fg"), add=FALSE,
 		}
 	}
 	pO <- attr(x, "plotOrder")
-	if (length(x) < 1) stop("zero length polylist")
+	if (length(x) < 1L) stop("zero length polylist")
 	if (is.null(pO) || length(x) != length(pO)) pO <- 1:length(x)
 	pO <- as.integer(pO)
 	if (length(pO) != length(unique(pO))) stop("malformed plot order")
@@ -350,7 +350,7 @@ Map2poly <- function(Map, region.id=NULL, quiet=TRUE) {
 	attr(res, "plotOrder") <- pO
 
     	nD <- unique(sapply(res, function(x) dim(x)[2]))
-    	if (length(nD) > 1) stop("multiple dimension polylist components")
+    	if (length(nD) > 1L) stop("multiple dimension polylist components")
     	nD <- as.integer(nD)
     	attr(res, "nDims") <- nD
 
@@ -448,7 +448,7 @@ Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
 
 			}
 			rj <- ri[int]
-			if (length(rj) > 0) {
+			if (length(rj) > 0L) {
 				res1[[i]] <- as.integer(rj)
 			}
 		}
@@ -509,7 +509,7 @@ Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
 				jj <- x[[i]][j]
 				hits[j] <- (i %in% x[[jj]])
 			}
-			if (length(which(hits)) > 1) stop("multiple circulars")
+			if (length(which(hits)) > 1L) stop("multiple circulars")
 			pair <- c(i, x[[i]][hits])
 			res <- rbind(res, pair)
 		}			
@@ -566,7 +566,7 @@ Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
 # the gone vector is used to avoid multiple assignments to the plot
 # order list that can happen with circularity
 
-		if (length(ihits) > 0) {
+		if (length(ihits) > 0L) {
 			tihits <- ids[ihits]
 			rtihits <- rle(ids[ids %in%tihits])
 			o <- order(rtihits$lengths)
