@@ -97,11 +97,55 @@ map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA))) {
 		nParts <- length(belongs[[i]])
 		srl <- vector(mode="list", length=nParts)
 		for (j in 1:nParts) {
-			srl[[j]] <- Polygon(coords=xyList[[belongs[[i]][j]]])
+                        crds <- xyList[[belongs[[i]][j]]]
+                        if (nrow(crds) == 3) crds <- rbind(crds, crds[1,])
+			srl[[j]] <- Polygon(coords=crds)
 		}
 		Srl[[i]] <- Polygons(srl, ID=IDss[i])
 	}
 	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4string)
 	res
+}
+
+SpatialPolygons2map <- function(spol) {
+    stopifnot(inherits(spol, "SpatialPolygons"))
+    p4str <- proj4string(spol)
+    if (is.na(p4str)) {
+        warning("no coordinate reference system")
+    } else {
+        if (is.projected(spol)) warning("projected coordinates")
+    }
+    pls <- slot(spol, "polygons")
+    n <- length(pls)
+    names <- NULL
+    range <- c(t(bbox(spol)))
+    x <- NULL
+    y <- NULL
+    for (i in 1:n) {
+        nm <- slot(pls[[i]], "ID")
+        Pls <- slot(pls[[i]], "Polygons")
+        ni <- length(Pls)
+        for (j in 1:ni) {
+            if (ni == 1) {
+                names <- c(names, nm)
+            } else {
+                names <- c(names, paste(nm, j, sep=":"))
+            }
+            crds <- slot(Pls[[j]], "coords")
+            x <- c(x, crds[,1])
+            y <- c(y, crds[,2])
+            if (j < ni) {
+                x <- c(x, as.numeric(NA))
+                y <- c(y, as.numeric(NA))
+            }
+        }
+        if (i < n) {
+            x <- c(x, as.numeric(NA))
+            y <- c(y, as.numeric(NA))
+        }
+    }
+    res <- list(x=x, y=y, range=range, names=names)
+    class(res) <- "map"
+    res
 }
 
