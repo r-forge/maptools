@@ -11,10 +11,6 @@
 kmlPolygon(obj=NULL, kmlfile=NULL, 
     name="R Polygon", description="", col=NULL, visibility=1, lwd=1, border=1,
     kmlname="", kmldescription="")
-x <- kmlPolygon(obj=NULL, 
-    name="R Polygon", description="", col=NULL, visibility=1, lwd=1, border=1,
-    kmlname="", kmldescription="")
-y <- kmlPolygon(kmlname="", kmldescription="")
 }
 
 \arguments{

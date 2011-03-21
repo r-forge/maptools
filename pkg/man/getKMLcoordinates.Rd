@@ -8,7 +8,7 @@
 }
 
 \usage{
-coords <- getKMLcoordinates(kmlfile, ignoreAltitude=FALSE)
+getKMLcoordinates(kmlfile, ignoreAltitude=FALSE)
 }
 
 \arguments{

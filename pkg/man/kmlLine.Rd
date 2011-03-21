@@ -9,10 +9,6 @@
 kmlLine(obj=NULL, kmlfile=NULL, 
     name="R Line", description="", col=NULL, visibility=1, lwd=1,
     kmlname="", kmldescription="")
-x <- kmlLine(obj=NULL,
-    name="R Line", description="", col=NULL, visibility=1, lwd=1,
-    kmlname="", kmldescription="")
-y <- kmlLine(kmlname="", kmldescription="")
 }
 
 \arguments{
