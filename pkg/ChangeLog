@@ -1,3 +1,23 @@
+2011-03-22 22:25  rsbivand
+
+	* data/wrld_simpl.rda:
+	  resave rda files
+
+2011-03-22 22:23  rsbivand
+
+	* data/gpcholes.rda,
+	  data/wrld_simpl.rda: resave rda files
+
+2011-03-22 22:22  rsbivand
+
+	* data/gpcholes.rda,
+	  data/wrld_simpl.rda: resave rda files
+
+2011-03-21 10:12  rsbivand
+
+	* ChangeLog,
+	  inst/ChangeLog: fix 2.13 Rd bugs
+
 2011-03-21 10:06  rsbivand
 
 	* DESCRIPTION,
