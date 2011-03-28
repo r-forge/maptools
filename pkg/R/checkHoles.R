@@ -101,7 +101,12 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE) {
     SP <- SpatialPolygons(lapply(1:n, function(i) 
         Polygons(list(pls[[i]]), ID=i)))
     for (i in 1:n) {
-        res <- gEquals(SP[i,], SP[uniqs,], byid=TRUE)
+        res <- try(gEquals(SP[i,], SP[uniqs,], byid=TRUE), silent=TRUE)
+        if (class(res) == "try-error") {
+            warning("Polygons object ", slot(obj, "ID"), ", Polygon ",
+                i, ": ", res)
+            next
+        }
         res[i] <- FALSE
         if (any(res)) {
             wres <- which(res)
