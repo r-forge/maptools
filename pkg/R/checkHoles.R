@@ -8,10 +8,11 @@ gpclibPermitStatus <- function() get("gpclib", envir=.MAPTOOLS_CACHE)
 
 rgeosStatus <- function() get("rgeos", envir=.MAPTOOLS_CACHE)
 
-checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE) {
+checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
+    useSTRtree=TRUE) {
     if (rgeosStatus() && !avoidGEOS) {
         require(rgeos)
-        return(checkPolygonsGEOS(x, properly=properly))
+        return(checkPolygonsGEOS(x, properly=properly, useSTRtree=useSTRtree))
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
 	require(gpclib)
@@ -84,7 +85,7 @@ checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE) {
 }
 
 
-checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE) {
+checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=TRUE) {
     if (!is(obj, "Polygons")) 
         stop("not a Polygons object")
     comm <- try(createPolygonsComment(obj), silent=TRUE)
@@ -98,6 +99,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE) {
     n <- length(pls)
     if (n < 1) stop("Polygon list of zero length")
     uniqs <- rep(TRUE, n)
+    if (useSTRtree) tree1 <- gUnarySTRtreeQuery(pls)
     SP <- SpatialPolygons(lapply(1:n, function(i) 
         Polygons(list(pls[[i]]), ID=i)))
     for (i in 1:n) {
@@ -127,6 +129,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE) {
     pls <- pls[order(areas, decreasing=TRUE)]
     oholes <- sapply(pls, function(x) slot(x, "hole"))
     holes <- rep(FALSE, n)
+    if (useSTRtree) tree2 <- gUnarySTRtreeQuery(pls)
     SP <- SpatialPolygons(lapply(1:n, function(i) 
         Polygons(list(pls[[i]]), ID=i)))
     for (i in 1:(n-1)) {
