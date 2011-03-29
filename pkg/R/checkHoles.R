@@ -12,6 +12,9 @@ checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
     useSTRtree=TRUE) {
     if (rgeosStatus() && !avoidGEOS) {
         require(rgeos)
+# version check rgeos
+        if (compareVersion(as.character(packageVersion("rgeos")), "0.1-4") < 0)
+            useSTRtree <- FALSE
         return(checkPolygonsGEOS(x, properly=properly, useSTRtree=useSTRtree))
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
