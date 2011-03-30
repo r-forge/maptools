@@ -1,3 +1,23 @@
+2011-03-30 14:48  rsbivand
+
+	* R/checkHoles.R, man/checkPolygonsHoles.Rd: more hole fixing
+
+2011-03-29 12:45  rsbivand
+
+	* R/checkHoles.R: tree holes
+
+2011-03-29 08:24  rsbivand
+
+	* R/checkHoles.R: STRtree in hole check
+
+2011-03-28 13:14  rsbivand
+
+	* DESCRIPTION, R/checkHoles.R: try around gEquals in hole check
+
+2011-03-28 08:25  rsbivand
+
+	* ChangeLog, inst/ChangeLog: add comments to wrld_simpl
+
 2011-03-28 08:24  rsbivand
 
 	* DESCRIPTION, data/wrld_simpl.rda: add comments to wrld_simpl
