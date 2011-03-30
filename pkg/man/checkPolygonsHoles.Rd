@@ -9,7 +9,7 @@
   The function checks holes in Polygons objects. Use of the rgeos package functions is prefered, and if rgeos is available, they will be used automatically. In this case, member Polygon objects are checked against each other for containment, and the returned Polygons object has component hole slots set appropriately. In addition, the output Polygons object may be provided with a comment string, encoding the external and internal rings. For gpclib use, see details below.
 }
 \usage{
-checkPolygonsHoles(x, properly=TRUE, avoidGEOS=FALSE)
+checkPolygonsHoles(x, properly=TRUE, avoidGEOS=FALSE, useSTRtree=FALSE)
 gpclibPermitStatus()
 gpclibPermit()
 rgeosStatus()
@@ -19,6 +19,7 @@ rgeosStatus()
   \item{x}{An Polygons object as defined in package sp}
   \item{properly}{default TRUE, use \code{\link[rgeos]{gContainsProperly}} rather than \code{\link[rgeos]{gContains}}}
   \item{avoidGEOS}{default FALSE; if TRUE force use of \pkg{gpclib} even when \pkg{rgeos} is available}
+  \item{useSTRtree}{default FALSE, if TRUE, use \pkg{rgeos} STRtree in checking holes, which is much faster, but uses a lot of memory and does not release it on completion (work in progress)}
 }
 \details{
 If the gpclib package is used, an intersection between a gpc.poly object with one or more polygon contours and its bounding box is used to set the hole flag. The function will set single polygon contours to hole=FALSE, and if multiple polygon contours are holes, will set them TRUE. The \code{gpclibPermit} function is used to choose to permit the use of gpclib if installed, and \code{gpclibPermitStatus} reports its status. The licence for gpclib is not Free or Open Source and explicitly forbids commercial use. See \code{library(help=gpclib)}.}
