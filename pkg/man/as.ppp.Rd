@@ -66,7 +66,8 @@ as.SpatialGridDataFrame.ppp(from)
 as.SpatialGridDataFrame.im(from)
 as.psp.Line(from, ..., window=NULL, marks=NULL, fatal)
 as.psp.Lines(from, ..., window=NULL, marks=NULL, fatal)
-as.psp.SpatialLines(from, ..., window=NULL, marks=NULL, fatal)
+as.psp.SpatialLines(from, ..., window=NULL, marks=NULL, characterMarks
+                 = FALSE, fatal)
 as.psp.SpatialLinesDataFrame(from, ..., window=NULL, marks=NULL, fatal)
 as.SpatialPolygons.tess(x)
 as.SpatialPolygons.owin(x)
@@ -76,6 +77,7 @@ as.SpatialPolygons.owin(x)
   \item{...}{other arguments to be passed through}
   \item{window}{window as defined in the spatstat package}
   \item{marks}{marks as defined in the spatstat package}
+  \item{characterMarks}{default FALSE, if TRUE, do not convert NULL narks to factor from character}
   \item{fatal}{formal coercion argument}
 }
 \note{When coercing a SpatialPolygons object to an owin object, full 

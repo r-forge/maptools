@@ -120,7 +120,8 @@ as.psp.Lines <- function(from, ..., window=NULL, marks=NULL, fatal) {
 
 setAs("Lines", "psp", function(from) as.psp.Lines(from))
 
-as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL, fatal) {
+as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL,
+                                 characterMarks=FALSE, fatal) {
   if(is.null(window)) {
     w <- from@bbox
     window <- owin(w[1,], w[2,])
@@ -129,8 +130,11 @@ as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL, fatal) {
   y <- lapply(lin, as.psp.Lines, window=window)
   id <- unlist(lapply(lin, function(s) { s@ID }))
   if(is.null(marks))
-    for(i in seq(y)) 
-      marks(y[[i]]) <- id[i]
+    for (i in seq(y)) 
+      marks(y[[i]]) <- if(characterMarks) id[i] else factor(id[i])
+# modified 110401 Rolf Turner
+#    for(i in seq(y)) 
+#      marks(y[[i]]) <- id[i]
   z <- do.call("superimposePSP", list(y, window=window))
   if(!is.null(marks))
     marks(z) <- marks
