@@ -20,7 +20,7 @@
     list(crds=crds, dateTime=dateTime)
 }
 
-###_ crepuscule methods
+###_ + crepuscule methods
 if (!isGeneric("crepuscule")) {
     setGeneric("crepuscule", function(crds, dateTime, ...) {
         standardGeneric("crepuscule")
@@ -67,7 +67,7 @@ setMethod("crepuscule", signature(crds="matrix", dateTime="POSIXct"),
                          direction=direction, POSIXct.out=POSIXct.out)
           })
 
-###_ sunriset methods
+###_ + sunriset methods
 if (!isGeneric("sunriset")) {
     setGeneric("sunriset", function(crds, dateTime, ...) {
         standardGeneric("sunriset")
@@ -112,7 +112,7 @@ setMethod("sunriset", signature(crds="matrix", dateTime="POSIXct"),
                        direction=direction, POSIXct.out=POSIXct.out)
           })
 
-###_ solarnoon methods
+###_ + solarnoon methods
 if (!isGeneric("solarnoon")) {
     setGeneric("solarnoon", function(crds, dateTime, ...) {
         standardGeneric("solarnoon")
@@ -153,7 +153,7 @@ setMethod("solarnoon", signature(crds="matrix", dateTime="POSIXct"),
                         POSIXct.out=POSIXct.out)
           })
 
-###_ solarpos methods
+###_ + solarpos methods
 if (!isGeneric("solarpos")) {
     setGeneric("solarpos", function(crds, dateTime, ...) {
         standardGeneric("solarpos")
@@ -175,7 +175,7 @@ setMethod("solarpos", signature(crds="SpatialPoints", dateTime="POSIXct"),
                                hours=time.ll$hour, minutes=time.ll$min,
                                seconds=time.ll$sec, timezone=time.ll$timezone,
                                dlstime=time.ll$dlstime)
-              matrix(c(azimuth=res[,1], elevation=res[,2]), ncol=2)
+              matrix(c(azimuth=res[, 1], elevation=res[, 2]), ncol=2)
           })
 
 setMethod("solarpos", signature(crds="matrix", dateTime="POSIXct"),
@@ -186,8 +186,7 @@ setMethod("solarpos", signature(crds="matrix", dateTime="POSIXct"),
           })
 
 
-###_* Emacs local variables.
+###_ * Emacs local variables.
 ## Local variables:
-## allout-widgets-mode-inhibit: t
-## allout-layout: (-2 : 0)
+## allout-layout: (+ : 0)
 ## End:
