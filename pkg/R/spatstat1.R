@@ -112,7 +112,11 @@ setAs("Line", "psp", function(from) as.psp.Line(from))
   
 as.psp.Lines <- function(from, ..., window=NULL, marks=NULL, fatal) {
   y <- lapply(from@Lines, as.psp.Line, window=window)
-  z <- superimposePSP(y, window=window)
+  if (as.character(packageVersion("spatstat")) < "1.22.0") {
+    z <- superimposePSP(y, window=window)
+  } else {
+    z <- superimpose(y, window=window)
+  }
   if(!is.null(marks))
     marks(z) <- marks
   return(z)
@@ -135,7 +139,11 @@ as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL,
 # modified 110401 Rolf Turner
 #    for(i in seq(y)) 
 #      marks(y[[i]]) <- id[i]
-  z <- do.call("superimposePSP", list(y, window=window))
+  if (as.character(packageVersion("spatstat")) < "1.22.0") {
+    z <- do.call("superimposePSP", list(y, window=window))
+  } else {
+    z <- do.call("superimpose", list(y, window=window))
+  }
   if(!is.null(marks))
     marks(z) <- marks
   return(z)
