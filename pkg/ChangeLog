@@ -1,3 +1,11 @@
+2011-05-06 06:13  rsbivand
+
+	* DESCRIPTION, R/spatstat1.R, man/as.ppp.Rd: superimpose correction
+
+2011-04-29 06:29  rsbivand
+
+	* ChangeLog, inst/ChangeLog: change superimpose
+
 2011-04-29 06:28  rsbivand
 
 	* DESCRIPTION, R/spatstat1.R: change superimpose
