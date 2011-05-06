@@ -111,6 +111,11 @@ mr <- Line(meuse.riv)
 mr_psp <- as(mr, "psp")
 mr_psp
 plot(mr_psp)
+xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1],
+ proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
+xx_psp <- as(xx, "psp")
+xx_psp
+plot(xx_psp)
 mg_owin <- as(as(meuse.grid["ffreq"], "SpatialPixelsDataFrame"), "owin")
 mg_owin
 ho_sp <- SpatialPolygons(list(Polygons(list(Polygon(cbind(c(0,1,1,0,0),
