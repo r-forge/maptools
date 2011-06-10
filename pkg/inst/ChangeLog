@@ -1,3 +1,13 @@
+2011-06-10 08:02  rsbivand
+
+	* DESCRIPTION:
+	  documenting unionSpatialPolygons change
+
+2011-06-10 08:00  rsbivand
+
+	* ChangeLog,
+	  inst/ChangeLog: documenting unionSpatialPolygons change
+
 2011-06-10 07:58  rsbivand
 
 	* man/unionSpatialPolygons.Rd:
