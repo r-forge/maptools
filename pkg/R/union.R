@@ -1,4 +1,4 @@
-unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, bound=1000L, avoidUnaryUnion=FALSE) {
+unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=FALSE) {
     if (!is(SpP, "SpatialPolygons")) stop("not a SpatialPolygons object")
     if (storage.mode(IDs) != "character") IDs <- as.character(IDs)
     if (missing(IDs)) stop("IDs required")
@@ -8,7 +8,7 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, boun
     if (rgeosI && !avoidGEOS) {
         require(rgeos)
         if (avoidUnaryUnion || version_GEOS0() < "3.3.0")
-            res <- gUnionCascaded(spgeom=SpP, id=IDs, bound=bound)
+            res <- gUnionCascaded(spgeom=SpP, id=IDs)
         else
             res <- gUnaryUnion(spgeom=SpP, id=IDs)
     } else {
