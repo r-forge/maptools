@@ -1,3 +1,13 @@
+2011-06-11 05:37  rsbivand
+
+	* DESCRIPTION,
+	  R/union.R, man/unionSpatialPolygons.Rd: permit NA IDs in union
+
+2011-06-10 08:03  rsbivand
+
+	* ChangeLog,
+	  inst/ChangeLog: documenting unionSpatialPolygons change
+
 2011-06-10 08:02  rsbivand
 
 	* DESCRIPTION:
