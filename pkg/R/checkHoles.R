@@ -6,6 +6,19 @@ gpclibPermit <- function() {
 
 gpclibPermitStatus <- function() get("gpclib", envir=.MAPTOOLS_CACHE)
 
+setRgeosStatus <- function() {
+    rgeosI <- "rgeos" %in% .packages(all = TRUE)
+#    if (rgeosI) {
+#        ldNS <- loadedNamespaces()
+#        if (!("rgeos" %in% ldNS)) {
+#            oo <- try(loadNamespace("rgeos"), silent=TRUE)
+#            if (class(oo) == "try-error") rgeosI <- FALSE
+#            else unloadNamespace("rgeos")
+#        }
+#    }
+    assign("rgeos", rgeosI, envir=.MAPTOOLS_CACHE)
+}
+
 rgeosStatus <- function() get("rgeos", envir=.MAPTOOLS_CACHE)
 
 checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
