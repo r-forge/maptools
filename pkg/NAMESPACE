@@ -39,7 +39,7 @@ export(as.owin.SpatialGridDataFrame, as.owin.SpatialPixelsDataFrame, as.owin.Spa
 
 export(as.psp.SpatialLinesDataFrame, as.psp.SpatialLines, as.psp.Lines, as.psp.Line)
 
-export(gpclibPermit, gpclibPermitStatus)
+export(gpclibPermit, gpclibPermitStatus, rgeosStatus)
 
 export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
 

@@ -26,7 +26,7 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=
 \author{Roger Bivand}
 %\seealso{\code{\link[rgeos]{gUnionCascaded}}}
 \examples{
-gpclibPermit()
+if (!rgeosStatus()) gpclibPermit()
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat +datum=NAD27"))
 lps <- coordinates(nc1)

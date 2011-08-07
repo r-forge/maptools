@@ -58,7 +58,7 @@ By default, if the rgeos package is available, it is used for topology operation
 }
 
 \examples{
-gpclibPermit()
+if (!rgeosStatus()) gpclibPermit()
 gshhs.c.b <- system.file("share/gshhs_c.b", package="maptools")
 WEx <- c(-12, 3)
 WEy <- c(48, 59)
