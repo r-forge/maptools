@@ -1,7 +1,6 @@
 .MAPTOOLS_CACHE <- new.env(FALSE, parent=globalenv())
 
 .onLoad <- function(lib, pkg) {
-    require(sp)
     assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
     Smess <- paste("Checking rgeos availability: ")
     rgeosI <- setRgeosStatus()
