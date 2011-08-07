@@ -1,3 +1,19 @@
+2011-08-07 11:28  rsbivand
+
+	* NAMESPACE,
+	  man/Rgshhs.Rd, man/checkPolygonsHoles.Rd, man/nowrapRecenter.Rd,
+	  man/unionSpatialPolygons.Rd: editing startup message
+
+2011-08-06 14:18  rsbivand
+
+	* DESCRIPTION,
+	  R/AAA.R, R/checkHoles.R: edited startup message
+
+2011-06-11 05:38  rsbivand
+
+	* ChangeLog,
+	  inst/ChangeLog: permit NA IDs in union
+
 2011-06-11 05:37  rsbivand
 
 	* DESCRIPTION,
