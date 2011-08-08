@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read arc shape files into SpatialLinesDataFrame objects}
 \description{
-  The \code{readShapeLines} function reads data from an arc/line shapefile into a \code{SpatialLinesDataFrame} object; the shapefile may be of type polygon, but for just plotting for example coastlines, a SpatialLines object is sufficient. The \code{writeLinesShape} function writes data from a \code{SpatialLinesDataFrame} object to a shapefile.
+  The \code{readShapeLines} function reads data from an arc/line shapefile into a \code{SpatialLinesDataFrame} object; the shapefile may be of type polygon, but for just plotting for example coastlines, a SpatialLines object is sufficient. The \code{writeLinesShape} function writes data from a \code{SpatialLinesDataFrame} object to a shapefile. Note DBF file restrictions in \code{\link[foreign]{write.dbf}}.
 }
 \usage{
 readShapeLines(fn, proj4string=CRS(as.character(NA)), verbose=FALSE,
@@ -29,6 +29,8 @@ writeLinesShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 
 \author{ Roger Bivand }
+
+\seealso{\code{\link[foreign]{write.dbf}}}
 
 
 \examples{

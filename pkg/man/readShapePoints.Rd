@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read points shape files into SpatialPointsDataFrame objects}
 \description{
-  The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile. Both reading and writing can be carried out for 2D and 3D point coordinates.
+  The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile. Both reading and writing can be carried out for 2D and 3D point coordinates. Note DBF file restrictions in \code{\link[foreign]{write.dbf}}.
 }
 \usage{
 readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE,
@@ -27,6 +27,8 @@ writePointsShape(x, fn, factor2char = TRUE, max_nchar=254)
 }
 
 \author{ Roger Bivand }
+
+\seealso{\code{\link[foreign]{write.dbf}}}
 
 \examples{
 library(maptools)

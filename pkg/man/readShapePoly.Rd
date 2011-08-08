@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read polygon shape files into SpatialPolygonsDataFrame objects}
 \description{
-   The \code{readShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{writePolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile.
+   The \code{readShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{writePolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile. Note DBF file restrictions in \code{\link[foreign]{write.dbf}}.
 }
 \usage{
 readShapePoly(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
@@ -34,6 +34,8 @@ null geometries inserted by ABS}
 }
 
 \author{ Roger Bivand }
+
+\seealso{\code{\link[foreign]{write.dbf}}}
 
 \examples{
 library(maptools)

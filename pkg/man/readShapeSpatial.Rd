@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read shape files into Spatial*DataFrame objects}
 \description{
-   The \code{readShapeSpatial} reads data from a shapefile into a \code{Spatial*DataFrame} object. The \code{writeSpatialShape} function writes data from a \code{Spatial*DataFrame} object to a shapefile.
+   The \code{readShapeSpatial} reads data from a shapefile into a \code{Spatial*DataFrame} object. The \code{writeSpatialShape} function writes data from a \code{Spatial*DataFrame} object to a shapefile. Note DBF file restrictions in \code{\link[foreign]{write.dbf}}.
 }
 \usage{
 readShapeSpatial(fn, proj4string=CRS(as.character(NA)), 
@@ -34,6 +34,8 @@ null geometries inserted by ABS (Polygons only)}
 }
 
 \author{ Roger Bivand }
+
+\seealso{\code{\link[foreign]{write.dbf}}}
 
 \examples{
 library(maptools)
