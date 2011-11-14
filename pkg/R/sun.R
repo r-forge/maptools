@@ -267,8 +267,8 @@
     eqtime <- .eqTime(jc)
     solarDec <- .sunDeclination(jc)
     switch(direction,
-           dawn = hourangle <- .hangleSunriset(lat, solarDec, dir="sunrise"),
-           dusk = hourangle <- .hangleSunriset(lat, solarDec, dir="sunset"))
+           dawn = hourangle <- .hangleSunriset(lat, solarDec, direction="sunrise"),
+           dusk = hourangle <- .hangleSunriset(lat, solarDec, direction="sunset"))
     d <- lon - .deg(hourangle)
     tdiff <- 4 * d
     timeUTC <- 720 + tdiff - eqtime
@@ -278,10 +278,10 @@
     switch(direction,
            dawn = {
                hourangle <- .hangleCrepuscule(lat, solarDec, solarDep,
-                                              dir="dawn")},
+                                              direction="dawn")},
            dusk = {
                hourangle <- .hangleCrepuscule(lat, solarDec, solarDep,
-                                              dir="dusk")})
+                                              direction="dusk")})
     d <- lon - .deg(hourangle)
     tdiff <- 4 * d
     720 + tdiff - eqtime
@@ -304,8 +304,8 @@
     eqtime <- .eqTime(jc)
     solarDec <- .sunDeclination(jc)
     switch(direction,
-           sunrise = hourangle <- .hangleSunriset(lat, solarDec, dir="sunrise"),
-           sunset = hourangle <- .hangleSunriset(lat, solarDec, dir="sunset"))
+           sunrise = hourangle <- .hangleSunriset(lat, solarDec, direction="sunrise"),
+           sunset = hourangle <- .hangleSunriset(lat, solarDec, direction="sunset"))
     d <- lon - .deg(hourangle)
     tdiff <- 4 * d
     timeUTC <- 720 + tdiff - eqtime
@@ -313,8 +313,8 @@
     eqtime <- .eqTime(newt)
     solarDec <- .sunDeclination(newt)
     switch(direction,
-           sunrise = hourangle <- .hangleSunriset(lat, solarDec, dir="sunrise"),
-           sunset = hourangle <- .hangleSunriset(lat, solarDec, dir="sunset"))
+           sunrise = hourangle <- .hangleSunriset(lat, solarDec, direction="sunrise"),
+           sunset = hourangle <- .hangleSunriset(lat, solarDec, direction="sunset"))
     d <- lon - .deg(hourangle)
     tdiff <- 4 * d
     720 + tdiff - eqtime
@@ -379,10 +379,10 @@
     switch(direction,
            dawn = {
                risetTimeGMT <- .crepusculeUTC(jd, ll[, 1], ll[, 2], solarDep,
-                                              dir="dawn")},
+                                              direction="dawn")},
            dusk = {
                risetTimeGMT <- .crepusculeUTC(jd, ll[, 1], ll[, 2], solarDep,
-                                              dir="dusk")})
+                                              direction="dusk")})
     risetTimeLST <- risetTimeGMT + (60 * timezone) + (dlstime * 60)
     risetTimeLST / 1440
 }
@@ -406,10 +406,10 @@
     switch(direction,
            sunrise = {
                risetTimeGMT <- .sunrisetUTC(jd, ll[, 1], ll[, 2],
-                                            dir="sunrise")},
+                                            direction="sunrise")},
            sunset = {
                risetTimeGMT <- .sunrisetUTC(jd, ll[, 1], ll[, 2],
-                                            dir="sunset")})
+                                            direction="sunset")})
     risetTimeLST <- risetTimeGMT + (60 * timezone) + (dlstime * 60)
     risetTimeLST / 1440
 }

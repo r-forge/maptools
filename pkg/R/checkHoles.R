@@ -1,5 +1,5 @@
 gpclibPermit <- function() {
-    if ("gpclib" %in% .packages(all = TRUE))
+    if ("gpclib" %in% .packages(all.available = TRUE))
         assign("gpclib", TRUE, envir=.MAPTOOLS_CACHE)
     gpclibPermitStatus()
 }
@@ -7,7 +7,7 @@ gpclibPermit <- function() {
 gpclibPermitStatus <- function() get("gpclib", envir=.MAPTOOLS_CACHE)
 
 setRgeosStatus <- function() {
-    rgeosI <- "rgeos" %in% .packages(all = TRUE)
+    rgeosI <- "rgeos" %in% .packages(all.available = TRUE)
 #    if (rgeosI) {
 #        ldNS <- loadedNamespaces()
 #        if (!("rgeos" %in% ldNS)) {
