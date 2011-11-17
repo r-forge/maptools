@@ -24,6 +24,8 @@
 \alias{coerce,Lines,psp-method}
 \alias{coerce,SpatialLines,psp-method}
 \alias{coerce,SpatialLinesDataFrame,psp-method}
+\alias{as.SpatialLines.psp}
+\alias{coerce,psp,SpatialLines-method}
 \alias{coerce,im,SpatialGridDataFrame-method}
 \alias{coerce,ppp,SpatialGridDataFrame-method}
 \alias{coerce,ppp,SpatialPointsDataFrame-method}
@@ -45,6 +47,7 @@ S4-style as() coercion works between objects of S4 sp classes to spatstat S3 cla
 \item{coerce}{\code{signature(from = "Lines", to = "psp")}}
 \item{coerce}{\code{signature(from = "SpatialLines", to = "psp")}}
 \item{coerce}{\code{signature(from = "SpatialLinesDataFrame", to = "psp")}}
+\item{coerce}{\code{signature(from = "psp", to = "SpatialLines")}}
 \item{coerce}{\code{signature(from = "SpatialGridDataFrame", to = "ppp")}}
 \item{coerce}{\code{signature(from = "SpatialPolygons", to = "owin")}}
 \item{coerce}{\code{signature(from = "SpatialPixelsDataFrame", to = "owin")}}
@@ -69,6 +72,7 @@ as.psp.Lines(from, ..., window=NULL, marks=NULL, fatal)
 as.psp.SpatialLines(from, ..., window=NULL, marks=NULL, characterMarks
                  = FALSE, fatal)
 as.psp.SpatialLinesDataFrame(from, ..., window=NULL, marks=NULL, fatal)
+as.SpatialLines.psp(from)
 as.SpatialPolygons.tess(x)
 as.SpatialPolygons.owin(x)
 }
@@ -111,11 +115,15 @@ mr <- Line(meuse.riv)
 mr_psp <- as(mr, "psp")
 mr_psp
 plot(mr_psp)
+xx_back <- as(mr_psp, "SpatialLines")
+plot(xx_back)
 xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1],
  proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
 xx_psp <- as(xx, "psp")
 xx_psp
 plot(xx_psp)
+xx_back <- as(xx_psp, "SpatialLines")
+plot(xx_back)
 mg_owin <- as(as(meuse.grid["ffreq"], "SpatialPixelsDataFrame"), "owin")
 mg_owin
 ho_sp <- SpatialPolygons(list(Polygons(list(Polygon(cbind(c(0,1,1,0,0),

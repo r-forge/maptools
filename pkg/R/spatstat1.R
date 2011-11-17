@@ -181,4 +181,19 @@ as.psp.SpatialLinesDataFrame <- function(from, ..., window=NULL, marks=NULL, fat
 
 setAs("SpatialLinesDataFrame", "psp", function(from) as.psp.SpatialLinesDataFrame(from))
 
+# 111117 from psp to SpatialLines, Rolf Turner, Adrian Baddeley, Mathieu Rajerison
+
+as.SpatialLines.psp <- function(from) {
+
+     ends2line <- function(x) Line(matrix(x, ncol=2, byrow=TRUE))
+     munch <- function(z) { Lines(ends2line(as.numeric(z[1:4])), ID=z[5]) }
+  
+     ends <- as.data.frame(from)[,1:4]
+     ends[,5] <- row.names(ends)
+     y <- apply(ends, 1, munch)
+     SpatialLines(y)
+}
+
+setAs("psp", "SpatialLines", function(from) as.SpatialLines.psp(from))
+
 
