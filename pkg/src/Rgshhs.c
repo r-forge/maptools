@@ -1,6 +1,6 @@
 /*	$Id$
  *
- *	Copyright (c) 1996-2009 by P. Wessel and W. H. F. Smith
+ *	Copyright (c) 1996-2011 by P. Wessel and W. H. F. Smith
  *	See COPYING file for copying and redistribution conditions.
  *
  * PROGRAM:	gshhs.c
@@ -24,6 +24,10 @@
  *				the polygons ancestor in the full resolution, and
  *				a flag to tell if a lake is a riverlake.
  *				Updated to deal with latest GSHHS database (2.0)
+ *		1.13 15-JUL-2011: Now contains improved area information (2.2.0),
+ *				 and revised greenwhich flags (now 2-bit; see gshhs.h).
+ *				 Also added -A and -G as suggested by José Luis García Pallero,
+ *				 as well as -Qe|i to control river-lake output.
  *
  *	Copyright (c) 1996-2004 by P. Wessel and W. H. F. Smith
  *	See COPYING file for copying and redistribution conditions.
@@ -40,7 +44,7 @@
  *	Contact info: www.soest.hawaii.edu/pwessel */
 
 /*
- * This modification of gshhs.c is Copyright (c) 2005-9 Roger Bivand
+ * This modification of gshhs.c is Copyright (c) 2005-2011 Roger Bivand
  * Modification to swap function taken from Rsystat.c in foreign 071117
 */
 
@@ -78,11 +82,11 @@ int gshhs_between(double x, double low, double up);
 SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea) 
 {
 	FILE *fp;
-	double w, e, s, n, area, lon, lat;
+	double w, e, s, n, area, lon, lat, scale = 10.0;
 	char source;
 	char msg[255];
 	char *name[2] = {"polygon", "line"};
-	int k, line, max_east = 270000000, n_read, /*flip,*/ Level, version, greenwich, src;
+	int k, line, max_east = 270000000, n_read, /*flip,*/ Level, version, greenwich, src, m, river;
 	struct POINT p;
 	struct GSHHS h;
 	int npols, pc=0;
@@ -175,10 +179,11 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 /*		    }*/
 		    Level = h.flag & 255;
 		    version = (h.flag >> 8) & 255;
-		    if (!(version == 7 || version == 8)) 
+		    if (!(version >= 9)) 
 			error("Data not same version as software");
-		    greenwich = (h.flag >> 16) & 255;
-		    src = (h.flag >> 24) & 255;
+		    greenwich = (h.flag >> 16) & 3;			/* Greenwich is 0-3 */
+		    src = (h.flag >> 24) & 1;			/* Greenwich is 0 (WDBII) or 1 (WVS) */
+		    river = (h.flag >> 25) & 1;			/* River is 0 (not river) or 1 (is river) */
 		    w = h.west  * GSHHS_SCL;	
 /* Convert from microdegrees to degrees */
 		    e = h.east  * GSHHS_SCL;
@@ -186,8 +191,9 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		    n = h.north * GSHHS_SCL;
 		    source = (src == 1) ? 'W' : 'C';	/* Either WVS or CIA (WDBII) pedigree */
 		    line = (h.area) ? 0 : 1;		/* Either Polygon (0) or Line (1) (if no area) */
-		    area = 0.1 * h.area;			
-/* Now im km^2 */
+		    m = h.flag >> 26;
+		    scale = pow (10.0, (double)m);		/* Area scale */
+		    area = h.area / scale;				/* Now im km^2 */
 		    INTEGER_POINTER(VECTOR_ELT(res, 0))[i] = (signed int) h.id;
 		    INTEGER_POINTER(VECTOR_ELT(res, 1))[i] = (signed int) h.n;
 		    INTEGER_POINTER(VECTOR_ELT(res, 2))[i] = 

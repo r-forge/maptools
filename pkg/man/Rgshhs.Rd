@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read GSHHS data into sp object}
 \description{
-  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 2.0 of July 15, 2009 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.0.zip}), or release 2.1.0 of July 17, 2010 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.1.0.zip}). 
+  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 2.2.0 of July 15, 2011 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs+wdbii_2.2.0.tbz}). 
 
 The \code{getRgshhsMap} function calls \code{Rgshhs} internally to simplify the interface by returning only a SpatialPolygons object rather than a more complex list, and by calling \code{Rgshhs} twice either side of longitude 0 degrees for values of \dQuote{xlim} straddling 0, then merging the polygons retrieved.
 
