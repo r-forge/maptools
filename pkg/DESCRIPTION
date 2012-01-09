@@ -1,9 +1,9 @@
 Package: maptools
-Version: 0.8-13
-Date: 2012-01-02
+Version: 0.8-14
+Date: 2012-01-09
 Title: Tools for reading and handling spatial objects
 Encoding: latin1
-Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Eric Archer, Adrian Baddeley, Hans-Jörg Bibiko, Stéphane Dray, David Forrest, Michael Friendly, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Karl Ove Hufthammer, Thomas Jagger, Sebastian P. Luque, Don MacQueen, Andrew Niccolai, Tom Short, Greg Snow, Ben Stabler and Rolf Turner
+Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Eric Archer, Adrian Baddeley, Hans-Jörg Bibiko, Jonathan Callahan, Stéphane Dray, David Forrest, Michael Friendly, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Karl Ove Hufthammer, Thomas Jagger, Sebastian P. Luque, Don MacQueen, Andrew Niccolai, Tom Short, Greg Snow, Ben Stabler and Rolf Turner
 Maintainer: Roger Bivand <Roger.Bivand@nhh.no>
 Depends: R (>= 2.10), foreign (>= 0.8), sp (>= 0.9-47), methods, lattice
 Suggests: spatstat (>= 1.18), PBSmapping, maps, rgeos (>= 0.1-8), gpclib, RArcInfo

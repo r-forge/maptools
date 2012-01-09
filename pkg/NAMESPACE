@@ -53,7 +53,7 @@ exportMethods(elide)
 
 export(GE_SpatialGrid, kmlOverlay, Sobj_SpatialGrid)
 
-export(kmlPolygon, kmlLine, getKMLcoordinates)
+export(kmlPolygon, kmlLine, getKMLcoordinates, kmlPoints)
 
 export(pointLabel, gcDestination)
 export(thinnedSpatialPoly)
