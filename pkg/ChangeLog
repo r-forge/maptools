@@ -1,3 +1,21 @@
+2012-01-12 06:50  rsbivand
+
+	* man/SplashDams.Rd: updated source for splash dam data
+
+2012-01-09 19:08  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/kmlPoints.R, data/SplashDams.rda,
+	  man/SplashDams.Rd, man/kmlPoints.Rd: adding kmlPoints
+
+2012-01-02 18:14  rsbivand
+
+	* DESCRIPTION, data/state.vbm.rda, man/state.vbm.Rd: adding
+	  state.vbm
+
+2011-12-19 09:01  rsbivand
+
+	* ChangeLog, inst/ChangeLog: upgrade GSHHS to 2.2.0
+
 2011-12-19 09:00  rsbivand
 
 	* DESCRIPTION, inst/share/gshhs_c.b, inst/share/wdb_borders_c.b,
