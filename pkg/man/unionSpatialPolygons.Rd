@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Aggregate Polygons in a SpatialPolygons object}
 \description{
-  The function aggregates Polygons in a SpatialPolygons object, according to the IDs vector specifying which input Polygons belong to which output Polygons; internal boundaries are dissolved using the gpclib package union() function. If the rgeos package is available, \code{unionSpatialPolygonsGEOS} will be used with partial topology preservation instead of the R implementation here by passing arguments through.
+  The function aggregates Polygons in a SpatialPolygons object, according to the IDs vector specifying which input Polygons belong to which output Polygons; internal boundaries are dissolved using the rgeos package \code{gUnaryUnion} function. If the rgeos package is not available, and if the gpclib package is available and the user confirms that its restrictive license conditions are met, its \code{union} function will be used.
 }
 \usage{
 unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=FALSE)
@@ -24,7 +24,7 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=
 \section{Warning}{When using GEOS Unary Union, it has been found that some polygons are not dissolved correctly when the absolute values of the coordinates are very small. No work-around is available at present.}
 
 \author{Roger Bivand}
-%\seealso{\code{\link[rgeos]{gUnionCascaded}}}
+%\seealso{\code{\link[rgeos]{gUnaryUnion}}}
 \examples{
 if (!rgeosStatus()) gpclibPermit()
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
