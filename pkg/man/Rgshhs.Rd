@@ -20,7 +20,7 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{fn}{filename or full path to GSHHS 2.0 file to be read}
+  \item{fn}{filename or full path to GSHHS 2.2.0 file to be read}
   \item{xlim}{longitude limits within 0-360 in most cases, negative longitudes are also found east of the Atlantic, but the Americas are recorded as positive values}
   \item{ylim}{latitude limits}
   \item{level}{maximum GSHHS level to include, defaults to 4 (everything), setting 1 will only retrieve land, no lakes}
@@ -47,7 +47,7 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
   for line data, a list with the following component:
   \item{SP}{a SpatialLines object}
 }
-\references{\url{http://www.soest.hawaii.edu/pwessel/gshhs/index.html}, \url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs_2.0.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
+\references{\url{http://www.soest.hawaii.edu/pwessel/gshhs/index.html}, \url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs+wdbii_2.2.0.tbz}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
 \author{Roger Bivand}
 
 \note{
