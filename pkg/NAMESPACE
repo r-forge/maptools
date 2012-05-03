@@ -58,6 +58,8 @@ export(kmlPolygon, kmlLine, getKMLcoordinates, kmlPoints)
 export(pointLabel, gcDestination)
 export(thinnedSpatialPoly)
 
+export(snapPointsToLines, nearestPointOnSegment, nearestPointOnLine)
+
 #S3method(plot, Map)
 #S3method(plot, polylist)
 #S3method(subset, polylist)
