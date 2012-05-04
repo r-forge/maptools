@@ -193,7 +193,9 @@ elide.polygons <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
       new_crds <- elideCoords(x=xc, y=yc, xr=xr, yr=yr, 
         reflect=reflect, scale=scale)
       Polygon(new_crds)})
-    Polygons(new_Pls, ID=slot(x, "ID"))})
+    pres <- Polygons(new_Pls, ID=slot(x, "ID"))
+    if (!is.null(comment(x))) comment(pres) <- comment(x)
+    pres})
   res <- SpatialPolygons(new_pls)
   res
 }
