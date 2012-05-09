@@ -4,6 +4,11 @@ getKMLcoordinates <- function(kmlfile, ignoreAltitude = FALSE) {
         stop("kmlfile is missing")
     kml <- paste(readLines(kmlfile, encoding = "UTF-8"), 
         collapse = " ")
+    ## ++ new code Mike Sumner 120509
+    ## remove tabs first
+    kml <- gsub("[[:blank:]]+", " ", kml)
+    ##   
+
     re <- "<coordinates> *([^<]+?) *<\\/coordinates>"
     mtchs <- gregexpr(re, kml)[[1]]
     coords <- list()
