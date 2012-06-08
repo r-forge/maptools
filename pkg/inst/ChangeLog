@@ -1,3 +1,35 @@
+2012-06-08 20:08  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/midpoint.R,
+	  man/SpatialLinesMidPoints.Rd: add line midpoint
+
+2012-05-09 08:12  rsbivand
+
+	* R/getKMLcoordinates.R: blanks in KML input
+
+2012-05-04 08:29  rsbivand
+
+	* R/elide.R: copy comment in elide
+
+2012-05-03 11:09  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/point_line_distance.R,
+	  man/nearestPointOnLine.Rd, man/nearestPointOnSegment.Rd,
+	  man/snapPointsToLines.Rd: adding functions for snapping points to
+	  lines by German Carrillo
+
+2012-02-06 09:13  rsbivand
+
+	* DESCRIPTION, man/Rgshhs.Rd: Rgshhs documentation
+
+2012-01-27 12:29  rsbivand
+
+	* man/unionSpatialPolygons.Rd: fix documentation
+
+2012-01-15 13:15  rsbivand
+
+	* ChangeLog, DESCRIPTION, inst/ChangeLog: tidy
+
 2012-01-12 06:50  rsbivand
 
 	* man/SplashDams.Rd: updated source for splash dam data
