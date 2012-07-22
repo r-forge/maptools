@@ -21,7 +21,7 @@ SpatialLinesMidPoints <- function(sldf) {
   }
   if (is(sldf, "SpatialLinesDataFrame")) {
     df0 <- slot(sldf, "data")[Ind,]
-    df <- cbind(df0, Ind)
+    df <- as.data.frame(cbind(df0, Ind))
   } else df <- data.frame(Ind=Ind)
 # create a SpatialPointsDataFrame
   spdf <- SpatialPointsDataFrame(midpoints, data=df,
