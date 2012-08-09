@@ -69,7 +69,11 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
                             polys[[i]])), ID="1")))
                         rp0 <- NULL
                         gI <- gIntersection(tp, limgp)
-                        if (!is.null(gI)) rp0 <- slot(gI, "polygons")[[1]]
+# bug reported 120809 r-sig-geo.20.trevva
+                        if (!is.null(gI) && is(gI, "SpatialCollections")) 
+                            gI <- slot(gI, "polyobj")
+                        if (!is.null(gI)) 
+                            rp0 <- slot(gI, "polygons")[[1]]
                         rp <- NULL
                         if (!is.null(rp0)) 
                             rp <- lapply(slot(rp0, "Polygons"), slot, "coords")

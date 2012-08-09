@@ -79,6 +79,9 @@ BNLp <- Rgshhs(gshhs.c.b, xlim=BNLx, ylim=BNLy)
 BNLl <- Rgshhs(wdb_lines, xlim=BNLx, ylim=BNLy)
 plot(BNLp$SP, col="khaki", pbg="azure2", xlim=BNLx, ylim=BNLy, xaxs="i", yaxs="i", axes=TRUE)
 lines(BNLl$SP)
+xlims <- c(0,360)
+ylims <- c(-90,90)
+world <- Rgshhs(gshhs.c.b, xlim=xlims, ylim=ylims, level=1, checkPolygons=TRUE)
 }
 \keyword{spatial}
 
