@@ -31,7 +31,7 @@ pruneMap(map, xlim=NULL, ylim=NULL)
 
 \seealso{\code{\link[maps]{map}}}
 \examples{
-library(maps)
+if(require(maps)) {
 nor_coast_poly <- map("world", "norway", fill=TRUE, col="transparent",
  plot=FALSE)
 range(nor_coast_poly$x, na.rm=TRUE)
@@ -54,6 +54,7 @@ nor_coast_lines_sp <- map2SpatialLines(nor_coast_lines,
  proj4string=CRS("+proj=longlat +datum=wgs84"))
 plot(nor_coast_poly_sp, col="grey", axes=TRUE)
 plot(nor_coast_lines_sp, col="blue", add=TRUE)
+}
 }
 \keyword{spatial}
 
