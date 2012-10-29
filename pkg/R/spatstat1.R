@@ -63,10 +63,15 @@ owin2Polygons <- function(x, id="1") {
   stopifnot(is.owin(x))
   x <- as.polygonal(x)
   closering <- function(df) { df[c(seq(nrow(df)), 1), ] }
-  pieces <- lapply(x$bdry,
+  if (x$type == "polygonal") {
+      pieces <- lapply(x$bdry,
                    function(p) {
                      Polygon(coords=closering(cbind(p$x,p$y)),
                              hole=is.hole.xypolygon(p))  })
+  } else if (x$type == "rectangle") {
+      rectCrds <- cbind(x$xrange[c(1,1,2,2,1)], x$yrange[c(1,2,2,1,1)])
+      pieces <- list(Polygon(rectCrds, hole=FALSE))
+  } else stop("owin2Polygons: unknown type:", x$type)
   z <- Polygons(pieces, id)
   return(z)
 }
@@ -77,8 +82,14 @@ as.SpatialPolygons.tess <- function(x) {
   y <- tiles(x)
   nam <- names(y)
   z <- list()
-  for(i in seq(y))
-    z[[i]] <- owin2Polygons(y[[i]], nam[i])
+  for(i in seq(y)) {
+    zi <- try(owin2Polygons(y[[i]], nam[i]), silent=TRUE)
+    if (class(zi) == "try-error") {
+      warning(paste("tile", i, "defective\n", as.character(zi)))
+    } else {
+      z[[i]] <- zi
+    }
+  }
   return(SpatialPolygons(z))
 }
 
