@@ -2,7 +2,9 @@ useDynLib(maptools)
 
 import(sp)
 import(foreign)
+import(grid)
 importFrom(lattice, strip.custom)
+importFrom(stats, smooth.spline)
 
 export(leglabs, dotsInPolys, symbolsInPolys, getinfo.shape, print.shapehead) 
         # plotpolys, shape2poly, shape2lines, 
@@ -59,6 +61,10 @@ export(pointLabel, gcDestination)
 export(thinnedSpatialPoly)
 
 export(snapPointsToLines, nearestPointOnSegment, nearestPointOnLine, SpatialLinesMidPoints)
+
+export(panel.pointLabel, lineLabel)
+
+exportMethods(sp.pointLabel, sp.lineLabel)
 
 #S3method(plot, Map)
 #S3method(plot, polylist)

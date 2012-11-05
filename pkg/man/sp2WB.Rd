@@ -19,7 +19,7 @@ sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
 }
 
 \references{\url{http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/geobugs12manual.pdf}}
-\author{Virgilio Gómez Rubio, partly derived from earlier code by Thomas Jagger}
+\author{Virgilio GÃ³mez Rubio, partly derived from earlier code by Thomas Jagger}
 
 
 \examples{
