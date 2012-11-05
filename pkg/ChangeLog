@@ -1,3 +1,15 @@
+2012-11-05 08:11  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/lineLabel.R, R/pointLabel.R,
+	  R/pointLabelBase.R, R/pointLabelLattice.R, man/lineLabel.Rd,
+	  man/pointLabel.Rd, man/pointLabelBase.Rd,
+	  man/pointLabelLattice.Rd, man/sp2WB.Rd: to UTF-8; adding lattice
+	  pointLabel
+
+2012-11-04 16:04  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2012-10-29 14:39  rsbivand
 
 	* DESCRIPTION, R/spatstat1.R: branching in owin2Polygons on
