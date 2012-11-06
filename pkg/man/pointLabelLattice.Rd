@@ -51,7 +51,7 @@ sp.pointLabel(object, labels, ...)
 
 
 \author{Tom Short wrote \code{\link{pointLabel}} for \code{base}
-  graphics.  Oscar Perpinan Lamigueiro modified this function for
+  graphics.  Oscar Perpiñán Lamigueiro modified this function for
   \code{lattice} and \code{spplot}.}
 
 \seealso{

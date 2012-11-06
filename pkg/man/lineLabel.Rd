@@ -51,7 +51,7 @@ sp.lineLabel(object, labels, ...)
 
 
 \author{
-Oscar Perpinan Lamigueiro.
+Oscar Perpiñán Lamigueiro.
 }
 
 \details{

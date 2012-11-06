@@ -63,7 +63,7 @@ export(thinnedSpatialPoly)
 export(snapPointsToLines, nearestPointOnSegment, nearestPointOnLine, SpatialLinesMidPoints)
 
 export(panel.pointLabel, lineLabel)
-
+S3method("drawDetails", "labels")
 exportMethods(sp.pointLabel, sp.lineLabel)
 
 #S3method(plot, Map)
