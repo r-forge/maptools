@@ -1,3 +1,7 @@
+2012-11-12 09:24  rsbivand
+
+	* ChangeLog, DESCRIPTION, R/CCmaps.R: fix bug in CCmaps
+
 2012-11-06 07:17  rsbivand
 
 	* DESCRIPTION, NAMESPACE, man/lineLabel.Rd,
