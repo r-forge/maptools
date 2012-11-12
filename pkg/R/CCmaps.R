@@ -11,7 +11,8 @@ CCmaps <- function(obj, zcol=NULL, cvar=NULL, cvar.names=NULL,
 	if (is.null(cvar.names)) cvar.names <- names(cvar)
 	nlcc <- integer(ncc)
 	lcc <- vector(mode="list", length=ncc)
-	fcc <- logical(nlcc)
+#	fcc <- logical(nlcc)
+	fcc <- logical(ncc)
 	for (i in 1:ncc) {
 	    ccc <- class(cvar[[i]])
 	    stopifnot(ccc %in% c("factor", "shingle"))
