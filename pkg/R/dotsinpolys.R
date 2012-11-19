@@ -22,7 +22,9 @@ dotsInPolys <- function(pl, x, f="random", offset, compatible=FALSE) {
     }
     for (i in 1:n) {
         if (x[i] > 0) {
-	    ires <- sample.Polygons(pls[[i]], x[i], type=f, offset=offset)
+		#EJP: deprecate sample.Polygons
+	    #ires <- sample.Polygons(pls[[i]], x[i], type=f, offset=offset)
+	    ires <- spsample(pls[[i]], x[i], type=f, offset=offset)
 	    if (!is.null(ires)) res[[i]] <- ires
 	    if (!is.null(res[[i]])) ID_out <- c(ID_out, IDs[i])
 	}
@@ -75,8 +77,9 @@ symbolsInPolys <- function(pl, dens, symb="+", compatible=FALSE) {
     for (i in 1:n) {
 	px <- as.integer(sum(counts[[i]]))
         if (px > 0) {
-            ires <- sample.Polygons(pls[[i]], px, type="regular", 
-		offset=c(0.5,0.5))
+			#EJP: deprecate sample.Polygons:
+            #ires <- sample.Polygons(pls[[i]], px, type="regular", 
+            ires <- spsample(pls[[i]], px, type="regular", offset=c(0.5,0.5))
 	    if (!is.null(ires)) res[[i]] <- ires
 	    if (!is.null(res[[i]])) symb_out <- c(symb_out, symb[i])
 	}
