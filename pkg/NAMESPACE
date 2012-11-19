@@ -64,7 +64,7 @@ export(snapPointsToLines, nearestPointOnSegment, nearestPointOnLine, SpatialLine
 
 export(panel.pointLabel, lineLabel)
 S3method("drawDetails", "labels")
-exportMethods(sp.pointLabel, sp.lineLabel)
+exportMethods(sp.pointLabel, sp.lineLabel, label)
 
 #S3method(plot, Map)
 #S3method(plot, polylist)
