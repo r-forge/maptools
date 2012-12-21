@@ -1,3 +1,25 @@
+2012-11-19 13:29  edzer
+
+	* DESCRIPTION, R/dotsinpolys.R: version bump, added URL
+	  dotsinpolygons: renamed sample.Polygons to spsample, so we can
+	  retire sample.Xxx in sp
+
+2012-11-19 13:00  oscarperpi
+
+	* NAMESPACE: new method "label" for line labels
+
+2012-11-19 12:59  oscarperpi
+
+	* man/lineLabel.Rd: new line labels examples added
+
+2012-11-19 12:59  oscarperpi
+
+	* R/lineLabel.R: line label algorithm improved
+
+2012-11-12 09:25  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2012-11-12 09:24  rsbivand
 
 	* ChangeLog, DESCRIPTION, R/CCmaps.R: fix bug in CCmaps
