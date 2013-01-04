@@ -9,12 +9,14 @@
 \alias{label,SpatialLines-method}
 
 \title{
-Label placement with spplot and lattice.
+Line label placement with spplot and lattice.
 }
-\description{
-     Use optimization routines to find good locations for point labels
-     without overlaps.
-}
+
+\description{ The \code{lineLabel} function produces and draws text
+  grobs following the paths defined by a list of \code{Line}
+  objects. The \code{sp.lineLabel} methods use this function to work
+  easily with \code{spplot}.}
+
 \usage{
 lineLabel(line, label,
           spar=.6, position = c('above', 'below'),
