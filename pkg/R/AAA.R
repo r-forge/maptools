@@ -2,6 +2,9 @@
 
 .onLoad <- function(lib, pkg) {
     assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
+}
+
+.onAttach <- function(lib, pkg) {
     Smess <- paste("Checking rgeos availability: ")
     rgeosI <- setRgeosStatus()
     Smess <- paste(Smess, rgeosI, "\n", sep="")

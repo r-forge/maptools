@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.8-21
-Date: 2012-11-19
+Version: 0.8-22
+Date: 2013-01-16
 Title: Tools for reading and handling spatial objects
 Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Eric Archer, Adrian Baddeley, Hans-Jörg Bibiko, Jonathan Callahan, German Carrillo, Stéphane Dray, David Forrest, Michael Friendly, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Karl Ove Hufthammer, Thomas Jagger, Sebastian P. Luque, Don MacQueen, Andrew Niccolai, Oscar Perpiñán Lamigueiro, Tom Short, Greg Snow, Ben Stabler and Rolf Turner
 Encoding: UTF-8
