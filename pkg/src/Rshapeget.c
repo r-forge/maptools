@@ -21,7 +21,7 @@ SEXP Rshapeget(SEXP shpnm, SEXP repair)
 
 {
     SHPHandle	hSHP;
-    int    nShapeType, nEntities, nImpliedEOF, qRep, i, pc=0;
+    int    nShapeType, nEntities, qRep, i, pc=0;
     double  adfMinBound[4], adfMaxBound[4];
     int j, pz=0, k;
     SHPObject *psShape;

@@ -85,7 +85,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 	double w, e, s, n, area, lon, lat, scale = 10.0;
 	char source;
 	char msg[255];
-	char *name[2] = {"polygon", "line"};
+	const char *name[2] = {"polygon", "line"};
 	int k, line, max_east = 270000000, n_read, /*flip,*/ Level, version, greenwich, src, m, river;
 	struct POINT p;
 	struct GSHHS h;

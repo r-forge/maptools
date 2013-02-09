@@ -9,10 +9,10 @@ SEXP shpwritepolys(SEXP fname, SEXP shapes)
 {
     SHPHandle   hSHP;
     SHPObject   *psShape;
-    int         nShapeType, i, j, k, kk;
+    int         nShapeType = SHPT_POLYGON, i, j, k, kk;
     int		nShapes, maxnParts=0, maxnVerts=0, pc=0, nDims;
     int		*nParts, *nVerts, *panPartStart, *from, *to;
-    double      *padfX, *padfY, *padfZ;
+    double      *padfX, *padfY, *padfZ=NULL;
     SEXP	SnParts, Spstart, SnDims;
 
     PROTECT(SnDims = NEW_CHARACTER(1)); pc++;

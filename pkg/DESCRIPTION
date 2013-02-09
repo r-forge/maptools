@@ -1,10 +1,35 @@
 Package: maptools
-Version: 0.8-22
-Date: 2013-01-16
+Version: 0.8-23
+Date: 2013-02-09
 Title: Tools for reading and handling spatial objects
-Author: Nicholas J. Lewin-Koh and Roger Bivand, contributions by Edzer J. Pebesma, Eric Archer, Adrian Baddeley, Hans-Jörg Bibiko, Jonathan Callahan, German Carrillo, Stéphane Dray, David Forrest, Michael Friendly, Patrick Giraudoux, Duncan Golicher, Virgilio Gómez Rubio, Patrick Hausmann, Karl Ove Hufthammer, Thomas Jagger, Sebastian P. Luque, Don MacQueen, Andrew Niccolai, Oscar Perpiñán Lamigueiro, Tom Short, Greg Snow, Ben Stabler and Rolf Turner
+Authors@R: c(
+	person("Roger", "Bivand", role = c("cre", "aut"), email = "Roger.Bivand@nhh.no"),
+	person("Nicholas", "Lewin-Koh", role = "aut"),
+	person("Edzer", "Pebesma", role = "ctb"),
+	person("Eric", "Archer", role = "ctb"),
+	person("Adrian", "Baddeley", role = "ctb"),
+	person("Hans-Jörg", "Bibiko", role = "ctb"),
+	person("Jonathan", "Callahan", role = "ctb"),
+	person("German", "Carrillo", role = "ctb"),
+	person("Stéphane", "Dray", role = "ctb"),
+	person("David", "Forrest", role = "ctb"),
+	person("Michael", "Friendly", role = "ctb"),
+	person("Patrick", "Giraudoux", role = "ctb"),
+	person("Duncan", "Golicher", role = "ctb"),
+	person("Virgilio", "Gómez Rubio", role = "ctb"),
+	person("Patrick", "Hausmann", role = "ctb"),
+	person("Karl Ove", "Hufthammer", role = "ctb"),
+	person("Thomas", "Jagger", role = "ctb"),
+	person("Sebastian", "Luque", role = "ctb"),
+	person("Don", "MacQueen", role = "ctb"),
+	person("Andrew", "Niccolai", role = "ctb"),
+	person("Oscar", "Perpiñán Lamigueiro", role = "ctb"),
+	person("Tom", "Short", role = "ctb"),
+	person("Greg", "Snow", role = "ctb"),
+	person("Ben", "Stabler", role = "ctb"),
+	person("Murray", "Stokely", role = "ctb"),
+	person("Rolf", "Turner", role = "ctb"))
 Encoding: UTF-8
-Maintainer: Roger Bivand <Roger.Bivand@nhh.no>
 Depends: R (>= 2.10), foreign (>= 0.8), sp (>= 0.9-47), methods, grid, lattice, stats
 Suggests: rgeos (>= 0.1-8), spatstat (>= 1.18), PBSmapping, RColorBrewer
 Enhances: maps, gpclib, RArcInfo
