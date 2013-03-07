@@ -35,5 +35,7 @@ writeSpatialShape  <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	} else if (is(x, "SpatialPointsDataFrame")) {
 	    writePointsShape(x=x, fn=fn, factor2char=factor2char, 
 		max_nchar=max_nchar)
-	}
+	} else {
+            stop("x is a", class(x), "object, not a compatible Spatial*DataFrame")
+        }
 }

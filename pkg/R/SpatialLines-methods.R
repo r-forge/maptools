@@ -7,6 +7,7 @@ readShapeLines <- function(fn, proj4string=CRS(as.character(NA)),
 }
 
 writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
+        stopifnot(is(x, "SpatialLinesDataFrame"))
 	df <- as(x, "data.frame")
 	df <- data.frame(SL_ID=I(row.names(df)), df)
 	pls <- .SpL2lineslist(as(x, "SpatialLines"))

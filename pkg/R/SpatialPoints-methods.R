@@ -22,6 +22,7 @@ readShapePoints <- function(fn, proj4string=CRS(as.character(NA)),
 }
 
 writePointsShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
+        stopifnot(is(x, "SpatialPointsDataFrame"))
 	df <- as(x, "data.frame")
 	coords <- coordinates(x)
 	suppressWarnings(write.pointShape(coordinates=coords, df=df, file=fn,  

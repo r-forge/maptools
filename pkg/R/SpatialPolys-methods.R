@@ -15,7 +15,7 @@ readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
 }
 
 writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
-	stopifnot(class(x) == "SpatialPolygonsDataFrame")
+	stopifnot(is(x, "SpatialPolygonsDataFrame"))
 	df <- as(x, "data.frame")
 	df <- data.frame(SP_ID=I(row.names(df)), df)
 	pls <- .SpP2polylist(as(x, "SpatialPolygons"))
