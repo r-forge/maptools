@@ -153,8 +153,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		SET_VECTOR_ELT(res, 13, NEW_INTEGER(npols));
 
 		fpos =  (signed int) ftell(fp);
-		n_read = fread ((void *)&h, (size_t)sizeof (struct GSHHS), 
-			(size_t)1, fp);
+		n_read = (int) fread ((void *)&h, (size_t)sizeof (struct GSHHS), 		    (size_t)1, fp);
 /*		version = (h.flag >> 8) & 255;
 		flip = (version != GSHHS_DATA_VERSION);	 Take as sign that byte-swabbing is needed */
 /*		flip = (! (h.level > 0 && h.level < 5));	
@@ -212,11 +211,10 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		    INTEGER_POINTER(VECTOR_ELT(res, 12))[i] = (signed int) h.container;
 		    INTEGER_POINTER(VECTOR_ELT(res, 13))[i] = (signed int) h.ancestor;
 
-		    fseek (fp, (long)(h.n * sizeof(struct POINT)), SEEK_CUR);
+		    fseek (fp, (long) (h.n * (int) sizeof(struct POINT)), SEEK_CUR);
 
 		    fpos =  (signed int) ftell(fp);
-		    n_read = fread((void *)&h, (size_t)sizeof (struct GSHHS), 
-			(size_t)1, fp);
+		    n_read = (int) fread((void *)&h, (size_t) sizeof (struct GSHHS), (size_t)1, fp);
 		    i++;
 		}
 
@@ -331,7 +329,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 			if (j > 1) max_east = 180000000;
 			j1 = INTEGER_POINTER(VECTOR_ELT(res, 1))[j];
 			j2 = INTEGER_POINTER(VECTOR_ELT(res, 5))[j];
-			fseek (fp, (long)(sizeof(struct GSHHS) + j2), SEEK_SET);
+			fseek (fp, (long)((int) sizeof(struct GSHHS) + j2), SEEK_SET);
 			SET_VECTOR_ELT(plist, i, allocMatrix(REALSXP, j1, 2));
 			for (k = 0; k < j1; k++) {
 			    if (fread ((void *)&p, 
@@ -370,7 +368,7 @@ int getNpols(FILE *fp) {
 	int n_read/*, flip, version*/;
 	int n;
 
-	n_read = fread ((void *)&h, (size_t)sizeof (struct GSHHS), 
+	n_read = (int) fread ((void *)&h, (size_t)sizeof (struct GSHHS), 
 		(size_t)1, fp);
 /*	version = (h.flag >> 8) & 255;
 	flip = (version != GSHHS_DATA_VERSION);	 Take as sign that byte-swabbing is needed */
@@ -382,8 +380,8 @@ int getNpols(FILE *fp) {
 /*		if (flip) {*/
 			swapb (&h.n, sizeof(int));
 /*		}*/
-		fseek (fp, (long)(h.n * sizeof(struct POINT)), SEEK_CUR);
-		n_read = fread((void *)&h, (size_t)sizeof (struct GSHHS), 
+		fseek (fp, (long)(h.n * (int) sizeof(struct POINT)), SEEK_CUR);
+		n_read = (int) fread((void *)&h, (size_t)sizeof (struct GSHHS), 
 			(size_t)1, fp);
 		n++;
 	}

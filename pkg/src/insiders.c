@@ -17,7 +17,7 @@ SEXP mtInsiders(SEXP n1, SEXP bbs) {
 
 	n = INTEGER_POINTER(n1)[0];
 	PROTECT(ans = NEW_LIST(n)); pc++;
-	yes = (int *) R_alloc((long) n, sizeof(int));
+	yes = (int *) R_alloc((size_t) n, sizeof(int));
 	for (i=0; i < n; i++) {
 		for (j=0; j < n; j++) yes[j] = 0;
 		bbi[0] = NUMERIC_POINTER(bbs)[i];

@@ -200,7 +200,7 @@
 #include <string.h>
 #include <stdio.h>
 
-SHP_CVSID("$Id$")
+//SHP_CVSID("$Id$")
 
 typedef unsigned char uchar;
 
@@ -251,13 +251,13 @@ static void	SwapWord( int length, void * wordP )
 /*      a valid input.                                                  */
 /************************************************************************/
 
-static void * SfRealloc( void * pMem, int nNewSize )
+static void * SfRealloc( void * pMem, size_t nNewSize )
 
 {
     if( pMem == NULL )
-        return( (void *) malloc(nNewSize) );
+        return( (void *) malloc((size_t) nNewSize) );
     else
-        return( (void *) realloc(pMem,nNewSize) );
+        return( (void *) realloc(pMem, (size_t) nNewSize) );
 }
 
 /************************************************************************/
@@ -345,7 +345,7 @@ void SHPWriteHeader( SHPHandle psSHP )
 /* -------------------------------------------------------------------- */
 /*      Prepare, and write .shx file header.                            */
 /* -------------------------------------------------------------------- */
-    i32 = (psSHP->nRecords * 2 * sizeof(int32) + 100)/2;   /* file size */
+    i32 = (psSHP->nRecords * 2 * (int) sizeof(int32) + 100)/2;   /* file size */
     ByteCopy( &i32, abyHeader+24, 4 );
     if( !bBigEndian ) SwapWord( 4, abyHeader+24 );
     
@@ -362,7 +362,7 @@ void SHPWriteHeader( SHPHandle psSHP )
 /* -------------------------------------------------------------------- */
 /*      Write out the .shx contents.                                    */
 /* -------------------------------------------------------------------- */
-    panSHX = (int32 *) malloc(sizeof(int32) * 2 * psSHP->nRecords);
+    panSHX = (int32 *) malloc(sizeof(int32) * (size_t) (2 * psSHP->nRecords));
 
     for( i = 0; i < psSHP->nRecords; i++ )
     {
@@ -372,7 +372,7 @@ void SHPWriteHeader( SHPHandle psSHP )
 	if( !bBigEndian ) SwapWord( 4, panSHX+i*2+1 );
     }
 
-    if( (int)fwrite( panSHX, sizeof(int32)*2, psSHP->nRecords, psSHP->fpSHX ) 
+    if( (int)fwrite( panSHX, sizeof(int32)*2, (size_t) psSHP->nRecords, psSHP->fpSHX ) 
         != psSHP->nRecords )
     {
 #ifdef USE_CPL
@@ -439,9 +439,9 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
 /*	Compute the base (layer) name.  If there is any extension	*/
 /*	on the passed in filename we will strip it off.			*/
 /* -------------------------------------------------------------------- */
-    pszBasename = (char *) malloc(strlen(pszLayer)+5);
+    pszBasename = (char *) malloc((size_t) (strlen(pszLayer)+5));
     strcpy( pszBasename, pszLayer );
-    for( i = strlen(pszBasename)-1; 
+    for( i = (int) strlen(pszBasename)-1; 
 	 i > 0 && pszBasename[i] != '.' && pszBasename[i] != '/'
 	       && pszBasename[i] != '\\';
 	 i-- ) {}
@@ -453,7 +453,7 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
 /*	Open the .shp and .shx files.  Note that files pulled from	*/
 /*	a PC to Unix with upper case filenames won't work!		*/
 /* -------------------------------------------------------------------- */
-    pszFullname = (char *) malloc(strlen(pszBasename) + 5);
+    pszFullname = (char *) malloc((size_t) (strlen(pszBasename) + 5));
     sprintf( pszFullname, "%s.shp", pszBasename );
     psSHP->fpSHP = fopen(pszFullname, pszAccess );
     if( psSHP->fpSHP == NULL )
@@ -503,7 +503,7 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
 /* -------------------------------------------------------------------- */
 /*  Read the file size from the SHP file.				*/
 /* -------------------------------------------------------------------- */
-    pabyBuf = (uchar *) malloc(100);
+    pabyBuf = (uchar *) malloc((size_t) (100));
     fread( pabyBuf, 100, 1, psSHP->fpSHP );
 
     psSHP->nFileSize = (pabyBuf[24] * 256 * 256 * 256
@@ -596,12 +596,12 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
     psSHP->nMaxRecords = psSHP->nRecords;
 
     psSHP->panRecOffset =
-        (int *) malloc(sizeof(int) * MAX(1,psSHP->nMaxRecords) );
+        (int *) malloc(sizeof(int) * (size_t) (MAX(1,psSHP->nMaxRecords)) );
     psSHP->panRecSize =
-        (int *) malloc(sizeof(int) * MAX(1,psSHP->nMaxRecords) );
+        (int *) malloc(sizeof(int) * (size_t) (MAX(1,psSHP->nMaxRecords)) );
 
-    pabyBuf = (uchar *) malloc(8 * MAX(1,psSHP->nRecords) );
-    if( (int) fread( pabyBuf, 8, psSHP->nRecords, psSHP->fpSHX ) 
+    pabyBuf = (uchar *) malloc(8 * (size_t) (MAX(1,psSHP->nRecords)) );
+    if( (int) fread( pabyBuf, 8, (size_t) psSHP->nRecords, psSHP->fpSHX ) 
 			!= psSHP->nRecords )
     {
 #ifdef USE_CPL
@@ -735,9 +735,9 @@ SHPCreate( const char * pszLayer, int nShapeType )
 /*	Compute the base (layer) name.  If there is any extension	*/
 /*	on the passed in filename we will strip it off.			*/
 /* -------------------------------------------------------------------- */
-    pszBasename = (char *) malloc(strlen(pszLayer)+5);
+    pszBasename = (char *) malloc((size_t) (strlen(pszLayer)+5));
     strcpy( pszBasename, pszLayer );
-    for( i = strlen(pszBasename)-1; 
+    for( i = (int) strlen(pszBasename)-1; 
 	 i > 0 && pszBasename[i] != '.' && pszBasename[i] != '/'
 	       && pszBasename[i] != '\\';
 	 i-- ) {}
@@ -748,7 +748,7 @@ SHPCreate( const char * pszLayer, int nShapeType )
 /* -------------------------------------------------------------------- */
 /*      Open the two files so we can write their headers.               */
 /* -------------------------------------------------------------------- */
-    pszFullname = (char *) malloc(strlen(pszBasename) + 5);
+    pszFullname = (char *) malloc((size_t) (strlen(pszBasename) + 5));
     sprintf( pszFullname, "%s.shp", pszBasename );
     fpSHP = fopen(pszFullname, "wb" );
     if( fpSHP == NULL )
@@ -961,9 +961,9 @@ SHPCreateObject( int nSHPType, int nShapeId, int nParts,
         psObject->nParts = MAX(1,nParts);
 
         psObject->panPartStart = (int *)
-            malloc(sizeof(int) * psObject->nParts);
+            malloc(sizeof(int) * (size_t) psObject->nParts);
         psObject->panPartType = (int *)
-            malloc(sizeof(int) * psObject->nParts);
+            malloc(sizeof(int) * (size_t) psObject->nParts);
 
         psObject->panPartStart[0] = 0;
         psObject->panPartType[0] = SHPP_RING;
@@ -997,10 +997,10 @@ SHPCreateObject( int nSHPType, int nShapeId, int nParts,
 /* -------------------------------------------------------------------- */
     if( nVertices > 0 )
     {
-        psObject->padfX = (double *) calloc(sizeof(double),nVertices);
-        psObject->padfY = (double *) calloc(sizeof(double),nVertices);
-        psObject->padfZ = (double *) calloc(sizeof(double),nVertices);
-        psObject->padfM = (double *) calloc(sizeof(double),nVertices);
+        psObject->padfX = (double *) calloc(sizeof(double), (size_t) nVertices);
+        psObject->padfY = (double *) calloc(sizeof(double), (size_t) nVertices);
+        psObject->padfZ = (double *) calloc(sizeof(double), (size_t) nVertices);
+        psObject->padfM = (double *) calloc(sizeof(double), (size_t) nVertices);
 
 /* RSB 071110 */
         if ( !(padfX != NULL) ) error("assert( padfX != NULL ) failed");
@@ -1088,16 +1088,16 @@ SHPWriteObject(SHPHandle psSHP, int nShapeId, SHPObject * psObject )
 	psSHP->nMaxRecords =(int) ( psSHP->nMaxRecords * 1.3 + 100);
 
 	psSHP->panRecOffset = (int *) 
-            SfRealloc(psSHP->panRecOffset,sizeof(int) * psSHP->nMaxRecords );
+            SfRealloc(psSHP->panRecOffset, sizeof(int) * (size_t) psSHP->nMaxRecords );
 	psSHP->panRecSize = (int *) 
-            SfRealloc(psSHP->panRecSize,sizeof(int) * psSHP->nMaxRecords );
+            SfRealloc(psSHP->panRecSize, sizeof(int) * (size_t) psSHP->nMaxRecords );
     }
 
 /* -------------------------------------------------------------------- */
 /*      Initialize record.                                              */
 /* -------------------------------------------------------------------- */
-    pabyRec = (uchar *) malloc(psObject->nVertices * 4 * sizeof(double) 
-			       + psObject->nParts * 8 + 128);
+    pabyRec = (uchar *) malloc((size_t) (psObject->nVertices * 4 * (int) sizeof(double) 
+			       + psObject->nParts * 8 + 128));
     
 /* -------------------------------------------------------------------- */
 /*  Extract vertices for a Polygon or Arc.				*/
@@ -1130,7 +1130,7 @@ SHPWriteObject(SHPHandle psSHP, int nShapeId, SHPObject * psObject )
          * Write part start positions.
          */
 	ByteCopy( psObject->panPartStart, pabyRec + 44 + 8,
-                  4 * psObject->nParts );
+                  (size_t) (4 * psObject->nParts) );
 	for( i = 0; i < psObject->nParts; i++ )
 	{
 	    if( bBigEndian ) SwapWord( 4, pabyRec + 44 + 8 + 4*i );
@@ -1143,7 +1143,7 @@ SHPWriteObject(SHPHandle psSHP, int nShapeId, SHPObject * psObject )
         if( psObject->nSHPType == SHPT_MULTIPATCH )
         {
             memcpy( pabyRec + nRecordSize, psObject->panPartType,
-                    4*psObject->nParts );
+                    (size_t) (4*psObject->nParts) );
             for( i = 0; i < psObject->nParts; i++ )
             {
                 if( bBigEndian ) SwapWord( 4, pabyRec + nRecordSize );
@@ -1368,8 +1368,8 @@ SHPWriteObject(SHPHandle psSHP, int nShapeId, SHPObject * psObject )
 /* -------------------------------------------------------------------- */
 /*      Write out record.                                               */
 /* -------------------------------------------------------------------- */
-    if( fseek( psSHP->fpSHP, nRecordOffset, 0 ) != 0
-        || fwrite( pabyRec, nRecordSize, 1, psSHP->fpSHP ) < 1 )
+    if( fseek( psSHP->fpSHP, (long) nRecordOffset, 0 ) != 0
+        || fwrite( pabyRec, (size_t) nRecordSize, 1, psSHP->fpSHP ) < 1 )
     {
 #ifdef USE_CPL
         CPLError( CE_Failure, CPLE_FileIO, 
@@ -1445,14 +1445,14 @@ SHPReadObject( SHPHandle psSHP, int hEntity )
     if( psSHP->panRecSize[hEntity]+8 > psSHP->nBufSize )
     {
 	psSHP->nBufSize = psSHP->panRecSize[hEntity]+8;
-	psSHP->pabyRec = (uchar *) SfRealloc(psSHP->pabyRec,psSHP->nBufSize);
+	psSHP->pabyRec = (uchar *) SfRealloc(psSHP->pabyRec, (size_t) psSHP->nBufSize);
     }
 
 /* -------------------------------------------------------------------- */
 /*      Read the record.                                                */
 /* -------------------------------------------------------------------- */
     if( fseek( psSHP->fpSHP, psSHP->panRecOffset[hEntity], 0 ) != 0 
-        || fread( psSHP->pabyRec, psSHP->panRecSize[hEntity]+8, 1, 
+        || fread( psSHP->pabyRec, (size_t) psSHP->panRecSize[hEntity]+8, 1, 
                   psSHP->fpSHP ) != 1 )
     {
 #ifdef USE_CPL
@@ -1508,14 +1508,14 @@ SHPReadObject( SHPHandle psSHP, int hEntity )
 	if( bBigEndian ) SwapWord( 4, &nParts );
 
 	psShape->nVertices = nPoints;
-        psShape->padfX = (double *) calloc(nPoints,sizeof(double));
-        psShape->padfY = (double *) calloc(nPoints,sizeof(double));
-        psShape->padfZ = (double *) calloc(nPoints,sizeof(double));
-        psShape->padfM = (double *) calloc(nPoints,sizeof(double));
+        psShape->padfX = (double *) calloc((size_t) nPoints,sizeof(double));
+        psShape->padfY = (double *) calloc((size_t) nPoints,sizeof(double));
+        psShape->padfZ = (double *) calloc((size_t) nPoints,sizeof(double));
+        psShape->padfM = (double *) calloc((size_t) nPoints,sizeof(double));
 
 	psShape->nParts = nParts;
-        psShape->panPartStart = (int *) calloc(nParts,sizeof(int));
-        psShape->panPartType = (int *) calloc(nParts,sizeof(int));
+        psShape->panPartStart = (int *) calloc((size_t) nParts,sizeof(int));
+        psShape->panPartType = (int *) calloc((size_t) nParts,sizeof(int));
 
         for( i = 0; i < nParts; i++ )
             psShape->panPartType[i] = SHPP_RING;
@@ -1523,7 +1523,7 @@ SHPReadObject( SHPHandle psSHP, int hEntity )
 /* -------------------------------------------------------------------- */
 /*      Copy out the part array from the record.                        */
 /* -------------------------------------------------------------------- */
-	memcpy( psShape->panPartStart, psSHP->pabyRec + 44 + 8, 4 * nParts );
+	memcpy( psShape->panPartStart, psSHP->pabyRec + 44 + 8, (size_t) (4 * nParts) );
 	for( i = 0; i < nParts; i++ )
 	{
 	    if( bBigEndian ) SwapWord( 4, psShape->panPartStart+i );
@@ -1536,7 +1536,7 @@ SHPReadObject( SHPHandle psSHP, int hEntity )
 /* -------------------------------------------------------------------- */
         if( psShape->nSHPType == SHPT_MULTIPATCH )
         {
-            memcpy( psShape->panPartType, psSHP->pabyRec + nOffset, 4*nParts );
+            memcpy( psShape->panPartType, psSHP->pabyRec + nOffset, (size_t) (4*nParts) );
             for( i = 0; i < nParts; i++ )
             {
                 if( bBigEndian ) SwapWord( 4, psShape->panPartType+i );
@@ -1625,10 +1625,10 @@ SHPReadObject( SHPHandle psSHP, int hEntity )
 	if( bBigEndian ) SwapWord( 4, &nPoints );
 
 	psShape->nVertices = nPoints;
-        psShape->padfX = (double *) calloc(nPoints,sizeof(double));
-        psShape->padfY = (double *) calloc(nPoints,sizeof(double));
-        psShape->padfZ = (double *) calloc(nPoints,sizeof(double));
-        psShape->padfM = (double *) calloc(nPoints,sizeof(double));
+        psShape->padfX = (double *) calloc((size_t) nPoints,sizeof(double));
+        psShape->padfY = (double *) calloc((size_t) nPoints,sizeof(double));
+        psShape->padfZ = (double *) calloc((size_t) nPoints,sizeof(double));
+        psShape->padfM = (double *) calloc((size_t) nPoints,sizeof(double));
 
 	for( i = 0; i < nPoints; i++ )
 	{

@@ -36,8 +36,8 @@ SEXP shpwritepolys(SEXP fname, SEXP shapes)
     }
 
     nShapes = LENGTH(shapes);
-    nParts = (int *) R_alloc((long) nShapes, sizeof(int));
-    nVerts = (int *) R_alloc((long) nShapes, sizeof(int));
+    nParts = (int *) R_alloc((size_t) nShapes, sizeof(int));
+    nVerts = (int *) R_alloc((size_t) nShapes, sizeof(int));
     PROTECT(SnParts = NEW_CHARACTER(1)); pc++;
     SET_STRING_ELT(SnParts, 0, COPY_TO_USER_STRING("nParts"));
     PROTECT(Spstart = NEW_CHARACTER(1)); pc++;
@@ -50,15 +50,15 @@ SEXP shpwritepolys(SEXP fname, SEXP shapes)
 		    Spstart), 1))[(nParts[i]-1)] - (nParts[i]-1);
       if (nVerts[i] > maxnVerts) maxnVerts = nVerts[i];
     } 
-    panPartStart = (int *) R_alloc((long) maxnParts, sizeof(int));
-    from = (int *) R_alloc((long) maxnParts, sizeof(int));
-    to = (int *) R_alloc((long) maxnParts, sizeof(int));
+    panPartStart = (int *) R_alloc((size_t) maxnParts, sizeof(int));
+    from = (int *) R_alloc((size_t) maxnParts, sizeof(int));
+    to = (int *) R_alloc((size_t) maxnParts, sizeof(int));
     if (maxnVerts > 1000000 || maxnVerts < 1)
       error("Old polylist object cannot be exported");
-    padfX = (double *) R_alloc((long) maxnVerts, sizeof(double));
-    padfY = (double *) R_alloc((long) maxnVerts, sizeof(double)); 
+    padfX = (double *) R_alloc((size_t) maxnVerts, sizeof(double));
+    padfY = (double *) R_alloc((size_t) maxnVerts, sizeof(double)); 
     if (nShapeType == SHPT_POLYGONZ)
-        padfZ = (double *) R_alloc((long) maxnVerts, sizeof(double));
+        padfZ = (double *) R_alloc((size_t) maxnVerts, sizeof(double));
 
     for (i = 0; i < nShapes; i++) {
       kk = 0;
@@ -124,8 +124,8 @@ SEXP shpwritelines(SEXP fname, SEXP shapes)
     }
 
     nShapes = GET_LENGTH(shapes);
-    nParts = (int *) R_alloc((long) nShapes, sizeof(int));
-    nVerts = (int *) R_alloc((long) nShapes, sizeof(int));
+    nParts = (int *) R_alloc((size_t) nShapes, sizeof(int));
+    nVerts = (int *) R_alloc((size_t) nShapes, sizeof(int));
     PROTECT(SnParts = NEW_CHARACTER(1)); pc++;
     SET_STRING_ELT(SnParts, 0, COPY_TO_USER_STRING("nParts"));
     PROTECT(Spstart = NEW_CHARACTER(1)); pc++;
@@ -138,17 +138,17 @@ SEXP shpwritelines(SEXP fname, SEXP shapes)
 		    Spstart), 1))[(nParts[i]-1)] - (nParts[i]-1);
       if (nVerts[i] > maxnVerts) maxnVerts = nVerts[i];
     } 
-    panPartStart = (int *) R_alloc((long) maxnParts, sizeof(int));
-    from = (int *) R_alloc((long) maxnParts, sizeof(int));
-    to = (int *) R_alloc((long) maxnParts, sizeof(int));
+    panPartStart = (int *) R_alloc((size_t) maxnParts, sizeof(int));
+    from = (int *) R_alloc((size_t) maxnParts, sizeof(int));
+    to = (int *) R_alloc((size_t) maxnParts, sizeof(int));
 /*    for (i = 0; i < nShapes; i++) {
       nVerts[i] = INTEGER_POINTER(GET_DIM(VECTOR_ELT(shapes, i)))[0];
       if (nVerts[i] > maxnVerts) maxnVerts = nVerts[i];
     } */
     if (maxnVerts < 1)
       error("list object cannot be exported");
-    padfX = (double *) R_alloc((long) maxnVerts, sizeof(double));
-    padfY = (double *) R_alloc((long) maxnVerts, sizeof(double)); 
+    padfX = (double *) R_alloc((size_t) maxnVerts, sizeof(double));
+    padfY = (double *) R_alloc((size_t) maxnVerts, sizeof(double)); 
 
     for (i = 0; i < nShapes; i++) {
       kk = 0;

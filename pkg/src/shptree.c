@@ -79,7 +79,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-SHP_CVSID("$Id$")
+//SHP_CVSID("$Id$")
 
 #ifndef TRUE
 #  define TRUE 1
@@ -106,13 +106,13 @@ static int bBigEndian = 0;
 /*      a valid input.                                                  */
 /************************************************************************/
 
-static void * SfRealloc( void * pMem, int nNewSize )
+static void * SfRealloc( void * pMem, size_t nNewSize )
 
 {
     if( pMem == NULL )
-        return( (void *) malloc(nNewSize) );
+        return( (void *) malloc((size_t) nNewSize) );
     else
-        return( (void *) realloc(pMem,nNewSize) );
+        return( (void *) realloc(pMem, (size_t) nNewSize) );
 }
 
 /************************************************************************/
@@ -507,14 +507,14 @@ SHPTreeNodeAddShapeId( SHPTreeNode * psTreeNode, SHPObject * psObject,
 
     psTreeNode->panShapeIds = (int *) 
         SfRealloc( psTreeNode->panShapeIds,
-                   sizeof(int) * psTreeNode->nShapeCount );
+                   sizeof(int) * (size_t) psTreeNode->nShapeCount );
     psTreeNode->panShapeIds[psTreeNode->nShapeCount-1] = psObject->nShapeId;
 
     if( psTreeNode->papsShapeObj != NULL )
     {
         psTreeNode->papsShapeObj = (SHPObject **)
             SfRealloc( psTreeNode->papsShapeObj,
-                       sizeof(void *) * psTreeNode->nShapeCount );
+                       sizeof(void *) * (size_t) psTreeNode->nShapeCount );
         psTreeNode->papsShapeObj[psTreeNode->nShapeCount-1] = NULL;
     }
 
@@ -572,7 +572,7 @@ SHPTreeCollectShapeIds( SHPTree *hTree, SHPTreeNode * psTreeNode,
     {
         *pnMaxShapes = (*pnShapeCount + psTreeNode->nShapeCount) * 2 + 20;
         *ppanShapeList = (int *)
-            SfRealloc(*ppanShapeList,sizeof(int) * *pnMaxShapes);
+            SfRealloc(*ppanShapeList,sizeof(int) * (size_t) *pnMaxShapes);
     }
 
 /* -------------------------------------------------------------------- */
@@ -635,7 +635,7 @@ SHPTreeFindLikelyShapes( SHPTree * hTree,
 /*      Sort the id array                                               */
 /* -------------------------------------------------------------------- */
 
-    qsort(panShapeList, *pnShapeCount, sizeof(int), compare_ints);
+    qsort(panShapeList, (size_t) *pnShapeCount, sizeof(int), compare_ints);
 
     return panShapeList;
 }
@@ -721,7 +721,7 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
 
 {
     int i;
-    int offset;
+    size_t offset;
     int numshapes, numsubnodes;
     double adfNodeBoundsMin[2], adfNodeBoundsMax[2];
 
@@ -751,8 +751,8 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
     if( !SHPCheckBoundsOverlap( adfNodeBoundsMin, adfNodeBoundsMax, 
                                 padfBoundsMin, padfBoundsMax, 2 ) )
     {
-        offset += numshapes*sizeof(int) + sizeof(int);
-        fseek(fp, offset, SEEK_CUR);
+        offset += (size_t) numshapes*sizeof(int) + sizeof(int);
+        fseek(fp, (long) offset, SEEK_CUR);
         return TRUE;
     }
 
@@ -765,11 +765,11 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
         {
             *pnBufferMax = (int) ((*pnResultCount + numshapes + 100) * 1.25);
             *ppanResultBuffer = (int *) 
-                SfRealloc( *ppanResultBuffer, *pnBufferMax * sizeof(int) );
+                SfRealloc( *ppanResultBuffer, (size_t) *pnBufferMax * sizeof(int) );
         }
 
         fread( *ppanResultBuffer + *pnResultCount, 
-               sizeof(int), numshapes, fp );
+               sizeof(int), (size_t) numshapes, fp );
 
         if (bNeedSwap )
         {
@@ -852,7 +852,7 @@ SHPSearchDiskTree( FILE *fp,
 /* -------------------------------------------------------------------- */
 /*      Sort the id array                                               */
 /* -------------------------------------------------------------------- */
-    qsort(panResultBuffer, *pnShapeCount, sizeof(int), compare_ints);
+    qsort(panResultBuffer, (size_t) *pnShapeCount, sizeof(int), compare_ints);
     
     return panResultBuffer;
 }
@@ -868,19 +868,19 @@ SHPSearchDiskTree( FILE *fp,
 static int SHPGetSubNodeOffset( SHPTreeNode *node) 
 {
     int i;
-    long offset=0;
+    size_t offset=0;
 
     for(i=0; i<node->nSubNodes; i++ ) 
     {
         if(node->apsSubNode[i]) 
         {
             offset += 4*sizeof(double) 
-                + (node->apsSubNode[i]->nShapeCount+3)*sizeof(int);
-            offset += SHPGetSubNodeOffset(node->apsSubNode[i]);
+                + (size_t) (node->apsSubNode[i]->nShapeCount+3)*sizeof(int);
+            offset += (size_t) SHPGetSubNodeOffset(node->apsSubNode[i]);
         }
     }
 
-    return(offset);
+    return((int) offset);
 }
 
 /************************************************************************/
@@ -897,7 +897,7 @@ static void SHPWriteTreeNode( FILE *fp, SHPTreeNode *node)
   
     pabyRec = (unsigned char *) 
         malloc(sizeof(double) * 4
-               + (3 * sizeof(int)) + (node->nShapeCount * sizeof(int)) );
+               + (3 * sizeof(int)) + ((size_t) node->nShapeCount * sizeof(int)) );
 
     memcpy( pabyRec, &offset, 4);
 
@@ -908,11 +908,11 @@ static void SHPWriteTreeNode( FILE *fp, SHPTreeNode *node)
     memcpy( pabyRec+28, node->adfBoundsMax+1, sizeof(double) );
 
     memcpy( pabyRec+36, &node->nShapeCount, 4);
-    j = node->nShapeCount * sizeof(int);
-    memcpy( pabyRec+40, node->panShapeIds, j);
+    j = node->nShapeCount * (int) sizeof(int);
+    memcpy( pabyRec+40, node->panShapeIds, (size_t) j);
     memcpy( pabyRec+j+40, &node->nSubNodes, 4);
 
-    fwrite( pabyRec, 44+j, 1, fp );
+    fwrite( pabyRec, (size_t) (44+j), 1, fp );
     free (pabyRec);
   
     for(i=0; i<node->nSubNodes; i++ ) 

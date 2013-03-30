@@ -213,7 +213,7 @@ void	RFindCG( int *n, double *x, double *y, double *xc, double *yc,
 	tPointd CG;
 	double Areasum2;
 	nn = n[0];
-	P = (tPointd *) R_alloc(nn, sizeof(tPointd));
+	P = (tPointd *) R_alloc((size_t) nn, sizeof(tPointd));
 	for (i=0; i<nn; i++) {
 		P[i][0] = x[i];
 		P[i][1] = y[i];
