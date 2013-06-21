@@ -7,7 +7,10 @@ Conditioned choropleth maps permit the conditioning of a map of a variable on th
 }
 
 \usage{
-CCmaps(obj, zcol = NULL, cvar = NULL, cvar.names = NULL, ..., names.attr, scales = list(draw = FALSE), xlab = NULL, ylab = NULL, aspect = mapasp(obj, xlim, ylim), sp.layout = NULL, xlim = bbox(obj)[1, ], ylim = bbox(obj)[2, ])
+CCmaps(obj, zcol = NULL, cvar = NULL, cvar.names = NULL, ..., names.attr,
+ scales = list(draw = FALSE), xlab = NULL, ylab = NULL,
+ aspect = mapasp(obj, xlim, ylim), sp.layout = NULL, xlim = bbox(obj)[1, ],
+ ylim = bbox(obj)[2, ])
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

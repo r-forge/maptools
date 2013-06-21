@@ -51,10 +51,12 @@ num <- length(SplashDams)
 td <- tempdir()
 kmlfile <- paste(td, "OregonSplashDams.kml", sep="/")
 kmlname <- "Oregon Splash Dams"
-kmldescription <- "Data for Splash Dams in western Oregon. See http://www.fs.fed.us/pnw/lwm/aem/people/burnett.html#projects_activities for more information."
+kmldescription <- paste("Data for Splash Dams in western Oregon.",
+ "See http://www.fs.fed.us/pnw/lwm/aem/people/burnett.html#projects_activities",
+ "for more information.")
 icon <- "http://google.com/mapfiles/kml/paddle/wht-diamond.png"
 name <- paste("Dam on",SplashDams$streamName)
-description <- paste("<b>owner:</b>",SplashDams$owner,"<br><b>dates:</b>",SplashDams$datesUsed)
+description <- paste("<b>owner:</b>", SplashDams$owner, "<br><b>dates:</b>", SplashDams$datesUsed)
 
 kmlPoints(SplashDams, kmlfile=kmlfile, name=name, description=description,
           icon=icon, kmlname=kmlname, kmldescription=kmldescription)

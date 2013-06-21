@@ -64,17 +64,17 @@ data(wrld_simpl)
 ## create a KML file containing the polygons of Brazil, Uganda, and Canada
 regions <- c("Brazil","Canada","Uganda")
 wrld_simpl_subset <- wrld_simpl[wrld_simpl$NAME \%in\% regions,]
-kmlPolygons(wrld_simpl_subset, kmlfile = "worldPoliticalSubset.kml", name = "KML Polygons subset", 
-         description = "three countries", col = "blue", 
-         visibility = 1, lwd = 1, border = "white", kmlname = "R Test 2", 
-         kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+kmlPolygons(wrld_simpl_subset, kmlfile = "worldPoliticalSubset.kml",
+ name = "KML Polygons subset", description = "three countries", col = "blue", 
+ visibility = 1, lwd = 1, border = "white", kmlname = "R Test 2", 
+ kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
 ## combine to make a list of polygon objects to plot
 polList <- c(regions,wrld_simpl)
-kmlPolygons(wrld_simpl_subset, kmlfile = "worldPoliticalandSubset.kml", name = "KML Polygons subset", 
-         description = "three countries highlighted in world", 
-         col = sample(colours(), length(polList)), visibility = 1, lwd = 1, border = "white", 
-         kmlname = "R Test 2", 
-         kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+kmlPolygons(wrld_simpl_subset, kmlfile = "worldPoliticalandSubset.kml",
+ name = "KML Polygons subset", description = "three countries highlighted in world", 
+ col = sample(colours(), length(polList)), visibility = 1, lwd = 1, border = "white", 
+ kmlname = "R Test 2", 
+ kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
 
 }
 

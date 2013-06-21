@@ -167,6 +167,7 @@ day_length <- down$time - up$time
 plot(Hels_seq, day_length, type="l")
 
 ## Using a grid of spatial points for the same point in time
+\dontrun{
 grd <- GridTopology(c(-179,-89), c(1,1), c(359,179))
 SP <- SpatialPoints(coordinates(grd),
                     proj4string=CRS("+proj=longlat +datum=WGS84"))
@@ -176,6 +177,7 @@ SPDF <- SpatialGridDataFrame(grd,
  proj4string=CRS("+proj=longlat +datum=WGS84"),
  data=data.frame(winter=win))
 image(SPDF, axes=TRUE, col=cm.colors(40))
+}
 }
 
 \keyword{methods}
