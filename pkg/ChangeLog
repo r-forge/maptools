@@ -1,3 +1,44 @@
+2013-06-21 12:50  rsbivand
+
+	* DESCRIPTION, man/CCmaps.Rd, man/kmlPoints.Rd, man/kmlPolygons.Rd,
+	  man/sun-methods.Rd: length of lines
+
+2013-06-20 18:20  rsbivand
+
+	* DESCRIPTION: adding vignette, kml functions
+
+2013-06-20 18:16  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/kmlLines.R, R/kmlPolygons.R,
+	  inst/shapes/co37_d90.dbf, inst/shapes/co37_d90.shp,
+	  inst/shapes/co37_d90.shx, inst/shapes/co45_d90.dbf,
+	  inst/shapes/co45_d90.shp, inst/shapes/co45_d90.shx,
+	  inst/shapes/co51_d90.dbf, inst/shapes/co51_d90.shp,
+	  inst/shapes/co51_d90.shx, inst/share/90mfips.txt,
+	  man/kmlLines.Rd, man/kmlPolygons.Rd, vignettes,
+	  vignettes/combine_maptools.Rnw, vignettes/combine_maptools.pdf:
+	  adding vignette, kml functions
+
+2013-03-30 12:53  rsbivand
+
+	* LICENSE, src/Rcentroid.c, src/Rgshhs.c, src/Rshapewrite1.c,
+	  src/insiders.c, src/shapefil.h, src/shpopen.c, src/shptree.c:
+	  remove clang warnings
+
+2013-03-22 07:34  rsbivand
+
+	* man/map2SpatialPolygons.Rd: wgs84 -> WGS84 in map2SP help page
+
+2013-03-07 09:47  rsbivand
+
+	* R/Spatial-methods.R, R/SpatialLines-methods.R,
+	  R/SpatialPoints-methods.R, R/SpatialPolys-methods.R: block
+	  non-Spatial objects
+
+2013-02-10 14:00  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2013-02-10 13:58  rsbivand
 
 	* .Rbuildignore: don't ship old_man
