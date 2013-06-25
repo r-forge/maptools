@@ -30,7 +30,11 @@
 \SweaveOpts{keep.source=FALSE}
 
 
-\title{Combining Spatial Data} 
+\title{Combining Spatial Data\footnote{This vignette formed pp. 120--126 of the first edition of Bivand, R. S.,
+Pebesma, E. and Gómez-Rubio V. (2008) Applied Spatial Data Analysis with R,
+Springer-Verlag, New York. It was retired from the second edition (2013) to
+accommodate material on other topics, and is made available in this form
+with the understanding of the publishers.}} 
 \author{Roger Bivand} 
 
 \begin{document} 
