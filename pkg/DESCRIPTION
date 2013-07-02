@@ -31,7 +31,7 @@ Authors@R: c(
 	person("Murray", "Stokely", role = "ctb"),
 	person("Rolf", "Turner", role = "ctb"))
 Encoding: UTF-8
-Depends: R (>= 2.10), foreign (>= 0.8), sp (>= 0.9-47), methods, grid, lattice, stats
+Depends: R (>= 2.10), foreign (>= 0.8), sp (>= 1.0-11), methods, grid, lattice, stats
 Suggests: rgeos (>= 0.1-8), spatstat (>= 1.18), PBSmapping, RColorBrewer
 Enhances: maps, gpclib, RArcInfo
 Description: Set of tools for manipulating and reading geographic data, in particular ESRI shapefiles; C code used from shapelib. It includes binary access to GSHHS shoreline files. The package also provides interface wrappers for exchanging spatial objects with packages such as PBSmapping, spatstat, maps, RArcInfo, Stata tmap, WinBUGS, Mondrian, and others.
