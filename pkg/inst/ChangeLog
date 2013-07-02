@@ -1,3 +1,24 @@
+2013-07-02 17:48  rsbivand
+
+	* DESCRIPTION: tidy
+
+2013-06-27 20:50  edzer
+
+	* R/sp_spat1.R: brought back tess.
+
+2013-06-27 20:46  edzer
+
+	* R/sp_spat1.R: removed class tess, which is used nor exported
+
+2013-06-25 17:11  rsbivand
+
+	* vignettes/combine_maptools.Rnw, vignettes/combine_maptools.pdf:
+	  adding footnote
+
+2013-06-21 12:52  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2013-06-21 12:50  rsbivand
 
 	* DESCRIPTION, man/CCmaps.Rd, man/kmlPoints.Rd, man/kmlPolygons.Rd,
