@@ -1,3 +1,12 @@
+2013-08-07 11:15  rsbivand
+
+	* DESCRIPTION, NAMESPACE, man/pointLabelLattice.Rd,
+	  man/spCbind-methods.Rd: depends -> imports
+
+2013-07-02 19:01  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2013-07-02 19:01  rsbivand
 
 	* inst/LICENSE, inst/README: tidy
