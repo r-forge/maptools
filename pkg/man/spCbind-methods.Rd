@@ -35,6 +35,7 @@
 \examples{
 xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], 
   IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
+library(foreign)
 xtra <- read.dbf(system.file("share/nc_xtra.dbf", package="maptools")[1])
 o <- match(xx$CNTY_ID, xtra$CNTY_ID)
 xtra1 <- xtra[o,]

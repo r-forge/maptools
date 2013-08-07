@@ -72,7 +72,7 @@ myTheme <- list(add.text=list(
                   col='midnightblue',
                   fontface=2,
                   fontfamily='mono'))
-
+library(lattice)
 xyplot(y~x,
        labels=labels,
        par.settings=myTheme, 

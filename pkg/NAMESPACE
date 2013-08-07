@@ -3,7 +3,7 @@ useDynLib(maptools)
 import(sp)
 import(foreign)
 import(grid)
-importFrom(lattice, strip.custom)
+importFrom(lattice, strip.custom, trellis.grobname, trellis.par.get, llines)
 importFrom(stats, smooth.spline)
 
 export(leglabs, dotsInPolys, symbolsInPolys, getinfo.shape, print.shapehead) 
@@ -30,7 +30,7 @@ export(gzAzimuth, trackAzimuth)
 
 export(MapGen2SL, ArcObj2SLDF, ContourLines2SLDF, pal2SpatialPolygons)
 
-exportClass(ppp, im, owin, psp)
+#exportClass(ppp, im, owin, psp)
 
 exportMethods("crepuscule", "sunriset", "solarnoon", "solarpos")
 

@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.8-25
-Date: 2013-07-03
+Version: 0.8-26
+Date: 2013-08-07
 Title: Tools for reading and handling spatial objects
 Authors@R: c(
 	person("Roger", "Bivand", role = c("cre", "aut"), email = "Roger.Bivand@nhh.no"),
@@ -31,8 +31,9 @@ Authors@R: c(
 	person("Murray", "Stokely", role = "ctb"),
 	person("Rolf", "Turner", role = "ctb"))
 Encoding: UTF-8
-Depends: R (>= 2.10), foreign (>= 0.8), sp (>= 1.0-11), methods, grid, lattice, stats
-Suggests: rgeos (>= 0.1-8), spatstat (>= 1.18), PBSmapping, RColorBrewer
+Depends: R (>= 2.10), sp (>= 1.0-11)
+Imports: foreign (>= 0.8), methods, grid, lattice, stats
+Suggests: rgeos (>= 0.1-8), spatstat (>= 1.18), foreign (>= 0.8), PBSmapping, RColorBrewer, lattice
 Enhances: maps, gpclib, RArcInfo
 Description: Set of tools for manipulating and reading geographic data, in particular ESRI shapefiles; C code used from shapelib. It includes binary access to GSHHS shoreline files. The package also provides interface wrappers for exchanging spatial objects with packages such as PBSmapping, spatstat, maps, RArcInfo, Stata tmap, WinBUGS, Mondrian, and others.
 License: GPL (>= 2)
