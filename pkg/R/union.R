@@ -46,7 +46,7 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoi
 			iin <- length(pli)
 			resi <- as(pli[[1]], "gpc.poly")
 			for (j in 2:iin) 
-				resi <- gpclib:::union(resi, as(pli[[j]], "gpc.poly"))
+				resi <- gpclib::union(resi, as(pli[[j]], "gpc.poly"))
 			if (!is.null(threshold)) {
 				areas <- sapply(resi@pts, function(x) {
 				    area.poly(as(cbind(x$x, x$y), "gpc.poly"))})

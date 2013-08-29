@@ -439,7 +439,7 @@ Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
 				xj <- pl[[ri[j]]]
 				jxc <- na.omit(xj[,1])
 				jyc <- na.omit(xj[,2])
-				pip <- maptools:::mt.point.in.polygon(ixc, 
+				pip <- mt.point.in.polygon(ixc, 
 					iyc, jxc, jyc)
 				int[j] <- ((pip == 1) | (pip > 1))
 #				int[j] <- ((pip == 1) | 

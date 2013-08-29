@@ -1,6 +1,7 @@
 gpclibPermit <- function() {
     if ("gpclib" %in% .packages(all.available = TRUE))
         assign("gpclib", TRUE, envir=.MAPTOOLS_CACHE)
+    if (gpclibPermitStatus()) warning("support for gpclib will be withdrawn from maptools at the next major release")
     gpclibPermitStatus()
 }
 
@@ -43,7 +44,7 @@ checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
 	bbmat <- matrix(c(rep(bb$x[1], 2), rep(bb$x[2], 2), bb$x[1], bb$y[1], 
 		rep(bb$y[2], 2), rep(bb$y[1], 2)), ncol=2)
 	gpc_bb <- as(bbmat, "gpc.poly")
-	gpc_res <- gpclib:::intersect(gpc, gpc_bb)
+	gpc_res <- gpclib::intersect(gpc, gpc_bb)
 	nP <- length(gpc_res@pts)
 	Srl <- vector(mode="list", length=nP)
 	for (j in 1:nP) {

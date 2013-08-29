@@ -100,7 +100,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 		for (i in seq(along=polys)) {
 			if (clip[i] == 1) {
 				tp <- as(polys[[i]], "gpc.poly")
-				rp <- gpclib:::intersect(tp, limgp)
+				rp <- gpclib::intersect(tp, limgp)
 				l <- length(rp@pts)
 				if (l > 0) {
 				    outl <- vector(mode="list", length=l)
@@ -250,7 +250,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 				    }
 				}
 				for (j in 1:length(l_1)) {
-				    tp <- gpclib:::intersect(l_1[[j]], lp1)
+				    tp <- gpclib::intersect(l_1[[j]], lp1)
 				    if (length(tp@pts) > 0L) {
 					belongs[w_il[i], (il-1)] <- w_il_1[j]
 			    		if (!first_time) {
@@ -278,7 +278,6 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	  reg <- match(IDs, IDss)
 	  new_belongs <- lapply(1:n, function(x) which(x == reg))
 	  Srl <- vector(mode="list", length=n)
-	  require("sp")
 	  for (i in 1:n) {
 		nParts <- length(new_belongs[[i]])
 		srl <- NULL

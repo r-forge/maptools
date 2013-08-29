@@ -69,7 +69,7 @@ setAs("im", "SpatialGridDataFrame", as.SpatialGridDataFrame.im)
 
 as.im.SpatialGridDataFrame = function(from) {
     require(spatstat)
-    xi <- sp:::as.image.SpatialGridDataFrame(from)
+    xi <- as.image.SpatialGridDataFrame(from)
     im(t(xi$z), xcol=xi$x, yrow=xi$y)
 }
 setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)

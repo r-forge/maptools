@@ -5,6 +5,7 @@ import(foreign)
 import(grid)
 importFrom(lattice, strip.custom, trellis.grobname, trellis.par.get, llines)
 importFrom(stats, smooth.spline)
+import(methods)
 
 export(leglabs, dotsInPolys, symbolsInPolys, getinfo.shape, print.shapehead) 
         # plotpolys, shape2poly, shape2lines, 

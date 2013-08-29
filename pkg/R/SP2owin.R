@@ -19,7 +19,7 @@
             for (j in 1:nParts[i]) {
                 crds <- slot(pl[[j]], "coords")
 	        colnames(crds) <- c("x", "y")
-	        rD <- sp:::.spFindCG(crds)$rD
+	        rD <- slot(pl[[j]], "ringDir") # sp:::.spFindCG(crds)$rD
 		hole <- slot(pl[[j]], "hole")
 
 	        if (rD == -1 && hole) crds <- crds[nrow(crds):1,]

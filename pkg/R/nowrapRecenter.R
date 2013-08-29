@@ -67,8 +67,8 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 		bbmat2 <- matrix(c(rep(offset+eps[2], 2), rep(bb$x[2], 2), 
 			offset+eps[2], bb$y[1], rep(bb$y[2], 2), 
 			rep(bb$y[1], 2)), ncol=2)
-		gpc_left <- gpclib:::intersect(gpc, as(bbmat1, "gpc.poly"))
-		gpc_right <- gpclib:::intersect(gpc, as(bbmat2, "gpc.poly"))
+		gpc_left <- gpclib::intersect(gpc, as(bbmat1, "gpc.poly"))
+		gpc_right <- gpclib::intersect(gpc, as(bbmat2, "gpc.poly"))
 		gpc_res <- append.poly(gpc_left, gpc_right)
 		nP <- length(gpc_res@pts)
 		if (nP == 0)

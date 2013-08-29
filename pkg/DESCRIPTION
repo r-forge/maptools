@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.8-26
-Date: 2013-08-07
+Version: 0.8-27
+Date: 2013-08-29
 Title: Tools for reading and handling spatial objects
 Authors@R: c(
 	person("Roger", "Bivand", role = c("cre", "aut"), email = "Roger.Bivand@nhh.no"),
@@ -30,6 +30,8 @@ Authors@R: c(
 	person("Ben", "Stabler", role = "ctb"),
 	person("Murray", "Stokely", role = "ctb"),
 	person("Rolf", "Turner", role = "ctb"))
+Author: Roger Bivand <Roger.Bivand@nhh.no>
+Maintainer: Roger Bivand <Roger.Bivand@nhh.no>
 Encoding: UTF-8
 Depends: R (>= 2.10), sp (>= 1.0-11)
 Imports: foreign (>= 0.8), methods, grid, lattice, stats
