@@ -1,3 +1,17 @@
+2013-08-30 11:37  rsbivand
+
+	* .Rbuildignore, DESCRIPTION: tidy
+
+2013-08-29 18:49  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/Rgshhs.R, R/SP2owin.R, R/checkHoles.R,
+	  R/maptools.R, R/nowrapRecenter.R, R/sp_spat1.R, R/union.R: remove
+	  :::
+
+2013-08-07 11:17  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2013-08-07 11:15  rsbivand
 
 	* DESCRIPTION, NAMESPACE, man/pointLabelLattice.Rd,
