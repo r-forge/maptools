@@ -9,7 +9,7 @@ distance of each point to any of the lines. This function does not work with
 geographic coordinates.
 }
 \usage{
-snapPointsToLines(points, lines, maxDist = NA, withAttrs = TRUE)
+snapPointsToLines(points, lines, maxDist = NA, withAttrs = TRUE, idField=NA)
 }
 \arguments{
   \item{points}{
@@ -25,6 +25,11 @@ are farther apart. This parameter is optional.
   \item{withAttrs}{
 Boolean value for preserving (TRUE) or getting rid (FALSE) of the original point 
 attributes. Default: TRUE. This parameter is optional. 
+}
+  \item{idField}{
+A string specifying the field which contains each line's id. This id will 
+be transferred to the snapped points data set to distinguish the line which each
+point was snapped to.
 }
 }
 \value{
