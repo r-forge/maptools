@@ -25,11 +25,12 @@ snapPointsToLines <- function( points, lines, maxDist=NA, withAttrs=TRUE, idFiel
 
     require("rgeos")
 
-    if (is(points, 'SpatialPoints') && missing(withAttrs))
+    if (class(points) == "SpatialPoints" && missing(withAttrs))
         withAttrs = FALSE
+            
+    if (class(points) == "SpatialPoints" && withAttrs==TRUE)
+        stop("A SpatialPoints object has no attributes! Please set withAttrs as FALSE.")
 
-    if (is(points, 'SpatialPoints') && withAttrs==TRUE)
-        stop("A SpatialPoints object has no attributes! Set withAttrs as FALSE.")
 
     if (!is.na(maxDist)) {
         w = gWithinDistance(points, lines, dist=maxDist, byid=TRUE)
