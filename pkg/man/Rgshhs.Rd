@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read GSHHS data into sp object}
 \description{
-  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution Shorelines, release 2.2.0 of July 15, 2011 (\url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs+wdbii_2.2.0.tbz}). 
+  If the data are polygon data, the function will read GSHHS polygons into SpatialPolygons object for a chosen region, using binary shorelines from Global Self-consistant Hierarchical High-resolution (Shorelines) Geography, release 2.3.0 of February 1, 2014 (\url{http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.0.zip}). 
 
 The \code{getRgshhsMap} function calls \code{Rgshhs} internally to simplify the interface by returning only a SpatialPolygons object rather than a more complex list, and by calling \code{Rgshhs} twice either side of longitude 0 degrees for values of \dQuote{xlim} straddling 0, then merging the polygons retrieved.
 
@@ -20,7 +20,7 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{fn}{filename or full path to GSHHS 2.2.0 file to be read}
+  \item{fn}{filename or full path to GSHHS 2.3.0 file to be read}
   \item{xlim}{longitude limits within 0-360 in most cases, negative longitudes are also found east of the Atlantic, but the Americas are recorded as positive values}
   \item{ylim}{latitude limits}
   \item{level}{maximum GSHHS level to include, defaults to 4 (everything), setting 1 will only retrieve land, no lakes}
@@ -47,7 +47,7 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
   for line data, a list with the following component:
   \item{SP}{a SpatialLines object}
 }
-\references{\url{http://www.soest.hawaii.edu/pwessel/gshhs/index.html}, \url{ftp://ftp.soest.hawaii.edu/pwessel/gshhs/gshhs+wdbii_2.2.0.tbz}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
+\references{\url{http://www.soest.hawaii.edu/pwessel/gshhg/}, \url{http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.0.zip}; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.}
 \author{Roger Bivand}
 
 \note{
