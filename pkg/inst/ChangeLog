@@ -1,3 +1,26 @@
+2014-02-19 16:51  rsbivand
+
+	* DESCRIPTION,
+	  inst/share/gshhs_c.b, inst/share/wdb_borders_c.b, man/Rgshhs.Rd:
+	  upgraded GSHHS files to 2.3.0
+
+2014-01-28 19:02  rsbivand
+
+	* DESCRIPTION,
+	  R/point_line_distance.R: fix is/class issue in
+	  point_line_distance
+
+2014-01-22 09:42  rsbivand
+
+	* DESCRIPTION,
+	  R/point_line_distance.R, man/snapPointsToLines.Rd: update
+	  to snapPointsToLines
+
+2013-09-01 18:06  rsbivand
+
+	* ChangeLog,
+	  inst/ChangeLog: tidy
+
 2013-08-30 11:38  rsbivand
 
 	* ChangeLog,
