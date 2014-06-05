@@ -61,6 +61,6 @@ xc = c(1.2,1.5,2.5)
 yc = c(1.5,2.2,1.6)
 Spoints = SpatialPoints(cbind(xc, yc))
 
-snapPointsToLines(Spoints, Sldf)
+if (rgeosStatus()) snapPointsToLines(Spoints, Sldf)
 }
 \keyword{ spatial }

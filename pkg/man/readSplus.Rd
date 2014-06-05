@@ -22,6 +22,7 @@ readSplus(file, proj4string = CRS(as.character(NA)))
 \note{In the example, taken from the GeoBUGS manual, the smaller part of area1 has a counter-clockwise ring direction in the data, while other rings are clockwise. This implies that it is a hole, and does not get filled. Errant holes may be filled using \code{\link{checkPolygonsHoles}}. The region labels are stored in the \code{ID} slots of the \code{Polygons} objects.}
 \seealso{\code{\link{map2SpatialPolygons}}}
 \examples{
+if (rgeosStatus()) {
 geobugs <- readSplus(system.file("share/Splus.map", package="maptools"))
 plot(geobugs, axes=TRUE, col=1:3)
 row.names(geobugs)
@@ -30,6 +31,7 @@ sapply(pls, function(i) sapply(slot(i, "Polygons"), slot, "hole"))
 pls1 <- lapply(pls, checkPolygonsHoles)
 sapply(pls1, function(i) sapply(slot(i, "Polygons"), slot, "hole"))
 plot(SpatialPolygons(pls1), axes=TRUE, col=1:3)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

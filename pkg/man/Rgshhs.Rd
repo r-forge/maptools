@@ -58,7 +58,7 @@ By default, if the rgeos package is available, it is used for topology operation
 }
 
 \examples{
-if (!rgeosStatus()) gpclibPermit()
+if (rgeosStatus()) {
 gshhs.c.b <- system.file("share/gshhs_c.b", package="maptools")
 WEx <- c(-12, 3)
 WEy <- c(48, 59)
@@ -82,6 +82,7 @@ lines(BNLl$SP)
 xlims <- c(0,360)
 ylims <- c(-90,90)
 world <- Rgshhs(gshhs.c.b, xlim=xlims, ylim=ylims, level=1, checkPolygons=TRUE)
+}
 }
 \keyword{spatial}
 

@@ -31,7 +31,6 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2), 2),
 
 \examples{
 \dontrun{
-if (!rgeosStatus()) gpclibPermit()
 library(maps)
 world <- map("world", fill=TRUE, col="transparent", plot=FALSE)
 worldSpP <- map2SpatialPolygons(world, world$names, CRS("+proj=longlat"))
@@ -48,6 +47,7 @@ worldSpPnr <- nowrapRecenter(worldSpP)
 plot(worldSpPnr)
 title("Pacific view with polygon splitting")
 }
+if (rgeosStatus()) {
 crds <- matrix(c(-1, 1, 1, -1, 50, 50, 52, 52), ncol=2)
 rcrds <- rbind(crds, crds[1,])
 SR <- SpatialPolygons(list(Polygons(list(Polygon(rcrds)), ID="r1")),
@@ -57,6 +57,7 @@ SRr <- recenter(SR)
 bbox(SRr)
 SRnr <- nowrapRecenter(SR)
 bbox(SRnr)
+}
 }
 
 \keyword{spatial}

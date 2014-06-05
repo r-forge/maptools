@@ -23,7 +23,11 @@ nearestPointOnLine = function(coordsLine, coordsPoint){
 
 snapPointsToLines <- function( points, lines, maxDist=NA, withAttrs=TRUE, idField=NA) {
 
-    require("rgeos")
+    if (rgeosStatus()) {
+        require("rgeos") 
+    } else {
+        stop("rgeos not installed")
+    }
 
     if (class(points) == "SpatialPoints" && missing(withAttrs))
         withAttrs = FALSE

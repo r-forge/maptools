@@ -31,7 +31,7 @@ If the gpclib package is used, an intersection between a gpc.poly object with on
 \author{Roger Bivand}
 %\seealso{\code{\link[rgeos]{createPolygonsComment}}, \code{\link[rgeos]{gIsValid}}, \code{\link[rgeos]{gEquals}}, \code{\link[rgeos]{gContainsProperly}}}
 \examples{
-if (!rgeosStatus()) gpclibPermit()
+if (rgeosStatus()) {
 nc1 <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat +ellps=clrk66"))
 pl <- slot(nc1, "polygons")
@@ -97,6 +97,7 @@ title(xlab="Hole slot values before checking")
 plot(SpatialPolygons(list(pls1)), col="magenta", pbg="cyan", usePolypath=FALSE)
 title(xlab="Hole slot values after checking")
 par(opar)
+}
 }
 }
 \keyword{spatial}
