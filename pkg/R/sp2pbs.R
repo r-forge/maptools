@@ -17,7 +17,10 @@ SpatialPolygons2PolySet <- function(SpP) {
 			k <- nrow(crds)
 			PID <- c(PID, rep(i, k))
 			SID <- c(SID, rep(j, k))
-			POS <- c(POS, 1:k)
+#			POS <- c(POS, 1:k)
+# Daniel Rodolphe Schlaepfer 140806
+			if(slot(srs[[j]], "hole")) POS <- c(POS, k:1) 
+			else POS <- c(POS, 1:k)
 			X <- c(X, crds[,1])
 			Y <- c(Y, crds[,2])
 		}

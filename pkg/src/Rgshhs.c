@@ -179,7 +179,7 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 		    Level = h.flag & 255;
 		    version = (h.flag >> 8) & 255;
 		    if (!(version >= 9)) 
-			error("Data not same version as software");
+			warning("Data not same version as software %d", version);
 		    greenwich = (h.flag >> 16) & 3;			/* Greenwich is 0-3 */
 		    src = (h.flag >> 24) & 1;			/* Greenwich is 0 (WDBII) or 1 (WVS) */
 		    river = (h.flag >> 25) & 1;			/* River is 0 (not river) or 1 (is river) */
