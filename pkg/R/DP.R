@@ -103,8 +103,10 @@ thinnedSpatialPoly <- function(SP, tolerance, minarea=0, topologyPreserve=FALSE,
     stopifnot(inherits(SP, "SpatialPolygons"))
     rgeosI <- rgeosStatus()
     if (rgeosI && !avoidGEOS) {
-        require(rgeos)
-        res <- gSimplify(spgeom=SP, tol=tolerance, topologyPreserve=topologyPreserve)
+        # require(rgeos)
+    	if (!requireNamespace("rgeos", quietly = TRUE))
+			stop("package rgeos required for tinnedSpatialPoly")
+        res <- rgeos::gSimplify(spgeom=SP, tol=tolerance, topologyPreserve=topologyPreserve)
     } else {
       pls <- slot(SP, "polygons")
       pls_dp <- vector(mode="list", length=length(pls))

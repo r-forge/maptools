@@ -29,8 +29,10 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 	inout <- bbo[1,1] < offset && bbo[1,2] >= offset
 	if (inout) {
             if (rgeosI && !avoidGEOS) {
-                 comm <- try(createPolygonsComment(obj), silent=TRUE)
-                 isV <- try(gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
+    		if (!requireNamespace("rgeos", quietly = TRUE))
+			stop("package rgeos required for .nowrapPolygons")
+                comm <- try(rgeos::createPolygonsComment(obj), silent=TRUE)
+                isV <- try(rgeos::gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
                  if (class(comm) != "try-error" && class(isV) != "try-error" 
                      && isV) {
                      comment(obj) <- comm
@@ -46,21 +48,23 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
                      offset+eps[2], bb$y[1], rep(bb$y[2], 2), 
                      rep(bb$y[1], 2)), ncol=2)
                  SPobj <- SpatialPolygons(list(obj))
-                 resW <- gIntersection(SPobj, SpatialPolygons(list(Polygons(
+                 resW <- rgeos::gIntersection(SPobj, SpatialPolygons(list(Polygons(
                      list(Polygon(bbmatW)), ID="W"))))
-                 resE <- gIntersection(SPobj, SpatialPolygons(list(Polygons(
+                 resE <- rgeos::gIntersection(SPobj, SpatialPolygons(list(Polygons(
                      list(Polygon(bbmatE)), ID="E"))))
                  cparts <- c(slot(slot(resW, "polygons")[[1]], "Polygons"),
                      slot(slot(resE, "polygons")[[1]], "Polygons"))
                  res <- Polygons(cparts, ID=slot(obj, "ID"))
             } else {
+    		if (!requireNamespace("gpclib", quietly = TRUE))
+			stop("package gpclib required for .nowrapPolygons")
 		pls <- slot(obj, "Polygons")
 		nParts <- length(pls)
 		ID <- slot(obj, "ID")
 		gpc <- as(slot(pls[[1]], "coords"), "gpc.poly")
-		if (nParts > 1) for (i in 2:nParts) gpc <- append.poly(gpc, 
+		if (nParts > 1) for (i in 2:nParts) gpc <- gpclib::append.poly(gpc, 
 			as(slot(pls[[i]], "coords"), "gpc.poly"))
-		bb <- get.bbox(gpc)
+		bb <- gpclib::get.bbox(gpc)
 		bbmat1 <- matrix(c(rep(bb$x[1], 2), rep(offset-eps[1], 2), 
 			bb$x[1], bb$y[1], rep(bb$y[2], 2), rep(bb$y[1], 2)), 
 			ncol=2)
@@ -69,7 +73,7 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 			rep(bb$y[1], 2)), ncol=2)
 		gpc_left <- gpclib::intersect(gpc, as(bbmat1, "gpc.poly"))
 		gpc_right <- gpclib::intersect(gpc, as(bbmat2, "gpc.poly"))
-		gpc_res <- append.poly(gpc_left, gpc_right)
+		gpc_res <- gpclib::append.poly(gpc_left, gpc_right)
 		nP <- length(gpc_res@pts)
 		if (nP == 0)
 			return(obj)

@@ -39,7 +39,9 @@ as.SpatialPointsDataFrame.ppp = function(from) {
 setAs("ppp", "SpatialPointsDataFrame", as.SpatialPointsDataFrame.ppp)
 
 as.SpatialGridDataFrame.ppp = function(from) {
-	require(spatstat)
+	# require(spatstat)
+    #if (!requireNamespace("spatstat", quietly = TRUE))
+	#	stop("package spatstat required for .SP2owin")
 	w = from$window
 	if (w$type != "mask")
 		stop("window is not of type mask")
@@ -55,7 +57,7 @@ as.SpatialGridDataFrame.ppp = function(from) {
 setAs("ppp", "SpatialGridDataFrame", as.SpatialGridDataFrame.ppp)
 
 as.SpatialGridDataFrame.im = function(from) {
-    require(spatstat)
+    # require(spatstat)
     offset = c(from$xrange[1] + 0.5 * from$xstep, from$yrange[1] + 
         0.5 * from$ystep)
     cellsize = c(diff(from$xrange)/from$dim[2], diff(from$yrange)/from$dim[1])
@@ -68,8 +70,10 @@ as.SpatialGridDataFrame.im = function(from) {
 setAs("im", "SpatialGridDataFrame", as.SpatialGridDataFrame.im)
 
 as.im.SpatialGridDataFrame = function(from) {
-    require(spatstat)
+    #require(spatstat)
+    if (!requireNamespace("spatstat", quietly = TRUE))
+		stop("package spatstat required for as.im.SpatialGridDataFrame")
     xi <- as.image.SpatialGridDataFrame(from)
-    im(t(xi$z), xcol=xi$x, yrow=xi$y)
+    spatstat::im(t(xi$z), xcol=xi$x, yrow=xi$y)
 }
 setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)

@@ -25,22 +25,26 @@ rgeosStatus <- function() get("rgeos", envir=.MAPTOOLS_CACHE)
 checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
     useSTRtree=FALSE) {
     if (rgeosStatus() && !avoidGEOS) {
-        require(rgeos)
+        # require(rgeos) # xxx
+    	if (!requireNamespace("rgeos", quietly = TRUE))
+		stop("package rgeos required")
 # version check rgeos
         if (compareVersion(as.character(packageVersion("rgeos")), "0.1-4") < 0)
             useSTRtree <- FALSE
         return(checkPolygonsGEOS(x, properly=properly, useSTRtree=useSTRtree))
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
-	require(gpclib)
+	# require(gpclib)
+    	if (!requireNamespace("gpclib", quietly = TRUE))
+		stop("package gpclib required")
 	if (!is(x, "Polygons")) stop("not an Polygons object")
 	pls <- slot(x, "Polygons")
 	nParts <- length(pls)
 	ID <- slot(x, "ID")
 	gpc <- as(slot(pls[[1]], "coords"), "gpc.poly")
-	if (nParts > 1) for (i in 2:nParts) gpc <- append.poly(gpc, 
+	if (nParts > 1) for (i in 2:nParts) gpc <- gpclib::append.poly(gpc, 
 		as(slot(pls[[i]], "coords"), "gpc.poly"))
-	bb <- get.bbox(gpc)
+	bb <- gpclib::get.bbox(gpc)
 	bbmat <- matrix(c(rep(bb$x[1], 2), rep(bb$x[2], 2), bb$x[1], bb$y[1], 
 		rep(bb$y[2], 2), rep(bb$y[1], 2)), ncol=2)
 	gpc_bb <- as(bbmat, "gpc.poly")
@@ -105,7 +109,9 @@ checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
 checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) {
     if (!is(obj, "Polygons")) 
         stop("not a Polygons object")
-    comm <- try(createPolygonsComment(obj), silent=TRUE)
+    if (!requireNamespace("rgeos", quietly = TRUE))
+		stop("package rgeos required for checkPolygonsGEOS")
+    comm <- try(rgeos::createPolygonsComment(obj), silent=TRUE)
 #    isVal <- try(gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
 #    if (class(isVal) == "try-error") isVal <- FALSE
     if (class(comm) != "try-error" && !force) {
@@ -117,13 +123,13 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     if (n < 1) stop("Polygon list of zero length")
     uniqs <- rep(TRUE, n)
     if (n > 1) {
-      if (useSTRtree) tree1 <- gUnarySTRtreeQuery(obj)
+      if (useSTRtree) tree1 <- rgeos::gUnarySTRtreeQuery(obj)
       SP <- SpatialPolygons(lapply(1:n, function(i) 
         Polygons(list(pls[[i]]), ID=i)))
       for (i in 1:(n-1)) {
         if (useSTRtree) {
             if (!is.null(tree1[[i]])) {
-                res <- try(gEquals(SP[i,], SP[tree1[[i]],], byid=TRUE),
+                res <- try(rgeos::gEquals(SP[i,], SP[tree1[[i]],], byid=TRUE),
                     silent=TRUE)
                 if (class(res) == "try-error") {
                     warning("Polygons object ", slot(obj, "ID"), ", Polygon ",
@@ -135,7 +141,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
                 }
             }
         } else {
-            res <- try(gEquals(SP[i,], SP[uniqs,], byid=TRUE), silent=TRUE)
+            res <- try(rgeos::gEquals(SP[i,], SP[uniqs,], byid=TRUE), silent=TRUE)
             if (class(res) == "try-error") {
                 warning("Polygons object ", slot(obj, "ID"), ", Polygon ",
                     i, ": ", res)
@@ -156,7 +162,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     if (n < 1) stop("Polygon list of zero length")
     if (n == 1) {
         oobj <- Polygons(pls, ID=slot(obj, "ID"))
-        comment(oobj) <- createPolygonsComment(oobj)
+        comment(oobj) <- rgeos::createPolygonsComment(oobj)
         return(oobj)
     }
     areas <- sapply(pls, slot, "area")
@@ -165,20 +171,20 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     holes <- rep(FALSE, n)
     SP <- SpatialPolygons(lapply(1:n, function(i) 
         Polygons(list(pls[[i]]), ID=i)))
-    if (useSTRtree) tree2 <- gUnarySTRtreeQuery(SP)
+    if (useSTRtree) tree2 <- rgeos::gUnarySTRtreeQuery(SP)
     for (i in 1:(n-1)) {
         if (useSTRtree) {
             if (!is.null(tree2[[i]])) {
-                if (properly) res <- gContainsProperly(SP[i,], SP[tree2[[i]],],
+                if (properly) res <- rgeos::gContainsProperly(SP[i,], SP[tree2[[i]],],
                     byid=TRUE)
-                else res <- gContains(SP[i,], SP[tree2[[i]],], byid=TRUE)
+                else res <- rgeos::gContains(SP[i,], SP[tree2[[i]],], byid=TRUE)
             } else {
                 res <- FALSE
             }
         } else {
-            if (properly) res <- gContainsProperly(SP[i,], SP[-(1:i),],
+            if (properly) res <- rgeos::gContainsProperly(SP[i,], SP[-(1:i),],
                 byid=TRUE)
-            else res <- gContains(SP[i,], SP[-(1:i),], byid=TRUE)
+            else res <- rgeos::gContains(SP[i,], SP[-(1:i),], byid=TRUE)
         }
         wres <- which(res)
         if (length(wres) > 0L) {
@@ -191,6 +197,6 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
         pls[[i]] <- Polygon(slot(pls[[i]], "coords"), hole=holes[i])
     }
     oobj <- Polygons(pls, ID=slot(obj, "ID"))
-    comment(oobj) <- createPolygonsComment(oobj)
+    comment(oobj) <- rgeos::createPolygonsComment(oobj)
     oobj    
 }

@@ -6,14 +6,18 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoi
         stop("input lengths differ")
     rgeosI <- rgeosStatus()
     if (rgeosI && !avoidGEOS) {
-        require(rgeos)
-        if (avoidUnaryUnion || version_GEOS0() < "3.3.0")
-            res <- gUnionCascaded(spgeom=SpP, id=IDs)
+        # require(rgeos)
+    	if (!requireNamespace("rgeos", quietly = TRUE))
+			stop("package rgeos required for unionSpatialPolygons")
+        if (avoidUnaryUnion || rgeos::version_GEOS0() < "3.3.0")
+            res <- rgeos::gUnionCascaded(spgeom=SpP, id=IDs)
         else
-            res <- gUnaryUnion(spgeom=SpP, id=IDs)
+            res <- rgeos::gUnaryUnion(spgeom=SpP, id=IDs)
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
-	require(gpclib)
+    if (!requireNamespace("gpclib", quietly = TRUE))
+		stop("package gpclib required for unionSpatialPolygons")
+	# require(gpclib)
 	pl <- slot(SpP, "polygons")
 	proj4CRS <- CRS(proj4string(SpP))
 	SrnParts <- sapply(pl, function(x) length(slot(x, "Polygons")))
@@ -49,7 +53,7 @@ unionSpatialPolygons <- function(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoi
 				resi <- gpclib::union(resi, as(pli[[j]], "gpc.poly"))
 			if (!is.null(threshold)) {
 				areas <- sapply(resi@pts, function(x) {
-				    area.poly(as(cbind(x$x, x$y), "gpc.poly"))})
+				    gpclib::area.poly(as(cbind(x$x, x$y), "gpc.poly"))})
 				resi@pts <- resi@pts[areas > threshold]
 			}
 			nP <- length(resi@pts)

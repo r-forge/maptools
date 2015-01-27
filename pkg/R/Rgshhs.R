@@ -27,10 +27,14 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 	else clip <- NULL
         rgeosI <- rgeosStatus()
         if (rgeosI && !avoidGEOS) {
-            require(rgeos)
+            # require(rgeos)
+    		if (!requireNamespace("rgeos", quietly = TRUE))
+				stop("rgeos spatstat required for Rgshhs")
         } else {
             stopifnot(isTRUE(gpclibPermitStatus()))
-	    require("gpclib")
+    		if (!requireNamespace("gpclib", quietly = TRUE))
+				stop("gpclib spatstat required for Rgshhs")
+	    	# require("gpclib")
         }
 	polys <- .Call("Rgshhs", as.character(fn), as.integer(5), 
 		as.logical(dolim), as.numeric(lim), as.integer(level), 
@@ -68,7 +72,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
                         tp <- SpatialPolygons(list(Polygons(list(Polygon(
                             polys[[i]])), ID="1")))
                         rp0 <- NULL
-                        gI <- gIntersection(tp, limgp)
+                        gI <- rgeos::gIntersection(tp, limgp)
 # bug reported 120809 r-sig-geo.20.trevva
                         if (!is.null(gI) && is(gI, "SpatialCollections")) 
                             gI <- slot(gI, "polyobj")
@@ -235,7 +239,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 				if (length(polys[[ii]]) > 1L) {
 				    for (j in 2:length(polys[[ii]])) {
 					lpj <- as(polys[[ii]][[j]], "gpc.poly")
-					lp1 <- append.poly(lp1, lpj)
+					lp1 <- gpclib::append.poly(lp1, lpj)
 				    }
 				}
 				l_1[[i]] <- lp1
@@ -246,7 +250,7 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
 				if (length(polys[[ii]]) > 1L) {
 				    for (j in 2:length(polys[[ii]])) {
 					lpj <- as(polys[[ii]][[j]], "gpc.poly")
-					lp1 <- append.poly(lp1, lpj)
+					lp1 <- gpclib::append.poly(lp1, lpj)
 				    }
 				}
 				for (j in 1:length(l_1)) {

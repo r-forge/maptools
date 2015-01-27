@@ -24,10 +24,10 @@ nearestPointOnLine = function(coordsLine, coordsPoint){
 snapPointsToLines <- function( points, lines, maxDist=NA, withAttrs=TRUE, idField=NA) {
 
     if (rgeosStatus()) {
-        require("rgeos") 
-    } else {
+    	if (!requireNamespace("rgeos", quietly = TRUE))
+			stop("package rgeos required for snapPointsToLines")
+    } else
         stop("rgeos not installed")
-    }
 
     if (class(points) == "SpatialPoints" && missing(withAttrs))
         withAttrs = FALSE
@@ -37,14 +37,14 @@ snapPointsToLines <- function( points, lines, maxDist=NA, withAttrs=TRUE, idFiel
 
 
     if (!is.na(maxDist)) {
-        w = gWithinDistance(points, lines, dist=maxDist, byid=TRUE)
+        w = rgeos::gWithinDistance(points, lines, dist=maxDist, byid=TRUE)
         validPoints = apply(w,2,any)
         validLines = apply(w,1,any)
         points = points[validPoints,]
         lines =  lines[validLines,]
     }
 
-    d = gDistance(points, lines, byid=TRUE) 
+    d = rgeos::gDistance(points, lines, byid=TRUE) 
     nearest_line_index = apply(d, 2, which.min) # Position of each nearest line in lines object 
 
     coordsLines = coordinates(lines)  

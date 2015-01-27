@@ -1,7 +1,9 @@
 # PBSmapping utilities
 
 SpatialPolygons2PolySet <- function(SpP) {
-	require(PBSmapping)
+	# require(PBSmapping)
+    if (!requireNamespace("PBSmapping", quietly = TRUE))
+		stop("package PBSmapping required for SpatialPolygons2PolySet")
 	pls <- slot(SpP, "polygons")
 	n <- length(pls)
 	PID <- NULL
@@ -30,15 +32,14 @@ SpatialPolygons2PolySet <- function(SpP) {
 	POS <- as.integer(POS)
         storage.mode(X) <- "double"
         storage.mode(Y) <- "double"
-	require(PBSmapping)
 	pj <- .pbsproj(SpP)
 	zn <- NULL
 	if (pj == "UTM") {
 		zn <- attr(pj, "zone")
 		attr(pj, "zone") <- NULL
 	}
-	res <- as.PolySet(data.frame(PID=PID, SID=SID, POS=POS, X=X, Y=Y),
-		projection=pj, zone=zn)
+	res <- PBSmapping::as.PolySet(data.frame(PID=PID, SID=SID, POS=POS, 
+		X=X, Y=Y), projection=pj, zone=zn)
 	res
 }
 
@@ -69,15 +70,17 @@ SpatialLines2PolySet <- function(SL) {
 	POS <- as.integer(POS)
         storage.mode(X) <- "double"
         storage.mode(Y) <- "double"
-	require(PBSmapping)
+	# require(PBSmapping)
+    if (!requireNamespace("PBSmapping", quietly = TRUE))
+		stop("package PBSmapping required for SpatialPolygons2PolySet")
 	pj <- .pbsproj(SL)
 	zn <- NULL
 	if (pj == "UTM") {
 		zn <- attr(pj, "zone")
 		attr(pj, "zone") <- NULL
 	}
-	res <- as.PolySet(data.frame(PID=PID, SID=SID, POS=POS, X=X, Y=Y),
-		projection=pj, zone=zn)
+	res <- PBSmapping::as.PolySet(data.frame(PID=PID, SID=SID, POS=POS, 
+		X=X, Y=Y), projection=pj, zone=zn)
 	res
 }
 
@@ -187,8 +190,4 @@ PolySet2SpatialLines <- function(PS) {
     }
     outSP <- SpatialLines(outLines, proj4string=CRS(p4s))
     outSP
-    
-
 }
-
-
