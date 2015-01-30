@@ -32,8 +32,7 @@ PolySet2SpatialPolygons(PS, close_polys=TRUE)
 \seealso{\code{\link[PBSmapping]{PolySet}}, \code{\link{MapGen2SL}}}
 
 \examples{
-if(require(PBSmapping)) {
-if(require(maps)) {
+if(require(PBSmapping) && require(maps)) {
 nor_coast_lines <- map("world", interior=FALSE, plot=FALSE, xlim=c(4,32),
  ylim=c(58,72))
 nor_coast_lines <- pruneMap(nor_coast_lines, xlim=c(4,32), ylim=c(58,72))
@@ -54,7 +53,7 @@ summary(nor_coast_poly_PS)
 plotPolys(nor_coast_poly_PS)
 o1 <- PolySet2SpatialPolygons(nor_coast_poly_PS)
 plot(o1, axes=TRUE)
-}}
+}
 }
 \keyword{spatial}
 
