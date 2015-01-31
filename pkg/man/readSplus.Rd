@@ -17,7 +17,7 @@ readSplus(file, proj4string = CRS(as.character(NA)))
 \value{
   \code{readSplus} returns a SpatialPolygons object
 }
-\references{\url{http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/geobugs12manual.pdf}}
+\references{\url{http://www.mrc-bsu.cam.ac.uk/wp-content/uploads/geobugs12manual.pdf}}
 \author{Virgilio Gomez Rubio <Virgilio.Gomez@uclm.es>}
 \note{In the example, taken from the GeoBUGS manual, the smaller part of area1 has a counter-clockwise ring direction in the data, while other rings are clockwise. This implies that it is a hole, and does not get filled. Errant holes may be filled using \code{\link{checkPolygonsHoles}}. The region labels are stored in the \code{ID} slots of the \code{Polygons} objects.}
 \seealso{\code{\link{map2SpatialPolygons}}}

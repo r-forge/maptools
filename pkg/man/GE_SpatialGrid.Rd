@@ -57,8 +57,8 @@ qk0 <- quakes
 qk0$long <- ifelse(qk0$long <= 180, qk0$long, qk0$long-360)
 qk0a <- SpatialPointsDataFrame(qk0[, c(2:1)], qk0)
 proj4string(qk0a) <- CRS("+proj=longlat")
-writeOGR(qk0a, paste(tf, "v.kml", sep=""), "Quakes", "KML")
-system(paste("googleearth ", tf, ".kml", sep=""))
+# writeOGR(qk0a, paste(tf, "v.kml", sep=""), "Quakes", "KML")
+# system(paste("googleearth ", tf, ".kml", sep=""))
 }
 options(example.ask=opt_exask)
 }

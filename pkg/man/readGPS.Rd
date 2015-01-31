@@ -27,22 +27,22 @@ The function just wraps: gpsbabel -i INTYPE -f INFILE -o tabsep -F - in system()
 
 \examples{
 \dontrun{
-b1 <- readGPS(f="usb:")
-str(b1)
-b2 <- b1[1:172,]
-wp0 <- b2[,c(2,3,4,8,9,19)]
-str(wp0)
-wp0$long <- wp0$V9
-wp0$lat <- as.numeric(as.character(wp0$V8))
-wp0$id <- as.character(wp0$V2)
-wp0$alt <- as.numeric(substring(as.character(wp0$V19), 1,
- (nchar(as.character(wp0$V19))-1)))
-wp0$time <- as.POSIXct(strptime(paste(as.character(wp0$V3),
- as.character(wp0$V4)), format="\%d-\%b-\%y \%H:\%M:\%S"))
-str(wp0)
-wp1 <- wp0[,-(1:6)]
-str(wp1)
-summary(wp1)
+#b1 <- readGPS(f="usb:")
+#str(b1)
+#b2 <- b1[1:172,]
+#wp0 <- b2[,c(2,3,4,8,9,19)]
+#str(wp0)
+#wp0$long <- wp0$V9
+#wp0$lat <- as.numeric(as.character(wp0$V8))
+#wp0$id <- as.character(wp0$V2)
+#wp0$alt <- as.numeric(substring(as.character(wp0$V19), 1,
+# (nchar(as.character(wp0$V19))-1)))
+#wp0$time <- as.POSIXct(strptime(paste(as.character(wp0$V3),
+# as.character(wp0$V4)), format="\%d-\%b-\%y \%H:\%M:\%S"))
+#str(wp0)
+#wp1 <- wp0[,-(1:6)]
+#str(wp1)
+#summary(wp1)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

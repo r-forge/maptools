@@ -29,10 +29,12 @@ xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 plot(xx, border="blue", axes=TRUE, las=1)
 tmapdf <- sp2tmap(as(xx, "SpatialPolygons"))
+if (require(foreign)) {
 write.dta(tmapdf, file="NCmap.dta", version=7)
 NCdf <- as(xx, "data.frame")
 NCdf$ID_n <- attr(tmapdf, "ID_names")
 write.dta(NCdf, file="NC.dta", version=7)
+}
 }
 }
 \keyword{spatial}

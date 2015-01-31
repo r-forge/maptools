@@ -1,10 +1,14 @@
 nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/2), 2), avoidGEOS=FALSE) {
     rgeosI <- rgeosStatus()
     if (rgeosI) {
-        require(rgeos)
+    	if (!requireNamespace("rgeos", quietly = TRUE))
+		stop("package rgeos required")
+#        require(rgeos)
     } else {
         stopifnot(isTRUE(gpclibPermitStatus()))
-	require(gpclib)
+    	if (!requireNamespace("gpclib", quietly = TRUE))
+		stop("package gpclib required")
+#	require(gpclib)
     }
 	if (!is(obj, "SpatialPolygons")) stop("obj not a SpatialPolygons object")
 	proj <- is.projected(obj)

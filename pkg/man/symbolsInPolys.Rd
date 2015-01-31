@@ -16,7 +16,7 @@ symbolsInPolys(pl, dens, symb = "+", compatible = FALSE)
   \item{compatible}{what to return, if TRUE a a list of matrices of point coordinates, one matrix for each member of pl, with a \code{symb} attribute, if false a SpatialPointsDataFrame with a \code{symb} column}
 }
 \details{
-  The dots are placed in a grid pattern with the number of points per polygon being polygon area times density (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). From maptools release 0.5-2, correction is made for holes in the placing of the dots, but depends on hole values being correctly set, which they often are not. The wrapper package spgpc may be used to check holes, see the \code{dontrun} section of the example. 
+  The dots are placed in a grid pattern with the number of points per polygon being polygon area times density (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). From maptools release 0.5-2, correction is made for holes in the placing of the dots, but depends on hole values being correctly set, which they often are not. 
 }
 
 \value{
@@ -33,7 +33,6 @@ The function returns a list of matrices of point coordinates, one matrix for eac
 nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat +ellps=clrk66"))
 \dontrun{
-library(spgpc)
 pls <- slot(nc_SP, "polygons")
 pls_new <- lapply(pls, checkPolygonsHoles)
 nc_SP <- SpatialPolygonsDataFrame(SpatialPolygons(pls_new,

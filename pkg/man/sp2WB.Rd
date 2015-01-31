@@ -18,7 +18,7 @@ sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
   \item{plotorder}{default=FALSE, if TRUE, export polygons in plotting order}
 }
 
-\references{\url{http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/geobugs12manual.pdf}}
+\references{\url{http://www.mrc-bsu.cam.ac.uk/wp-content/uploads/geobugs12manual.pdf}}
 \author{Virgilio Gómez Rubio, partly derived from earlier code by Thomas Jagger}
 
 
@@ -34,7 +34,7 @@ all.equal(xxx, as(xx, "SpatialPolygons"), tolerance=.Machine$double.eps^(1/4),
 \dontrun{
 x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
 xp <- as(x, "SpatialPixelsDataFrame")
-pp <- as.SpatialPolygons.SpatialPixels(xp)
+pp <- as(xp, "SpatialPolygons")
 sp2WB(pp, filename="test.map")
 }
 }

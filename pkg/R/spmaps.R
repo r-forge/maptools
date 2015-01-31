@@ -35,7 +35,9 @@
 }
 
 map2SpatialLines <- function(map, IDs=NULL, proj4string=CRS(as.character(NA))) {
-	require(maps)
+    	if (!requireNamespace("maps", quietly = TRUE))
+		stop("package maps required")
+#	require(maps)
 	xyList <- .NAmat2xyList(cbind(map$x, map$y))
 	if (is.null(IDs)) IDs <- as.character(1:length(xyList))
 
@@ -82,7 +84,9 @@ pruneMap <- function(map, xlim=NULL, ylim=NULL) {
 # to be moved to glue with maps:
 
 map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA))) {
-	require(maps)
+    	if (!requireNamespace("maps", quietly = TRUE))
+		stop("package maps required")
+#	require(maps)
 	if (missing(IDs)) stop("IDs required")
 	xyList <- .NAmat2xyList(cbind(map$x, map$y))
 	if (length(xyList) != length(IDs)) stop("map and IDs differ in length")
@@ -98,10 +102,12 @@ map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA))) {
 		srl <- vector(mode="list", length=nParts)
 		for (j in 1:nParts) {
                         crds <- xyList[[belongs[[i]][j]]]
+                        if (nrow(crds) == 2) crds <- rbind(crds, crds[1,])
                         if (nrow(crds) == 3) crds <- rbind(crds, crds[1,])
 			srl[[j]] <- Polygon(coords=crds)
 		}
 		Srl[[i]] <- Polygons(srl, ID=IDss[i])
+                Srl[[i]] <- checkPolygonsHoles(Srl[[i]])
 	}
 	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4string)
 	res

@@ -19,7 +19,7 @@ not random}
   \item{compatible}{what to return, if TRUE a a list of matrices of point coordinates, one matrix for each member of pl, if false a SpatialPointsDataFrame with polygon ID values}
 }
 \details{
- With f="random", the dots are placed in the polygon at random, f="regular" - in a grid pattern (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). From maptools release 0.5-2, correction is made for holes in the placing of the dots, but depends on hole values being correctly set, which they often are not. The wrapper package spgpc may be used to check holes, see the \code{dontrun} section of the example. 
+ With f="random", the dots are placed in the polygon at random, f="regular" - in a grid pattern (number of dots not guaranteed to be the same as the count). When the polygon is made up of more than one part, the dots will be placed in proportion to the relative areas of the clockwise rings (anticlockwise are taken as holes). From maptools release 0.5-2, correction is made for holes in the placing of the dots, but depends on hole values being correctly set, which they often are not.  
 }
 \value{
   If compatible=TRUE, the function returns a list of matrices of point coordinates, one matrix for each member of pl. If x[i] is zero, the list element is NULL, and can be tested when plotting - see the examples. If compatible=FALSE (default), it returns a SpatialPointsDataFrame with polygon ID values as the only column in the data slot.
@@ -34,7 +34,6 @@ not random}
 nc_SP <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
  proj4string=CRS("+proj=longlat  +ellps=clrk66"))
 \dontrun{
-library(spgpc)
 pls <- slot(nc_SP, "polygons")
 pls_new <- lapply(pls, checkPolygonsHoles)
 nc_SP <- SpatialPolygonsDataFrame(SpatialPolygons(pls_new,
