@@ -8,7 +8,7 @@
   These functions may be used to convert map objects returned by the map function in the maps package to suitable objects defined in the sp package. In the examples below, arguments are shown for retrieving first polygons by name, then lines by window.
 }
 \usage{
-map2SpatialPolygons(map, IDs, proj4string = CRS(as.character(NA)))
+map2SpatialPolygons(map, IDs, proj4string = CRS(as.character(NA)), checkHoles=FALSE)
 map2SpatialLines(map, IDs=NULL, proj4string = CRS(as.character(NA)))
 pruneMap(map, xlim=NULL, ylim=NULL)
 }
@@ -18,6 +18,7 @@ pruneMap(map, xlim=NULL, ylim=NULL)
   \item{IDs}{Unique character ID values for each output Polygons object; the input IDs can be an integer or character vector with duplicates, where the duplicates will be combined as a single output Polygons object}
   \item{proj4string}{Object of class \code{"CRS"};
 	holding a valid proj4 string}
+  \item{checkHoles}{default=FALSE, if TRUE call \code{checkPolygonsHoles}internally to check hole assignment, (by default no polygon objects are holes)}
   \item{xlim,ylim}{limits for pruning a map object - should only be used for lines, because polygons will not be closed}
 }
 

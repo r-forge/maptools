@@ -83,10 +83,10 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 {
 	FILE *fp;
 	double w, e, s, n, area, lon, lat, scale = 10.0;
-	char source;
+/*	char source;*/
 	char msg[255];
 	const char *name[2] = {"polygon", "line"};
-	int k, line, max_east = 270000000, n_read, /*flip,*/ Level, version, greenwich, src, m, river;
+	int k, line, max_east = 270000000, n_read, /*flip,*/ Level, version, greenwich, src, m/*, river*/;
 	struct POINT p;
 	struct GSHHS h;
 	int npols, pc=0;
@@ -182,13 +182,13 @@ SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea)
 			warning("Data not same version as software %d", version);
 		    greenwich = (h.flag >> 16) & 3;			/* Greenwich is 0-3 */
 		    src = (h.flag >> 24) & 1;			/* Greenwich is 0 (WDBII) or 1 (WVS) */
-		    river = (h.flag >> 25) & 1;			/* River is 0 (not river) or 1 (is river) */
+/*		    river = (h.flag >> 25) & 1;			 River is 0 (not river) or 1 (is river) */
 		    w = h.west  * GSHHS_SCL;	
 /* Convert from microdegrees to degrees */
 		    e = h.east  * GSHHS_SCL;
 		    s = h.south * GSHHS_SCL;
 		    n = h.north * GSHHS_SCL;
-		    source = (src == 1) ? 'W' : 'C';	/* Either WVS or CIA (WDBII) pedigree */
+/*		    source = (src == 1) ? 'W' : 'C';	 Either WVS or CIA (WDBII) pedigree */
 		    line = (h.area) ? 0 : 1;		/* Either Polygon (0) or Line (1) (if no area) */
 		    m = h.flag >> 26;
 		    scale = pow (10.0, (double)m);		/* Area scale */

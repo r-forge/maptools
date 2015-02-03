@@ -83,7 +83,7 @@ pruneMap <- function(map, xlim=NULL, ylim=NULL) {
 
 # to be moved to glue with maps:
 
-map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA))) {
+map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA)), checkHoles=FALSE) {
     	if (!requireNamespace("maps", quietly = TRUE))
 		stop("package maps required")
 #	require(maps)
@@ -104,10 +104,12 @@ map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA))) {
                         crds <- xyList[[belongs[[i]][j]]]
                         if (nrow(crds) == 2) crds <- rbind(crds, crds[1,])
                         if (nrow(crds) == 3) crds <- rbind(crds, crds[1,])
-			srl[[j]] <- Polygon(coords=crds)
+                        if (.ringDirxy_gpc(crds) == -1)
+                            crds <- crds[nrow(crds):1,]
+			srl[[j]] <- Polygon(coords=crds, hole=FALSE)
 		}
 		Srl[[i]] <- Polygons(srl, ID=IDss[i])
-                Srl[[i]] <- checkPolygonsHoles(Srl[[i]])
+                if (checkHoles) Srl[[i]] <- checkPolygonsHoles(Srl[[i]])
 	}
 	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4string)
 	res
