@@ -119,6 +119,9 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
         return(obj)
     }
     pls <- slot(obj, "Polygons")
+    IDs <- slot(obj, "ID")
+    rm(obj)
+    gc(verbose=FALSE)
     n <- length(pls)
     if (n < 1) stop("Polygon list of zero length")
     uniqs <- rep(TRUE, n)
@@ -132,7 +135,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
                 res <- try(rgeos::gEquals(SP[i,], SP[tree1[[i]],], byid=TRUE),
                     silent=TRUE)
                 if (class(res) == "try-error") {
-                    warning("Polygons object ", slot(obj, "ID"), ", Polygon ",
+                    warning("Polygons object ", IDs, ", Polygon ",
                         i, ": ", res)
                     next
                 }
@@ -143,7 +146,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
         } else {
             res <- try(rgeos::gEquals(SP[i,], SP[uniqs,], byid=TRUE), silent=TRUE)
             if (class(res) == "try-error") {
-                warning("Polygons object ", slot(obj, "ID"), ", Polygon ",
+                warning("Polygons object ", IDs, ", Polygon ",
                     i, ": ", res)
                 next
             }
@@ -158,10 +161,11 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     if (any(!uniqs)) warning(paste("Duplicate Polygon objects dropped:",
         paste(wres, collapse=" ")))
     pls <- pls[uniqs]
+    IDs <- IDs[uniqs]
     n <- length(pls)
     if (n < 1) stop("Polygon list of zero length")
     if (n == 1) {
-        oobj <- Polygons(pls, ID=slot(obj, "ID"))
+        oobj <- Polygons(pls, ID=IDs)
         comment(oobj) <- rgeos::createPolygonsComment(oobj)
         return(oobj)
     }
@@ -196,7 +200,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
         if (oholes[i] != holes[i])
         pls[[i]] <- Polygon(slot(pls[[i]], "coords"), hole=holes[i])
     }
-    oobj <- Polygons(pls, ID=slot(obj, "ID"))
+    oobj <- Polygons(pls, ID=IDs)
     comment(oobj) <- rgeos::createPolygonsComment(oobj)
     oobj    
 }
