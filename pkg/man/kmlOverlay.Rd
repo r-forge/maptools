@@ -32,7 +32,7 @@ x is a character vector containing the generated lines of the kml file
 \examples{
 opt_exask <- options(example.ask=FALSE)
 qk <- SpatialPointsDataFrame(quakes[, c(2:1)], quakes)
-proj4string(qk) <- CRS("+proj=longlat")
+proj4string(qk) <- CRS("+proj=longlat +ellps=WGS84")
 tf <- tempfile()
 SGqk <- GE_SpatialGrid(qk)
 png(file=paste(tf, ".png", sep=""), width=SGqk$width, height=SGqk$height,
@@ -42,13 +42,13 @@ plot(qk, xlim=SGqk$xlim, ylim=SGqk$ylim, setParUsrBB=TRUE)
 dev.off()
 kmlOverlay(SGqk, paste(tf, ".kml", sep=""), paste(tf, ".png", sep=""))
 \dontrun{
-library(rgdal)
-qk0 <- quakes
-qk0$long <- ifelse(qk0$long <= 180, qk0$long, qk0$long-360)
-qk0a <- SpatialPointsDataFrame(qk0[, c(2:1)], qk0)
-proj4string(qk0a) <- CRS("+proj=longlat")
-writeOGR(qk0a, paste(tf, "v.kml", sep=""), "Quakes", "KML")
-system(paste("googleearth ", tf, ".kml", sep=""))
+#library(rgdal)
+#qk0 <- quakes
+#qk0$long <- ifelse(qk0$long <= 180, qk0$long, qk0$long-360)
+#qk0a <- SpatialPointsDataFrame(qk0[, c(2:1)], qk0)
+#proj4string(qk0a) <- CRS("+proj=longlat +ellps=WGS84")
+#writeOGR(qk0a, paste(tf, "v.kml", sep=""), "Quakes", "KML")
+#system(paste("googleearth ", tf, ".kml", sep=""))
 }
 options(example.ask=opt_exask)
 }

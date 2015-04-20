@@ -48,7 +48,7 @@ The following color specifications are allowed: \code{'red'}, \code{2}, or as he
 
 \examples{
 xx <- readShapeSpatial(system.file("shapes/fylk-val-ll.shp",
-      package="maptools")[1], proj4string=CRS("+proj=longlat"))
+      package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=WGS84"))
 out <- sapply(slot(xx, "lines"), function(x) { kmlLine(x,
     name=slot(x, "ID"), col="blue", lwd=1.5, 
     description=paste("river:", slot(x, "ID"))) })

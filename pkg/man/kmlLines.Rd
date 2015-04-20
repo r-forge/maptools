@@ -51,7 +51,7 @@ The following color specifications are allowed: \code{'red'}, \code{2}, or as he
 library(maptools)
 # load line object
 rivers <- readShapeSpatial(system.file("shapes/fylk-val-ll.shp",
-                           package="maptools")[1], proj4string=CRS("+proj=longlat"))
+                           package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=WGS84"))
 # create kml file
 kmlLines(rivers, kmlfile = "rivers.kml", name = "R Lines", 
          description = "Hello!", col = "blue", visibility = 1, lwd = 1, 

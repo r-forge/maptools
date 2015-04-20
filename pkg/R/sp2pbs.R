@@ -105,13 +105,13 @@ PolySet2SpatialPolygons <- function(PS, close_polys=TRUE) {
     if (!inherits(PS, "PolySet")) stop("not a PolySet object")
     prj <- attr(PS, "projection")
     if (is.null(prj)) stop("unknown coordinate reference system")
-    if (prj == "LL") p4s <- "+proj=longlat"
+    if (prj == "LL") p4s <- "+proj=longlat +ellps=WGS84"
     else if (prj == "UTM") {
 # apparent change in PBS object attributes
         zn <- attr(prj, "zone")
         if (is.null(zn)) zn <- attr(PS, "zone")
         if (is.null(zn)) stop("no valid zone attribute")
-	p4s <- paste("+proj=utm +zone=", zn, sep="")
+	p4s <- paste("+proj=utm +ellps=WGS84 +zone=", zn, sep="")
     } else {
        p4s <- as.character(NA)
        warning("unknown coordinate reference system")
@@ -159,13 +159,13 @@ PolySet2SpatialLines <- function(PS) {
     prj <- attr(PS, "projection")
     prj <- attr(PS, "projection")
     if (is.null(prj)) stop("unknown coordinate reference system")
-    if (prj == "LL") p4s <- "+proj=longlat"
+    if (prj == "LL") p4s <- "+proj=longlat +ellps=WGS84"
     else if (prj == "UTM") {
 # apparent change in PBS object attributes
         zn <- attr(prj, "zone")
         if (is.null(zn)) zn <- attr(PS, "zone")
         if (is.null(zn)) stop("no valid zone attribute")
-	p4s <- paste("+proj=utm +zone=", zn, sep="")
+	p4s <- paste("+proj=utm +ellps=WGS84 +zone=", zn, sep="")
     } else {
        p4s <- as.character(NA)
        warning("unknown coordinate reference system")

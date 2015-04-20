@@ -161,7 +161,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     if (any(!uniqs)) warning(paste("Duplicate Polygon objects dropped:",
         paste(wres, collapse=" ")))
     pls <- pls[uniqs]
-    IDs <- IDs[uniqs]
+#    IDs <- IDs[uniqs]
     n <- length(pls)
     if (n < 1) stop("Polygon list of zero length")
     if (n == 1) {

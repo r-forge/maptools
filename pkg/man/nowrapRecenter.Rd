@@ -31,9 +31,9 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2), 2),
 
 \examples{
 \dontrun{
-library(maps)
+if (require(maps)) {
 world <- map("world", fill=TRUE, col="transparent", plot=FALSE)
-worldSpP <- map2SpatialPolygons(world, world$names, CRS("+proj=longlat"))
+worldSpP <- map2SpatialPolygons(world, world$names, CRS("+proj=longlat +ellps=WGS84"))
 worldSpP <- worldSpP[-grep("Antarctica", row.names(worldSpP)),]
 # incomplete polygons
 worldSpP <- worldSpP[-grep("Ghana", row.names(worldSpP)),]
@@ -47,11 +47,12 @@ worldSpPnr <- nowrapRecenter(worldSpP)
 plot(worldSpPnr)
 title("Pacific view with polygon splitting")
 }
+}
 if (rgeosStatus()) {
 crds <- matrix(c(-1, 1, 1, -1, 50, 50, 52, 52), ncol=2)
 rcrds <- rbind(crds, crds[1,])
 SR <- SpatialPolygons(list(Polygons(list(Polygon(rcrds)), ID="r1")),
- proj4string=CRS("+proj=longlat"))
+ proj4string=CRS("+proj=longlat +ellps=WGS84"))
 bbox(SR)
 SRr <- recenter(SR)
 bbox(SRr)
