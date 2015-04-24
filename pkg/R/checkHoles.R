@@ -120,8 +120,6 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     }
     pls <- slot(obj, "Polygons")
     IDs <- slot(obj, "ID")
-    rm(obj)
-    gc(verbose=FALSE)
     n <- length(pls)
     if (n < 1) stop("Polygon list of zero length")
     uniqs <- rep(TRUE, n)
