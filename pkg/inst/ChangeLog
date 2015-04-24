@@ -1,3 +1,11 @@
+2015-04-24 10:25  rsbivand
+
+	* DESCRIPTION, R/checkHoles.R: remove gc() and rm() from checkHoles
+
+2015-04-23 10:19  rsbivand
+
+	* ChangeLog, inst/ChangeLog, svn2cl.xsl: tidy
+
 2015-04-20 13:21  rsbivand
 
 	* DESCRIPTION, R/checkHoles.R, R/sp2pbs.R, man/GE_SpatialGrid.Rd,
