@@ -16,7 +16,7 @@ sp2Mondrian(SP, file, new_format=TRUE)
 }
 
 
-\references{\url{http://rosuda.org/Mondrian/}}
+\references{\url{http://www.theusrus.de/Mondrian/}}
 \author{Patrick Hausmann and Roger Bivand}
 \note{
  At this release, the function writes out a text file with both data and polygon(s) identified as belonging to each row of data.

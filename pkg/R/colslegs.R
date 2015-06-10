@@ -1,5 +1,6 @@
 # Copyright 2000-2001 (c) Nicholas Lewin-Koh 
 # modifications 2001-2003 (c) Roger Bivand
+# modifications 201506 Nick Bearman
 
 
 # Returns a vector of HSV values
@@ -40,17 +41,43 @@ color.ramp <- function (nclass, color = "red", nvec = NULL, type = "q"){
   return(NULL)
 }
 
-leglabs <- function(vec, under="under", over="over", between="-") {
-	x <- vec
-	lx <- length(x)
-	if(lx < 3) stop("vector too short")
-	res <- character(lx-1)
-	res[1] <- paste(under, x[2])
-	for (i in 2:(lx-2)) res[i] <- paste(x[i], between, x[i+1])
-	res[lx-1] <- paste(over, x[lx-1])
-	res
+#updated leglabs function to allow order of entries to be reversed
+
+leglabs <- function(vec, under="under", over="over", between="-", reverse = FALSE) {
+  x <- vec
+  lx <- length(x)
+  if(lx < 3) stop("vector too short")
+  if(reverse) { #if user asks order to be reversed
+    #reorder variable
+#    x<-reverseorder(x)
+    x<-rev(x)
+    #set new under and over values
+    under <- "over"
+    over <- "under"
+  }  
+  res <- character(lx-1)
+  res[1] <- paste(under, x[2])
+  for (i in 2:(lx-2)) res[i] <- paste(x[i], between, x[i+1])
+  res[lx-1] <- paste(over, x[lx-1])
+  res
 }
 
+#reverseorder <- function(old.var){
+  #function to reverseorder any set of values, designed for use with legends in maptools library
+  #copy variable to be reordered
+#  new.var <- old.var
+  #loop going through each value in turn
+#  for (i in 1:length(old.var)) {
+    #save it in the appropiate place in the new variable
+#    new.var[length(old.var)+1-i] <- old.var[i]
+#  } 
+  #return new variable
+#  return(new.var)
+#}
+
+#x 
+
+#x
 #The set of classification methods is large (Dent p. 145), but there are a few to remember:
 
 #        * Equal Intervals ("Constant Interval"): each class has same difference in value
