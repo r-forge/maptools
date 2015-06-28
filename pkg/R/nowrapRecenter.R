@@ -20,6 +20,7 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 		pls <- slot(obj, "polygons")
 		Srl <- lapply(pls, .nowrapPolygons, offset=offset, eps=eps,
                     rgeosI=rgeosI, avoidGEOS=avoidGEOS)
+                Srl <- Srl[!sapply(Srl, is.null)]
 		res <- as.SpatialPolygons.PolygonsList(Srl,
 			proj4string=CRS(proj4string(obj)))
 	} else res <- obj
@@ -29,6 +30,7 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 .nowrapPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps, 2),
      rgeosI, avoidGEOS=FALSE) {
 	if (!is(obj, "Polygons")) stop("not an Polygons object")
+        if (slot(obj, "area")  < mean(eps)) return(NULL)
 	bbo <- bbox(obj)
 	inout <- bbo[1,1] < offset && bbo[1,2] >= offset
 	if (inout) {
@@ -85,6 +87,11 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 		for (j in 1:nP) {
 			crds <- cbind(gpc_res@pts[[j]]$x, gpc_res@pts[[j]]$y)
 			crds <- rbind(crds, crds[1,])
+                        if (any(crds[,1] > offset)) {
+                            crds[,1] <- crds[,1] - (2*offset)
+                        } else if (any(crds[,1] < -offset)){
+                            crds[,1] <- crds[,1] + (2*offset)
+                        }
 			hole <- gpc_res@pts[[j]]$hole
 			rD <- .ringDirxy(crds)
 			if (rD == 1 & hole) crds <- crds[nrow(crds):1,]
