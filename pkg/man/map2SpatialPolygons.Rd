@@ -22,6 +22,8 @@ pruneMap(map, xlim=NULL, ylim=NULL)
   \item{xlim,ylim}{limits for pruning a map object - should only be used for lines, because polygons will not be closed}
 }
 
+\details{Any zero area output geometries are dropped, and warnings are issued.}
+
 \value{
   \code{map2SpatialPolygons} returns a SpatialPolygons object and \code{map2SpatialLines} returns a SpatialLines object (objects defined in the sp package); \code{pruneMap} returns a modified map object defined in the maps package
 }
@@ -55,6 +57,15 @@ nor_coast_lines_sp <- map2SpatialLines(nor_coast_lines,
  proj4string=CRS("+proj=longlat +datum=WGS84"))
 plot(nor_coast_poly_sp, col="grey", axes=TRUE)
 plot(nor_coast_lines_sp, col="blue", add=TRUE)
+worldmap <- map("world", fill=TRUE, plot=FALSE)
+worldmapPolys <- map2SpatialPolygons(worldmap, 
+ IDs=sapply(strsplit(worldmap$names, ":"), "[", 1L), 
+ proj4string=CRS("+proj=longlat +datum=WGS84"))
+if (rgeosStatus()) {
+require(rgeos)
+vals <- rgeos::gIsValid(worldmapPolys, byid=TRUE, reason=TRUE)
+print(table(sapply(strsplit(vals, "\\\\["), "[", 1)))
+}
 }
 }
 \keyword{spatial}

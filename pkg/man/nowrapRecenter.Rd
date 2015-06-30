@@ -7,17 +7,17 @@
   When recentering a world map, say to change an "Atlantic" view with longitude range -180 to 180, to a "Pacific" view, with longitude range 0 to 360, polygons crossed by the new offset, here 0/360, need to be clipped into left and right sub.polygons to avoid horizontal scratches across the map. The \code{nowrapSpatialPolygons} function performs this operation using polygon intersection, and \code{nowrapRecenter} recenters the output SpatialPolygons object. 
 }
 \usage{
-nowrapRecenter(obj, offset = 0, eps = rep(.Machine$double.eps^(1/2), 2),
+nowrapRecenter(obj, offset = 0, eps = rep(.Machine$double.eps^(1/2.5), 2),
  avoidGEOS = FALSE)
-nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2), 2),
+nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2.5), 2),
  avoidGEOS = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{obj}{ A SpatialPolygons object }
   \item{offset}{ offset from the Greenwich meridian }
-  \item{eps}{vector of two (left and right) fuzz factors to retract the ring from the offset (square root to accommodate \pkg{rgeos} precision rules)}
-  \item{avoidGEOS}{use \pkg{gpclib} code even if \pkg{rgeos} is available}
+  \item{eps}{vector of two (left and right) fuzz factors to retract the ring from the offset (2.5 root to accommodate \pkg{rgeos} precision rules)}
+  \item{avoidGEOS}{default FALSE; use \pkg{polyclip} or \pkg{gpclib} code even if \pkg{rgeos} is available}
 }
 
 \value{
@@ -27,7 +27,7 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2), 2),
 \author{Roger Bivand}
 
 
-\seealso{\code{\link[sp]{recenter-methods}}, \code{\link[sp]{nowrapSpatialLines}}}
+\seealso{\code{\link[sp]{recenter-methods}}, \code{\link{nowrapSpatialLines}}}
 
 \examples{
 \dontrun{

@@ -47,7 +47,7 @@ export(as.psp.SpatialLinesDataFrame, as.psp.SpatialLines, as.psp.Lines, as.psp.L
 
 export(gpclibPermit, gpclibPermitStatus, rgeosStatus)
 
-export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles)
+export(unionSpatialPolygons, nowrapSpatialPolygons, nowrapRecenter, checkPolygonsHoles, nowrapSpatialLines)
 
 export(Rgshhs, getRgshhsMap)
 

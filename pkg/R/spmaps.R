@@ -97,9 +97,11 @@ map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA)), che
 	belongs <- lapply(1:n, function(x) which(x == reg))
 # assemble the list of Srings
 	Srl <- vector(mode="list", length=n)
+        drop_Polygons <- logical(length=n)
 	for (i in 1:n) {
 		nParts <- length(belongs[[i]])
 		srl <- vector(mode="list", length=nParts)
+                ars <- logical(length=nParts)
 		for (j in 1:nParts) {
                         crds <- xyList[[belongs[[i]][j]]]
                         if (nrow(crds) == 2) crds <- rbind(crds, crds[1,])
@@ -107,10 +109,19 @@ map2SpatialPolygons <- function(map, IDs, proj4string=CRS(as.character(NA)), che
                         if (.ringDirxy_gpc(crds) == -1)
                             crds <- crds[nrow(crds):1,]
 			srl[[j]] <- Polygon(coords=crds, hole=FALSE)
+                        ars[j] <- slot(srl[[j]], "area") > 0
 		}
-		Srl[[i]] <- Polygons(srl, ID=IDss[i])
-                if (checkHoles) Srl[[i]] <- checkPolygonsHoles(Srl[[i]])
+                srl <- srl[ars]
+                drop_Polygons[i] <- length(srl) <= 0L
+                if (!drop_Polygons[i]) {
+		  Srl[[i]] <- Polygons(srl, ID=IDss[i])
+                  if (checkHoles) Srl[[i]] <- checkPolygonsHoles(Srl[[i]])
+                } else {
+                  warning("map2SpatialPolygons: ", IDss[i], " dropped")
+                }
 	}
+        Srl <- Srl[!drop_Polygons]
+        if (length(Srl) <= 0L) stop("map2SpatialPolygons: no Polygons output")
 	res <- as.SpatialPolygons.PolygonsList(Srl, proj4string=proj4string)
 	res
 }
