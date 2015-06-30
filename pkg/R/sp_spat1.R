@@ -77,3 +77,26 @@ as.im.SpatialGridDataFrame = function(from) {
     spatstat::im(t(xi$z), xcol=xi$x, yrow=xi$y)
 }
 setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)
+
+as.im.RasterLayer <- function(from, to = "im", strict = TRUE) 
+{
+    if (!requireNamespace("spatstat", quietly = TRUE))
+		stop("package spatstat required for coercion")
+    if (!requireNamespace("raster", quietly = TRUE))
+		stop("package raster required for coercion")
+    if (!raster::hasValues(from)) stop("values required in RasterLayer object")
+    if (raster::rotated(from)) {
+        stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the \"rectify\" function")
+    }
+    rs <- raster::res(from)
+    orig <- bbox(from)[, 1] + 0.5 * rs
+    dm <- dim(from)[2:1]
+    xx <- unname(orig[1] + cumsum(c(0, rep(rs[1], dm[1]-1))))
+    yy <- unname(orig[2] + cumsum(c(0, rep(rs[2], dm[2]-1))))
+    im <- spatstat::im(matrix(raster::values(from), ncol=dm[1], nrow=dm[2],
+        byrow=TRUE)[dm[2]:1,], xcol=xx, yrow=yy)
+    im
+}
+
+setAs("RasterLayer", "im", as.im.RasterLayer)
+
