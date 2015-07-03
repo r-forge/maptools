@@ -14,6 +14,9 @@ if (!isClass("im"))
 if (!isClass("tess"))
     setClass("tess")
 
+if (!isClass("RasterLayer"))
+    setClass("RasterLayer")
+
 as.SpatialPoints.ppp =  function(from) {
     mult <- 1
     if (!is.null(from$window$units) && !is.null(from$window$units$multiplier))
