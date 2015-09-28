@@ -1,3 +1,37 @@
+2015-09-28 22:19  rsbivand
+
+	* ChangeLog, DESCRIPTION, NAMESPACE, R/nowrapRecenter.R,
+	  R/sp_spat1.R, man/as.ppp.Rd, man/gzAzimuth.Rd: tidy
+
+2015-07-03 11:21  rsbivand
+
+	* R/nowrapRecenter.R, R/sp_spat1.R, R/spmaps.R: nowrapSL to rgeos
+
+2015-06-30 21:16  rsbivand
+
+	* DESCRIPTION, R/sp_spat1.R, man/as.ppp.Rd: RasterLayer to im
+	  coercion
+
+2015-06-30 05:52  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/nowrapRecenter.R, R/spmaps.R,
+	  man/map2SpatialPolygons.Rd, man/nowrapRecenter.Rd: nowrap
+	  revisions
+
+2015-06-28 15:17  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/nowrapRecenter.R: CRAN
+	  _R_CHECK_CODE_USAGE_WITH_ONLY_BASE_ATTACHED_=true NAMESPACE tidy
+
+2015-06-10 13:55  rsbivand
+
+	* DESCRIPTION, R/colslegs.R, man/leglabs.Rd, man/sp2Mondrian.Rd,
+	  vignettes/combine_maptools.Rnw: reverse leglabs
+
+2015-04-24 10:26  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2015-04-24 10:25  rsbivand
 
 	* DESCRIPTION, R/checkHoles.R: remove gc() and rm() from checkHoles

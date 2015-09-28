@@ -1,3 +1,8 @@
+2015-09-28 22:19  rsbivand
+
+	* ChangeLog, DESCRIPTION, NAMESPACE, R/nowrapRecenter.R,
+	  R/sp_spat1.R, man/as.ppp.Rd, man/gzAzimuth.Rd: tidy
+
 2015-07-03 11:21  rsbivand
 
 	* R/nowrapRecenter.R, R/sp_spat1.R, R/spmaps.R: nowrapSL to rgeos
