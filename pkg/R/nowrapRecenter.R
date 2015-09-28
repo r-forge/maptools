@@ -193,10 +193,14 @@ nowrapSpatialLines <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/2.5
                 SPobj <- SpatialLines(list(obj))
                 resW <- rgeos::gIntersection(SPobj, SpatialPolygons(list(
                     Polygons(list(Polygon(bbmatW)), ID="W"))))
+                resW <- ifelse (inherits(resW, "SpatialLines"),
+                    slot(slot(resW, "lines")[[1]], "Lines"), list(NULL))
                 resE <- rgeos::gIntersection(SPobj, SpatialPolygons(list(
                     Polygons(list(Polygon(bbmatE)), ID="E"))))
-                cparts <- c(slot(slot(resW, "lines")[[1]], "Lines"),
-                    slot(slot(resE, "lines")[[1]], "Lines"))
+                resE <- ifelse (inherits(resE, "SpatialLines"),
+                    slot(slot(resE, "lines")[[1]], "Lines"), list(NULL))
+                cparts <- c(resW, resE)
+                cparts <- cparts[!sapply(cparts, is.null)]
                 res <- Lines(cparts, ID=slot(obj, "ID"))
 
 	} else res <- obj

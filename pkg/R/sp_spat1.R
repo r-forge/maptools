@@ -14,8 +14,8 @@ if (!isClass("im"))
 if (!isClass("tess"))
     setClass("tess")
 
-if (!isClass("RasterLayer"))
-    setClass("RasterLayer")
+#if (!isClass("RasterLayer"))
+#    setClass("RasterLayer")
 
 as.SpatialPoints.ppp =  function(from) {
     mult <- 1
@@ -81,7 +81,7 @@ as.im.SpatialGridDataFrame = function(from) {
 }
 setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)
 
-as.im.RasterLayer <- function(from, to = "im", strict = TRUE) 
+as.im.RasterLayer <- function(from) 
 {
     if (!requireNamespace("spatstat", quietly = TRUE))
 		stop("package spatstat required for coercion")
@@ -101,5 +101,7 @@ as.im.RasterLayer <- function(from, to = "im", strict = TRUE)
     im
 }
 
-setAs("RasterLayer", "im", as.im.RasterLayer)
+#if (requireNamespace("spatstat", quietly = TRUE) && requireNamespace("raster", quietly = TRUE)) {
+#  setAs("RasterLayer", "im", as.im.RasterLayer)
+#}
 

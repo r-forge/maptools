@@ -23,7 +23,7 @@ trackAzimuth(track, type="snyder_sphere")
 \value{
   values in decimal degrees - zero is North - of the azimuth from the \code{from} coordinates to the \code{to} coordinate.
 }
-\references{Snyder JP (1987) Map projections - a working manual, USGS Professional Paper 1395; Abdali SK (1997) "The Correct Qibla", \url{http://patriot.net/users/abdali/ftp/qibla.pdf}}
+\references{Snyder JP (1987) Map projections - a working manual, USGS Professional Paper 1395; Abdali SK (1997) "The Correct Qibla", formerly at http://patriot.net/users/abdali/ftp/qibla.pdf}
 \author{Roger Bivand, with contributions by Sebastian Luque}
 
 \examples{
