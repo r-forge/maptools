@@ -33,6 +33,8 @@ kmlPolygon(sw, kmlfile=tf, name="South Africa", col="#df0000aa", lwd=5,
     kmldescription="This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
 zz <- getKMLcoordinates(tf, ignoreAltitude=TRUE)
 str(zz)
+zz <- getKMLcoordinates(system.file("shapes/tessellate.kml", package="maptools"))
+str(zz)
 }
 \keyword{spatial}
 

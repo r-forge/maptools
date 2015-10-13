@@ -14,7 +14,8 @@ getKMLcoordinates <- function(kmlfile, ignoreAltitude = FALSE) {
     coords <- list()
     for (i in 1:(length(mtchs))) {
         kmlCoords <- unlist(strsplit(gsub(re, "\\1", substr(kml, 
-            mtchs[i], (mtchs[i] + attr(mtchs, "match.length")[i])), 
+# Kent Johnson bugfix (added -1) 151013
+            mtchs[i], (mtchs[i] + (attr(mtchs, "match.length")[i]-1))), 
             perl = TRUE), split = " "))
         m <- t(as.matrix(sapply(kmlCoords, function(x) as.numeric(unlist(
             strsplit(x, ","))), USE.NAMES = FALSE)))
