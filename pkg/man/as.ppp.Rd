@@ -104,7 +104,7 @@ plot(zn1)
 as(as(meuse, "SpatialPoints"), "ppp")
 data(meuse.grid)
 gridded(meuse.grid) = ~x+y
-mg_owin <- as(meuse.grid, "owin")
+mg_owin <- as(meuse.grid["dist"], "owin")
 zn1a <- ppp(x=zn1$x, y=zn1$y, marks=zn1$marks, window=mg_owin)
 zn1a
 plot(zn1a)
@@ -123,7 +123,7 @@ xx_back <- as(mr_psp, "SpatialLines")
 plot(xx_back)
 xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1],
  proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
-xx_psp <- as(xx, "psp")
+xx_psp <- as(xx["LENGTH"], "psp")
 xx_psp
 plot(xx_psp)
 xx_back <- as(xx_psp, "SpatialLines")
