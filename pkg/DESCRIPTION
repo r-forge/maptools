@@ -22,6 +22,7 @@ Authors@R: c(
 	person("Patrick", "Hausmann", role = "ctb"),
 	person("Karl Ove", "Hufthammer", role = "ctb"),
 	person("Thomas", "Jagger", role = "ctb"),
+	person("Kent", "Johnson", role = "ctb"),
 	person("Sebastian", "Luque", role = "ctb"),
 	person("Don", "MacQueen", role = "ctb"),
 	person("Andrew", "Niccolai", role = "ctb"),
