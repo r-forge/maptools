@@ -1,7 +1,7 @@
 
 kmlPoints <- function (obj = NULL, kmlfile = NULL, kmlname = "", kmldescription = "",
                        name = NULL, description = "", 
-                       icon = "http://google.com/mapfiles/kml/paddle/wht-diamond.png") {
+                       icon = "http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png") {
     # Handle null object
     if (is.null(obj)) 
         return(list(header = c("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", 

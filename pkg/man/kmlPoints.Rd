@@ -8,7 +8,7 @@
 \usage{
 kmlPoints(obj=NULL, kmlfile=NULL, kmlname="", kmldescription="",
     name=NULL, description="",
-    icon="http://google.com/mapfiles/kml/paddle/wht-diamond.png")
+    icon="http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png")
 }
 
 \arguments{
@@ -38,7 +38,7 @@ y is a list with the elements \code{header} and \code{footer} representing the K
 }
 
 \section{KML icons}{
-The default icon URL is \url{http://google.com/mapfiles/kml/paddle/wht-diamond.png}. Additional icons are available at:
+The default icon URL is \url{http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png}. Additional icons are available at:
 \url{http://sites.google.com/site/gmapsdevelopment}.
 }
 
@@ -54,7 +54,7 @@ kmlname <- "Oregon Splash Dams"
 kmldescription <- paste("Data for Splash Dams in western Oregon.",
  "See http://www.fs.fed.us/pnw/lwm/aem/people/burnett.html#projects_activities",
  "for more information.")
-icon <- "http://google.com/mapfiles/kml/paddle/wht-diamond.png"
+icon <- "http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png"
 name <- paste("Dam on",SplashDams$streamName)
 description <- paste("<b>owner:</b>", SplashDams$owner, "<br><b>dates:</b>", SplashDams$datesUsed)
 

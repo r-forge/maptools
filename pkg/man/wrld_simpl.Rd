@@ -27,7 +27,7 @@ The object is in geographical coordinates using the WGS84 datum.
 }
 
 \source{
-  \url{http://mappinghacks.com/data/TM_WORLD_BORDERS_SIMPL-0.2.zip}
+  Originally \dQuote{http://mappinghacks.com/data/TM_WORLD_BORDERS_SIMPL-0.2.zip}, now available from \url{https://github.com/nasa/World-Wind-Java/tree/master/WorldWind/testData/shapefiles}
 }
 
 \examples{

@@ -1,10 +1,6 @@
 /* Copyright where not otherwise stated Edzer Pebesma 2004, 
 copied from sp package */
 
-#define USING_R 1
-#include "S.h" 
-
-#ifdef USING_R
 # include <R.h>
 # include <Rdefines.h>
 /* # include <Rinternals.h> */
@@ -12,20 +8,6 @@ copied from sp package */
 # define R_NORMAL  norm_rand()
 # define RANDIN seed_in((long *) NULL)
 # define RANDOUT seed_out((long *) NULL)
-# define S_EVALUATOR
-#else /* some S-Plus version; assuming >= 6 for now: */
-# if (!defined(SPLUS_VERSION) || SPLUS_VERSION < 6000)
-#  error("no SPLUS_VERSION >= 6.0")
-# endif
-# define SEXP s_object *
-# define PROTECT(x) x
-# define UNPROTECT(x)
-# define R_UNIFORM unif_rand(S_evaluator)
-# define R_NORMAL  norm_rand(S_evaluator)
-# define RANDIN seed_in((long *) NULL, S_evaluator)
-# define RANDOUT seed_out((long *) NULL, S_evaluator)
-# define Rprintf printf
-#endif
 
 #ifndef MIN
 # define MIN(a,b) ((a)>(b)?(b):(a))
@@ -59,7 +41,6 @@ SEXP R_point_in_polygon_mt(SEXP px, SEXP py, SEXP polx, SEXP poly) {
 	POLYGON pol;
 	SEXP ret;
 
-	S_EVALUATOR
 	pol.lines = LENGTH(polx); /* check later that first == last */
 	pol.p = (PLOT_POINT *) Calloc(pol.lines, PLOT_POINT); /* Calloc does error handling */
 	for (i = 0; i < LENGTH(polx); i++) {
