@@ -1,3 +1,39 @@
+2016-01-28 13:48  rsbivand
+
+	* DESCRIPTION, R/kmlPoints.R, man/kmlPoints.Rd, man/wrld_simpl.Rd,
+	  src/pip.c: remove S.h from src/pip.c
+
+2015-10-28 21:01  rsbivand
+
+	* data/wrld_simpl.rda: tidy
+
+2015-10-14 13:07  rsbivand
+
+	* DESCRIPTION, inst/README, inst/shapes/Testing.kml,
+	  inst/shapes/tessellate.kml, man/getKMLcoordinates.Rd: tidy
+
+2015-10-14 07:06  rsbivand
+
+	* inst/README: tidy
+
+2015-10-13 14:43  rsbivand
+
+	* man/as.ppp.Rd: tidy
+
+2015-10-13 12:36  rsbivand
+
+	* DESCRIPTION, R/getKMLcoordinates.R, inst/README,
+	  inst/shapes/tessellate.kml, man/getKMLcoordinates.Rd: fix
+	  getKMLcoordinates bug
+
+2015-10-13 12:31  rsbivand
+
+	* man/nowrapSpatialLines.Rd: tidy
+
+2015-09-28 22:20  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2015-09-28 22:19  rsbivand
 
 	* ChangeLog, DESCRIPTION, NAMESPACE, R/nowrapRecenter.R,
