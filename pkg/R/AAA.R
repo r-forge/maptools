@@ -4,10 +4,17 @@
 #    assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
 #}
 
-.onAttach <- function(lib, pkg) {
+.onLoad <- function(lib, pkg) {
     assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
-    Smess <- paste("Checking rgeos availability: ")
     rgeosI <- setRgeosStatus()
+    invisible(NULL)
+}
+
+.onAttach <- function(lib, pkg) {
+#    assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
+    Smess <- paste("Checking rgeos availability: ")
+#    rgeosI <- setRgeosStatus()
+    rgeosI <- rgeosStatus()
     Smess <- paste(Smess, rgeosI, "\n", sep="")
     if (!rgeosI) Smess <- paste(Smess, 
               "\tNote: when rgeos is not available, polygon geometry",
