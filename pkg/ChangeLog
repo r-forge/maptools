@@ -1,3 +1,12 @@
+2016-11-13 19:29  rsbivand
+
+	* DESCRIPTION, R/AAA.R, data/wrld_simpl.rda: cache on load not
+	  attach; Untied ...
+
+2016-01-29 08:38  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2016-01-28 13:48  rsbivand
 
 	* DESCRIPTION, R/kmlPoints.R, man/kmlPoints.Rd, man/wrld_simpl.Rd,
