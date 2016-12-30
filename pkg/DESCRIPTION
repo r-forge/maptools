@@ -1,6 +1,6 @@
 Package: maptools
-Version: 0.8-40
-Date: 2016-11-14
+Version: 0.8-41
+Date: 2016-12-30
 Title: Tools for Reading and Handling Spatial Objects
 Authors@R: c(
 	person("Roger", "Bivand", role = c("cre", "aut"), email = "Roger.Bivand@nhh.no"),
