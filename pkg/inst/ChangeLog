@@ -1,3 +1,17 @@
+2017-01-02 11:17  rsbivand
+
+	* DESCRIPTION: tidy
+
+2016-12-30 20:01  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/as.linnet.SL.R,
+	  man/as.linnet.SpatialLines.Rd: adding coercion to
+	  spatstat::linnet
+
+2016-11-14 13:33  rsbivand
+
+	* ChangeLog, inst/ChangeLog, man/nowrapSpatialLines.Rd: tidy
+
 2016-11-13 19:29  rsbivand
 
 	* DESCRIPTION, R/AAA.R, data/wrld_simpl.rda: cache on load not
