@@ -27,7 +27,7 @@ gcDestination(lon, lat, bearing, dist, dist.units = "km",
 }
 \references{\url{http://www.movable-type.co.uk/scripts/latlong.html#ellipsoid}, 
 
-\url{http://williams.best.vwh.net/avform.htm}, 
+the file earlier available at \code{http:\/\/williams.best.vwh.net/avform.htm}, 
 
 \url{http://www.movable-type.co.uk/scripts/latlong-vincenty-direct.html}, 
 
