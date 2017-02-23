@@ -5,9 +5,14 @@
 #include <Rinternals.h>
 
 int 	SHPRingDir_2d ( SHPObject *psCShape, int Ring );
-/* #if R_VERSION < R_Version(1, 2, 0)
-# define STRING_ELT(x,i)        (STRING(x)[i])
-# define VECTOR_ELT(x,i)        (VECTOR(x)[i])
-# define SET_STRING_ELT(x,i,v)  (STRING(x)[i] = (v))
-# define SET_VECTOR_ELT(x,i,v)  (VECTOR(x)[i] = (v))
-#endif */
+void	RFindCG( int *n, double *x, double *y, double *xc, double *yc, 
+		double *area );
+SEXP mtInsiders(SEXP n1, SEXP bbs);
+SEXP R_point_in_polygon_mt(SEXP px, SEXP py, SEXP polx, SEXP poly);
+SEXP Rgshhs(SEXP fn, SEXP mode, SEXP dolim, SEXP lim, SEXP level, SEXP minarea);
+SEXP Rshapeget(SEXP shpnm, SEXP repair);
+SEXP Rshapeinfo1(SEXP shpname);
+SEXP shpwritepoint(SEXP fname, SEXP shapes, SEXP ncol);
+SEXP shpwritepolys(SEXP fname, SEXP shapes);
+SEXP shpwritelines(SEXP fname, SEXP shapes);
+

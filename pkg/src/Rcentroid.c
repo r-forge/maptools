@@ -202,8 +202,6 @@ typedef double  tPointd[DIM];   /* type double point */
 double  Area2( tPointd a, tPointd b, tPointd c );
 void    FindCG( int n, tPointd *P, tPointd CG, double *Areasum2 );
 void    Centroid3( tPointd p1, tPointd p2, tPointd p3, tPointd c );
-void	RFindCG( int *n, double *x, double *y, double *xc, double *yc, 
-		double *area );
 
 void	RFindCG( int *n, double *x, double *y, double *xc, double *yc, 
 		double *area ) {

@@ -70,7 +70,6 @@ static void swapb(void *result, int size)
 }
 
 
-SEXP Rgshhs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 int getNpols(FILE *);
 
