@@ -17,7 +17,7 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{fn}{shapefile layer name, when writing omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{IDvar}{a character string: the name of a column in the shapefile DBF containing the ID values of the shapes - the values will be converted to a character vector}
   \item{proj4string}{Object of class \code{CRS}; holding a valid proj4 string}
-  \item{verbose}{default TRUE - report type of shapefile and number of shapes}
+  \item{verbose}{default FALSE - report type of shapefile and number of shapes}
   \item{repair}{default FALSE: some shapefiles provided by Geolytics Inc. have values of object sizes stored in the *.shx index file that are eight bytes too large, leading the function to try to read past the end of file. If repair=TRUE, an attempt is made to repair the internal values, permitting such files to be read.}
   \item{force_ring}{if TRUE, close unclosed input rings}
   \item{delete_null_obj}{if TRUE, null geometries will be removed together with their data.frame rows}
