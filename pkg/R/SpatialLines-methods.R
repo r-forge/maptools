@@ -1,5 +1,6 @@
 readShapeLines <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE, delete_null_obj=FALSE) {
+  .Deprecated("", package="maptools", msg="use rgdal::readOGR or sf::st_read")
 	suppressWarnings(Map <- read.shape(filen=fn, verbose=verbose,
 	    repair=repair))
 	suppressWarnings(.shp2LinesDF(Map, proj4string=proj4string,
@@ -7,6 +8,7 @@ readShapeLines <- function(fn, proj4string=CRS(as.character(NA)),
 }
 
 writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
+  .Deprecated("", package="maptools", msg="use rgdal::readOGR or sf::st_read")
         stopifnot(is(x, "SpatialLinesDataFrame"))
 	df <- as(x, "data.frame")
 	df <- data.frame(SL_ID=I(row.names(df)), df)

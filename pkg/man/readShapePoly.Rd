@@ -4,6 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read polygon shape files into SpatialPolygonsDataFrame objects}
 \description{
+The use of this function is deprecated and it is not being maintained. Use \code{rgdal::readOGR()} or \code{sf::st_read()} instead - both of these read the coordinate reference system from the input file, while this deprecated function does not.
    The \code{readShapePoly} reads data from a polygon shapefile into a \code{SpatialPolygonsDataFrame} object. The \code{writePolyShape} function writes data from a \code{SpatialPolygonsDataFrame} object to a shapefile. Note DBF file restrictions in \code{\link[foreign]{write.dbf}}.
 }
 \usage{

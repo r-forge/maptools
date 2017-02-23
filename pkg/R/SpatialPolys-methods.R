@@ -1,6 +1,7 @@
 readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE, force_ring=FALSE, delete_null_obj=FALSE,
 	retrieve_ABS_null=FALSE) {
+  .Deprecated("", package="maptools", msg="use rgdal::readOGR or sf::st_read")
 	suppressWarnings(Map <- read.shape(filen=fn, 
 		verbose=verbose, repair=repair))
 	if (!is.null(IDvar)) {
@@ -15,6 +16,7 @@ readShapePoly <- function(fn, IDvar=NULL, proj4string=CRS(as.character(NA)),
 }
 
 writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
+  .Deprecated("", package="maptools", msg="use rgdal::readOGR or sf::st_read")
 	stopifnot(is(x, "SpatialPolygonsDataFrame"))
 	df <- as(x, "data.frame")
 	df <- data.frame(SP_ID=I(row.names(df)), df)

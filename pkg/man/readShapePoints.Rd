@@ -4,6 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Read points shape files into SpatialPointsDataFrame objects}
 \description{
+The use of this function is deprecated and it is not being maintained. Use \code{rgdal::readOGR()} or \code{sf::st_read()} instead - both of these read the coordinate reference system from the input file, while this deprecated function does not.
   The \code{readShapePoints} reads data from a points shapefile into a \code{SpatialPointsDataFrame} object. The \code{writePointsShape} function writes data from a \code{SpatialPointsDataFrame} object to a shapefile. Both reading and writing can be carried out for 2D and 3D point coordinates. Note DBF file restrictions in \code{\link[foreign]{write.dbf}}.
 }
 \usage{
