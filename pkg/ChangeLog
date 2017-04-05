@@ -1,3 +1,18 @@
+2017-04-05 10:13  rsbivand
+
+	* DESCRIPTION, R/spatstat1.R: add spatstat.utils
+
+2017-04-05 10:11  rsbivand
+
+	* R/Spatial-methods.R, R/SpatialLines-methods.R,
+	  R/SpatialPoints-methods.R, R/SpatialPolys-methods.R,
+	  man/readShapeLines.Rd, man/readShapePoints.Rd,
+	  man/readShapePoly.Rd, man/readShapeSpatial.Rd: tidy
+
+2017-02-23 09:29  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2017-02-23 09:29  rsbivand
 
 	* src/Rcentroid.c, src/Rgshhs.c, src/init.c, src/maptools.h: add
