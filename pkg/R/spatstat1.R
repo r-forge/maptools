@@ -73,10 +73,21 @@ owin2Polygons <- function(x, id="1") {
   x <- spatstat::as.polygonal(x)
   closering <- function(df) { df[c(seq(nrow(df)), 1), ] }
   if (x$type == "polygonal") {
-      pieces <- lapply(x$bdry,
+      if (packageVersion("spatstat") >= "1.50.0") {
+        if (requireNamespace("spatstat.utils", quietly = TRUE)) {
+          pieces <- lapply(x$bdry,
+                   function(p) {
+                     Polygon(coords=closering(cbind(p$x,p$y)),
+                             hole=spatstat.utils::is.hole.xypolygon(p))  })
+       } else {
+         stop("from spatstat 1.50-0, the spatstat.utils package is also required")
+       }
+     } else {
+          pieces <- lapply(x$bdry,
                    function(p) {
                      Polygon(coords=closering(cbind(p$x,p$y)),
                              hole=spatstat::is.hole.xypolygon(p))  })
+     }
   } else if (x$type == "rectangle") {
       rectCrds <- cbind(x$xrange[c(1,1,2,2,1)], x$yrange[c(1,2,2,1,1)])
       pieces <- list(Polygon(rectCrds, hole=FALSE))
