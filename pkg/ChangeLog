@@ -1,3 +1,11 @@
+2018-07-30 20:31  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
+2018-07-30 20:30  rsbivand
+
+	* man/kmlLines.Rd, man/kmlPolygons.Rd: tidy
+
 2018-07-30 14:45  rsbivand
 
 	* ChangeLog, inst/ChangeLog: tidy
