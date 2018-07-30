@@ -73,7 +73,7 @@ owin2Polygons <- function(x, id="1") {
   x <- spatstat::as.polygonal(x)
   closering <- function(df) { df[c(seq(nrow(df)), 1), ] }
   if (x$type == "polygonal") {
-      if (packageVersion("spatstat") >= "1.50.0") {
+#      if (packageVersion("spatstat") >= "1.50.0") {
         if (requireNamespace("spatstat.utils", quietly = TRUE)) {
           pieces <- lapply(x$bdry,
                    function(p) {
@@ -82,12 +82,12 @@ owin2Polygons <- function(x, id="1") {
        } else {
          stop("from spatstat 1.50-0, the spatstat.utils package is also required")
        }
-     } else {
-          pieces <- lapply(x$bdry,
-                   function(p) {
-                     Polygon(coords=closering(cbind(p$x,p$y)),
-                             hole=spatstat::is.hole.xypolygon(p))  })
-     }
+#     } else {
+#          pieces <- lapply(x$bdry,
+#                   function(p) {
+#                     Polygon(coords=closering(cbind(p$x,p$y)),
+#                             hole=spatstat::is.hole.xypolygon(p))  })
+#     }
   } else if (x$type == "rectangle") {
       rectCrds <- cbind(x$xrange[c(1,1,2,2,1)], x$yrange[c(1,2,2,1,1)])
       pieces <- list(Polygon(rectCrds, hole=FALSE))
@@ -156,12 +156,12 @@ as.psp.Lines <- function(from, ..., window=NULL, marks=NULL, fatal) {
 	if (!requireNamespace("spatstat", quietly = TRUE))
 		stop("package spatstat required for as.owin.SpatialPixelsDataFrame")
   y <- lapply(slot(from, "Lines"), as.psp.Line, window=window)
-  if (as.character(packageVersion("spatstat")) < "1.22.0") {
-    z <- spatstat::superimposePSP(y, window=window)
-  } else {
+#  if (as.character(packageVersion("spatstat")) < "1.22.0") {
+#    z <- spatstat::superimposePSP(y, window=window)
+#  } else {
     z <- do.call(spatstat::superimpose,c(y,list(W=window)))
 #    z <- superimpose(y, window=window)
-  }
+#  }
   if(!is.null(marks))
     spatstat::marks(z) <- marks
   return(z)
@@ -187,12 +187,12 @@ as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL,
 # modified 110401 Rolf Turner
 #    for(i in seq(y)) 
 #      marks(y[[i]]) <- id[i]
-  if (as.character(packageVersion("spatstat")) < "1.22.0") {
-    z <- do.call(spatstat::superimposePSP, list(y, window=window))
-  } else {
+#  if (as.character(packageVersion("spatstat")) < "1.22.0") {
+#    z <- do.call(spatstat::superimposePSP, list(y, window=window))
+#  } else {
 #    z <- do.call("superimpose", list(y, window=window))
     z <- do.call(spatstat::superimpose, c(y, list(W = window)))
-  }
+#  }
   if(!is.null(marks))
     spatstat::marks(z) <- marks
   return(z)
