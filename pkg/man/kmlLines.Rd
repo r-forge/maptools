@@ -53,7 +53,9 @@ library(maptools)
 rivers <- readShapeSpatial(system.file("shapes/fylk-val-ll.shp",
                            package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=WGS84"))
 # create kml file
-kmlLines(rivers, kmlfile = "rivers.kml", name = "R Lines", 
+td <- tempdir()
+kmlfile <- paste(td, "rivers.kml", sep="/")
+kmlLines(rivers, kmlfile = kmlfile, name = "R Lines", 
          description = "Hello!", col = "blue", visibility = 1, lwd = 1, 
          kmlname = "", kmldescription = "")
 }
