@@ -31,18 +31,20 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
 .onLoad <- function(lib, pkg) {
     assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
     rgeosI <- setRgeosStatus()
-    register_s3_method("spatstat", "as.im", "RasterLayer")
-    register_s3_method("spatstat", "as.im", "SpatialGridDataFrame")
-    register_s3_method("spatstat", "as.linnet", "SpatialLines")
-    register_s3_method("spatstat", "as.owin", "SpatialGridDataFrame")
-    register_s3_method("spatstat", "as.owin", "SpatialPixelsDataFrame")
-    register_s3_method("spatstat", "as.owin", "SpatialPolygons")
-    register_s3_method("spatstat", "as.ppp", "SpatialPoints")
-    register_s3_method("spatstat", "as.ppp", "SpatialPointsDataFrame")
-    register_s3_method("spatstat", "as.psp", "Line")
-    register_s3_method("spatstat", "as.psp", "Lines")
-    register_s3_method("spatstat", "as.psp", "SpatialLines")
-    register_s3_method("spatstat", "as.psp", "SpatialLinesDataFrame")
+    if (getRversion() < "3.6.0") {
+      register_s3_method("spatstat", "as.im", "RasterLayer")
+      register_s3_method("spatstat", "as.im", "SpatialGridDataFrame")
+      register_s3_method("spatstat", "as.linnet", "SpatialLines")
+      register_s3_method("spatstat", "as.owin", "SpatialGridDataFrame")
+      register_s3_method("spatstat", "as.owin", "SpatialPixelsDataFrame")
+      register_s3_method("spatstat", "as.owin", "SpatialPolygons")
+      register_s3_method("spatstat", "as.ppp", "SpatialPoints")
+      register_s3_method("spatstat", "as.ppp", "SpatialPointsDataFrame")
+      register_s3_method("spatstat", "as.psp", "Line")
+      register_s3_method("spatstat", "as.psp", "Lines")
+      register_s3_method("spatstat", "as.psp", "SpatialLines")
+      register_s3_method("spatstat", "as.psp", "SpatialLinesDataFrame")
+    }
     invisible(NULL)
 }
 
