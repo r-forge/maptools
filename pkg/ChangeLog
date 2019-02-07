@@ -1,3 +1,19 @@
+2018-09-19 07:40  rsbivand
+
+	* DESCRIPTION: tidy
+
+2018-09-10 18:34  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/AAA.R: delayed S3 method registration
+
+2018-07-30 20:31  rsbivand
+
+	* inst/ChangeLog: tidy
+
+2018-07-30 20:31  rsbivand
+
+	* ChangeLog: tidy
+
 2018-07-30 20:31  rsbivand
 
 	* ChangeLog, inst/ChangeLog: tidy
