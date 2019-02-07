@@ -9,7 +9,7 @@ distance of each point to any of the lines. This function does not work with
 geographic coordinates.
 }
 \usage{
-snapPointsToLines(points, lines, maxDist = NA, withAttrs = TRUE, idField=NA)
+snapPointsToLines(points, lines, maxDist=0.1, withAttrs = TRUE, idField=NA)
 }
 \arguments{
   \item{points}{
@@ -20,7 +20,7 @@ An object of the class SpatialLines or SpatialLinesDataFrame.
 }
   \item{maxDist}{
 Numeric value for establishing a maximum distance to avoid snapping points that 
-are farther apart. This parameter is optional.
+are farther apart; its default value is set from 7 February 2019 to 0.1, but this value may not be appropriate for all settings.
 }
   \item{withAttrs}{
 Boolean value for preserving (TRUE) or getting rid (FALSE) of the original point 
@@ -37,7 +37,7 @@ SpatialPointsDataFrame object as defined by the R package 'sp'. This object
 contains the snapped points, therefore all of them lie on the lines.
 }
 \author{
-German Carrillo
+German Carrillo and Ethan Plunkett
 }
 \seealso{
 \code{\link{nearestPointOnSegment}}, \code{\link{nearestPointOnLine}}, 
@@ -61,6 +61,6 @@ xc = c(1.2,1.5,2.5)
 yc = c(1.5,2.2,1.6)
 Spoints = SpatialPoints(cbind(xc, yc))
 
-if (rgeosStatus()) snapPointsToLines(Spoints, Sldf)
+if (rgeosStatus()) snapPointsToLines(Spoints, Sldf, maxDist=0.4)
 }
 \keyword{ spatial }
