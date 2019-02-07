@@ -1,3 +1,12 @@
+2019-02-07 16:59  rsbivand
+
+	* DESCRIPTION, R/point_line_distance.R, man/snapPointsToLines.Rd:
+	  update to snapPointsToLines
+
+2019-02-07 16:19  rsbivand
+
+	* ChangeLog: tidy
+
 2018-09-19 07:40  rsbivand
 
 	* DESCRIPTION: tidy
