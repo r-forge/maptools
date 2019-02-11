@@ -37,9 +37,9 @@
 \details{
   This function converts an object of class \code{SpatialLines}
   or \code{SpatialLinesDataFrame} into an object of class \code{linnet}.
-  It is no a method for the \pkg{spatstat} generic function
+  It is not a method for the \pkg{spatstat} generic function
   \code{\link[spatstat]{as.linnet}}, but like other S4 coercion functions for
-  sp classes to spatstat classes may be called directly as a function.
+  \pkg{sp} classes to \pkg{spatstat} classes, it may be called directly as a function.
 
   An object of class {SpatialLines}
   or \code{SpatialLinesDataFrame} (from package \pkg{sp}) represents
@@ -55,7 +55,13 @@
   If \code{fuse=TRUE} (the default), the code will
   search for identical pairs of vertices occurring in different
   \dQuote{Line} objects, and will treat them as identical vertices,
-  effectively joining the two \dQuote{Line} objects at this common vertex.
+  effectively joining the two \dQuote{Line} objects at this common
+  vertex.
+
+  If \code{X} belongs to class \code{SpatialLinesDataFrame},
+  the associated columns of data in the auxiliary data frame
+  \code{slot(X, "data")} will be copied to the output as the marks
+  attached to the line segments of the network. See the Examples.
 }
 \value{
   An object of class \code{linnet}.
@@ -75,6 +81,8 @@
    print(max(vertexdegree(L)))
    L0 <- as.linnet.SpatialLines(fylk, fuse=FALSE)
    print(max(vertexdegree(L0)))
+   ## extract data associated with each network segment
+   head(marks(as.psp(L)))
   }
 }
 \keyword{spatial}
