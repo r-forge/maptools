@@ -1,3 +1,12 @@
+2019-02-11 09:14  rsbivand
+
+	* DESCRIPTION, R/as.linnet.SL.R, man/as.linnet.SpatialLines.Rd:
+	  update as.linnet.SpatialLines
+
+2019-02-07 17:01  rsbivand
+
+	* ChangeLog: tidy
+
 2019-02-07 16:59  rsbivand
 
 	* DESCRIPTION, R/point_line_distance.R, man/snapPointsToLines.Rd:
