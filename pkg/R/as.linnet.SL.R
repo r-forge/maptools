@@ -1,11 +1,11 @@
-#' Convert 'SpatialLines*' object to spatstat 'linnet' object
-#' 
-#' For 'SpatialLinesDataFrame', the data columns are copied 
-#' to the network as marks associated with the network segments.
-#'
-#' If fuse=TRUE, the code searches for pairs of points with the same (x,y)
-#'               coordinates that occur in different polylines,
-#'               and merges them together as identical vertices of the network.
+# Convert 'SpatialLines*' object to spatstat 'linnet' object
+# 
+# For 'SpatialLinesDataFrame', the data columns are copied 
+# to the network as marks associated with the network segments.
+#
+# If fuse=TRUE, the code searches for pairs of points with the same (x,y)
+#               coordinates that occur in different polylines,
+#               and merges them together as identical vertices of the network.
 
 if (!isClass("linnet"))
 	setClass("linnet")
