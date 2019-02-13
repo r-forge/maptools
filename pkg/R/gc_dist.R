@@ -55,7 +55,7 @@ gcDestination <- function(lon, lat, bearing, dist, dist.units = "km",
         lat2 <- asin(sin(lat) * cos(psi) +  cos(lat) * sin(psi) * cos(bearing))
         lon2 <- lon + atan2(sin(bearing) * sin(psi) * cos(lat), cos(psi) - 
             sin(lat) * sin(lat2))
-        if (is.nan(lat2) || is.nan(lon2)) warning("Out of range values")
+        if (any(is.nan(lat2)) || any(is.nan(lon2))) warning("Out of range values")
         return(cbind(long=as.degrees(lon2), lat=as.degrees(lat2)))
     }
 
