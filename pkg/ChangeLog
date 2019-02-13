@@ -1,3 +1,20 @@
+2019-02-13 09:20  rsbivand
+
+	* R/gc_dist.R: logic checks
+
+2019-02-12 12:59  rsbivand
+
+	* _pkgdown.yml: pkgdown
+
+2019-02-12 12:50  rsbivand
+
+	* .Rbuildignore, DESCRIPTION, R/as.linnet.SL.R, _pkgdown.yml: start
+	  pkgdown
+
+2019-02-11 09:15  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2019-02-11 09:14  rsbivand
 
 	* DESCRIPTION, R/as.linnet.SL.R, man/as.linnet.SpatialLines.Rd:
