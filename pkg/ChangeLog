@@ -1,3 +1,11 @@
+2019-02-18 08:32  rsbivand
+
+	* R/point_line_distance.R: uncomment lines in snapPointsToLines
+
+2019-02-13 09:21  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2019-02-13 09:20  rsbivand
 
 	* R/gc_dist.R: logic checks
