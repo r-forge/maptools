@@ -1,3 +1,16 @@
+2019-02-18 08:58  rsbivand
+
+	* R/point_line_distance.R, man/snapPointsToLines.Rd: revert default
+	  snapPointsToLines maxDist default to NA
+
+2019-02-18 08:55  rsbivand
+
+	* DESCRIPTION: add pkgdown link to DESCRIPTION
+
+2019-02-18 08:35  rsbivand
+
+	* ChangeLog, DESCRIPTION, inst/ChangeLog: tidy
+
 2019-02-18 08:32  rsbivand
 
 	* R/point_line_distance.R: uncomment lines in snapPointsToLines

@@ -109,7 +109,7 @@ geographic coordinates.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>snapPointsToLines</span>(<span class='no'>points</span>, <span class='no'>lines</span>, <span class='kw'>maxDist</span><span class='kw'>=</span><span class='fl'>0.1</span>, <span class='kw'>withAttrs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>idField</span><span class='kw'>=</span><span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>snapPointsToLines</span>(<span class='no'>points</span>, <span class='no'>lines</span>, <span class='kw'>maxDist</span><span class='kw'>=</span><span class='fl'>NA</span>, <span class='kw'>withAttrs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>idField</span><span class='kw'>=</span><span class='fl'>NA</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,7 +125,7 @@ geographic coordinates.</p>
     <tr>
       <th>maxDist</th>
       <td><p>Numeric value for establishing a maximum distance to avoid snapping points that 
-are farther apart; its default value is set from 7 February 2019 to 0.1, but this value may not be appropriate for all settings.</p></td>
+are farther apart; its default value is NA.</p></td>
     </tr>
     <tr>
       <th>withAttrs</th>
@@ -169,14 +169,10 @@ contains the snapped points, therefore all of them lie on the lines.</p>
 <span class='no'>yc</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1.5</span>,<span class='fl'>2.2</span>,<span class='fl'>1.6</span>)
 <span class='no'>Spoints</span> <span class='kw'>=</span> <span class='fu'>SpatialPoints</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='no'>xc</span>, <span class='no'>yc</span>))
 
-<span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) <span class='fu'>snapPointsToLines</span>(<span class='no'>Spoints</span>, <span class='no'>Sldf</span>, <span class='kw'>maxDist</span><span class='kw'>=</span><span class='fl'>0.4</span>)</div><div class='output co'>#&gt; class       : SpatialPointsDataFrame 
-#&gt; features    : 3 
-#&gt; extent      : 1.36, 2.36, 1.18, 2.35  (xmin, xmax, ymin, ymax)
-#&gt; coord. ref. : NA 
-#&gt; variables   : 2
-#&gt; names       : nearest_line_id, snap_dist 
-#&gt; min values  :               a, 0.2121320 
-#&gt; max values  :               b, 0.3577709 </div></pre>
+<span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) <span class='fu'>snapPointsToLines</span>(<span class='no'>Spoints</span>, <span class='no'>Sldf</span>, <span class='kw'>maxDist</span><span class='kw'>=</span><span class='fl'>0.4</span>)</div><div class='output co'>#&gt;    coordinates nearest_line_id snap_dist
+#&gt; 1 (1.36, 1.18)               b 0.3577709
+#&gt; 2 (1.65, 2.35)               a 0.2121320
+#&gt; 3 (2.36, 1.32)               b 0.3130495</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
