@@ -38,7 +38,7 @@ snapPointsToLines <- function( points, lines, maxDist=0.1, withAttrs=TRUE, idFie
 
     d = rgeos::gDistance(points, lines, byid=TRUE) 
     
-#    if(!is.na(maxDist)){
+    if(!is.na(maxDist)){
       distToLine <- apply(d, 2, min, na.rm = TRUE)  
       validPoints <- distToLine <= maxDist  # indicates which points are within maxDist of a line
       distToPoint <- apply(d, 1, min, na.rm = TRUE)
@@ -64,9 +64,9 @@ snapPointsToLines <- function( points, lines, maxDist=0.1, withAttrs=TRUE, idFie
         return(res)
       }
       
-#    } else { # If no maxDist arg still calculate distToLine so it can be returned
-#      distToLine = apply(d, 2, min, na.rm = TRUE)
-#    }
+    } else { # If no maxDist arg still calculate distToLine so it can be returned
+      distToLine = apply(d, 2, min, na.rm = TRUE)
+    }
     
     nearest_line_index = apply(d, 2, which.min) # Position of each nearest line in lines object 
 
