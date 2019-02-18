@@ -22,7 +22,7 @@ nearestPointOnLine = function(coordsLine, coordsPoint){
     nearest_points[1:2, which.min(nearest_points[3,])]  
 }
 
-snapPointsToLines <- function( points, lines, maxDist=0.1, withAttrs=TRUE, idField=NA) {
+snapPointsToLines <- function( points, lines, maxDist=NA, withAttrs=TRUE, idField=NA) {
 
     if (rgeosStatus()) {
     	if (!requireNamespace("rgeos", quietly = TRUE))

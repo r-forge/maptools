@@ -9,7 +9,7 @@ distance of each point to any of the lines. This function does not work with
 geographic coordinates.
 }
 \usage{
-snapPointsToLines(points, lines, maxDist=0.1, withAttrs = TRUE, idField=NA)
+snapPointsToLines(points, lines, maxDist=NA, withAttrs = TRUE, idField=NA)
 }
 \arguments{
   \item{points}{
@@ -20,7 +20,7 @@ An object of the class SpatialLines or SpatialLinesDataFrame.
 }
   \item{maxDist}{
 Numeric value for establishing a maximum distance to avoid snapping points that 
-are farther apart; its default value is set from 7 February 2019 to 0.1, but this value may not be appropriate for all settings.
+are farther apart; its default value is NA.
 }
   \item{withAttrs}{
 Boolean value for preserving (TRUE) or getting rid (FALSE) of the original point 
