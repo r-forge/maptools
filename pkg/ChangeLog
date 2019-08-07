@@ -1,3 +1,15 @@
+2019-08-07 13:05  rsbivand
+
+	* R/SP2owin.R, R/as.linnet.SL.R, R/spatstat1.R,
+	  man/as.linnet.SpatialLines.Rd, man/as.ppp.Rd,
+	  man/map2SpatialPolygons.Rd, man/nowrapRecenter.Rd,
+	  man/sp2Mondrian.Rd, man/sp2WB.Rd, man/sp2tmap.Rd: add checks for
+	  projected objects
+
+2019-08-07 09:36  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2019-08-07 09:25  rsbivand
 
 	* DESCRIPTION, R/as.linnet.SL.R: revised linnet code
