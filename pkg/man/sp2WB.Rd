@@ -35,7 +35,8 @@ all.equal(xxx, as(xx, "SpatialPolygons"), tolerance=.Machine$double.eps^(1/4),
 x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
 xp <- as(x, "SpatialPixelsDataFrame")
 pp <- as(xp, "SpatialPolygons")
-sp2WB(pp, filename="test.map")
+td <- tempdir()
+sp2WB(pp, filename=file.path(td, "test.map"))
 }
 }
 \keyword{spatial}

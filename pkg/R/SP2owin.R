@@ -1,5 +1,7 @@
 .SP2owin <- function(SP) {
     # require(spatstat)
+    if (!is.na(sp::is.projected(SP)) && !sp::is.projected(SP))
+      stop("Only projected coordinates may be converted to spatstat class objects")
     if (!requireNamespace("spatstat", quietly = TRUE))
 	stop("package spatstat required for .SP2owin")
     pls <- slot(SP, "polygons")

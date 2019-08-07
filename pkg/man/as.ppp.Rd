@@ -95,65 +95,120 @@ To perform the checking later, \code{owinpolycheck(W, verbose=TRUE)}.}
 
 \author{Edzer Pebesma \email{edzer.pebesma@uni-muenster.de}, Roger Bivand}
 \examples{
-if (require(spatstat, quietly=TRUE)) {
+run <- FALSE
+if (require(spatstat, quietly=TRUE)) run <- TRUE
+if (run) {
 data(meuse)
 coordinates(meuse) = ~x+y
 zn1 <- as(meuse["zinc"], "ppp")
 zn1
+}
+if (run) {
 plot(zn1)
+}
+if (run) {
 as(as(meuse, "SpatialPoints"), "ppp")
+}
+if (run) {
 data(meuse.grid)
 gridded(meuse.grid) = ~x+y
 mg_owin <- as(meuse.grid["dist"], "owin")
 zn1a <- ppp(x=zn1$x, y=zn1$y, marks=zn1$marks, window=mg_owin)
 zn1a
+}
+if (run) {
 plot(zn1a)
+}
+if (run) {
 rev_ppp_SP <- as.SpatialPoints.ppp(zn1a)
 summary(rev_ppp_SP)
+}
+if (run) {
 rev_ppp_SPDF <- as.SpatialPointsDataFrame.ppp(zn1a)
 summary(rev_ppp_SPDF)
+}
+if (run) {
 rev_ppp_SGDF <- as.SpatialGridDataFrame.ppp(zn1a)
 summary(rev_ppp_SGDF)
+}
+if (run) {
 data(meuse.riv)
 mr <- Line(meuse.riv)
 mr_psp <- as(mr, "psp")
 mr_psp
+}
+if (run) {
 plot(mr_psp)
+}
+if (run) {
 xx_back <- as(mr_psp, "SpatialLines")
 plot(xx_back)
+}
+if (run) {
 xx <- readShapeLines(system.file("shapes/fylk-val.shp", package="maptools")[1],
- proj4string=CRS("+proj=utm +zone=33 +datum=WGS84"))
+ proj4string=CRS("+proj=utm +zone=33 +ellps=WGS84"))
 xx_psp <- as(xx["LENGTH"], "psp")
 xx_psp
+}
+if (run) {
 plot(xx_psp)
+}
+if (run) {
 xx_back <- as(xx_psp, "SpatialLines")
 plot(xx_back)
+}
+if (run) {
+xx <- readShapeLines(system.file("shapes/fylk-val-ll.shp", package="maptools")[1], 
+ proj4string=CRS("+proj=longlat +ellps=WGS84"))
+try(xx_psp <- as(xx["LENGTH"], "psp"))
+}
+if (run) {
 mg_owin <- as(as(meuse.grid["ffreq"], "SpatialPixelsDataFrame"), "owin")
 mg_owin
+}
+if (run) {
 ho_sp <- SpatialPolygons(list(Polygons(list(Polygon(cbind(c(0,1,1,0,0),
   c(0,0,1,1,0))), Polygon(cbind(c(0.6,0.4,0.4,0.6,0.6), 
   c(0.2,0.2,0.4,0.4,0.2)), hole=TRUE)), ID="ho")))
 plot(ho_sp, col="red", pbg="pink")
+}
+if (run) {
 ho <- as(ho_sp, "owin")
 plot(ho)
+}
+if (run) {
 pp <- runifpoint(500, win=ho)
 plot(pp)
+}
+if (run) {
 ho_orig <- owin(poly=list(list(x=c(0,1,1,0), y=c(0,0,1,1)),
   list(x=c(0.6,0.4,0.4,0.6), y=c(0.2,0.2,0.4,0.4))))
 identical(ho, ho_orig)
+}
+if (run) {
 ho_sp1 <- as(ho, "SpatialPolygons")
 all.equal(ho_sp, ho_sp1, check.attributes=FALSE)
+}
+if (run) {
 A <- tess(xgrid=0:4,ygrid=0:4)
 A_sp <- as(A, "SpatialPolygons")
 plot(A_sp)
 text(coordinates(A_sp), labels=row.names(A_sp), cex=0.6)
+}
+if (run) {
 mg_dist <- meuse.grid["dist"]
 fullgrid(mg_dist) <- TRUE
 image(mg_dist, axes=TRUE)
+}
+if (run) {
 mg_im <- as(mg_dist, "im")
 plot(mg_im)
+}
+if (run) {
 mg2 <- as.SpatialGridDataFrame.im(mg_im)
 image(mg2, axes=TRUE)
+}
+if (run) {
 if (require(raster, quietly=TRUE)) {
 r <- as(mg2, "RasterLayer")
 r_im <- as.im.RasterLayer(r)

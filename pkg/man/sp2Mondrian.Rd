@@ -24,10 +24,11 @@ sp2Mondrian(SP, file, new_format=TRUE)
 
 \examples{
 \dontrun{
+td <- tempdir()
 xx <- readShapePoly(system.file("shapes/columbus.shp", package="maptools")[1])
-sp2Mondrian(xx, file="columbus1.txt")
+sp2Mondrian(xx, file=file.path(td, "columbus1.txt"))
 xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1])
-sp2Mondrian(xx, file="sids1.txt")
+sp2Mondrian(xx, file=file.path(td, "sids1.txt"))
 }
 }
 \keyword{spatial}

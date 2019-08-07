@@ -30,8 +30,10 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2.5), 2),
 \seealso{\code{\link[sp]{recenter-methods}}, \code{\link{nowrapSpatialLines}}}
 
 \examples{
+run <- FALSE
+if (require(maps)) run <- TRUE
 \dontrun{
-if (require(maps)) {
+if (run) {
 world <- map("world", fill=TRUE, col="transparent", plot=FALSE)
 worldSpP <- map2SpatialPolygons(world, world$names, CRS("+proj=longlat +ellps=WGS84"))
 worldSpP <- worldSpP[-grep("Antarctica", row.names(worldSpP)),]
@@ -43,19 +45,26 @@ worldSpP <- worldSpP[-grep("UK:Great Britain", row.names(worldSpP)),]
 worldSpPr <- recenter(worldSpP)
 plot(worldSpPr)
 title("Pacific view without polygon splitting")
+}
+if (run) {
 worldSpPnr <- nowrapRecenter(worldSpP)
 plot(worldSpPnr)
 title("Pacific view with polygon splitting")
 }
 }
-if (rgeosStatus()) {
+if (!rgeosStatus()) run <- FALSE
+if (run) {
 crds <- matrix(c(-1, 1, 1, -1, 50, 50, 52, 52), ncol=2)
 rcrds <- rbind(crds, crds[1,])
 SR <- SpatialPolygons(list(Polygons(list(Polygon(rcrds)), ID="r1")),
  proj4string=CRS("+proj=longlat +ellps=WGS84"))
 bbox(SR)
+}
+if (run) {
 SRr <- recenter(SR)
 bbox(SRr)
+}
+if (run) {
 SRnr <- nowrapRecenter(SR)
 bbox(SRnr)
 }

@@ -73,16 +73,33 @@
   \code{\link[spatstat]{as.linnet}}
 }
 \examples{
-  if(require(spatstat, quietly=TRUE)) {
+  run <- FALSE
+  if(require(spatstat, quietly=TRUE)) run <- TRUE
+if (run) {
    dname <- system.file("shapes", package="maptools")
    fname <- file.path(dname, "fylk-val.shp")
-   fylk <- readShapeSpatial(fname)
+   fylk <- readShapeSpatial(fname, proj4string=CRS("+proj=utm +zone=33 +ellps=WGS84"))
+   is.projected(fylk)
+}
+if (run) {
    L <- as(fylk, "linnet")
    print(max(vertexdegree(L)))
+}
+if (run) {
    L0 <- as.linnet.SpatialLines(fylk, fuse=FALSE)
    print(max(vertexdegree(L0)))
+}
+if (run) {
    ## extract data associated with each network segment
    head(marks(as.psp(L)))
+}
+if (run) {
+   fname <- file.path(dname, "fylk-val-ll.shp")
+   fylk <- readShapeSpatial(fname, proj4string=CRS("+proj=longlat +ellps=WGS84"))
+   is.projected(fylk)
+}
+if (run) {
+   try(L <- as(fylk, "linnet"))
   }
 }
 \keyword{spatial}

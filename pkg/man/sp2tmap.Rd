@@ -30,10 +30,11 @@ xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
 plot(xx, border="blue", axes=TRUE, las=1)
 tmapdf <- sp2tmap(as(xx, "SpatialPolygons"))
 if (require(foreign)) {
-write.dta(tmapdf, file="NCmap.dta", version=7)
+td <- tempdir()
+write.dta(tmapdf, file=file.path(td, "NCmap.dta"), version=7)
 NCdf <- as(xx, "data.frame")
 NCdf$ID_n <- attr(tmapdf, "ID_names")
-write.dta(NCdf, file="NC.dta", version=7)
+write.dta(NCdf, file=file.path(td, "NC.dta"), version=7)
 }
 }
 }

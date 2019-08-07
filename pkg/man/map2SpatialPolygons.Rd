@@ -34,29 +34,49 @@ pruneMap(map, xlim=NULL, ylim=NULL)
 
 \seealso{\code{\link[maps]{map}}}
 \examples{
-if(require(maps)) {
+run <- FALSE
+if(require(maps)) run <- TRUE
+if (run) {
 nor_coast_poly <- map("world", "norway", fill=TRUE, col="transparent",
  plot=FALSE)
 range(nor_coast_poly$x, na.rm=TRUE)
+}
+if (run) {
 range(nor_coast_poly$y, na.rm=TRUE)
+}
+if (run) {
 nor_coast_poly <- map("world", "norway", fill=TRUE, col="transparent",
  plot=FALSE, ylim=c(58,72))
 nor_coast_poly$names
+}
+if (run) {
 IDs <- sapply(strsplit(nor_coast_poly$names, ":"), function(x) x[1])
+}
+if (run) {
 nor_coast_poly_sp <- map2SpatialPolygons(nor_coast_poly, IDs=IDs,
  proj4string=CRS("+proj=longlat +datum=WGS84"))
 sapply(slot(nor_coast_poly_sp, "polygons"),
  function(x) length(slot(x, "Polygons")))
+}
+if (run) {
 plot(nor_coast_poly_sp, col="grey", axes=TRUE)
+}
+if (run) {
 nor_coast_lines <- map("world", interior=FALSE, plot=FALSE, xlim=c(4,32),
  ylim=c(58,72))
 plot(nor_coast_lines, type="l")
+}
+if (run) {
 nor_coast_lines <- pruneMap(nor_coast_lines, xlim=c(4,32), ylim=c(58,72))
 lines(nor_coast_lines, col="red")
 nor_coast_lines_sp <- map2SpatialLines(nor_coast_lines,
  proj4string=CRS("+proj=longlat +datum=WGS84"))
 plot(nor_coast_poly_sp, col="grey", axes=TRUE)
+}
+if (run) {
 plot(nor_coast_lines_sp, col="blue", add=TRUE)
+}
+if (run) {
 worldmap <- map("world", fill=TRUE, plot=FALSE)
 worldmapPolys <- map2SpatialPolygons(worldmap, 
  IDs=sapply(strsplit(worldmap$names, ":"), "[", 1L), 
