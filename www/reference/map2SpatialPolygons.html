@@ -153,29 +153,48 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>maps</span>)) {
+    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='kw'>if</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>maps</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>nor_coast_poly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/maps/topics/map'>map</a></span>(<span class='st'>"world"</span>, <span class='st'>"norway"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"transparent"</span>,
  <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/range'>range</a></span>(<span class='no'>nor_coast_poly</span>$<span class='no'>x</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='output co'>#&gt; [1] -9.098877 33.629295</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/range'>range</a></span>(<span class='no'>nor_coast_poly</span>$<span class='no'>y</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='output co'>#&gt; [1] 58.02095 80.47783</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>nor_coast_poly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/maps/topics/map'>map</a></span>(<span class='st'>"world"</span>, <span class='st'>"norway"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"transparent"</span>,
  <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>58</span>,<span class='fl'>72</span>))
 <span class='no'>nor_coast_poly</span>$<span class='no'>names</span>
+}</div><div class='output co'>#&gt;  [1] "Norway:1"           "Norway:2"           "Norway:Smola"      
+#&gt;  [4] "Norway:Froya"       "Norway:5"           "Norway:6"          
+#&gt;  [7] "Norway:7"           "Norway:8"           "Norway:Moskenesoya"
+#&gt; [10] "Norway:Vestvagoy"   "Norway:Langoya"     "Norway:Hinnoya"    
+#&gt; [13] "Norway:Senja"       "Norway:14"          "Norway:Arnoy"      
+#&gt; [16] "Norway:16"          "Norway:Vannoy"      "Norway:Seiland"    
+#&gt; [19] "Norway:Kvaloya"     "Norway:Soroya"      "Norway"            
+#&gt; [22] "Norway:Mageroya"    "Norway:Jan Mayen"  </div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>IDs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/strsplit'>strsplit</a></span>(<span class='no'>nor_coast_poly</span>$<span class='no'>names</span>, <span class='st'>":"</span>), <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fl'>1</span>])
+}
+<span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>nor_coast_poly_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>map2SpatialPolygons</span>(<span class='no'>nor_coast_poly</span>, <span class='kw'>IDs</span><span class='kw'>=</span><span class='no'>IDs</span>,
  <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></span>(<span class='fu'>slot</span>(<span class='no'>nor_coast_poly_sp</span>, <span class='st'>"polygons"</span>),
  <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fu'>slot</span>(<span class='no'>x</span>, <span class='st'>"Polygons"</span>)))
+}</div><div class='output co'>#&gt; [1] 23</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>nor_coast_poly_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"grey"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='img'><img src='map2SpatialPolygons-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>nor_coast_lines</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/maps/topics/map'>map</a></span>(<span class='st'>"world"</span>, <span class='kw'>interior</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>32</span>),
  <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>58</span>,<span class='fl'>72</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>nor_coast_lines</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"l"</span>)
+}</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>nor_coast_lines</span> <span class='kw'>&lt;-</span> <span class='fu'>pruneMap</span>(<span class='no'>nor_coast_lines</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>32</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>58</span>,<span class='fl'>72</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/lines'>lines</a></span>(<span class='no'>nor_coast_lines</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>)
 <span class='no'>nor_coast_lines_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>map2SpatialLines</span>(<span class='no'>nor_coast_lines</span>,
  <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>nor_coast_poly_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"grey"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='img'><img src='map2SpatialPolygons-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>nor_coast_lines_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='img'><img src='map2SpatialPolygons-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>worldmap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/maps/topics/map'>map</a></span>(<span class='st'>"world"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 <span class='no'>worldmapPolys</span> <span class='kw'>&lt;-</span> <span class='fu'>map2SpatialPolygons</span>(<span class='no'>worldmap</span>,
  <span class='kw'>IDs</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/strsplit'>strsplit</a></span>(<span class='no'>worldmap</span>$<span class='no'>names</span>, <span class='st'>":"</span>), <span class='st'>"["</span>, <span class='fl'>1L</span>),
@@ -185,10 +204,10 @@
 <span class='no'>vals</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgeos</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/rgeos/topics/pred-unary-gIsValid'>gIsValid</a></span>(<span class='no'>worldmapPolys</span>, <span class='kw'>byid</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>reason</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/table'>table</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/strsplit'>strsplit</a></span>(<span class='no'>vals</span>, <span class='st'>"\\["</span>), <span class='st'>"["</span>, <span class='fl'>1</span>)))
 }
-}</div><div class='img'><img src='map2SpatialPolygons-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='map2SpatialPolygons-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; <span class='message'>Loading required package: rgeos</span></div><div class='output co'>#&gt; <span class='message'>rgeos version: 0.5-1, (SVN revision 614)</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: rgeos</span></div><div class='output co'>#&gt; <span class='message'>rgeos version: 0.5-1, (SVN revision 614)</span>
 #&gt; <span class='message'> GEOS runtime version: 3.7.2-CAPI-1.11.2 </span>
 #&gt; <span class='message'> Linking to sp version: 1.3-1 </span>
-#&gt; <span class='message'> Polygon checking: TRUE </span></div><div class='img'><img src='map2SpatialPolygons-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; <span class='message'> Polygon checking: TRUE </span></div><div class='output co'>#&gt; 
 #&gt;   Duplicate Rings     Nested shells Self-intersection    Valid Geometry 
 #&gt;                 2                 8                 4               239 </div></pre>
   </div>

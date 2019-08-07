@@ -141,8 +141,9 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>maps</span>)) {
+    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>maps</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span></div><span class='co'># NOT RUN {</span>
+<span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>world</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/maps/topics/map'>map</a></span>(<span class='st'>"world"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"transparent"</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 <span class='no'>worldSpP</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='map2SpatialPolygons.html'>map2SpatialPolygons</a></span>(<span class='no'>world</span>, <span class='no'>world</span>$<span class='no'>names</span>, <span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +ellps=WGS84"</span>))
 <span class='no'>worldSpP</span> <span class='kw'>&lt;-</span> <span class='no'>worldSpP</span>[-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>grep</a></span>(<span class='st'>"Antarctica"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/row.names'>row.names</a></span>(<span class='no'>worldSpP</span>)),]
@@ -154,18 +155,27 @@
 <span class='no'>worldSpPr</span> <span class='kw'>&lt;-</span> <span class='fu'>recenter</span>(<span class='no'>worldSpP</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>worldSpPr</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/title'>title</a></span>(<span class='st'>"Pacific view without polygon splitting"</span>)
+}
+<span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>worldSpPnr</span> <span class='kw'>&lt;-</span> <span class='fu'>nowrapRecenter</span>(<span class='no'>worldSpP</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>worldSpPnr</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/title'>title</a></span>(<span class='st'>"Pacific view with polygon splitting"</span>)
 }
-<span class='co'># }</span><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) {
+<span class='co'># }</span><div class='input'><span class='kw'>if</span> (!<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>crds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, -<span class='fl'>1</span>, <span class='fl'>50</span>, <span class='fl'>50</span>, <span class='fl'>52</span>, <span class='fl'>52</span>), <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>)
 <span class='no'>rcrds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>rbind</a></span>(<span class='no'>crds</span>, <span class='no'>crds</span>[<span class='fl'>1</span>,])
 <span class='no'>SR</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPolygons</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'>Polygons</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'>Polygon</span>(<span class='no'>rcrds</span>)), <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"r1"</span>)),
  <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +ellps=WGS84"</span>))
 <span class='fu'>bbox</span>(<span class='no'>SR</span>)
+}</div><div class='output co'>#&gt;   min max
+#&gt; x  -1   1
+#&gt; y  50  52</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>SRr</span> <span class='kw'>&lt;-</span> <span class='fu'>recenter</span>(<span class='no'>SR</span>)
 <span class='fu'>bbox</span>(<span class='no'>SRr</span>)
+}</div><div class='output co'>#&gt;   min max
+#&gt; x   1 359
+#&gt; y  50  52</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>SRnr</span> <span class='kw'>&lt;-</span> <span class='fu'>nowrapRecenter</span>(<span class='no'>SR</span>)
 <span class='fu'>bbox</span>(<span class='no'>SRnr</span>)
 }</div><div class='output co'>#&gt;       min max

@@ -145,7 +145,8 @@ format to be import by WinBUGS.</p>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='asciigrid.html'>readAsciiGrid</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"grids/test.ag"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>])
 <span class='no'>xp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>x</span>, <span class='st'>"SpatialPixelsDataFrame"</span>)
 <span class='no'>pp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>xp</span>, <span class='st'>"SpatialPolygons"</span>)
-<span class='fu'>sp2WB</span>(<span class='no'>pp</span>, <span class='kw'>filename</span><span class='kw'>=</span><span class='st'>"test.map"</span>)
+<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>()
+<span class='fu'>sp2WB</span>(<span class='no'>pp</span>, <span class='kw'>filename</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='no'>td</span>, <span class='st'>"test.map"</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

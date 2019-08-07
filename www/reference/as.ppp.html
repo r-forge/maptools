@@ -181,76 +181,156 @@ To perform the checking later, <code><a href='https://www.rdocumentation.org/pac
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>spatstat</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) {
+    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>spatstat</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>meuse</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/xyFromCell'>coordinates</a></span>(<span class='no'>meuse</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span>
+<span class='fu'>coordinates</span>(<span class='no'>meuse</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span>
 <span class='no'>zn1</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse</span>[<span class='st'>"zinc"</span>], <span class='st'>"ppp"</span>)
 <span class='no'>zn1</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>zn1</span>)
+}</div><div class='output co'>#&gt; Marked planar point pattern: 155 points
+#&gt; marks are numeric, of storage type  ‘double’
+#&gt; window: rectangle = [178605, 181390] x [329714, 333611] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>zn1</span>)
+}</div><div class='img'><img src='as.ppp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'>as</span>(<span class='fu'>as</span>(<span class='no'>meuse</span>, <span class='st'>"SpatialPoints"</span>), <span class='st'>"ppp"</span>)
+}</div><div class='output co'>#&gt; Planar point pattern: 155 points
+#&gt; window: rectangle = [178605, 181390] x [329714, 333611] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>meuse.grid</span>)
 <span class='fu'>gridded</span>(<span class='no'>meuse.grid</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span>
 <span class='no'>mg_owin</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse.grid</span>[<span class='st'>"dist"</span>], <span class='st'>"owin"</span>)
 <span class='no'>zn1a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/spatstat/topics/ppp'>ppp</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>zn1</span>$<span class='no'>x</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>zn1</span>$<span class='no'>y</span>, <span class='kw'>marks</span><span class='kw'>=</span><span class='no'>zn1</span>$<span class='no'>marks</span>, <span class='kw'>window</span><span class='kw'>=</span><span class='no'>mg_owin</span>)
 <span class='no'>zn1a</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>zn1a</span>)
+}</div><div class='output co'>#&gt; Marked planar point pattern: 155 points
+#&gt; marks are numeric, of storage type  ‘double’
+#&gt; window: binary image mask
+#&gt; 104 x 78 pixel array (ny, nx)
+#&gt; enclosing rectangle: [178440, 181560] x [329600, 333760] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>zn1a</span>)
+}</div><div class='img'><img src='as.ppp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>rev_ppp_SP</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialPoints.ppp</span>(<span class='no'>zn1a</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>rev_ppp_SP</span>)
+}</div><div class='output co'>#&gt; Object of class SpatialPoints
+#&gt; Coordinates:
+#&gt;       min    max
+#&gt; mx 178605 181390
+#&gt; my 329714 333611
+#&gt; Is projected: NA 
+#&gt; proj4string : [NA]
+#&gt; Number of points: 155</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>rev_ppp_SPDF</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialPointsDataFrame.ppp</span>(<span class='no'>zn1a</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>rev_ppp_SPDF</span>)
+}</div><div class='output co'>#&gt; Object of class SpatialPointsDataFrame
+#&gt; Coordinates:
+#&gt;       min    max
+#&gt; mx 178605 181390
+#&gt; my 329714 333611
+#&gt; Is projected: NA 
+#&gt; proj4string : [NA]
+#&gt; Number of points: 155
+#&gt; Data attributes:
+#&gt;      marks       
+#&gt;  Min.   : 113.0  
+#&gt;  1st Qu.: 198.0  
+#&gt;  Median : 326.0  
+#&gt;  Mean   : 469.7  
+#&gt;  3rd Qu.: 674.5  
+#&gt;  Max.   :1839.0  </div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>rev_ppp_SGDF</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialGridDataFrame.ppp</span>(<span class='no'>zn1a</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>rev_ppp_SGDF</span>)
+}</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
+#&gt; Coordinates:
+#&gt;        min    max
+#&gt; min 178440 181560
+#&gt; min 329600 333760
+#&gt; Is projected: NA 
+#&gt; proj4string : [NA]
+#&gt; Grid attributes:
+#&gt;   cellcentre.offset cellsize cells.dim
+#&gt; 1            178460       40        78
+#&gt; 2            329620       40       104
+#&gt; Data attributes:
+#&gt;    mask        
+#&gt;  Mode:logical  
+#&gt;  TRUE:3103     
+#&gt;  NA's:5009     </div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>meuse.riv</span>)
 <span class='no'>mr</span> <span class='kw'>&lt;-</span> <span class='fu'>Line</span>(<span class='no'>meuse.riv</span>)
 <span class='no'>mr_psp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>mr</span>, <span class='st'>"psp"</span>)
 <span class='no'>mr_psp</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>mr_psp</span>)
+}</div><div class='output co'>#&gt; planar line segment pattern: 175 line segments
+#&gt; window: rectangle = [178304, 182331.5] x [325698.5, 337684.8] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mr_psp</span>)
+}</div><div class='img'><img src='as.ppp-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>xx_back</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>mr_psp</span>, <span class='st'>"SpatialLines"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>xx_back</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>xx_back</span>)
+}</div><div class='img'><img src='as.ppp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='readShapeLines.html'>readShapeLines</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"shapes/fylk-val.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>],
- <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=utm +zone=33 +datum=WGS84"</span>))
+ <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=utm +zone=33 +ellps=WGS84"</span>))
 <span class='no'>xx_psp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>xx</span>[<span class='st'>"LENGTH"</span>], <span class='st'>"psp"</span>)
 <span class='no'>xx_psp</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>xx_psp</span>)
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeLines is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; marked planar line segment pattern: 1094 line segments
+#&gt; marks are numeric, of type ‘double’
+#&gt; window: rectangle = [-4867.8, 1084721.9] x [6456207, 7841997] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>xx_psp</span>)
+}</div><div class='img'><img src='as.ppp-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>xx_back</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>xx_psp</span>, <span class='st'>"SpatialLines"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>xx_back</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>xx_back</span>)
+}</div><div class='img'><img src='as.ppp-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='readShapeLines.html'>readShapeLines</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"shapes/fylk-val-ll.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>],
+ <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +ellps=WGS84"</span>))
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/try'>try</a></span>(<span class='no'>xx_psp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>xx</span>[<span class='st'>"LENGTH"</span>], <span class='st'>"psp"</span>))
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeLines is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; Error in as.psp.SpatialLinesDataFrame(from) : 
+#&gt;   Only projected coordinates may be converted to spatstat class objects</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>mg_owin</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='fu'>as</span>(<span class='no'>meuse.grid</span>[<span class='st'>"ffreq"</span>], <span class='st'>"SpatialPixelsDataFrame"</span>), <span class='st'>"owin"</span>)
 <span class='no'>mg_owin</span>
+}</div><div class='output co'>#&gt; window: binary image mask
+#&gt; 104 x 78 pixel array (ny, nx)
+#&gt; enclosing rectangle: [178440, 181560] x [329600, 333760] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>ho_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPolygons</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'>Polygons</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'>Polygon</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>),
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>))), <span class='fu'>Polygon</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.6</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.6</span>,<span class='fl'>0.6</span>),
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>0.2</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.2</span>)), <span class='kw'>hole</span><span class='kw'>=</span><span class='fl'>TRUE</span>)), <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"ho"</span>)))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>ho_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>pbg</span><span class='kw'>=</span><span class='st'>"pink"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>ho_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>pbg</span><span class='kw'>=</span><span class='st'>"pink"</span>)
+}</div><div class='img'><img src='as.ppp-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>ho</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>ho_sp</span>, <span class='st'>"owin"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>ho</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>ho</span>)
+}</div><div class='img'><img src='as.ppp-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>pp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/spatstat/topics/runifpoint'>runifpoint</a></span>(<span class='fl'>500</span>, <span class='kw'>win</span><span class='kw'>=</span><span class='no'>ho</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>pp</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>pp</span>)
+}</div><div class='img'><img src='as.ppp-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>ho_orig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/spatstat/topics/owin'>owin</a></span>(<span class='kw'>poly</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>)),
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.6</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.6</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>0.2</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>))))
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span>(<span class='no'>ho</span>, <span class='no'>ho_orig</span>)
+}</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>ho_sp1</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>ho</span>, <span class='st'>"SpatialPolygons"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/all.equal'>all.equal</a></span>(<span class='no'>ho_sp</span>, <span class='no'>ho_sp1</span>, <span class='kw'>check.attributes</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+}</div><div class='output co'>#&gt; [1] "Names: 1 string mismatch"</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/spatstat/topics/tess'>tess</a></span>(<span class='kw'>xgrid</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>4</span>,<span class='kw'>ygrid</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>4</span>)
 <span class='no'>A_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>A</span>, <span class='st'>"SpatialPolygons"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>A_sp</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/text'>text</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/xyFromCell'>coordinates</a></span>(<span class='no'>A_sp</span>), <span class='kw'>labels</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/row.names'>row.names</a></span>(<span class='no'>A_sp</span>), <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.6</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>A_sp</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/text'>text</a></span>(<span class='fu'>coordinates</span>(<span class='no'>A_sp</span>), <span class='kw'>labels</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/row.names'>row.names</a></span>(<span class='no'>A_sp</span>), <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.6</span>)
+}</div><div class='img'><img src='as.ppp-10.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>mg_dist</span> <span class='kw'>&lt;-</span> <span class='no'>meuse.grid</span>[<span class='st'>"dist"</span>]
 <span class='fu'>fullgrid</span>(<span class='no'>mg_dist</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/image'>image</a></span>(<span class='no'>mg_dist</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/image'>image</a></span>(<span class='no'>mg_dist</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='img'><img src='as.ppp-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>mg_im</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>mg_dist</span>, <span class='st'>"im"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>mg_im</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>mg_im</span>)
+}</div><div class='img'><img src='as.ppp-12.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>mg2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialGridDataFrame.im</span>(<span class='no'>mg_im</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/image'>image</a></span>(<span class='no'>mg2</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/image'>image</a></span>(<span class='no'>mg2</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+}</div><div class='img'><img src='as.ppp-13.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>raster</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) {
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>mg2</span>, <span class='st'>"RasterLayer"</span>)
 <span class='no'>r_im</span> <span class='kw'>&lt;-</span> <span class='fu'>as.im.RasterLayer</span>(<span class='no'>r</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='no'>r_im</span>)
 }
-}</div><div class='img'><img src='as.ppp-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeLines is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='img'><img src='as.ppp-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-8.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-9.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-10.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-12.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; <span class='message'></span>
+}</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘raster’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:spatstat’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    area, rotate, shift</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:nlme’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    getData</span></div><div class='img'><img src='as.ppp-13.png' alt='' width='700' height='433' /></div><div class='img'><img src='as.ppp-14.png' alt='' width='700' height='433' /></div></pre>
+#&gt; <span class='message'>    getData</span></div><div class='img'><img src='as.ppp-14.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
