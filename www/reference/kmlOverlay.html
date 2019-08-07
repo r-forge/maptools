@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7</span>
       </span>
     </div>
 
@@ -158,16 +158,18 @@
 #&gt; [2] "&lt;kml xmlns='http://earth.google.com/kml/2.0'&gt;"                                                                    
 #&gt; [3] "&lt;GroundOverlay&gt;"                                                                                                  
 #&gt; [4] "&lt;name&gt;R image&lt;/name&gt;"                                                                                             
-#&gt; [5] "&lt;Icon&gt;&lt;href&gt;/tmp/RtmpjGaG8D/file427e175f12d1.png&lt;/href&gt;&lt;viewBoundScale&gt;0.75&lt;/viewBoundScale&gt;&lt;/Icon&gt;"              
+#&gt; [5] "&lt;Icon&gt;&lt;href&gt;/tmp/Rtmp8mLuYN/file4e1646ec5a2b.png&lt;/href&gt;&lt;viewBoundScale&gt;0.75&lt;/viewBoundScale&gt;&lt;/Icon&gt;"              
 #&gt; [6] "&lt;LatLonBox&gt;&lt;north&gt;-10.72&lt;/north&gt;&lt;south&gt;-38.59&lt;/south&gt;&lt;east&gt;188.158103454744&lt;/east&gt;&lt;west&gt;165.67&lt;/west&gt;&lt;/LatLonBox&gt;"
-#&gt; [7] "&lt;/GroundOverlay&gt;&lt;/kml&gt;"                                                                                           </div><div class='input'>#library(rgdal)
+#&gt; [7] "&lt;/GroundOverlay&gt;&lt;/kml&gt;"                                                                                           </div># NOT RUN {
+#library(rgdal)
 #qk0 <- quakes
 #qk0$long <- ifelse(qk0$long <= 180, qk0$long, qk0$long-360)
 #qk0a <- SpatialPointsDataFrame(qk0[, c(2:1)], qk0)
 #proj4string(qk0a) <- CRS("+proj=longlat +ellps=WGS84")
 #writeOGR(qk0a, paste(tf, "v.kml", sep=""), "Quakes", "KML")
 #system(paste("googleearth ", tf, ".kml", sep=""))
-</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>example.ask</span><span class='kw'>=</span><span class='no'>opt_exask</span>)</div></pre>
+# }
+<div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>example.ask</span><span class='kw'>=</span><span class='no'>opt_exask</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

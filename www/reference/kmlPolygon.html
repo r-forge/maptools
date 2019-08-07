@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7</span>
       </span>
     </div>
 
@@ -184,7 +184,7 @@
 <span class='fu'>kmlPolygon</span>(<span class='no'>sw</span>, <span class='kw'>kmlfile</span><span class='kw'>=</span><span class='no'>tf</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"South Africa"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"#df0000aa"</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>5</span>,
     <span class='kw'>border</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>"R Test"</span>,
     <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>"This is &lt;b&gt;only&lt;/b&gt; a &lt;a href='http://www.r-project.org'&gt;R&lt;/a&gt; test."</span>)
-<span class='no'>tf</span></div><div class='output co'>#&gt; [1] "/tmp/RtmpjGaG8D/file427e2ad857d3"</div><div class='input'>
+<span class='no'>tf</span></div><div class='output co'>#&gt; [1] "/tmp/Rtmp8mLuYN/file4e161385abd7"</div><div class='input'>
 <span class='co'>## creates a KML file containing the polygons of South Africa, Switzerland, and Canada</span>
 <span class='no'>sw</span>  <span class='kw'>&lt;-</span> <span class='no'>wrld_simpl</span>[<span class='no'>wrld_simpl</span>$<span class='no'>NAME</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"South Africa"</span>, <span class='st'>"Switzerland"</span>, <span class='st'>"Canada"</span>),]
 <span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></span>(<span class='fu'>slot</span>(<span class='no'>sw</span>, <span class='st'>"polygons"</span>), <span class='kw'>function</span>(<span class='no'>x</span>) { <span class='fu'>kmlPolygon</span>(<span class='no'>x</span>,
@@ -193,7 +193,7 @@
     <span class='kw'>description</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='st'>"ISO3:"</span>, <span class='fu'>slot</span>(<span class='no'>x</span>, <span class='st'>"ID"</span>))) })
 <span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span>()
 <span class='no'>kmlFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/connections'>file</a></span>(<span class='no'>tf</span>, <span class='st'>"w"</span>)
-<span class='no'>tf</span></div><div class='output co'>#&gt; [1] "/tmp/RtmpjGaG8D/file427e5028ecc5"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>kmlPolygon</span>(<span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>"R Test"</span>, <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>"&lt;i&gt;Hello&lt;/i&gt;"</span>)$<span class='no'>header</span>,
+<span class='no'>tf</span></div><div class='output co'>#&gt; [1] "/tmp/Rtmp8mLuYN/file4e164393ca21"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>kmlPolygon</span>(<span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>"R Test"</span>, <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>"&lt;i&gt;Hello&lt;/i&gt;"</span>)$<span class='no'>header</span>,
     <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlist'>unlist</a></span>(<span class='no'>out</span>[<span class='st'>"style"</span>,]), <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlist'>unlist</a></span>(<span class='no'>out</span>[<span class='st'>"content"</span>,]), <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)

@@ -65,7 +65,7 @@ geographic coordinates." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7</span>
       </span>
     </div>
 
@@ -169,10 +169,14 @@ contains the snapped points, therefore all of them lie on the lines.</p>
 <span class='no'>yc</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1.5</span>,<span class='fl'>2.2</span>,<span class='fl'>1.6</span>)
 <span class='no'>Spoints</span> <span class='kw'>=</span> <span class='fu'>SpatialPoints</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></span>(<span class='no'>xc</span>, <span class='no'>yc</span>))
 
-<span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) <span class='fu'>snapPointsToLines</span>(<span class='no'>Spoints</span>, <span class='no'>Sldf</span>, <span class='kw'>maxDist</span><span class='kw'>=</span><span class='fl'>0.4</span>)</div><div class='output co'>#&gt;    coordinates nearest_line_id snap_dist
-#&gt; 1 (1.36, 1.18)               b 0.3577709
-#&gt; 2 (1.65, 2.35)               a 0.2121320
-#&gt; 3 (2.36, 1.32)               b 0.3130495</div></pre>
+<span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) <span class='fu'>snapPointsToLines</span>(<span class='no'>Spoints</span>, <span class='no'>Sldf</span>, <span class='kw'>maxDist</span><span class='kw'>=</span><span class='fl'>0.4</span>)</div><div class='output co'>#&gt; class       : SpatialPointsDataFrame 
+#&gt; features    : 3 
+#&gt; extent      : 1.36, 2.36, 1.18, 2.35  (xmin, xmax, ymin, ymax)
+#&gt; crs         : NA 
+#&gt; variables   : 2
+#&gt; names       : nearest_line_id,         snap_dist 
+#&gt; min values  :               a, 0.212132034355964 
+#&gt; max values  :               b, 0.357770876399966 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
