@@ -21,18 +21,23 @@ as.linnet.SpatialLines <- function(X, ..., fuse=TRUE) {
   xx <- yy <- numeric(0)
   ii <- jj <- integer(0)
   if(n > 0) {
+    #' concatenate coordinates of all vertices
     crdlists <- coordinates(X)
-    dflist <- vector(mode="list", length=sum(sapply(crdlists, length)))
-    dfli <- 1
+    ntot <- sum(sapply(crdlists, function(x) { sum(sapply(x, nrow)) }))
+    xx <- yy <- numeric(ntot)
+    ii <- jj <- integer(ntot)
+    last <- 0
     for (id1 in seq_along(crdlists)) {
       for (id2 in seq_along(crdlists[[id1]])) {
         crdmat <- crdlists[[id1]][[id2]]
         m <- nrow(crdmat)
         if(m > 0) {
-          xx <- c(xx, crdmat[,1])
-          yy <- c(yy, crdmat[,2])
-          ii <- c(ii, rep(id1, m))
-          jj <- c(jj, rep(id2, m))
+          relevant <- last + seq_len(m)
+          xx[relevant] <- crdmat[,1]
+          yy[relevant] <- crdmat[,2]
+          ii[relevant] <- id1
+          jj[relevant] <- id2
+          last <- last + m
         }
       }
     }
@@ -41,6 +46,7 @@ as.linnet.SpatialLines <- function(X, ..., fuse=TRUE) {
   V <- spatstat::ppp(xx, yy, window=BB, check=!fuse)
   nV <- length(xx)
   #' join them
+  edges <- NULL
   if(nV > 1) {
     seqn <- seq_len(nV)
     from <- seqn[-nV]
@@ -50,17 +56,16 @@ as.linnet.SpatialLines <- function(X, ..., fuse=TRUE) {
     to   <- to[ok]
     iii  <- ii[c(ok, FALSE)] #' indices backward
     jjj  <- jj[c(ok, FALSE)]
-    if(fuse && any(dup <- spatstat::duplicated.ppp(V))) {
-      retain <- !dup
-      vmap <- cumsum(retain)
-      U <- V[retain]
-      vmap[dup] <- spatstat::nncross(V[dup], U, what="which")
-      from <- vmap[from]
-      to   <- vmap[to]
-      V <- U
+    if(fuse) {
+      umap <- spatstat::uniquemap(V)
+      retain <- (umap == seq_along(umap))
+      V <- V[retain]
+      renumber <- cumsum(retain)
+      from <- renumber[umap[from]]
+      to   <- renumber[umap[to]]
     }
     edges <- cbind(from, to)
-  } else edges <- NULL
+  } 
   if(!is.null(edges)) {
     up <- (from < to)
     ee <- cbind(ifelse(up, from , to), ifelse(up, to, from))
