@@ -1,3 +1,13 @@
+2019-08-09 15:41  rsbivand
+
+	* man/as.SpatialPolygons.tess.Rd, man/as.im.Rd, man/as.owin.Rd,
+	  man/as.ppp.Rd, man/as.psp.Rd: add split out spatstat coercion man
+	  pages
+
+2019-08-07 13:06  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2019-08-07 13:05  rsbivand
 
 	* R/SP2owin.R, R/as.linnet.SL.R, R/spatstat1.R,
