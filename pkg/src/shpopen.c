@@ -407,6 +407,7 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
     uchar		*pabyBuf;
     int			i;
     double		dValue;
+    size_t out;
     
 /* -------------------------------------------------------------------- */
 /*      Ensure the access string is one of the legal ones.  We          */
@@ -504,7 +505,7 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
 /*  Read the file size from the SHP file.				*/
 /* -------------------------------------------------------------------- */
     pabyBuf = (uchar *) malloc((size_t) (100));
-    fread( pabyBuf, 100, 1, psSHP->fpSHP );
+    out = fread( pabyBuf, 100, 1, psSHP->fpSHP );
 
     psSHP->nFileSize = (pabyBuf[24] * 256 * 256 * 256
 			+ pabyBuf[25] * 256 * 256

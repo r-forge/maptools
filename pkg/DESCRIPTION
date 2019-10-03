@@ -1,5 +1,5 @@
 Package: maptools
-Version: 0.9-7
+Version: 0.9-8
 Date: 2019-10-03
 Title: Tools for Handling Spatial Objects
 Authors@R: c(

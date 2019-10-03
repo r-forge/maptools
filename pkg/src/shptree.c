@@ -721,18 +721,18 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
 
 {
     int i;
-    size_t offset;
+    size_t offset, out;
     int numshapes, numsubnodes;
     double adfNodeBoundsMin[2], adfNodeBoundsMax[2];
 
 /* -------------------------------------------------------------------- */
 /*      Read and unswap first part of node info.                        */
 /* -------------------------------------------------------------------- */
-    fread( &offset, 4, 1, fp );
+    out = fread( &offset, 4, 1, fp );
     if ( bNeedSwap ) SwapWord ( 4, &offset );
 
-    fread( adfNodeBoundsMin, sizeof(double), 2, fp );
-    fread( adfNodeBoundsMax, sizeof(double), 2, fp );
+    out = fread( adfNodeBoundsMin, sizeof(double), 2, fp );
+    out = fread( adfNodeBoundsMax, sizeof(double), 2, fp );
     if ( bNeedSwap )
     {
         SwapWord( 8, adfNodeBoundsMin + 0 );
@@ -741,7 +741,7 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
         SwapWord( 8, adfNodeBoundsMax + 1 );
     }
       
-    fread( &numshapes, 4, 1, fp );
+    out = fread( &numshapes, 4, 1, fp );
     if ( bNeedSwap ) SwapWord ( 4, &numshapes );
 
 /* -------------------------------------------------------------------- */
@@ -768,7 +768,7 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
                 SfRealloc( *ppanResultBuffer, (size_t) *pnBufferMax * sizeof(int) );
         }
 
-        fread( *ppanResultBuffer + *pnResultCount, 
+        out = fread( *ppanResultBuffer + *pnResultCount, 
                sizeof(int), (size_t) numshapes, fp );
 
         if (bNeedSwap )
@@ -783,7 +783,7 @@ SHPSearchDiskTreeNode( FILE *fp, double *padfBoundsMin, double *padfBoundsMax,
 /* -------------------------------------------------------------------- */
 /*      Process the subnodes.                                           */
 /* -------------------------------------------------------------------- */
-    fread( &numsubnodes, 4, 1, fp );
+    out = fread( &numsubnodes, 4, 1, fp );
     if ( bNeedSwap  ) SwapWord ( 4, &numsubnodes );
 
     for(i=0; i<numsubnodes; i++)
@@ -810,6 +810,7 @@ SHPSearchDiskTree( FILE *fp,
     int i, bNeedSwap, nBufferMax = 0;
     unsigned char abyBuf[16];
     int *panResultBuffer = NULL;
+    size_t out;
 
     *pnShapeCount = 0;
 
@@ -826,7 +827,7 @@ SHPSearchDiskTree( FILE *fp,
 /*      Read the header.                                                */
 /* -------------------------------------------------------------------- */
     fseek( fp, 0, SEEK_SET );
-    fread( abyBuf, 16, 1, fp );
+    out = fread( abyBuf, 16, 1, fp );
 
     if( memcmp( abyBuf, "SQT", 3 ) != 0 )
         return NULL;
