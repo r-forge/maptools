@@ -8,21 +8,25 @@
 
 <title>Methods for Function elide in Package `maptools' — elide-methods • maptools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +34,11 @@
 
 
 
-<meta property="og:title" content="Methods for Function elide in Package `maptools' — elide-methods" />
 
+<meta property="og:title" content="Methods for Function elide in Package `maptools' — elide-methods" />
 <meta property="og:description" content="Methods for function elide to translate and disguise coordinate placing in the real world." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -45,6 +50,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -63,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.8</span>
       </span>
     </div>
 
@@ -71,7 +77,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,7 +85,6 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -89,6 +94,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -100,14 +106,12 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Methods for function <code>elide</code> to translate and disguise coordinate placing in the real world.</p>
-    
     </div>
 
     <pre class="usage">elide(obj, ...)
 <!-- % (obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE), scale=NULL, flip=FALSE) --></pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -126,77 +130,80 @@
     <dt>rotate</dt><dd><p>default 0, rotate angle degrees clockwise around center</p></dd>
     <dt>center</dt><dd><p>default NULL, if not NULL, the rotation center, numeric of length two</p></dd>
     <dt>unitsq</dt><dd><p>logical, default FALSE, if TRUE and scale TRUE, impose unit square bounding box (currently only points)</p></dd>
+
 </dl></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <dl class='dl-horizontal'>
-    <dt>obj = "SpatialPoints"</dt><dd><p>elides object</p></dd>
-    <dt>obj = "SpatialPointsDataFrame"</dt><dd><p>elides object</p></dd>
-    <dt>obj = "SpatialLines"</dt><dd><p>elides object</p></dd>
-    <dt>obj = "SpatialLinesDataFrame"</dt><dd><p>elides object</p></dd>
-    <dt>obj = "SpatialPolygons"</dt><dd><p>elides object</p></dd>
-    <dt>obj = "SpatialPolygonsDataFrame"</dt><dd><p>elides object</p></dd>
-</dl>
     
+<dl class='dl-horizontal'>
+
+<dt>obj = "SpatialPoints"</dt><dd><p>elides object</p></dd>
+
+<dt>obj = "SpatialPointsDataFrame"</dt><dd><p>elides object</p></dd>
+
+<dt>obj = "SpatialLines"</dt><dd><p>elides object</p></dd>
+
+<dt>obj = "SpatialLinesDataFrame"</dt><dd><p>elides object</p></dd>
+
+<dt>obj = "SpatialPolygons"</dt><dd><p>elides object</p></dd>
+
+<dt>obj = "SpatialPolygonsDataFrame"</dt><dd><p>elides object</p></dd>
+
+</dl>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The methods return objects of the input class object with elided coordinates; the coordinate reference system is not set. Note that if the input coordinates or centroids are in the data slot data.frame of the input object, they should be removed before the use of these methods, otherwise they will betray the input positions.</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Rotation code kindly contributed by Don MacQueen</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>meuse</span>)
-<span class='fu'>coordinates</span>(<span class='no'>meuse</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"x"</span>, <span class='st'>"y"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse</span>)
+<span class='fu'>coordinates</span>(<span class='no'>meuse</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>, <span class='st'>"y"</span>)
 <span class='fu'>proj4string</span>(<span class='no'>meuse</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>meuse.riv</span>)
-<span class='no'>river_polygon</span> <span class='kw'>&lt;-</span> <span class='fu'>Polygons</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fu'>Polygon</span>(<span class='no'>meuse.riv</span>)), <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"meuse"</span>)
-<span class='no'>rivers</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPolygons</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>river_polygon</span>))
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.riv</span>)
+<span class='no'>river_polygon</span> <span class='kw'>&lt;-</span> <span class='fu'>Polygons</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>Polygon</span>(<span class='no'>meuse.riv</span>)), <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"meuse"</span>)
+<span class='no'>rivers</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPolygons</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>river_polygon</span>))
 <span class='fu'>proj4string</span>(<span class='no'>rivers</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)
-<span class='no'>rivers1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>rivers</span>, <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>bb</span><span class='kw'>=</span><span class='fu'>bbox</span>(<span class='no'>rivers</span>), <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>rivers</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>meuse</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>rivers1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(<span class='no'>opar</span>)
-<span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>shift</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>10000</span>, -<span class='fl'>10000</span>))
+<span class='no'>rivers1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>rivers</span>, <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>bb</span><span class='kw'>=</span><span class='fu'>bbox</span>(<span class='no'>rivers</span>), <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>rivers</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>meuse</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>rivers1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>shift</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10000</span>, -<span class='fl'>10000</span>))
 <span class='fu'>bbox</span>(<span class='no'>meuse</span>)</div><div class='output co'>#&gt;      min    max
 #&gt; x 178605 181390
 #&gt; y 329714 333611</div><div class='input'><span class='fu'>bbox</span>(<span class='no'>meuse1</span>)</div><div class='output co'>#&gt;      min    max
 #&gt; x 188605 191390
-#&gt; y 319714 323611</div><div class='input'><span class='no'>rivers1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>rivers</span>, <span class='kw'>shift</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>10000</span>, -<span class='fl'>10000</span>))
+#&gt; y 319714 323611</div><div class='input'><span class='no'>rivers1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>rivers</span>, <span class='kw'>shift</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10000</span>, -<span class='fl'>10000</span>))
 <span class='fu'>bbox</span>(<span class='no'>rivers</span>)</div><div class='output co'>#&gt;        min      max
 #&gt; x 178304.0 182331.5
 #&gt; y 325698.5 337684.8</div><div class='input'><span class='fu'>bbox</span>(<span class='no'>rivers1</span>)</div><div class='output co'>#&gt;        min      max
 #&gt; x 188304.0 192331.5
-#&gt; y 315698.5 327684.8</div><div class='input'><span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>rotate</span><span class='kw'>=</span>-<span class='fl'>30</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/apply'>apply</a></span>(<span class='fu'>bbox</span>(<span class='no'>meuse</span>), <span class='fl'>1</span>, <span class='no'>mean</span>))
+#&gt; y 315698.5 327684.8</div><div class='input'><span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>rotate</span><span class='kw'>=</span>-<span class='fl'>30</span>, <span class='kw'>center</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'>bbox</span>(<span class='no'>meuse</span>), <span class='fl'>1</span>, <span class='no'>mean</span>))
 <span class='fu'>bbox</span>(<span class='no'>meuse</span>)</div><div class='output co'>#&gt;      min    max
 #&gt; x 178605 181390
 #&gt; y 329714 333611</div><div class='input'><span class='fu'>bbox</span>(<span class='no'>meuse1</span>)</div><div class='output co'>#&gt;        min      max
 #&gt; x 179419.8 181278.9
-#&gt; y 329462.8 333890.2</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-2.png' alt='' width='700' height='433' /></div></pre>
+#&gt; y 329462.8 333890.2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#methods">Methods</a></li>
-
       <li><a href="#value">Value</a></li>
-
       <li><a href="#note">Note</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -204,13 +211,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
