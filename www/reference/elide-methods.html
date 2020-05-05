@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Methods for Function elide in Package `maptools' — elide-methods" />
 <meta property="og:description" content="Methods for function elide to translate and disguise coordinate placing in the real world." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -69,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-1</span>
       </span>
     </div>
 
@@ -110,7 +113,7 @@
     </div>
 
     <pre class="usage">elide(obj, ...)
-<!-- % (obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE), scale=NULL, flip=FALSE) --></pre>
+&lt;!-- % (obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE), scale=NULL, flip=FALSE) --&gt;</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -121,7 +124,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other arguments:</p><dl class='dl-horizontal'>
+      <td><p>other arguments:</p><dl'>
     <dt>bb</dt><dd><p>if NULL, uses bounding box of object, otherwise the given bounding box</p></dd>
     <dt>shift</dt><dd><p>values to shift the coordinates of the input object; this is made ineffective by the scale argument</p></dd>
     <dt>reflect</dt><dd><p>reverse coordinate axes</p></dd>
@@ -138,7 +141,7 @@
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<dl class='dl-horizontal'>
+<dl'>
 
 <dt>obj = "SpatialPoints"</dt><dd><p>elides object</p></dd>
 
@@ -163,17 +166,15 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse</span>)
 <span class='fu'>coordinates</span>(<span class='no'>meuse</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>, <span class='st'>"y"</span>)
-<span class='fu'>proj4string</span>(<span class='no'>meuse</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.riv</span>)
+<span class='fu'>proj4string</span>(<span class='no'>meuse</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Amersfoort in CRS definition</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.riv</span>)
 <span class='no'>river_polygon</span> <span class='kw'>&lt;-</span> <span class='fu'>Polygons</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>Polygon</span>(<span class='no'>meuse.riv</span>)), <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"meuse"</span>)
 <span class='no'>rivers</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPolygons</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>river_polygon</span>))
-<span class='fu'>proj4string</span>(<span class='no'>rivers</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)
-<span class='no'>rivers1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>rivers</span>, <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'>proj4string</span>(<span class='no'>rivers</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Amersfoort in CRS definition</span></div><div class='input'><span class='no'>rivers1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>rivers</span>, <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>bb</span><span class='kw'>=</span><span class='fu'>bbox</span>(<span class='no'>rivers</span>), <span class='kw'>reflect</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>), <span class='kw'>scale</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>rivers</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>meuse</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>rivers1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>rivers</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>meuse</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>rivers1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
 <span class='no'>meuse1</span> <span class='kw'>&lt;-</span> <span class='fu'>elide</span>(<span class='no'>meuse</span>, <span class='kw'>shift</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10000</span>, -<span class='fl'>10000</span>))
 <span class='fu'>bbox</span>(<span class='no'>meuse</span>)</div><div class='output co'>#&gt;      min    max
 #&gt; x 178605 181390
@@ -189,18 +190,12 @@
 #&gt; x 178605 181390
 #&gt; y 329714 333611</div><div class='input'><span class='fu'>bbox</span>(<span class='no'>meuse1</span>)</div><div class='output co'>#&gt;        min      max
 #&gt; x 179419.8 181278.9
-#&gt; y 329462.8 333890.2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-2.png' alt='' width='700' height='433' /></div></pre>
+#&gt; y 329462.8 333890.2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>meuse1</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='elide-methods-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -211,7 +206,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
