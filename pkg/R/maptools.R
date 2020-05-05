@@ -287,7 +287,7 @@ shape2bbs <- function(shape) {
 
 Map2lines <- function(Map) {
 	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'arc')
 		stop("maptype not line/arc")
 	n <- attr(Map$Shapes,'nshps')
@@ -313,7 +313,8 @@ Map2lines <- function(Map) {
 
 Map2points <- function(Map) {
 	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
+#	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'point')
 		stop("maptype not points")
 	n <- attr(Map$Shapes,'nshps')
@@ -334,7 +335,8 @@ Map2points <- function(Map) {
 
 Map2poly <- function(Map, region.id=NULL, quiet=TRUE) {
 	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
+#	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'poly')
 		stop("maptype not poly")
 	if (!is.null(region.id))
@@ -360,7 +362,8 @@ Map2poly <- function(Map, region.id=NULL, quiet=TRUE) {
 
 Map2poly1 <- function(Map, region.id=NULL, raw=TRUE) {
 	.Deprecated("", package="sp", msg="objects other than Spatial objects defined in the sp package are deprecated")
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
+#	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'poly')
 		stop("maptype not poly")
 	if (!is.null(region.id))
@@ -694,7 +697,8 @@ cat("level 2:", j, ii, "\n")
 }
 
 MapShapeIds <- function(Map) {
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
+#	if (class(Map) != "Map") stop("not a Map")
 	sapply(Map$Shapes, function(x) attr(x, "shpID"))
 }
 .getMultiShp1 <- function(shp, nParts, IID, quiet=TRUE) {
@@ -844,7 +848,8 @@ MapShapeIds <- function(Map) {
 }
 
 Map2bbs <- function(Map) {
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
+#	if (class(Map) != "Map") stop("not a Map")
 	if (attr(Map$Shapes,'shp.type') != 'poly')
 		stop("maptype not poly")
 	res <- .get.polybbs(Map)
@@ -852,7 +857,8 @@ Map2bbs <- function(Map) {
 }
 
 Map2maplim <- function(Map) {
-	if (class(Map) != "Map") stop("not a Map")
+	if (!inherits(Map, "Map")) stop("not a Map")
+#	if (class(Map) != "Map") stop("not a Map")
     	mapxlim<-c(attr(Map$Shapes, 'minbb')[1], 
 		attr(Map$Shapes, 'maxbb')[1])
 	mapylim<-c(attr(Map$Shapes, 'minbb')[2], 

@@ -13,14 +13,14 @@ kmlLines <- function(obj = NULL, kmlfile = NULL, name = "R Lines",
                 footer = c("</Document>", "</kml>")))
   
   # Handle wrong data type
-  if (class(obj) == "list") {
+  if (inherits(obj, "list")) {
     if (!is.null(obj[[1]])) {
-      if ( class(obj[[1]]) != "Lines" && class(obj[[1]]) != "SpatialLinesDataFrame" ) {
+      if (!is(obj[[1]], "Lines") && !is(obj[[1]], "SpatialLinesDataFrame")) {
         stop("obj must be of class 'Lines' or 'SpatialLinesDataFrame' or a 'list' of either [package 'maptools']")      
       }
     }
   } else {
-    if (class(obj) != "Lines" && class(obj) != "SpatialLinesDataFrame") {
+    if (!is(obj, "Lines") && !is(obj, "SpatialLinesDataFrame")) {
       stop("obj must be of class 'Lines' or 'SpatialLinesDataFrame' or a 'list' of either [package 'maptools']")
     } else {
       # Put the "Lines" or "SpatialLinesDataFrame" inside a list for consistent code further down

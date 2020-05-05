@@ -9,9 +9,9 @@ kmlLine <- function(obj = NULL, kmlfile = NULL, name = "R Line",
               sep = ""), paste("<description><![CDATA[", 
               kmldescription, "]]></description>", sep = "")), 
             footer = c("</Document>", "</kml>")))
-    if (class(obj) != "Lines" && class(obj) != "SpatialLinesDataFrame") 
+    if (!is(obj, "Lines") && !is(obj, "SpatialLinesDataFrame")) 
         stop("obj must be of class 'Lines' or 'SpatialLinesDataFrame' [package 'sp']")
-    if (class(obj) == "SpatialLinesDataFrame") {
+    if (is(obj, "SpatialLinesDataFrame")) {
         if (length(obj@lines) > 1L) 
             warning(paste("Only the first Lines object with the ID '", 
               obj@lines[[1]]@ID, "' is taken from 'obj'", 

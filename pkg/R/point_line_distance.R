@@ -30,10 +30,10 @@ snapPointsToLines <- function( points, lines, maxDist=NA, withAttrs=TRUE, idFiel
     } else
         stop("rgeos not installed")
 
-    if (class(points) == "SpatialPoints" && missing(withAttrs))
+    if (is(points, "SpatialPoints") && missing(withAttrs))
         withAttrs = FALSE
             
-    if (class(points) == "SpatialPoints" && withAttrs==TRUE)
+    if (is(points, "SpatialPoints") && withAttrs==TRUE)
         stop("A SpatialPoints object has no attributes! Please set withAttrs as FALSE.")
 
     d = rgeos::gDistance(points, lines, byid=TRUE) 

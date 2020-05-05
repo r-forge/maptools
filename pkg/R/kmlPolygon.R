@@ -9,9 +9,9 @@ kmlPolygon <- function(obj = NULL, kmlfile = NULL, name = "R Polygon",
               sep = ""), paste("<description><![CDATA[", 
               kmldescription, "]]></description>", sep = "")), 
             footer = c("</Document>", "</kml>")))
-    if (class(obj) != "Polygons" && class(obj) != "SpatialPolygonsDataFrame") 
+    if (!is(obj, "Polygons") && !is(obj, "SpatialPolygonsDataFrame")) 
         stop("obj must be of class 'Polygons' or 'SpatialPolygonsDataFrame' [package 'sp']")
-    if (class(obj) == "SpatialPolygonsDataFrame") {
+    if (is(obj, "SpatialPolygonsDataFrame")) {
         if (length(obj@polygons) > 1L) 
             warning(paste("Only the first Polygons object with the ID '", 
               obj@polygons[[1]]@ID, "' is taken from 'obj'", 

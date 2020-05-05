@@ -78,7 +78,7 @@ Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100, n=NULL) {
 # kml file
 
 kmlOverlay <- function(obj, kmlfile=NULL, imagefile=NULL, name="R image") {
-    if (class(obj) != "GE_SG") 
+    if (!inherits(obj, "GE_SG")) 
         stop("obj must be of class GE_SG from function GE_SpatialGrid")
     if (is.na(proj4string(obj$SG)) || is.projected(obj$SG))
         stop("Spatial* object must be in geographical coordinates")

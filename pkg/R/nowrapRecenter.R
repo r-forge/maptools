@@ -42,7 +42,7 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
 			stop("package rgeos required for .nowrapPolygons")
                 comm <- try(rgeos::createPolygonsComment(obj), silent=TRUE)
                 isV <- try(rgeos::gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
-                 if (class(comm) != "try-error" && class(isV) != "try-error" 
+                 if (!inherits(comm, "try-error") && !inherits(isV, "try-error") 
                      && isV) {
                      comment(obj) <- comm
                  } else {

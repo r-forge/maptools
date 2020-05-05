@@ -350,7 +350,7 @@ getRgshhsMap = function (fn = system.file("share/gshhs_c.b",
     
     # If there where no polygons with negative coordinates, just
     # use the positive coordinates.
-    if (class(map1) == "try-error") 
+    if (inherits(map1, "try-error")) 
         map.union = map2 else { # Else merge the two maps into one.
         
         # First store the original polygon IDs in data frames.

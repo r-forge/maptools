@@ -12,7 +12,7 @@ kmlPoints <- function (obj = NULL, kmlfile = NULL, kmlname = "", kmldescription 
             "</kml>")))
 
     # Handle wrong data type
-    if (class(obj) != "SpatialPointsDataFrame") 
+    if (!is(obj, "SpatialPointsDataFrame")) 
         stop("obj must be of class 'SpatialPointsDataFrame' [package 'sp']")
 
     # Handle null name

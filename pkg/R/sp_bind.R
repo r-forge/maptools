@@ -81,7 +81,7 @@ if (!isGeneric("spRbind"))
 		standardGeneric("spRbind"))
 
 rbindSpatialPoints <- function(obj, x) {
-    if (!isTRUE(all.equal(proj4string(obj), proj4string(x))))
+    if (!isTRUE(identicalCRS(obj, x)))
         stop("coordinate reference systems differ")
     crds <- rbind(coordinates(obj), coordinates(x))
     SpatialPoints(crds, proj4string=CRS(proj4string(obj)))
@@ -102,7 +102,7 @@ setMethod("spRbind", signature(obj="SpatialPointsDataFrame",
     x="SpatialPointsDataFrame"), rbindSpatialPointsDataFrame)
 
 rbindSpatialLines <- function(obj, x) {
-    if (!isTRUE(all.equal(proj4string(obj), proj4string(x))))
+    if (!isTRUE(identicalCRS(obj, x)))
         stop("coordinate reference systems differ")
     ll1 <- slot(obj, "lines")
     ll2 <- slot(x, "lines")
@@ -128,7 +128,7 @@ setMethod("spRbind", signature(obj="SpatialLinesDataFrame",
 
 
 rbindSpatialPolygons <- function(obj, x) {
-    if (!isTRUE(all.equal(proj4string(obj), proj4string(x))))
+    if (!isTRUE(identicalCRS(obj, x)))
         stop("coordinate reference systems differ")
     pl1 <- slot(obj, "polygons")
     pl2 <- slot(x, "polygons")

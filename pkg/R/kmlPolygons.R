@@ -14,14 +14,14 @@ kmlPolygons <- function(obj = NULL, kmlfile = NULL, name = "KML Polygons",
                 footer = c("</Document>", "</kml>")))
 
   # Handle wrong data type
-  if (class(obj) == "list") {
+  if (inherits(obj, "list")) {
     if (!is.null(obj[[1]])) {
-      if ( class(obj[[1]]) != "Polygons" && class(obj[[1]]) != "SpatialPolygonsDataFrame" ) {
+      if (!is(obj[[1]], "Polygons") && !is(obj[[1]], "SpatialPolygonsDataFrame")) {
         stop("obj must be of class 'Polygons' or 'SpatialPolygonsDataFrame' or a 'list' of either [package 'maptools']")      
       }
     }
   } else {
-    if (class(obj) != "Polygons" && class(obj) != "SpatialPolygonsDataFrame") {
+    if (!is(obj, "Polygons") && !is(obj, "SpatialPolygonsDataFrame")) {
       stop("obj must be of class 'Polygons' or 'SpatialPolygonsDataFrame' or a 'list' of either [package 'maptools']")
     } else { 
       # Put the "Polygons" or "SpatialPolygonsDataFrame" inside a list for consistent code further down

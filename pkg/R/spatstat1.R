@@ -116,7 +116,7 @@ as.SpatialPolygons.tess <- function(x) {
   z <- list()
   for(i in seq(y)) {
     zi <- try(owin2Polygons(y[[i]], nam[i]), silent=TRUE)
-    if (class(zi) == "try-error") {
+    if (inherits(zi, "try-error")) {
       warning(paste("tile", i, "defective\n", as.character(zi)))
     } else {
       z[[i]] <- zi

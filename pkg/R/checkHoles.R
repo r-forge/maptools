@@ -114,7 +114,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
     comm <- try(rgeos::createPolygonsComment(obj), silent=TRUE)
 #    isVal <- try(gIsValid(SpatialPolygons(list(obj))), silent=TRUE)
 #    if (class(isVal) == "try-error") isVal <- FALSE
-    if (class(comm) != "try-error" && !force) {
+    if (!inherits(comm, "try-error") && !force) {
         comment(obj) <- comm
         return(obj)
     }
@@ -132,7 +132,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
             if (!is.null(tree1[[i]])) {
                 res <- try(rgeos::gEquals(SP[i,], SP[tree1[[i]],], byid=TRUE),
                     silent=TRUE)
-                if (class(res) == "try-error") {
+                if (inherits(res, "try-error")) {
                     warning("Polygons object ", IDs, ", Polygon ",
                         i, ": ", res)
                     next
@@ -143,7 +143,7 @@ checkPolygonsGEOS <- function(obj, properly=TRUE, force=TRUE, useSTRtree=FALSE) 
             }
         } else {
             res <- try(rgeos::gEquals(SP[i,], SP[uniqs,], byid=TRUE), silent=TRUE)
-            if (class(res) == "try-error") {
+            if (inherits(res, "try-error")) {
                 warning("Polygons object ", IDs, ", Polygon ",
                     i, ": ", res)
                 next

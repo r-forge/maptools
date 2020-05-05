@@ -20,7 +20,7 @@ writeLinesShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 
 .shp2LinesDF <- function(shp, proj4string=CRS(as.character(NA)), IDs,
         delete_null_obj=FALSE) {
-	if (class(shp) != "Map") stop("shp not a Map object")
+	if (!inherits(shp, "Map")) stop("shp not a Map object")
 	shp.type <- attr(shp$Shapes, "shp.type")
 	if (!shp.type %in% c("arc", "poly")) 
 		stop("not an arc or poly Map object")
