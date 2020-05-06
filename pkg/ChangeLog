@@ -1,3 +1,15 @@
+2020-05-06 17:45  rsbivand
+
+	* R/SpatialPolys-methods.R, R/shapelib.R: read MAP format files
+
+2020-05-05 15:15  rsbivand
+
+	* DESCRIPTION: tidy
+
+2020-05-05 15:09  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
 2020-05-05 15:07  rsbivand
 
 	* DESCRIPTION, R/GE_png.R, R/Rgshhs.R, R/SpatialLines-methods.R,
