@@ -187,6 +187,10 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
       if (any(is.na(c(polylist[[i]])))) {
 	xy <- polylist[[i]]
         NAs <- unclass(attr(na.omit(xy), "na.action"))
+        if (NAs[length(NAs)] == nrow(xy)) {
+          NAs <- NAs[-length(NAs)]
+          xy <- xy[1:(nrow(xy)-1),]
+        }
 	nParts <- length(NAs) + 1L
 	from <- integer(nParts)
 	to <- integer(nParts)
@@ -350,5 +354,76 @@ write.linelistShape <- function(linelist, df, file, factor2char=TRUE,
   res <- .Call("shpwritelines", as.character(file), linelist, 
     PACKAGE="maptools")
   invisible(res)
+}
+
+readMAP2polylist = function(filename){
+  zz=file(filename,"rb")
+  #
+  # header of .map
+  #
+  versao = readBin(zz,"integer",1,size=2)  # 100 = versao 1.00
+  #Bounding Box
+  Leste = readBin(zz,"numeric",1,size=4)
+  Norte = readBin(zz,"numeric",1,size=4)
+  Oeste = readBin(zz,"numeric",1,size=4)
+  Sul   = readBin(zz,"numeric",1,size=4)
+
+  geocodigo = ""
+  nome = ""
+  xleg = 0
+  yleg = 0
+  sede = FALSE
+  poli = list()
+  i = 0
+
+  #
+  # repeat of each object in file
+  #
+  repeat{  
+    tipoobj = readBin(zz,"integer",1,size=1) # 0=Poligono, 1=PoligonoComSede, 2=Linha, 3=Ponto
+
+    if (length(tipoobj) == 0) break
+    i = i + 1
+
+    Len = readBin(zz,"integer",1,size=1)  # length byte da string Pascal
+    geocodigo[i] = rawToChar(readBin(zz, "raw", 10, size = 1))#readChar(zz,10)
+    Len = readBin(zz,"integer",1,size=1)  # length byte da string Pascal
+    inp <- readBin(zz, "raw", 25, size = 1)
+    inp[inp > 127] <- charToRaw(" ")
+    nome[i] = substr(rawToChar(inp), 1, Len)
+    xleg[i] = readBin(zz,"numeric",1,size=4)
+    yleg[i] = readBin(zz,"numeric",1,size=4)
+    numpontos = readBin(zz,"integer",1,size=2)
+
+    sede = sede || (tipoobj = 1)
+
+    x=0
+    y=0   
+    for (j in 1:numpontos){
+      x[j] = readBin(zz,"numeric",1,size=4)
+      y[j] = readBin(zz,"numeric",1,size=4)
+    }
+
+
+    # separate polygons
+    xInic = x[1]
+    yInic = y[1]  
+    for (j in 2:numpontos){
+      if (x[j] == xInic & y[j] == yInic) {x[j]=NA; y[j] = NA}
+    }
+
+    poli[[i]] = c(x,y)
+    dim(poli[[i]]) = c(numpontos,2)
+  }
+
+  class(poli) = "polylist"
+  attr(poli,"region.id") = geocodigo
+  attr(poli,"region.name") = nome
+  attr(poli,"centroid") = list(x=xleg,y=yleg)
+  attr(poli,"sede") = sede
+  attr(poli,"maplim") = list(x=c(Oeste,Leste),y=c(Sul,Norte))
+
+  close(zz)
+  return(poli)
 }
 

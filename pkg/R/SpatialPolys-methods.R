@@ -209,18 +209,30 @@ writePolyShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
 	invisible(res)
 }
 
-.polylist2SpP <- function(pl) {
+.polylist2SpP <- function(pl, tol=.Machine$double.eps^(1/4)) {
 	if (!inherits(pl, "polylist")) stop("not a polylist object")
 	n <- length(pl)
 	IDs <- attr(pl, "region.id")
 	pL <- vector(mode="list", length=n)
 	for (i in 1:n) {
-		nP <- attr(pl[[i]], "nParts")
-		Ps <- vector(mode="list", length=nP)
-		from <- attr(pl[[i]], "pstart")$from
-		to <- attr(pl[[i]], "pstart")$to
+                this_pl <- pl[[i]]
+		nP <- attr(this_pl, "nParts")
+                keep <- logical(nP)
+		from <- attr(this_pl, "pstart")$from
+		to <- attr(this_pl, "pstart")$to
 		for (j in 1:nP) {
-			Ps[[j]] <- Polygon(pl[[i]][from[j]:to[j],])
+                    xy <- this_pl[from[j]:to[j],]
+                    keep[j] <- abs(.RingCentrd_2d(xy)$area) > tol
+		}
+                Ps <- vector(mode="list", length=sum(keep))
+                jj <- 1
+		for (j in 1:nP) {
+                        if (keep[j]) {
+                            xy <- this_pl[from[j]:to[j],]
+                            if (nrow(xy) < 4) xy <- rbind(xy, xy[1,])
+			    Ps[[jj]] <- Polygon(xy)
+                            jj <- jj + 1
+                        }
 		}
 		pL[[i]] <- Polygons(Ps, IDs[i])
 	}
