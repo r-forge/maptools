@@ -19,10 +19,11 @@ Functions to convert between \pkg{spatstat}s raster format \code{im} and \pkg{sp
 \usage{
 as.im.SpatialGridDataFrame(from)
 as.SpatialGridDataFrame.im(from)
-as.im.RasterLayer(from)
+as.im.RasterLayer(from, factor.col.name = NULL)
 }
 \arguments{
   \item{from}{object to coerce from}
+  \item{factor.col.name}{factor.col.name FIXME}
 }
 \details{A \code{SpatialGridDataFrame} object may contain several columns of 
 data such that several values are associated with each grid cell. In contrast an
@@ -74,13 +75,33 @@ if (run) {
 mg2 <- as.SpatialGridDataFrame.im(mg_im)
 image(mg2, axes=TRUE)
 }
+run <- run && require(raster, quietly=TRUE)
 if (run) {
-if (require(raster, quietly=TRUE)) {
 ## Convert SpatialGridDataFrame -> RasterLayer -> im and plot it
 r <- as(mg2, "RasterLayer")
 r_im <- as.im.RasterLayer(r)
 plot(r_im)
 }
+if (run) {
+rr <- raster(nrow=2, ncol=3)
+values(rr) <- 1:6
+rr <- as.factor(rr)
+rrr <- rr
+f <- levels(rrr)[[1]]
+f$name <- c("vector", "of", "values")
+f$name2 <- letters[1:6]
+levels(rrr) <- f
+print(levels(rrr))
+}
+if (run) {
+iii <- as.im.RasterLayer(rrr)
+plot(iii)
+}
+if (run) {
+iv <- as.im.RasterLayer(rrr, factor.col.name = "name")
+plot(iv)
+}
+if (run) {
 }
 }
 \keyword{spatial}

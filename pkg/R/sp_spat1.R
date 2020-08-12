@@ -81,25 +81,66 @@ as.im.SpatialGridDataFrame = function(from) {
 }
 setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)
 
-as.im.RasterLayer <- function(from) 
+#as.im.RasterLayer <- function(from) 
+#{
+#    if (!requireNamespace("spatstat", quietly = TRUE))
+#		stop("package spatstat required for coercion")
+#    if (!requireNamespace("raster", quietly = TRUE))
+#		stop("package raster required for coercion")
+#    if (!raster::hasValues(from)) stop("values required in RasterLayer object")
+#    if (raster::rotated(from)) {
+#        stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the \"rectify\" function")
+#    }
+#    rs <- raster::res(from)
+#    orig <- bbox(from)[, 1] + 0.5 * rs
+#    dm <- dim(from)[2:1]
+#    xx <- unname(orig[1] + cumsum(c(0, rep(rs[1], dm[1]-1))))
+#    yy <- unname(orig[2] + cumsum(c(0, rep(rs[2], dm[2]-1))))
+#    im <- spatstat::im(matrix(raster::values(from), ncol=dm[1], nrow=dm[2],
+#        byrow=TRUE)[dm[2]:1,], xcol=xx, yrow=yy)
+#    im
+#}
+
+# contributed by Matthew Lewis https://github.com/spatstat/spatstat/issues/132
+
+as.im.RasterLayer <- function(from, factor.col.name = NULL) 
 {
-    if (!requireNamespace("spatstat", quietly = TRUE))
-		stop("package spatstat required for coercion")
-    if (!requireNamespace("raster", quietly = TRUE))
-		stop("package raster required for coercion")
-    if (!raster::hasValues(from)) stop("values required in RasterLayer object")
-    if (raster::rotated(from)) {
-        stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the \"rectify\" function")
+  if (!requireNamespace("spatstat", quietly = TRUE))
+    stop("package spatstat required for coercion")
+  if (!requireNamespace("raster", quietly = TRUE))
+    stop("package raster required for coercion")
+  if (!raster::hasValues(from)) stop("values required in RasterLayer object")
+  if (raster::rotated(from)) {
+    stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the \"rectify\" function")
+  }
+  rs <- raster::res(from)
+  orig <- bbox(from)[, 1] + 0.5 * rs
+  dm <- dim(from)[2:1]
+  xx <- unname(orig[1] + cumsum(c(0, rep(rs[1], dm[1]-1))))
+  yy <- unname(orig[2] + cumsum(c(0, rep(rs[2], dm[2]-1))))
+  ## Use `from` to make a vector `val` with input values
+  val <- raster::values(from)
+  if(is.factor(from)){
+    lev <- levels(from)[[1]]
+    if(!is.null(factor.col.name)){
+        if(factor.col.name %in% colnames(lev)){
+            factor.col <- which(colnames(lev) == factor.col.name)
+        } else {
+            stop("'factor.col.name' is not a column name of the raster 'from'")
+        }
+    }else{
+        factor.col <- length(lev)
     }
-    rs <- raster::res(from)
-    orig <- bbox(from)[, 1] + 0.5 * rs
-    dm <- dim(from)[2:1]
-    xx <- unname(orig[1] + cumsum(c(0, rep(rs[1], dm[1]-1))))
-    yy <- unname(orig[2] + cumsum(c(0, rep(rs[2], dm[2]-1))))
-    im <- spatstat::im(matrix(raster::values(from), ncol=dm[1], nrow=dm[2],
-        byrow=TRUE)[dm[2]:1,], xcol=xx, yrow=yy)
-    im
+    val <- factor(val, levels = lev$ID, labels = lev[[factor.col]])
+  }
+  ## Assign dimensions to `val` as a matrix in raster layout:
+  dim(val) <- dm
+  ## Transform to spatstat format
+  val <- spatstat::transmat(val, from = list(x="-i", y="j"), to = "spatstat")
+  im <- spatstat::im(val, xcol=xx, yrow=yy)
+  return(im)
 }
+
 
 #if (requireNamespace("spatstat", quietly = TRUE) && requireNamespace("raster", quietly = TRUE)) {
 #  setAs("RasterLayer", "im", as.im.RasterLayer)
