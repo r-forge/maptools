@@ -23,7 +23,7 @@ Authors@R: c(
 	person("Karl Ove", "Hufthammer", role = "ctb"),
 	person("Thomas", "Jagger", role = "ctb"),
 	person("Kent", "Johnson", role = "ctb"),
-        person("Matthew", "Lewis", role = "ctb"),
+        person("Matthew", "Lewis", role = "ctb", comment=c(ORCID="0000-0003-2244-4078")),
 	person("Sebastian", "Luque", role = "ctb"),
 	person("Don", "MacQueen", role = "ctb"),
 	person("Andrew", "Niccolai", role = "ctb"),
