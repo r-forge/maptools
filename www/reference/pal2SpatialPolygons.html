@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
       </span>
     </div>
 
@@ -153,21 +153,21 @@
 <span class='no'>nc2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='map2SpatialPolygons.html'>map2SpatialPolygons</a></span>(<span class='no'>ncmap</span>, <span class='no'>IDs</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>nc2</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fu'>coordinates</span>(<span class='no'>nc2</span>), <span class='kw'>labels</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span>(<span class='no'>nc2</span>), <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.6</span>)
-}</div><div class='img'><img src='pal2SpatialPolygons-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>RArcInfo</span>)) {
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='no'>tmpcover</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>td</span>, <span class='st'>"nc"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>)
-<span class='kw'>if</span> (!<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.exists</a></span>(<span class='no'>tmpcover</span>)) <span class='fu'><a href='https://rdrr.io/pkg/RArcInfo/man/e00toavc.html'>e00toavc</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"share/co37_d90.e00"</span>,
- <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>], <span class='no'>tmpcover</span>)
-<span class='no'>arc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/RArcInfo/man/get.arcdata.html'>get.arcdata</a></span>(<span class='no'>td</span>, <span class='st'>"nc"</span>)
-<span class='no'>pal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/RArcInfo/man/get.paldata.html'>get.paldata</a></span>(<span class='no'>td</span>, <span class='st'>"nc"</span>)
-<span class='no'>pat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/RArcInfo/man/get.tabledata.html'>get.tabledata</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>td</span>, <span class='st'>"info"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>), <span class='st'>"NC.PAT"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>pal</span><span class='kw'>[[</span><span class='fl'>2</span>]], <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span><span class='kw'>[[</span><span class='fl'>1</span>]]))
-<span class='no'>IDs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>pat</span>$<span class='no'>ST</span>[-<span class='fl'>1</span>], <span class='no'>pat</span>$<span class='no'>CO</span>[-<span class='fl'>1</span>], <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)
-<span class='no'>nc3</span> <span class='kw'>&lt;-</span> <span class='fu'>pal2SpatialPolygons</span>(<span class='no'>arc</span>, <span class='no'>pal</span>, <span class='kw'>IDs</span><span class='kw'>=</span><span class='no'>IDs</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>nc3</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fu'>coordinates</span>(<span class='no'>nc3</span>), <span class='kw'>labels</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span>(<span class='no'>nc3</span>), <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.6</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: RArcInfo</span></div><div class='output co'>#&gt; <span class='message'>Error: package or namespace load failed for ‘RArcInfo’:</span>
-#&gt; <span class='message'> package ‘RArcInfo’ was installed before R 4.0.0: please re-install it</span></div></pre>
+}</div><div class='img'><img src='pal2SpatialPolygons-2.png' alt='' width='700' height='433' /></div><div class='input'>#if(require(RArcInfo)) {
+#td &lt;- tempdir()
+#tmpcover &lt;- paste(td, "nc", sep="/")
+#if (!file.exists(tmpcover)) e00toavc(system.file("share/co37_d90.e00",
+# package="maptools")[1], tmpcover)
+#arc &lt;- get.arcdata(td, "nc")
+#pal &lt;- get.paldata(td, "nc")
+#pat &lt;- get.tabledata(paste(td, "info", sep="/"), "NC.PAT")
+#sapply(pal[[2]], function(x) length(x[[1]]))
+#IDs &lt;- paste(pat$ST[-1], pat$CO[-1], sep="")
+#nc3 &lt;- pal2SpatialPolygons(arc, pal, IDs=IDs)
+#plot(nc3)
+#text(coordinates(nc3), labels=row.names(nc3), cex=0.6)
+#}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

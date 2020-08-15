@@ -73,7 +73,7 @@ to sps SpatialPolygons class. S4-style as() coercion works as well." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
       </span>
     </div>
 
@@ -138,13 +138,12 @@ to <span class="pkg">sp</span>s <code>SpatialPolygons</code> class. S4-style as(
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>spatstat</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'spatstat':</span>
 #&gt; <span class='message'>  method     from</span>
 #&gt; <span class='message'>  print.boxx cli </span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>spatstat 1.63-3       (nickname: ‘Wet paint’) </span>
+#&gt; <span class='message'>spatstat 1.64-1       (nickname: ‘Help you I can, yes!’) </span>
 #&gt; <span class='message'>For an introduction to spatstat, type ‘beginner’ </span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Note: spatstat version 1.64-1 is out of date by more than 13 weeks; a newer version should be available.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘spatstat’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:lattice’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    panel.histogram</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    marginSums</span></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+#&gt; <span class='message'>    panel.histogram</span></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
 <span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/spatstat/man/tess.html'>tess</a></span>(<span class='kw'>xgrid</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>4</span>,<span class='kw'>ygrid</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>4</span>)
 <span class='no'>A_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>A</span>, <span class='st'>"SpatialPolygons"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>A_sp</span>)

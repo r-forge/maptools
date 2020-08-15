@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
       </span>
     </div>
 
@@ -188,9 +188,9 @@
     
 
 <p>NOAA used the reference below to develop their Sunrise/Sunset</p>
-<p><a href='http://www.srrb.noaa.gov/highlights/sunrise/sunrise.html'>http://www.srrb.noaa.gov/highlights/sunrise/sunrise.html</a> and Solar
+<p><a href='https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html'>https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html</a> and Solar
   Position</p>
-<p><a href='http://www.srrb.noaa.gov/highlights/sunrise/azel.html'>http://www.srrb.noaa.gov/highlights/sunrise/azel.html</a>
+<p><a href='https://www.esrl.noaa.gov/gmd/grad/solcalc/azel.html'>https://www.esrl.noaa.gov/gmd/grad/solcalc/azel.html</a>
   Calculators.  The algorithms include corrections for atmospheric
   refraction effects.</p>
 <p>Input can consist of one location and at least one POSIXct times, or one
@@ -245,9 +245,9 @@
 #&gt; newlon 0.3519249 2004-12-24 08:26:46</div><div class='input'><span class='fu'>crepuscule</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
 #&gt; newlon 0.3519249 2004-12-24 08:26:46</div><div class='input'><span class='fu'>solarnoon</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
 #&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarnoon</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarpos</span>(<span class='no'>hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>))</div><div class='output co'>#&gt;         [,1]     [,2]
-#&gt; [1,] 266.006 21.42701</div><div class='input'><span class='fu'>solarpos</span>(<span class='no'>Hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>))</div><div class='output co'>#&gt;          [,1]     [,2]
-#&gt; [1,] 266.0061 21.42701</div><div class='input'><span class='fu'>sunriset</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunrise"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarpos</span>(<span class='no'>hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>))</div><div class='output co'>#&gt;          [,1]    [,2]
+#&gt; [1,] 160.3036 42.4284</div><div class='input'><span class='fu'>solarpos</span>(<span class='no'>Hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>))</div><div class='output co'>#&gt;          [,1]     [,2]
+#&gt; [1,] 160.3037 42.42841</div><div class='input'><span class='fu'>sunriset</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunrise"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
 #&gt; newlon 0.3924249 2004-12-24 09:25:05</div><div class='input'><span class='fu'>sunriset</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunrise"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
 #&gt; newlon 0.3924249 2004-12-24 09:25:05</div><div class='input'><span class='co'>## Using a sequence of dates</span>
 <span class='no'>Hels_seq</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span><span class='kw'>=</span><span class='no'>d041224</span>, <span class='kw'>length.out</span><span class='kw'>=</span><span class='fl'>365</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='st'>"days"</span>)

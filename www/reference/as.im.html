@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
 
     <pre class="usage"><span class='fu'>as.im.SpatialGridDataFrame</span>(<span class='no'>from</span>)
 <span class='fu'>as.SpatialGridDataFrame.im</span>(<span class='no'>from</span>)
-<span class='fu'>as.im.RasterLayer</span>(<span class='no'>from</span>)</pre>
+<span class='fu'>as.im.RasterLayer</span>(<span class='no'>from</span>, <span class='kw'>factor.col.name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,6 +122,10 @@
     <tr>
       <th>from</th>
       <td><p>object to coerce from</p></td>
+    </tr>
+    <tr>
+      <th>factor.col.name</th>
+      <td><p>column name of <code><a href='https://rdrr.io/r/base/levels.html'>levels(from)</a></code> to be treated as a factor; if NULL defaults to last column of <code>from</code>. Ignored if <code>from</code> is not a raster with factor values.</p></td>
     </tr>
     </table>
 
@@ -179,19 +183,42 @@ the example below.</p>
 <span class='co'>## Convert back to SpatialGridDataFrame and plot it again</span>
 <span class='no'>mg2</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialGridDataFrame.im</span>(<span class='no'>mg_im</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>mg2</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='img'><img src='as.im-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>raster</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) {
-<span class='co'>## Convert SpatialGridDataFrame -&gt; RasterLayer -&gt; im and plot it</span>
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>mg2</span>, <span class='st'>"RasterLayer"</span>)
-<span class='no'>r_im</span> <span class='kw'>&lt;-</span> <span class='fu'>as.im.RasterLayer</span>(<span class='no'>r</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='no'>r_im</span>)
-}
-}</div><div class='output co'>#&gt; <span class='message'></span>
+}</div><div class='img'><img src='as.im-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='no'>run</span> <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>raster</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘raster’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:spatstat’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    area, rotate, shift</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:nlme’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    getData</span></div><div class='img'><img src='as.im-4.png' alt='' width='700' height='433' /></div></pre>
+#&gt; <span class='message'>    getData</span></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='co'>## Convert SpatialGridDataFrame -&gt; RasterLayer -&gt; im and plot it</span>
+<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>mg2</span>, <span class='st'>"RasterLayer"</span>)
+<span class='no'>r_im</span> <span class='kw'>&lt;-</span> <span class='fu'>as.im.RasterLayer</span>(<span class='no'>r</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='no'>r_im</span>)
+}</div><div class='img'><img src='as.im-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='no'>rr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>3</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/getValues.html'>values</a></span>(<span class='no'>rr</span>) <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>6</span>
+<span class='no'>rr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/factor.html'>as.factor</a></span>(<span class='no'>rr</span>)
+<span class='no'>rrr</span> <span class='kw'>&lt;-</span> <span class='no'>rr</span>
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/factor.html'>levels</a></span>(<span class='no'>rrr</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='no'>f</span>$<span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"vector"</span>, <span class='st'>"of"</span>, <span class='st'>"values"</span>)
+<span class='no'>f</span>$<span class='no'>name2</span> <span class='kw'>&lt;-</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>6</span>]
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/factor.html'>levels</a></span>(<span class='no'>rrr</span>) <span class='kw'>&lt;-</span> <span class='no'>f</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/raster/man/factor.html'>levels</a></span>(<span class='no'>rrr</span>))
+}</div><div class='output co'>#&gt; [[1]]
+#&gt;   ID   name name2
+#&gt; 1  1 vector     a
+#&gt; 2  2     of     b
+#&gt; 3  3 values     c
+#&gt; 4  4 vector     d
+#&gt; 5  5     of     e
+#&gt; 6  6 values     f
+#&gt; </div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='no'>iii</span> <span class='kw'>&lt;-</span> <span class='fu'>as.im.RasterLayer</span>(<span class='no'>rrr</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='no'>iii</span>)
+}</div><div class='img'><img src='as.im-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='no'>iv</span> <span class='kw'>&lt;-</span> <span class='fu'>as.im.RasterLayer</span>(<span class='no'>rrr</span>, <span class='kw'>factor.col.name</span> <span class='kw'>=</span> <span class='st'>"name"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='no'>iv</span>)
+}</div><div class='img'><img src='as.im-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+}</div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
