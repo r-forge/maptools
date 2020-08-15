@@ -29,7 +29,7 @@ Formal class 'SpatialPointsDataFrame' [package "sp"] with 5 slots
   .. .. ..@ projargs: chr " +proj=longlat +ellps=WGS84"
 }
 \source{R. R. Miller (2010) Is the Past Present? Historical Splash-dam Mapping and Stream Disturbance Detection in the Oregon Coastal Province. MSc. thesis, Oregon State University; packaged by Jonathan Callahan}
-\references{\url{http://www.fs.fed.us/pnw/lwm/aem/docs/burnett/miller_rebecca_r2010rev.pdf}}
+\references{\url{https://www.fs.fed.us/pnw/lwm/aem/docs/burnett/miller_rebecca_r2010rev.pdf}}
 \examples{
 data(SplashDams)
 plot(SplashDams, axes=TRUE)

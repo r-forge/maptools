@@ -81,10 +81,10 @@
 
   NOAA used the reference below to develop their Sunrise/Sunset
 
-  \url{http://www.srrb.noaa.gov/highlights/sunrise/sunrise.html} and Solar
+  \url{https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html} and Solar
   Position 
 
-  \url{http://www.srrb.noaa.gov/highlights/sunrise/azel.html}
+  \url{https://www.esrl.noaa.gov/gmd/grad/solcalc/azel.html}
   Calculators.  The algorithms include corrections for atmospheric
   refraction effects.
 
@@ -133,7 +133,7 @@
 
 \author{Sebastian P. Luque \email{spluque@gmail.com}, translated from
   Greg Pelletier's \email{gpel461@ecy.wa.gov} VBA code (available from
-  \url{http://www.ecy.wa.gov/programs/eap/models.html}), who in turn
+  \url{https://ecology.wa.gov/Research-Data/Data-resources/Models-spreadsheets/Modeling-the-environment/Models-tools-for-TMDLs}), who in turn
   translated it from original Javascript code by NOAA (see Details).
   Roger Bivand \email{roger.bivand@nhh.no} adapted the code to work with
   \pkg{sp} classes.}

@@ -20,7 +20,7 @@ sp2tmap(SP)
   \item{\_Y}{numeric y coordinate}
   and an \code{ID_n} attribute with the named polygon identifiers
 }
-\references{\url{http://www.stata.com/search.cgi?query=tmap}}
+\references{\url{https://www.stata.com/search.cgi?query=tmap}}
 \author{Roger Bivand}
 \seealso{\code{\link[foreign]{write.dta}}}
 \examples{

@@ -23,7 +23,7 @@ as.im.RasterLayer(from, factor.col.name = NULL)
 }
 \arguments{
   \item{from}{object to coerce from}
-  \item{factor.col.name}{column name of \code{from} to be treated as a factor; if NULL defaults to last column of \code{from}. Not used if \code{from} is not a factor.}
+  \item{factor.col.name}{column name of \code{levels(from)} to be treated as a factor; if NULL defaults to last column of \code{from}. Ignored if \code{from} is not a raster with factor values.}
 }
 \details{A \code{SpatialGridDataFrame} object may contain several columns of 
 data such that several values are associated with each grid cell. In contrast an

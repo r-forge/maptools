@@ -31,7 +31,7 @@ the file earlier available at \code{http:\/\/williams.best.vwh.net/avform.htm},
 
 \url{http://www.movable-type.co.uk/scripts/latlong-vincenty-direct.html}, 
 
-Original reference \url{http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf}:
+Original reference \url{https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf}:
 
 Vincenty, T. 1975.  Direct and inverse solutions of geodesics on 
 the ellipsoid with application of nested equations.

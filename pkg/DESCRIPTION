@@ -30,6 +30,7 @@ Authors@R: c(
 	person("Edzer", "Pebesma", role = "ctb"),
 	person("Oscar", "Perpiñán Lamigueiro", role = "ctb"),
         person("Ethan", "Plunkett", role = "ctb"),
+	person("Ege", "Rubak", role = "ctb", comment=c(ORCID="0000-0002-6675-533X")),
 	person("Tom", "Short", role = "ctb"),
 	person("Greg", "Snow", role = "ctb"),
 	person("Ben", "Stabler", role = "ctb"),
@@ -38,7 +39,7 @@ Authors@R: c(
 Encoding: UTF-8
 Depends: R (>= 2.10), sp (>= 1.0-11)
 Imports: foreign (>= 0.8), methods, grid, lattice, stats, utils, grDevices
-Suggests: rgeos (>= 0.1-8), spatstat (>= 1.60), PBSmapping, maps, RColorBrewer, raster, polyclip, spatstat.utils
+Suggests: rgeos (>= 0.1-8), spatstat (>= 1.60), PBSmapping, maps, RColorBrewer, raster, polyclip, spatstat.utils, plotrix
 Enhances: gpclib
 Description: Set of tools for manipulating geographic data. It includes binary access to 'GSHHG' shoreline files. The package also provides interface wrappers for exchanging spatial objects with packages such as 'PBSmapping', 'spatstat', 'maps', and others.
 License: GPL (>= 2)
