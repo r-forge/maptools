@@ -22,7 +22,7 @@ The function just wraps: gpsbabel -i INTYPE -f INFILE -o tabsep -F - in system()
 \value{
   A data frame of waypoint values
 }
-\references{\url{http://www.gpsbabel.org}}
+\references{\url{https://www.gpsbabel.org}}
 \author{Patrick Giraudoux and Roger Bivand}
 
 \examples{

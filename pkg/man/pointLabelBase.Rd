@@ -66,7 +66,7 @@ pointLabel(x, y = NULL, labels = seq(along = x), cex = 1,
 }
 \references{
 
-\url{http://en.wikipedia.org/wiki/Automatic_label_placement}
+\url{https://en.wikipedia.org/wiki/Automatic_label_placement}
 
 \url{http://i11www.iti.uni-karlsruhe.de/map-labeling/bibliography/}
 
@@ -76,7 +76,7 @@ pointLabel(x, y = NULL, labels = seq(along = x), cex = 1,
 
 The genetic algorithm code was adapted from the python code at 
 
-\url{http://meta.wikimedia.org/wiki/Map_generator}.
+\url{https://meta.wikimedia.org/wiki/Map_generator}.
 
 The simulated annealing code follows the algorithm and guidelines in:
 

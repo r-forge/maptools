@@ -29,7 +29,7 @@ MapGen2SL(file, proj4string=CRS(as.character(NA)))
 
 \author{ Roger Bivand; Edzer Pebesma }
 
-\note{Coastlines of varying resolution may be chosen online and downloaded in "Mapgen" text format from \url{http://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html}, most conveniently using the interactive selection tool, but please note the 500,000 point limit on downloads, which is easy to exceed.}
+\note{Coastlines of varying resolution may be chosen online and downloaded in "Mapgen" text format from \url{https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html}, most conveniently using the interactive selection tool, but please note the 500,000 point limit on downloads, which is easy to exceed.}
 
 
 \seealso{ \link[sp]{SpatialLines-class} }
