@@ -29,11 +29,11 @@ Rgshhs <- function(fn, xlim=NULL, ylim=NULL, level=4, minarea=0,
         if (rgeosI && !avoidGEOS) {
             # require(rgeos)
     		if (!requireNamespace("rgeos", quietly = TRUE))
-				stop("rgeos spatstat required for Rgshhs")
+				stop("rgeos required for Rgshhs")
         } else {
             stopifnot(isTRUE(gpclibPermitStatus()))
     		if (!requireNamespace("gpclib", quietly = TRUE))
-				stop("gpclib spatstat required for Rgshhs")
+				stop("gpclib required for Rgshhs")
 	    	# require("gpclib")
         }
 	polys <- .Call("Rgshhs", as.character(fn), as.integer(5), 

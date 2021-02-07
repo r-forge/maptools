@@ -33,7 +33,7 @@ GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
 Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100, n=NULL) {
     if (!extends(class(obj), "Spatial")) 
         stop("Sobj_SpatialGrid only works for class(es extending) Spatial")
-    p4s <- proj4string(obj)
+    p4s <- slot(obj, "proj4string")
     xlim <- bbox(obj)[1,]
     ylim <- bbox(obj)[2,]
     m_asp <- (diff(ylim)/diff(xlim)) / asp
@@ -58,7 +58,7 @@ Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100, n=NULL) {
         ylim[1]+(0.5*cellsize[2]))
     names(cellcentre.offset) <- c("x", "y")
     grd <- GridTopology(cellcentre.offset, cellsize, cells.dim)
-    mySG <- SpatialGrid(grd, proj4string=CRS(p4s))
+    mySG <- SpatialGrid(grd, proj4string=p4s)
 
     res <- list(height=as.integer(myheight), width=as.integer(mywidth),
         SG=mySG, asp=m_asp, xlim=bbox(mySG)[1,], ylim=bbox(mySG)[2,])

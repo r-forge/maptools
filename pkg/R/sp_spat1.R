@@ -74,10 +74,10 @@ setAs("im", "SpatialGridDataFrame", as.SpatialGridDataFrame.im)
 
 as.im.SpatialGridDataFrame = function(from) {
     #require(spatstat)
-    if (!requireNamespace("spatstat", quietly = TRUE))
-		stop("package spatstat required for as.im.SpatialGridDataFrame")
+    if (!requireNamespace("spatstat.geom", quietly = TRUE))
+		stop("package spatstat.geom required for as.im.SpatialGridDataFrame")
     xi <- as.image.SpatialGridDataFrame(from)
-    spatstat::im(t(xi$z), xcol=xi$x, yrow=xi$y)
+    spatstat.geom::im(t(xi$z), xcol=xi$x, yrow=xi$y)
 }
 setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)
 
@@ -105,8 +105,8 @@ setAs("SpatialGridDataFrame", "im", as.im.SpatialGridDataFrame)
 
 as.im.RasterLayer <- function(from, factor.col.name = NULL) 
 {
-  if (!requireNamespace("spatstat", quietly = TRUE))
-    stop("package spatstat required for coercion")
+  if (!requireNamespace("spatstat.geom", quietly = TRUE))
+    stop("package spatstat.geom required for coercion")
   if (!requireNamespace("raster", quietly = TRUE))
     stop("package raster required for coercion")
   if (!raster::hasValues(from)) stop("values required in RasterLayer object")
@@ -136,8 +136,8 @@ as.im.RasterLayer <- function(from, factor.col.name = NULL)
   ## Assign dimensions to `val` as a matrix in raster layout:
   dim(val) <- dm
   ## Transform to spatstat format
-  val <- spatstat::transmat(val, from = list(x="-i", y="j"), to = "spatstat")
-  im <- spatstat::im(val, xcol=xx, yrow=yy)
+  val <- spatstat.geom::transmat(val, from = list(x="-i", y="j"), to = "spatstat")
+  im <- spatstat.geom::im(val, xcol=xx, yrow=yy)
   return(im)
 }
 
