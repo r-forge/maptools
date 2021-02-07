@@ -1,9 +1,9 @@
-# Version 1.1-1 (development, rev. 378-)
+# Version 1.1-1 (development, rev. 381-382)
 
 * Upgrade **spatstat**-family reverse dependencies
 
 
-# Version 1.0-2 (2020-08-24, rev. 371-377)
+# Version 1.0-2 (2020-08-24, rev. 371-380)
 
 * New `as.im.RasterLayer()` version
 

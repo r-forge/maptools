@@ -1,3 +1,11 @@
+2021-02-07 13:06  rsbivand
+
+	* [r381] ChangeLog, DESCRIPTION, NAMESPACE, NEWS.md, R/GE_png.R,
+	  R/Rgshhs.R, R/SP2owin.R, R/as.linnet.SL.R, R/sp_spat1.R,
+	  R/spatstat1.R, inst/ChangeLog, man/as.SpatialPolygons.tess.Rd,
+	  man/as.im.Rd, man/as.linnet.SpatialLines.Rd, man/as.owin.Rd,
+	  man/as.ppp.Rd, man/as.psp.Rd: upgrade to new spatstat API
+
 2020-08-15 09:22  rsbivand
 
 	* [r377] man/ContourLines2SLDF.Rd, man/pointLabelBase.Rd,
@@ -1580,5 +1588,4 @@
 2005-09-01 18:26  
 
 	* [r2] New repository initialized by cvs2svn.
-
 
