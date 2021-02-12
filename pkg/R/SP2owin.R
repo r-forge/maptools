@@ -1,9 +1,7 @@
 .SP2owin <- function(SP) {
-    # require(spatstat)
     if (!is.na(sp::is.projected(SP)) && !sp::is.projected(SP))
       stop("Only projected coordinates may be converted to spatstat class objects")
-    if (!requireNamespace("spatstat.geom", quietly = TRUE))
-	stop("package spatstat.geom required for .SP2owin")
+    check_spatstat("spatstat.geom")
     pls <- slot(SP, "polygons")
     nParts <- sapply(pls, function(x) length(slot(x, "Polygons")))
     nOwin <- sum(nParts)
@@ -35,7 +33,6 @@
                 io <- io+1
             }
         }
-#	if (exists(".spatstat_check") && !.spatstat_check) 
         if (!spatstat.geom::spatstat.options("checkpolygons")) 
         	res <- spatstat.geom::owin(bbox(SP)[1,], bbox(SP)[2,], poly = opls,
 			check=FALSE)

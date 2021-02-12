@@ -1,11 +1,24 @@
+check_spatstat <- function(pkg="spatstat.geom") {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    stop(paste("package ", pkg,
+     " required; please install it (or the full spatstat package) first"))
+  } else {
+    spst_ver <- try(packageVersion("spatstat"), silent = TRUE)
+    if(!inherits(spst_ver, "try-error") && spst_ver < 2.0-0) {
+      stop(paste("You have an old version of spatstat installed which is",
+        " incompatible with ", pkg,
+        ". Please update spatstat (or uninstall it)."))
+    }
+  }
+}
+
+
 # as.ppp method to be used in spatstat:
 
 as.ppp.SpatialPoints = function(X) {
-	# require(spatstat)
         if (!is.na(sp::is.projected(X)) && !sp::is.projected(X))
           stop("Only projected coordinates may be converted to spatstat class objects")
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat required for as.ppp.SpatialPoints")
+	check_spatstat("spatstat.geom")
         bb <- bbox(X)
         colnames(bb) <- NULL
 	W = spatstat.geom::owin(bb[1,], bb[2,])
@@ -17,11 +30,9 @@ setAs("SpatialPoints", "ppp", function(from) as.ppp.SpatialPoints(from))
 
 # Mike Sumner 20101011
 as.ppp.SpatialPointsDataFrame = function(X) {
-	# require(spatstat)
         if (!is.na(sp::is.projected(X)) && !sp::is.projected(X))
           stop("Only projected coordinates may be converted to spatstat class objects")
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.ppp.SpatialPointsDataFrame")
+	check_spatstat("spatstat.geom")
 	bb <- bbox(X)
         colnames(bb) <- NULL
 	W  <- spatstat.geom::owin(bb[1,], bb[2,])
@@ -36,11 +47,9 @@ as.ppp.SpatialPointsDataFrame = function(X) {
 setAs("SpatialPointsDataFrame", "ppp", function(from) as.ppp.SpatialPointsDataFrame(from))
 
 as.owin.SpatialGridDataFrame = function(W, ..., fatal) {
-	# require(spatstat)
         if (!is.na(sp::is.projected(W)) && !sp::is.projected(W))
           stop("Only projected coordinates may be converted to spatstat class objects")
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat required for as.owin.SpatialGridDataFrame")
+	check_spatstat("spatstat.geom")
 	# W = from
 	m = t(!is.na(as(W, "matrix")))
 	spatstat.geom::owin(bbox(W)[1,], bbox(W)[2,], mask = m[nrow(m):1,])
@@ -49,11 +58,9 @@ as.owin.SpatialGridDataFrame = function(W, ..., fatal) {
 setAs("SpatialGridDataFrame", "owin", function(from) as.owin.SpatialGridDataFrame(from))
 
 as.owin.SpatialPixelsDataFrame = function(W, ..., fatal) {
-	# require(spatstat)
         if (!is.na(sp::is.projected(W)) && !sp::is.projected(W))
           stop("Only projected coordinates may be converted to spatstat class objects")
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+	check_spatstat("spatstat.geom")
 	# W = from
 	m = t(!is.na(as(W, "matrix")))
 	spatstat.geom::owin(bbox(W)[1,], bbox(W)[2,], mask = m[nrow(m):1,])
@@ -62,7 +69,6 @@ as.owin.SpatialPixelsDataFrame = function(W, ..., fatal) {
 setAs("SpatialPixelsDataFrame", "owin", function(from) as.owin.SpatialPixelsDataFrame(from))
 
 as.owin.SpatialPolygons = function(W, ..., fatal) {
-	# require(spatstat)
 	# W = from
         if (!is.na(sp::is.projected(W)) && !sp::is.projected(W))
           stop("Only projected coordinates may be converted to spatstat class objects")
@@ -77,39 +83,20 @@ setAs("SpatialPolygons", "owin", function(from) as.owin.SpatialPolygons(from))
 # methods for coercion to Spatial Polygons by Adrian Baddeley
 
 owin2Polygons <- function(x, id="1") {
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+	check_spatstat("spatstat.geom")
   stopifnot(spatstat.geom::is.owin(x))
   x <- spatstat.geom::as.polygonal(x)
   closering <- function(df) { df[c(seq(nrow(df)), 1), ] }
-#  if (x$type == "polygonal") {
-#      if (packageVersion("spatstat") >= "1.50.0") {
-        if (requireNamespace("spatstat.utils", quietly = TRUE)) {
-          pieces <- lapply(x$bdry,
-                   function(p) {
-                     Polygon(coords=closering(cbind(p$x,p$y)),
-                             hole=spatstat.utils::is.hole.xypolygon(p))  })
-       } else {
-         stop("from spatstat 1.50-0, the spatstat.utils package is also required")
-       }
-#     } else {
-#          pieces <- lapply(x$bdry,
-#                   function(p) {
-#                     Polygon(coords=closering(cbind(p$x,p$y)),
-#                             hole=spatstat::is.hole.xypolygon(p))  })
-#     }
-#  } else if (x$type == "rectangle") {
-#      rectCrds <- cbind(x$xrange[c(1,1,2,2,1)], x$yrange[c(1,2,2,1,1)])
-#      pieces <- list(Polygon(rectCrds, hole=FALSE))
-#  } else stop("owin2Polygons: unknown type:", x$type)
+  check_spatstat("spatstat.utils")
+  pieces <- lapply(x$bdry,
+      function(p) {Polygon(coords=closering(cbind(p$x,p$y)),
+                   hole=spatstat.utils::is.hole.xypolygon(p))  })
   z <- Polygons(pieces, id)
   return(z)
 }
 
 as.SpatialPolygons.tess <- function(x) {
-	#require(spatstat)
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+  check_spatstat("spatstat.geom")
   stopifnot(spatstat.geom::is.tess(x))
   y <- spatstat.geom::tiles(x)
   nam <- names(y)
@@ -129,9 +116,7 @@ setAs("tess", "SpatialPolygons", function(from) as.SpatialPolygons.tess(from))
 
 
 as.SpatialPolygons.owin <- function(x) {
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
-	#require(spatstat)
+  check_spatstat("spatstat.geom")
   stopifnot(spatstat.geom::is.owin(x))
   y <- owin2Polygons(x)
   z <- SpatialPolygons(list(y))
@@ -145,9 +130,7 @@ setAs("owin", "SpatialPolygons", function(from) as.SpatialPolygons.owin(from))
 # methods for 'as.psp' for sp classes by Adrian Baddeley
 
 as.psp.Line <- function(from, ..., window=NULL, marks=NULL, fatal) {
-	#require(spatstat)
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+  check_spatstat("spatstat.geom")
   xy <- slot(from, "coords")
   df <- as.data.frame(cbind(xy[-nrow(xy), , drop=FALSE], xy[-1, ,
 drop=FALSE]))
@@ -162,16 +145,9 @@ drop=FALSE]))
 setAs("Line", "psp", function(from) as.psp.Line(from))
   
 as.psp.Lines <- function(from, ..., window=NULL, marks=NULL, fatal) {
-	# require(spatstat)
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+  check_spatstat("spatstat.geom")
   y <- lapply(slot(from, "Lines"), as.psp.Line, window=window)
-#  if (as.character(packageVersion("spatstat")) < "1.22.0") {
-#    z <- spatstat::superimposePSP(y, window=window)
-#  } else {
-    z <- do.call(spatstat.geom::superimpose,c(y,list(W=window)))
-#    z <- superimpose(y, window=window)
-#  }
+  z <- do.call(spatstat.geom::superimpose,c(y,list(W=window)))
   if(!is.null(marks))
     spatstat.geom::marks(z) <- marks
   return(z)
@@ -181,11 +157,9 @@ setAs("Lines", "psp", function(from) as.psp.Lines(from))
 
 as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL,
                                  characterMarks=FALSE, fatal) {
-	# require(spatstat)
-        if (!is.na(sp::is.projected(from)) && !sp::is.projected(from))
-          stop("Only projected coordinates may be converted to spatstat class objects")
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+  if (!is.na(sp::is.projected(from)) && !sp::is.projected(from))
+    stop("Only projected coordinates may be converted to spatstat class objects")
+  check_spatstat("spatstat.geom")
   if(is.null(window)) {
     w <- slot(from, "bbox")
     window <- spatstat.geom::owin(w[1,], w[2,])
@@ -197,14 +171,7 @@ as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL,
     for (i in seq(y)) 
       spatstat.geom::marks(y[[i]]) <- if(characterMarks) id[i] else factor(id[i])
 # modified 110401 Rolf Turner
-#    for(i in seq(y)) 
-#      marks(y[[i]]) <- id[i]
-#  if (as.character(packageVersion("spatstat")) < "1.22.0") {
-#    z <- do.call(spatstat::superimposePSP, list(y, window=window))
-#  } else {
-#    z <- do.call("superimpose", list(y, window=window))
-    z <- do.call(spatstat.geom::superimpose, c(y, list(W = window)))
-#  }
+  z <- do.call(spatstat.geom::superimpose, c(y, list(W = window)))
   if(!is.null(marks))
     spatstat.geom::marks(z) <- marks
   return(z)
@@ -213,11 +180,9 @@ as.psp.SpatialLines <- function(from, ..., window=NULL, marks=NULL,
 setAs("SpatialLines", "psp", function(from) as.psp.SpatialLines(from))
 
 as.psp.SpatialLinesDataFrame <- function(from, ..., window=NULL, marks=NULL, fatal) {
-	# require(spatstat)
-        if (!is.na(sp::is.projected(from)) && !sp::is.projected(from))
-          stop("Only projected coordinates may be converted to spatstat class objects")
-	if (!requireNamespace("spatstat.geom", quietly = TRUE))
-		stop("package spatstat.geom required for as.owin.SpatialPixelsDataFrame")
+  if (!is.na(sp::is.projected(from)) && !sp::is.projected(from))
+    stop("Only projected coordinates may be converted to spatstat class objects")
+  check_spatstat("spatstat.geom")
   y <- as(from, "SpatialLines")
   z <- spatstat.geom::as.psp(y, window=window, marks=marks)
   if(is.null(marks)) {
