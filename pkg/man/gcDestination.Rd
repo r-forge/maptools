@@ -29,7 +29,7 @@ gcDestination(lon, lat, bearing, dist, dist.units = "km",
 
 the file earlier available at \code{http:\/\/williams.best.vwh.net/avform.htm}, 
 
-\url{http://www.movable-type.co.uk/scripts/latlong-vincenty-direct.html}, 
+\url{http://www.movable-type.co.uk/scripts/latlong-vincenty.html#direct}, 
 
 Original reference \url{https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf}:
 
