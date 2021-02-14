@@ -7,7 +7,7 @@ check_spatstat <- function(pkg="spatstat.geom") {
     if(!inherits(spst_ver, "try-error") && spst_ver < 2.0-0) {
       stop(paste("You have an old version of spatstat installed which is",
         " incompatible with ", pkg,
-        ". Please update spatstat (or uninstall it)."))
+        ". Please update spatstat (or uninstall it).", sep=""))
     }
   }
 }
