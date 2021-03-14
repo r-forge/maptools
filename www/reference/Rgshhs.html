@@ -74,7 +74,7 @@ If the data are line data, the borders or river lines will be read into a Spatia
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -82,12 +82,15 @@ If the data are line data, the borders or river lines will be read into a Spatia
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -116,12 +119,12 @@ If the data are line data, the borders or river lines will be read into a Spatia
 <p>If the data are line data, the borders or river lines will be read into a SpatialLines object. The data are provided in integer form as millionths of decimal degrees. Reading of much earlier versions of the GSHHS binary files will fail with an error message. The netCDF GSHHS files distributed with GMT &gt;= 4.2 cannot be read as they are in a very different format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Rgshhs</span>(<span class='no'>fn</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>minarea</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>no.clip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>properly</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>avoidGEOS</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
-<span class='kw'>checkPolygons</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>getRgshhsMap</span>(<span class='kw'>fn</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"share/gshhs_c.b"</span>, <span class='kw'>package</span><span class='kw'>=</span> <span class='st'>"maptools"</span>),
- <span class='no'>xlim</span>, <span class='no'>ylim</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>no.clip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
- <span class='kw'>properly</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>avoidGEOS</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>checkPolygons</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>Rgshhs</span><span class='op'>(</span><span class='va'>fn</span>, xlim <span class='op'>=</span> <span class='cn'>NULL</span>, ylim <span class='op'>=</span> <span class='cn'>NULL</span>, level <span class='op'>=</span> <span class='fl'>4</span>, minarea <span class='op'>=</span> <span class='fl'>0</span>, shift <span class='op'>=</span> <span class='cn'>FALSE</span>, 
+verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, no.clip <span class='op'>=</span> <span class='cn'>FALSE</span>, properly<span class='op'>=</span><span class='cn'>FALSE</span>, avoidGEOS<span class='op'>=</span><span class='cn'>FALSE</span>, 
+checkPolygons<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'>getRgshhsMap</span><span class='op'>(</span>fn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"share/gshhs_c.b"</span>, package<span class='op'>=</span> <span class='st'>"maptools"</span><span class='op'>)</span>,
+ <span class='va'>xlim</span>, <span class='va'>ylim</span>, level <span class='op'>=</span> <span class='fl'>1</span>, shift <span class='op'>=</span> <span class='cn'>TRUE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, no.clip <span class='op'>=</span> <span class='cn'>FALSE</span>,
+ properly<span class='op'>=</span><span class='cn'>FALSE</span>, avoidGEOS<span class='op'>=</span><span class='cn'>FALSE</span>, checkPolygons<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,6 +192,9 @@ If the data are line data, the borders or river lines will be read into a Spatia
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='http://www.soest.hawaii.edu/pwessel/gshhg/'>http://www.soest.hawaii.edu/pwessel/gshhg/</a>, <a href='http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.0.zip'>http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.0.zip</a>; Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743, 1996.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>A number of steps are taken in this implementation that are unexpected, print messages, and so require explanation. Following the extraction of polygons intersecting the required region, a check is made to see if Antarctica is present. If it is, a new southern border is imposed at the southern ylim value or -90 if no ylim value is given. When clipping polygons seeming to intersect the required region boundary, it can happen that no polygon is left within the region (for example when the boundaries are overlaid, but also because the min/max polygon values in the header may not agree with the polygon itself (one case observed for a lake west of Groningen). The function then reports a null polygon. Another problem occurs when closed polygons are cut up during the finding of intersections between polygons and the required region boundary.</p>
@@ -196,31 +202,32 @@ If the data are line data, the borders or river lines will be read into a Spatia
 <p>By default, if the rgeos package is available, it is used for topology operations. If it is not available, the gpclib package may be used. Please also note that gpclib has a restricted licence.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) {
-<span class='no'>gshhs.c.b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"share/gshhs_c.b"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)
-<span class='no'>WEx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>12</span>, <span class='fl'>3</span>)
-<span class='no'>WEy</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>48</span>, <span class='fl'>59</span>)
-<span class='no'>WE</span> <span class='kw'>&lt;-</span> <span class='fu'>getRgshhsMap</span>(<span class='no'>gshhs.c.b</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>WEx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>WEy</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>WE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"khaki"</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>WEx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>WEy</span>, <span class='kw'>xaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>yaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>NZx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>160</span>,<span class='fl'>180</span>)
-<span class='no'>NZy</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>50</span>,-<span class='fl'>30</span>)
-<span class='no'>NZ</span> <span class='kw'>&lt;-</span> <span class='fu'>Rgshhs</span>(<span class='no'>gshhs.c.b</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>NZx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>NZy</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>NZ</span>$<span class='no'>SP</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"khaki"</span>, <span class='kw'>pbg</span><span class='kw'>=</span><span class='st'>"azure2"</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>NZx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>NZy</span>, <span class='kw'>xaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>yaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>GLx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>265</span>,<span class='fl'>285</span>)
-<span class='no'>GLy</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>40</span>,<span class='fl'>50</span>)
-<span class='no'>GL</span> <span class='kw'>&lt;-</span> <span class='fu'>Rgshhs</span>(<span class='no'>gshhs.c.b</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>GLx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>GLy</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>GL</span>$<span class='no'>SP</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"khaki"</span>, <span class='kw'>pbg</span><span class='kw'>=</span><span class='st'>"azure2"</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>GLx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>GLy</span>, <span class='kw'>xaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>yaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>BNLx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>8</span>)
-<span class='no'>BNLy</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>49</span>,<span class='fl'>54</span>)
-<span class='no'>wdb_lines</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"share/wdb_borders_c.b"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)
-<span class='no'>BNLp</span> <span class='kw'>&lt;-</span> <span class='fu'>Rgshhs</span>(<span class='no'>gshhs.c.b</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>BNLx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>BNLy</span>)
-<span class='no'>BNLl</span> <span class='kw'>&lt;-</span> <span class='fu'>Rgshhs</span>(<span class='no'>wdb_lines</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>BNLx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>BNLy</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>BNLp</span>$<span class='no'>SP</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"khaki"</span>, <span class='kw'>pbg</span><span class='kw'>=</span><span class='st'>"azure2"</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>BNLx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>BNLy</span>, <span class='kw'>xaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>yaxs</span><span class='kw'>=</span><span class='st'>"i"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/lines.html'>lines</a></span>(<span class='no'>BNLl</span>$<span class='no'>SP</span>)
-<span class='no'>xlims</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>360</span>)
-<span class='no'>ylims</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>90</span>,<span class='fl'>90</span>)
-<span class='no'>world</span> <span class='kw'>&lt;-</span> <span class='fu'>Rgshhs</span>(<span class='no'>gshhs.c.b</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>xlims</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>ylims</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>checkPolygons</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; Data are polygon data
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>gshhs.c.b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"share/gshhs_c.b"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span>
+<span class='va'>WEx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>12</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>WEy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>48</span>, <span class='fl'>59</span><span class='op'>)</span>
+<span class='va'>WE</span> <span class='op'>&lt;-</span> <span class='fu'>getRgshhsMap</span><span class='op'>(</span><span class='va'>gshhs.c.b</span>, xlim<span class='op'>=</span><span class='va'>WEx</span>, ylim<span class='op'>=</span><span class='va'>WEy</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>WE</span>, col<span class='op'>=</span><span class='st'>"khaki"</span>, xlim<span class='op'>=</span><span class='va'>WEx</span>, ylim<span class='op'>=</span><span class='va'>WEy</span>, xaxs<span class='op'>=</span><span class='st'>"i"</span>, yaxs<span class='op'>=</span><span class='st'>"i"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>NZx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>160</span>,<span class='fl'>180</span><span class='op'>)</span>
+<span class='va'>NZy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>50</span>,<span class='op'>-</span><span class='fl'>30</span><span class='op'>)</span>
+<span class='va'>NZ</span> <span class='op'>&lt;-</span> <span class='fu'>Rgshhs</span><span class='op'>(</span><span class='va'>gshhs.c.b</span>, xlim<span class='op'>=</span><span class='va'>NZx</span>, ylim<span class='op'>=</span><span class='va'>NZy</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>NZ</span><span class='op'>$</span><span class='va'>SP</span>, col<span class='op'>=</span><span class='st'>"khaki"</span>, pbg<span class='op'>=</span><span class='st'>"azure2"</span>, xlim<span class='op'>=</span><span class='va'>NZx</span>, ylim<span class='op'>=</span><span class='va'>NZy</span>, xaxs<span class='op'>=</span><span class='st'>"i"</span>, yaxs<span class='op'>=</span><span class='st'>"i"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>GLx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>265</span>,<span class='fl'>285</span><span class='op'>)</span>
+<span class='va'>GLy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>40</span>,<span class='fl'>50</span><span class='op'>)</span>
+<span class='va'>GL</span> <span class='op'>&lt;-</span> <span class='fu'>Rgshhs</span><span class='op'>(</span><span class='va'>gshhs.c.b</span>, xlim<span class='op'>=</span><span class='va'>GLx</span>, ylim<span class='op'>=</span><span class='va'>GLy</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>GL</span><span class='op'>$</span><span class='va'>SP</span>, col<span class='op'>=</span><span class='st'>"khaki"</span>, pbg<span class='op'>=</span><span class='st'>"azure2"</span>, xlim<span class='op'>=</span><span class='va'>GLx</span>, ylim<span class='op'>=</span><span class='va'>GLy</span>, xaxs<span class='op'>=</span><span class='st'>"i"</span>, yaxs<span class='op'>=</span><span class='st'>"i"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>BNLx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>8</span><span class='op'>)</span>
+<span class='va'>BNLy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>49</span>,<span class='fl'>54</span><span class='op'>)</span>
+<span class='va'>wdb_lines</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"share/wdb_borders_c.b"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span>
+<span class='va'>BNLp</span> <span class='op'>&lt;-</span> <span class='fu'>Rgshhs</span><span class='op'>(</span><span class='va'>gshhs.c.b</span>, xlim<span class='op'>=</span><span class='va'>BNLx</span>, ylim<span class='op'>=</span><span class='va'>BNLy</span><span class='op'>)</span>
+<span class='va'>BNLl</span> <span class='op'>&lt;-</span> <span class='fu'>Rgshhs</span><span class='op'>(</span><span class='va'>wdb_lines</span>, xlim<span class='op'>=</span><span class='va'>BNLx</span>, ylim<span class='op'>=</span><span class='va'>BNLy</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>BNLp</span><span class='op'>$</span><span class='va'>SP</span>, col<span class='op'>=</span><span class='st'>"khaki"</span>, pbg<span class='op'>=</span><span class='st'>"azure2"</span>, xlim<span class='op'>=</span><span class='va'>BNLx</span>, ylim<span class='op'>=</span><span class='va'>BNLy</span>, xaxs<span class='op'>=</span><span class='st'>"i"</span>, yaxs<span class='op'>=</span><span class='st'>"i"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/lines.html'>lines</a></span><span class='op'>(</span><span class='va'>BNLl</span><span class='op'>$</span><span class='va'>SP</span><span class='op'>)</span>
+<span class='va'>xlims</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>360</span><span class='op'>)</span>
+<span class='va'>ylims</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>90</span>,<span class='fl'>90</span><span class='op'>)</span>
+<span class='va'>world</span> <span class='op'>&lt;-</span> <span class='fu'>Rgshhs</span><span class='op'>(</span><span class='va'>gshhs.c.b</span>, xlim<span class='op'>=</span><span class='va'>xlims</span>, ylim<span class='op'>=</span><span class='va'>ylims</span>, level<span class='op'>=</span><span class='fl'>1</span>, checkPolygons<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Data are polygon data
 #&gt; Rgshhs: clipping 1 of 2 polygons ...
 #&gt; Data are polygon data
 #&gt; Rgshhs: clipping 1 of 11 polygons ...</div><div class='img'><img src='Rgshhs-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Data are polygon data</div><div class='img'><img src='Rgshhs-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Data are polygon data
@@ -243,7 +250,7 @@ If the data are line data, the borders or river lines will be read into a Spatia
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -74,7 +74,7 @@ as well." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -82,12 +82,15 @@ as well." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -116,10 +119,10 @@ format and various <span class="pkg">sp</span> formats. S4-style <code>as()</cod
 as well.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.owin.SpatialPolygons</span>(<span class='no'>W</span>, <span class='no'>...</span>, <span class='no'>fatal</span>)
-<span class='fu'>as.owin.SpatialGridDataFrame</span>(<span class='no'>W</span>, <span class='no'>...</span>, <span class='no'>fatal</span>)
-<span class='fu'>as.owin.SpatialPixelsDataFrame</span>(<span class='no'>W</span>, <span class='no'>...</span>, <span class='no'>fatal</span>)
-<span class='fu'>as.SpatialPolygons.owin</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>as.owin.SpatialPolygons</span><span class='op'>(</span><span class='va'>W</span>, <span class='va'>...</span>, <span class='va'>fatal</span><span class='op'>)</span>
+<span class='fu'>as.owin.SpatialGridDataFrame</span><span class='op'>(</span><span class='va'>W</span>, <span class='va'>...</span>, <span class='va'>fatal</span><span class='op'>)</span>
+<span class='fu'>as.owin.SpatialPixelsDataFrame</span><span class='op'>(</span><span class='va'>W</span>, <span class='va'>...</span>, <span class='va'>fatal</span><span class='op'>)</span>
+<span class='fu'>as.SpatialPolygons.owin</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,7 +147,7 @@ as well.</p>
 
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <p></p><dl'>
+    <p></p><dl>
 <dt>coerce</dt><dd><p><code>signature(from = "SpatialPolygons", to = "owin")</code></p></dd>
 <dt>coerce</dt><dd><p><code>signature(from = "SpatialPixelsDataFrame", to = "owin")</code></p></dd>
 <dt>coerce</dt><dd><p><code>signature(from = "SpatialGridDataFrame", to = "owin")</code></p></dd>
@@ -181,46 +184,55 @@ spatial region itself are discarded.</p>
 
     <p>When coercing a SpatialPolygons object to an owin object, full 
 topology checking is enabled by default. To avoid checking, set 
-<code><a href='https://rdrr.io/pkg/spatstat/man/spatstat.options.html'>spatstat.options(checkpolygons=FALSE)</a></code> (from spatstat (1.14-6)). 
-To perform the checking later, <code><a href='https://rdrr.io/pkg/spatstat/man/spatstat-internal.html'>owinpolycheck(W, verbose=TRUE)</a></code>.</p>
+<code><a href='https://rdrr.io/pkg/spatstat.geom/man/spatstat.options.html'>spatstat.options(checkpolygons=FALSE)</a></code> (from spatstat (1.14-6)). 
+To perform the checking later, <code><a href='https://rdrr.io/pkg/spatstat.geom/man/spatstat.geom-internal.html'>owinpolycheck(W, verbose=TRUE)</a></code>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Edzer Pebesma <a href='mailto:edzer.pebesma@uni-muenster.de'>edzer.pebesma@uni-muenster.de</a>, Roger Bivand</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>spatstat</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='kw'>if</span> (<span class='no'>run</span>) {
+    <pre class="examples"><div class='input'><span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='http://spatstat.org/'>"spatstat.geom"</a></span>, quietly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## SpatialPixelsDataFrame -&gt; owin</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.grid</span>) <span class='co'># A data.frame</span>
-<span class='fu'>gridded</span>(<span class='no'>meuse.grid</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span> <span class='co'># Now a SpatialPixelsDataFrame</span>
-<span class='no'>mg_owin</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse.grid</span>, <span class='st'>"owin"</span>)
-<span class='no'>mg_owin</span>
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: as.matrix.SpatialGridDataFrame uses first column;</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='co'># A data.frame</span>
+<span class='fu'>gridded</span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='op'>=</span> <span class='op'>~</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span> <span class='co'># Now a SpatialPixelsDataFrame</span>
+<span class='va'>mg_owin</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>meuse.grid</span>, <span class='st'>"owin"</span><span class='op'>)</span>
+<span class='va'>mg_owin</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: as.matrix.SpatialGridDataFrame uses first column;</span>
 #&gt; <span class='warning'> use subset or [] for other columns</span></div><div class='output co'>#&gt; window: binary image mask
 #&gt; 104 x 78 pixel array (ny, nx)
-#&gt; enclosing rectangle: [178440, 181560] x [329600, 333760] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+#&gt; enclosing rectangle: [178440, 181560] x [329600, 333760] units</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## SpatialGridDataFrame -&gt; owin</span>
-<span class='fu'>fullgrid</span>(<span class='no'>meuse.grid</span>) <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span> <span class='co'># Now a SpatialGridDataFrame</span>
-<span class='no'>mg_owin2</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse.grid</span>, <span class='st'>"owin"</span>)
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: as.matrix.SpatialGridDataFrame uses first column;</span>
-#&gt; <span class='warning'> use subset or [] for other columns</span></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='fu'>fullgrid</span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span> <span class='co'># Now a SpatialGridDataFrame</span>
+<span class='va'>mg_owin2</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>meuse.grid</span>, <span class='st'>"owin"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: as.matrix.SpatialGridDataFrame uses first column;</span>
+#&gt; <span class='warning'> use subset or [] for other columns</span></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## SpatialPolygons region with a hole</span>
-<span class='no'>ho_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPolygons</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>Polygons</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>Polygon</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>))), <span class='fu'>Polygon</span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.6</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.6</span>,<span class='fl'>0.6</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>0.2</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.2</span>)), <span class='kw'>hole</span><span class='kw'>=</span><span class='fl'>TRUE</span>)), <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"ho"</span>)))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>ho_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>pbg</span><span class='kw'>=</span><span class='st'>"pink"</span>)
-}</div><div class='img'><img src='as.owin-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='va'>ho_sp</span> <span class='op'>&lt;-</span> <span class='fu'>SpatialPolygons</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>Polygons</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>Polygon</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'>Polygon</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.6</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.6</span>,<span class='fl'>0.6</span><span class='op'>)</span>, 
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.2</span>,<span class='fl'>0.2</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>, hole<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>, ID<span class='op'>=</span><span class='st'>"ho"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>ho_sp</span>, col<span class='op'>=</span><span class='st'>"red"</span>, pbg<span class='op'>=</span><span class='st'>"pink"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='as.owin-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## SpatialPolygons -&gt; owin</span>
-<span class='no'>ho</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>ho_sp</span>, <span class='st'>"owin"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>ho</span>)
-}</div><div class='img'><img src='as.owin-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='va'>ho</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>ho_sp</span>, <span class='st'>"owin"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>ho</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='as.owin-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Define owin directly and check they are identical</span>
-<span class='no'>ho_orig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/spatstat/man/owin.html'>owin</a></span>(<span class='kw'>poly</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>)),
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.6</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.6</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.2</span>,<span class='fl'>0.2</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>))))
-<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>ho</span>, <span class='no'>ho_orig</span>)
-}</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='va'>ho_orig</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/spatstat.geom/man/owin.html'>owin</a></span><span class='op'>(</span>poly<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.6</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span>,<span class='fl'>0.6</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.2</span>,<span class='fl'>0.2</span>,<span class='fl'>0.4</span>,<span class='fl'>0.4</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='va'>ho</span>, <span class='va'>ho_orig</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## owin -&gt; SpatialPolygons</span>
-<span class='no'>ho_sp1</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>ho</span>, <span class='st'>"SpatialPolygons"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span>(<span class='no'>ho_sp</span>, <span class='no'>ho_sp1</span>, <span class='kw'>check.attributes</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-}</div><div class='output co'>#&gt; [1] "Names: 1 string mismatch"</div></pre>
+<span class='va'>ho_sp1</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>ho</span>, <span class='st'>"SpatialPolygons"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>ho_sp</span>, <span class='va'>ho_sp1</span>, check.attributes<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [1] "Names: 1 string mismatch"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -236,7 +248,7 @@ To perform the checking later, <code><a href='https://rdrr.io/pkg/spatstat/man/s
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

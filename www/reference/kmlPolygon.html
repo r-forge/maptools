@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,9 +115,9 @@
     <p>The function is used to create and write a KML file on the basis of a given Polygons object (a list of Polygon objects) for the usage in Google Earth resp. Google Maps.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kmlPolygon</span>(<span class='kw'>obj</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kmlfile</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-    <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"R Polygon"</span>, <span class='kw'>description</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>visibility</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='fl'>1</span>,
-    <span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>kmlPolygon</span><span class='op'>(</span>obj<span class='op'>=</span><span class='cn'>NULL</span>, kmlfile<span class='op'>=</span><span class='cn'>NULL</span>, 
+    name<span class='op'>=</span><span class='st'>"R Polygon"</span>, description<span class='op'>=</span><span class='st'>""</span>, col<span class='op'>=</span><span class='cn'>NULL</span>, visibility<span class='op'>=</span><span class='fl'>1</span>, lwd<span class='op'>=</span><span class='fl'>1</span>, border<span class='op'>=</span><span class='fl'>1</span>,
+    kmlname<span class='op'>=</span><span class='st'>""</span>, kmldescription<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,33 +178,39 @@
     <h2 class="hasAnchor" id="color-specification"><a class="anchor" href="#color-specification"></a>Color Specification</h2>
 
     <p>The following color specifications are allowed: <code>'red'</code>, <code>2</code>, or as hex code <code>'#RRGGBB'</code> resp. <code>'#RRGGBBAA'</code> for passing the alpha value.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hans-J. Bibiko</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='kmlOverlay.html'>kmlOverlay</a></code>, <code><a href='kmlLine.html'>kmlLine</a></code>, <code><a href='https://rdrr.io/pkg/sp/man/SpatialPolygons.html'>SpatialPolygons</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>wrld_simpl</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>wrld_simpl</span><span class='op'>)</span>
 <span class='co'>## creates a KML file containing the polygons of South Africa (plus hole)</span>
-<span class='no'>sw</span> <span class='kw'>&lt;-</span> <span class='fu'>slot</span>(<span class='no'>wrld_simpl</span>[<span class='no'>wrld_simpl</span>$<span class='no'>NAME</span><span class='kw'>==</span><span class='st'>"South Africa"</span>,], <span class='st'>"polygons"</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
-<span class='fu'>kmlPolygon</span>(<span class='no'>sw</span>, <span class='kw'>kmlfile</span><span class='kw'>=</span><span class='no'>tf</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"South Africa"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"#df0000aa"</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>5</span>,
-    <span class='kw'>border</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>"R Test"</span>,
-    <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>"This is &lt;b&gt;only&lt;/b&gt; a &lt;a href='http://www.r-project.org'&gt;R&lt;/a&gt; test."</span>)
-<span class='no'>tf</span></div><div class='output co'>#&gt; [1] "/tmp/RtmpqZdEId/file47e832e1934e7"</div><div class='input'>
+<span class='va'>sw</span> <span class='op'>&lt;-</span> <span class='fu'>slot</span><span class='op'>(</span><span class='va'>wrld_simpl</span><span class='op'>[</span><span class='va'>wrld_simpl</span><span class='op'>$</span><span class='va'>NAME</span><span class='op'>==</span><span class='st'>"South Africa"</span>,<span class='op'>]</span>, <span class='st'>"polygons"</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>kmlPolygon</span><span class='op'>(</span><span class='va'>sw</span>, kmlfile<span class='op'>=</span><span class='va'>tf</span>, name<span class='op'>=</span><span class='st'>"South Africa"</span>, col<span class='op'>=</span><span class='st'>"#df0000aa"</span>, lwd<span class='op'>=</span><span class='fl'>5</span>, 
+    border<span class='op'>=</span><span class='fl'>4</span>, kmlname<span class='op'>=</span><span class='st'>"R Test"</span>, 
+    kmldescription<span class='op'>=</span><span class='st'>"This is &lt;b&gt;only&lt;/b&gt; a &lt;a href='http://www.r-project.org'&gt;R&lt;/a&gt; test."</span><span class='op'>)</span>
+<span class='va'>tf</span>
+</div><div class='output co'>#&gt; [1] "/tmp/RtmpNYUSJN/file71fe4093908c"</div><div class='input'>
 <span class='co'>## creates a KML file containing the polygons of South Africa, Switzerland, and Canada</span>
-<span class='no'>sw</span>  <span class='kw'>&lt;-</span> <span class='no'>wrld_simpl</span>[<span class='no'>wrld_simpl</span>$<span class='no'>NAME</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"South Africa"</span>, <span class='st'>"Switzerland"</span>, <span class='st'>"Canada"</span>),]
-<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'>slot</span>(<span class='no'>sw</span>, <span class='st'>"polygons"</span>), <span class='kw'>function</span>(<span class='no'>x</span>) { <span class='fu'>kmlPolygon</span>(<span class='no'>x</span>,
-    <span class='kw'>name</span><span class='kw'>=</span><span class='fu'>as</span>(<span class='no'>sw</span>, <span class='st'>"data.frame"</span>)[<span class='fu'>slot</span>(<span class='no'>x</span>, <span class='st'>"ID"</span>), <span class='st'>"NAME"</span>],
-    <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>1.5</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>'black'</span>,
-    <span class='kw'>description</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"ISO3:"</span>, <span class='fu'>slot</span>(<span class='no'>x</span>, <span class='st'>"ID"</span>))) })
-<span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
-<span class='no'>kmlFile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/connections.html'>file</a></span>(<span class='no'>tf</span>, <span class='st'>"w"</span>)
-<span class='no'>tf</span></div><div class='output co'>#&gt; [1] "/tmp/RtmpqZdEId/file47e8321271fbb"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>kmlPolygon</span>(<span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>"R Test"</span>, <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>"&lt;i&gt;Hello&lt;/i&gt;"</span>)$<span class='no'>header</span>,
-    <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span>(<span class='no'>out</span>[<span class='st'>"style"</span>,]), <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span>(<span class='no'>out</span>[<span class='st'>"content"</span>,]), <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>kmlPolygon</span>()$<span class='no'>footer</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='no'>kmlFile</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/connections.html'>close</a></span>(<span class='no'>kmlFile</span>)</div></pre>
+<span class='va'>sw</span>  <span class='op'>&lt;-</span> <span class='va'>wrld_simpl</span><span class='op'>[</span><span class='va'>wrld_simpl</span><span class='op'>$</span><span class='va'>NAME</span> <span class='op'>%in%</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"South Africa"</span>, <span class='st'>"Switzerland"</span>, <span class='st'>"Canada"</span><span class='op'>)</span>,<span class='op'>]</span>
+<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>sw</span>, <span class='st'>"polygons"</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'>kmlPolygon</span><span class='op'>(</span><span class='va'>x</span>,
+    name<span class='op'>=</span><span class='fu'>as</span><span class='op'>(</span><span class='va'>sw</span>, <span class='st'>"data.frame"</span><span class='op'>)</span><span class='op'>[</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"ID"</span><span class='op'>)</span>, <span class='st'>"NAME"</span><span class='op'>]</span>, 
+    col<span class='op'>=</span><span class='st'>"red"</span>, lwd<span class='op'>=</span><span class='fl'>1.5</span>, border<span class='op'>=</span><span class='st'>'black'</span>, 
+    description<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"ISO3:"</span>, <span class='fu'>slot</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"ID"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>}</span><span class='op'>)</span>
+<span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>kmlFile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/connections.html'>file</a></span><span class='op'>(</span><span class='va'>tf</span>, <span class='st'>"w"</span><span class='op'>)</span>
+<span class='va'>tf</span>
+</div><div class='output co'>#&gt; [1] "/tmp/RtmpNYUSJN/file71fe3a0f813f"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>kmlPolygon</span><span class='op'>(</span>kmlname<span class='op'>=</span><span class='st'>"R Test"</span>, kmldescription<span class='op'>=</span><span class='st'>"&lt;i&gt;Hello&lt;/i&gt;"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>header</span>, 
+    file<span class='op'>=</span><span class='va'>kmlFile</span>, sep<span class='op'>=</span><span class='st'>"\n"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>out</span><span class='op'>[</span><span class='st'>"style"</span>,<span class='op'>]</span><span class='op'>)</span>, file<span class='op'>=</span><span class='va'>kmlFile</span>, sep<span class='op'>=</span><span class='st'>"\n"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>out</span><span class='op'>[</span><span class='st'>"content"</span>,<span class='op'>]</span><span class='op'>)</span>, file<span class='op'>=</span><span class='va'>kmlFile</span>, sep<span class='op'>=</span><span class='st'>"\n"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>kmlPolygon</span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>footer</span>, file<span class='op'>=</span><span class='va'>kmlFile</span>, sep<span class='op'>=</span><span class='st'>"\n"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/connections.html'>close</a></span><span class='op'>(</span><span class='va'>kmlFile</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -217,7 +226,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

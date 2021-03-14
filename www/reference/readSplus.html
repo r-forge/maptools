@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,7 +115,7 @@
     <p>The function permits an exported WinBUGS map to be read into an <span class="pkg">sp</span> package class <code>SpatialPolygons</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>readSplus</span>(<span class='no'>file</span>, <span class='kw'>proj4string</span> <span class='kw'>=</span> <span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)))</pre>
+    <pre class="usage"><span class='fu'>readSplus</span><span class='op'>(</span><span class='va'>file</span>, proj4string <span class='op'>=</span> <span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,6 +136,9 @@
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='http://www.mrc-bsu.cam.ac.uk/wp-content/uploads/geobugs12manual.pdf'>http://www.mrc-bsu.cam.ac.uk/wp-content/uploads/geobugs12manual.pdf</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Virgilio Gomez Rubio &lt;Virgilio.Gomez@uclm.es&gt;</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>In the example, taken from the GeoBUGS manual, the smaller part of area1 has a counter-clockwise ring direction in the data, while other rings are clockwise. This implies that it is a hole, and does not get filled. Errant holes may be filled using <code><a href='checkPolygonsHoles.html'>checkPolygonsHoles</a></code>. The region labels are stored in the <code>ID</code> slots of the <code>Polygons</code> objects.</p>
@@ -141,16 +147,17 @@
     <div class='dont-index'><p><code><a href='map2SpatialPolygons.html'>map2SpatialPolygons</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) {
-<span class='no'>geobugs</span> <span class='kw'>&lt;-</span> <span class='fu'>readSplus</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"share/Splus.map"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>geobugs</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span>(<span class='no'>geobugs</span>)
-<span class='no'>pls</span> <span class='kw'>&lt;-</span> <span class='fu'>slot</span>(<span class='no'>geobugs</span>, <span class='st'>"polygons"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>pls</span>, <span class='kw'>function</span>(<span class='no'>i</span>) <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'>slot</span>(<span class='no'>i</span>, <span class='st'>"Polygons"</span>), <span class='no'>slot</span>, <span class='st'>"hole"</span>))
-<span class='no'>pls1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>pls</span>, <span class='no'>checkPolygonsHoles</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>pls1</span>, <span class='kw'>function</span>(<span class='no'>i</span>) <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'>slot</span>(<span class='no'>i</span>, <span class='st'>"Polygons"</span>), <span class='no'>slot</span>, <span class='st'>"hole"</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'>SpatialPolygons</span>(<span class='no'>pls1</span>), <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>)
-}</div><div class='img'><img src='readSplus-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='readSplus-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>geobugs</span> <span class='op'>&lt;-</span> <span class='fu'>readSplus</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"share/Splus.map"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>geobugs</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span>, col<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>geobugs</span><span class='op'>)</span>
+<span class='va'>pls</span> <span class='op'>&lt;-</span> <span class='fu'>slot</span><span class='op'>(</span><span class='va'>geobugs</span>, <span class='st'>"polygons"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>pls</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>i</span>, <span class='st'>"Polygons"</span><span class='op'>)</span>, <span class='va'>slot</span>, <span class='st'>"hole"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>pls1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>pls</span>, <span class='va'>checkPolygonsHoles</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>pls1</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>i</span>, <span class='st'>"Polygons"</span><span class='op'>)</span>, <span class='va'>slot</span>, <span class='st'>"hole"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='fu'>SpatialPolygons</span><span class='op'>(</span><span class='va'>pls1</span><span class='op'>)</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span>, col<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='readSplus-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='readSplus-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -166,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

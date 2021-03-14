@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,7 +115,7 @@
     <p>A SpatialPolygonsDataFrame object (for use with the maptools package) to plot a Visibility Based Map.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>state.vbm</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>state.vbm</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -136,18 +139,23 @@
   it was refused), most of my uses I feel fall under fair use and do not
   violate copyright, but you will need to decide for yourself and your
   applications.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Greg Snow <a href='mailto:greg.snow@imail.org'>greg.snow@imail.org</a> (of this compilation)</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='http://www.markmonmonier.com/index.htm'>http://www.markmonmonier.com/index.htm</a>,
   <a href='http://euclid.psych.yorku.ca/SCS/Gallery/bright-ideas.html'>http://euclid.psych.yorku.ca/SCS/Gallery/bright-ideas.html</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>state.vbm</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>state.vbm</span>)</div><div class='img'><img src='state.vbm-1.png' alt='' width='700' height='433' /></div><div class='input'>
-  <span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='no'>state.x77</span>[,<span class='st'>'HS Grad'</span>]
-  <span class='no'>tmp2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span>(<span class='no'>tmp</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='no'>tmp</span>),<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>tmp</span>), <span class='kw'>length.out</span><span class='kw'>=</span><span class='fl'>11</span>),
-    <span class='kw'>include.lowest</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>state.vbm</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>cm.colors</a></span>(<span class='fl'>10</span>)[<span class='no'>tmp2</span>])</div><div class='img'><img src='state.vbm-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>state.vbm</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>state.vbm</span><span class='op'>)</span>
+</div><div class='img'><img src='state.vbm-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='va'>state.x77</span><span class='op'>[</span>,<span class='st'>'HS Grad'</span><span class='op'>]</span>
+  <span class='va'>tmp2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>,<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>, length.out<span class='op'>=</span><span class='fl'>11</span><span class='op'>)</span>,
+    include.lowest<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>state.vbm</span>,col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>cm.colors</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>[</span><span class='va'>tmp2</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='img'><img src='state.vbm-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -163,7 +171,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

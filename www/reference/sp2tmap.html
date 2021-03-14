@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,7 +115,7 @@
     <p>The function converts a SpatialPolygons object for use with the Stata tmap command, by creating a data frame with the required columns.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sp2tmap</span>(<span class='no'>SP</span>)</pre>
+    <pre class="usage"><span class='fu'>sp2tmap</span><span class='op'>(</span><span class='va'>SP</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,24 +137,28 @@
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://www.stata.com/search.cgi?query=tmap'>https://www.stata.com/search.cgi?query=tmap</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/foreign/man/write.dta.html'>write.dta</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='readShapePoly.html'>readShapePoly</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/sids.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>],
- <span class='kw'>IDvar</span><span class='kw'>=</span><span class='st'>"FIPSNO"</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +ellps=clrk66"</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>xx</span>, <span class='kw'>border</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>las</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='no'>tmapdf</span> <span class='kw'>&lt;-</span> <span class='fu'>sp2tmap</span>(<span class='fu'>as</span>(<span class='no'>xx</span>, <span class='st'>"SpatialPolygons"</span>))
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>foreign</span>)) {
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='fu'><a href='https://rdrr.io/pkg/foreign/man/write.dta.html'>write.dta</a></span>(<span class='no'>tmapdf</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>td</span>, <span class='st'>"NCmap.dta"</span>), <span class='kw'>version</span><span class='kw'>=</span><span class='fl'>7</span>)
-<span class='no'>NCdf</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>xx</span>, <span class='st'>"data.frame"</span>)
-<span class='no'>NCdf</span>$<span class='no'>ID_n</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>tmapdf</span>, <span class='st'>"ID_names"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/foreign/man/write.dta.html'>write.dta</a></span>(<span class='no'>NCdf</span>, <span class='kw'>file</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>td</span>, <span class='st'>"NC.dta"</span>), <span class='kw'>version</span><span class='kw'>=</span><span class='fl'>7</span>)
-}
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>xx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='readShapePoly.html'>readShapePoly</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/sids.shp"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+ IDvar<span class='op'>=</span><span class='st'>"FIPSNO"</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +ellps=clrk66"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>xx</span>, border<span class='op'>=</span><span class='st'>"blue"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span>, las<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>tmapdf</span> <span class='op'>&lt;-</span> <span class='fu'>sp2tmap</span><span class='op'>(</span><span class='fu'>as</span><span class='op'>(</span><span class='va'>xx</span>, <span class='st'>"SpatialPolygons"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://svn.r-project.org/R-packages/trunk/foreign/'>foreign</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/foreign/man/write.dta.html'>write.dta</a></span><span class='op'>(</span><span class='va'>tmapdf</span>, file<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='st'>"NCmap.dta"</span><span class='op'>)</span>, version<span class='op'>=</span><span class='fl'>7</span><span class='op'>)</span>
+<span class='va'>NCdf</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>xx</span>, <span class='st'>"data.frame"</span><span class='op'>)</span>
+<span class='va'>NCdf</span><span class='op'>$</span><span class='va'>ID_n</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>tmapdf</span>, <span class='st'>"ID_names"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/foreign/man/write.dta.html'>write.dta</a></span><span class='op'>(</span><span class='va'>NCdf</span>, file<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='st'>"NC.dta"</span><span class='op'>)</span>, version<span class='op'>=</span><span class='fl'>7</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -167,7 +174,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

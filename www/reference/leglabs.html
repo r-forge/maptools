@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,7 +115,7 @@
     <p><code>leglabs</code> makes character strings from the same break points. The <code>plot.polylist()</code> function may be used as a generic S3 method.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>leglabs</span>(<span class='no'>vec</span>, <span class='kw'>under</span><span class='kw'>=</span><span class='st'>"under"</span>, <span class='kw'>over</span><span class='kw'>=</span><span class='st'>"over"</span>, <span class='kw'>between</span><span class='kw'>=</span><span class='st'>"-"</span>, <span class='kw'>reverse</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>leglabs</span><span class='op'>(</span><span class='va'>vec</span>, under<span class='op'>=</span><span class='st'>"under"</span>, over<span class='op'>=</span><span class='st'>"over"</span>, between<span class='op'>=</span><span class='st'>"-"</span>, reverse<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,21 +142,31 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand <a href='mailto:Roger.Bivand@nhh.no'>Roger.Bivand@nhh.no</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/findInterval.html'>findInterval</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mappolys</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='readShapeSpatial.html'>readShapeSpatial</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/columbus.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>], <span class='kw'>ID</span><span class='kw'>=</span><span class='st'>"NEIGNO"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoly is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='no'>brks</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>mappolys</span>$<span class='no'>CRIME</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0.2</span>)), <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='no'>colours</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"salmon1"</span>, <span class='st'>"salmon2"</span>, <span class='st'>"red3"</span>, <span class='st'>"brown"</span>, <span class='st'>"black"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mappolys</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>colours</span>[<span class='fu'><a href='https://rdrr.io/r/base/findInterval.html'>findInterval</a></span>(<span class='no'>mappolys</span>$<span class='no'>CRIME</span>, <span class='no'>brks</span>,
- <span class='kw'>all.inside</span><span class='kw'>=</span><span class='fl'>TRUE</span>)])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5.8</span>, <span class='fl'>7.1</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>, <span class='fl'>14.5</span>), <span class='kw'>legend</span><span class='kw'>=</span><span class='fu'>leglabs</span>(<span class='no'>brks</span>),
-  <span class='kw'>fill</span><span class='kw'>=</span><span class='no'>colours</span>, <span class='kw'>bty</span><span class='kw'>=</span><span class='st'>"n"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='kw'>main</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Columbus OH: residential burglaries and vehicle"</span>,
- <span class='st'>"thefts per thousand households, 1980"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>))</div><div class='img'><img src='leglabs-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#legend with reversed order</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>mappolys</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>colours</span>[<span class='fu'><a href='https://rdrr.io/r/base/findInterval.html'>findInterval</a></span>(<span class='no'>mappolys</span>$<span class='no'>CRIME</span>, <span class='no'>brks</span>,
- <span class='kw'>all.inside</span><span class='kw'>=</span><span class='fl'>TRUE</span>)])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5.8</span>, <span class='fl'>7.1</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>13</span>, <span class='fl'>14.5</span>), <span class='kw'>legend</span><span class='kw'>=</span><span class='fu'>leglabs</span>(<span class='no'>brks</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-  <span class='kw'>fill</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>colours</span>), <span class='kw'>bty</span><span class='kw'>=</span><span class='st'>"n"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='kw'>main</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Columbus OH: residential burglaries and vehicle"</span>,
- <span class='st'>"thefts per thousand households, 1980 (reversed legend)"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"\n"</span>))</div><div class='img'><img src='leglabs-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='va'>mappolys</span> <span class='op'>&lt;-</span> <span class='fu'><a href='readShapeSpatial.html'>readShapeSpatial</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/columbus.shp"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, ID<span class='op'>=</span><span class='st'>"NEIGNO"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoly is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='va'>brks</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>mappolys</span><span class='op'>$</span><span class='va'>CRIME</span>, probs<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span>, digits<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>colours</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"salmon1"</span>, <span class='st'>"salmon2"</span>, <span class='st'>"red3"</span>, <span class='st'>"brown"</span>, <span class='st'>"black"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>mappolys</span>, col<span class='op'>=</span><span class='va'>colours</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/findInterval.html'>findInterval</a></span><span class='op'>(</span><span class='va'>mappolys</span><span class='op'>$</span><span class='va'>CRIME</span>, <span class='va'>brks</span>,
+ all.inside<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5.8</span>, <span class='fl'>7.1</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>13</span>, <span class='fl'>14.5</span><span class='op'>)</span>, legend<span class='op'>=</span><span class='fu'>leglabs</span><span class='op'>(</span><span class='va'>brks</span><span class='op'>)</span>,
+  fill<span class='op'>=</span><span class='va'>colours</span>, bty<span class='op'>=</span><span class='st'>"n"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span>main<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Columbus OH: residential burglaries and vehicle"</span>,
+ <span class='st'>"thefts per thousand households, 1980"</span>, sep<span class='op'>=</span><span class='st'>"\n"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='leglabs-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#legend with reversed order</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>mappolys</span>, col<span class='op'>=</span><span class='va'>colours</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/findInterval.html'>findInterval</a></span><span class='op'>(</span><span class='va'>mappolys</span><span class='op'>$</span><span class='va'>CRIME</span>, <span class='va'>brks</span>,
+ all.inside<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/legend.html'>legend</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5.8</span>, <span class='fl'>7.1</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>13</span>, <span class='fl'>14.5</span><span class='op'>)</span>, legend<span class='op'>=</span><span class='fu'>leglabs</span><span class='op'>(</span><span class='va'>brks</span>, reverse <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+  fill<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='va'>colours</span><span class='op'>)</span>, bty<span class='op'>=</span><span class='st'>"n"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span>main<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Columbus OH: residential burglaries and vehicle"</span>,
+ <span class='st'>"thefts per thousand households, 1980 (reversed legend)"</span>, sep<span class='op'>=</span><span class='st'>"\n"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='leglabs-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -169,7 +182,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

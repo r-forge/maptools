@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -83,12 +83,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -119,30 +122,30 @@
     </div>
 
     <pre class="usage"><span class='co'># S4 method for SpatialPoints,POSIXct</span>
-<span class='fu'>crepuscule</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>, <span class='no'>solarDep</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"dawn"</span>, <span class='st'>"dusk"</span>),
-           <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>, <span class='va'>solarDep</span>, direction<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"dawn"</span>, <span class='st'>"dusk"</span><span class='op'>)</span>,
+           POSIXct.out<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># S4 method for matrix,POSIXct</span>
-<span class='fu'>crepuscule</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>,
-           <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>), <span class='no'>solarDep</span>,
-           <span class='kw'>direction</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"dawn"</span>, <span class='st'>"dusk"</span>), <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>,
+           proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span>, <span class='va'>solarDep</span>,
+           direction<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"dawn"</span>, <span class='st'>"dusk"</span><span class='op'>)</span>, POSIXct.out<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># S4 method for SpatialPoints,POSIXct</span>
-<span class='fu'>sunriset</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sunrise"</span>, <span class='st'>"sunset"</span>),
-         <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>sunriset</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>, direction<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sunrise"</span>, <span class='st'>"sunset"</span><span class='op'>)</span>,
+         POSIXct.out<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># S4 method for matrix,POSIXct</span>
-<span class='fu'>sunriset</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>,
-         <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>),
-         <span class='kw'>direction</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sunrise"</span>, <span class='st'>"sunset"</span>), <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>sunriset</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>,
+         proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span>,
+         direction<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sunrise"</span>, <span class='st'>"sunset"</span><span class='op'>)</span>, POSIXct.out<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># S4 method for SpatialPoints,POSIXct</span>
-<span class='fu'>solarnoon</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>solarnoon</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>, POSIXct.out<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># S4 method for matrix,POSIXct</span>
-<span class='fu'>solarnoon</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>,
-          <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>),
-          <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>solarnoon</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>,
+          proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span>,
+          POSIXct.out<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># S4 method for SpatialPoints,POSIXct</span>
-<span class='fu'>solarpos</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>, <span class='no'>...</span>)
+<span class='fu'>solarpos</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>, <span class='va'>...</span><span class='op'>)</span>
 <span class='co'># S4 method for matrix,POSIXct</span>
-<span class='fu'>solarpos</span>(<span class='no'>crds</span>, <span class='no'>dateTime</span>,
-         <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>), <span class='no'>...</span>)</pre>
+<span class='fu'>solarpos</span><span class='op'>(</span><span class='va'>crds</span>, <span class='va'>dateTime</span>,
+         proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,46 +230,68 @@
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Meeus, J.  (1991)  Astronomical Algorithms.  Willmann-Bell, Inc.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Sebastian P. Luque <a href='mailto:spluque@gmail.com'>spluque@gmail.com</a>, translated from
+  Greg Pelletier's <a href='mailto:gpel461@ecy.wa.gov'>gpel461@ecy.wa.gov</a> VBA code (available from
+  <a href='https://ecology.wa.gov/Research-Data/Data-resources/Models-spreadsheets/Modeling-the-environment/Models-tools-for-TMDLs'>https://ecology.wa.gov/Research-Data/Data-resources/Models-spreadsheets/Modeling-the-environment/Models-tools-for-TMDLs</a>), who in turn
+  translated it from original Javascript code by NOAA (see Details).
+  Roger Bivand <a href='mailto:roger.bivand@nhh.no'>roger.bivand@nhh.no</a> adapted the code to work with
+  <span class="pkg">sp</span> classes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Location of Helsinki, Finland, in decimal degrees,</span>
 <span class='co'>## as listed in NOAA's website</span>
-<span class='no'>hels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24.97</span>, <span class='fl'>60.17</span>), <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='no'>Hels</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPoints</span>(<span class='no'>hels</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
-<span class='no'>d041224</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2004-12-24"</span>, <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>)
+<span class='va'>hels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>24.97</span>, <span class='fl'>60.17</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>Hels</span> <span class='op'>&lt;-</span> <span class='fu'>SpatialPoints</span><span class='op'>(</span><span class='va'>hels</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>d041224</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"2004-12-24"</span>, tz<span class='op'>=</span><span class='st'>"EET"</span><span class='op'>)</span>
 <span class='co'>## Astronomical dawn</span>
-<span class='fu'>crepuscule</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>18</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;        day_frac                time
-#&gt; newlon   0.2762 2004-12-24 06:37:43</div><div class='input'><span class='fu'>crepuscule</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>18</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;        day_frac                time
+<span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>hels</span>, <span class='va'>d041224</span>, solarDep<span class='op'>=</span><span class='fl'>18</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;        day_frac                time
+#&gt; newlon   0.2762 2004-12-24 06:37:43</div><div class='input'><span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>d041224</span>, solarDep<span class='op'>=</span><span class='fl'>18</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;        day_frac                time
 #&gt; newlon   0.2762 2004-12-24 06:37:43</div><div class='input'><span class='co'>## Nautical dawn</span>
-<span class='fu'>crepuscule</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>12</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.3121822 2004-12-24 07:29:32</div><div class='input'><span class='fu'>crepuscule</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>12</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
+<span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>hels</span>, <span class='va'>d041224</span>, solarDep<span class='op'>=</span><span class='fl'>12</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.3121822 2004-12-24 07:29:32</div><div class='input'><span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>d041224</span>, solarDep<span class='op'>=</span><span class='fl'>12</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
 #&gt; newlon 0.3121822 2004-12-24 07:29:32</div><div class='input'><span class='co'>## Civil dawn</span>
-<span class='fu'>crepuscule</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.3519249 2004-12-24 08:26:46</div><div class='input'><span class='fu'>crepuscule</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.3519249 2004-12-24 08:26:46</div><div class='input'><span class='fu'>solarnoon</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarnoon</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarpos</span>(<span class='no'>hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>))</div><div class='output co'>#&gt;          [,1]    [,2]
-#&gt; [1,] 160.3036 42.4284</div><div class='input'><span class='fu'>solarpos</span>(<span class='no'>Hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"EET"</span>))</div><div class='output co'>#&gt;          [,1]     [,2]
-#&gt; [1,] 160.3037 42.42841</div><div class='input'><span class='fu'>sunriset</span>(<span class='no'>hels</span>, <span class='no'>d041224</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunrise"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
-#&gt; newlon 0.3924249 2004-12-24 09:25:05</div><div class='input'><span class='fu'>sunriset</span>(<span class='no'>Hels</span>, <span class='no'>d041224</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunrise"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;         day_frac                time
+<span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>hels</span>, <span class='va'>d041224</span>, solarDep<span class='op'>=</span><span class='fl'>6</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.3519249 2004-12-24 08:26:46</div><div class='input'><span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>d041224</span>, solarDep<span class='op'>=</span><span class='fl'>6</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.3519249 2004-12-24 08:26:46</div><div class='input'><span class='fu'>solarnoon</span><span class='op'>(</span><span class='va'>hels</span>, <span class='va'>d041224</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarnoon</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>d041224</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.5137966 2004-12-24 12:19:52</div><div class='input'><span class='fu'>solarpos</span><span class='op'>(</span><span class='va'>hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>, tz<span class='op'>=</span><span class='st'>"EET"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          [,1]     [,2]
+#&gt; [1,] 179.8386 27.50198</div><div class='input'><span class='fu'>solarpos</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>, tz<span class='op'>=</span><span class='st'>"EET"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          [,1]     [,2]
+#&gt; [1,] 179.8386 27.50198</div><div class='input'><span class='fu'>sunriset</span><span class='op'>(</span><span class='va'>hels</span>, <span class='va'>d041224</span>, direction<span class='op'>=</span><span class='st'>"sunrise"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
+#&gt; newlon 0.3924249 2004-12-24 09:25:05</div><div class='input'><span class='fu'>sunriset</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>d041224</span>, direction<span class='op'>=</span><span class='st'>"sunrise"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         day_frac                time
 #&gt; newlon 0.3924249 2004-12-24 09:25:05</div><div class='input'><span class='co'>## Using a sequence of dates</span>
-<span class='no'>Hels_seq</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>from</span><span class='kw'>=</span><span class='no'>d041224</span>, <span class='kw'>length.out</span><span class='kw'>=</span><span class='fl'>365</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='st'>"days"</span>)
-<span class='no'>up</span> <span class='kw'>&lt;-</span> <span class='fu'>sunriset</span>(<span class='no'>Hels</span>, <span class='no'>Hels_seq</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunrise"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>down</span> <span class='kw'>&lt;-</span> <span class='fu'>sunriset</span>(<span class='no'>Hels</span>, <span class='no'>Hels_seq</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"sunset"</span>, <span class='kw'>POSIXct.out</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>day_length</span> <span class='kw'>&lt;-</span> <span class='no'>down</span>$<span class='no'>time</span> - <span class='no'>up</span>$<span class='no'>time</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>Hels_seq</span>, <span class='no'>day_length</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"l"</span>)</div><div class='img'><img src='sun-methods-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>Hels_seq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from<span class='op'>=</span><span class='va'>d041224</span>, length.out<span class='op'>=</span><span class='fl'>365</span>, by<span class='op'>=</span><span class='st'>"days"</span><span class='op'>)</span>
+<span class='va'>up</span> <span class='op'>&lt;-</span> <span class='fu'>sunriset</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>Hels_seq</span>, direction<span class='op'>=</span><span class='st'>"sunrise"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>down</span> <span class='op'>&lt;-</span> <span class='fu'>sunriset</span><span class='op'>(</span><span class='va'>Hels</span>, <span class='va'>Hels_seq</span>, direction<span class='op'>=</span><span class='st'>"sunset"</span>, POSIXct.out<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>day_length</span> <span class='op'>&lt;-</span> <span class='va'>down</span><span class='op'>$</span><span class='va'>time</span> <span class='op'>-</span> <span class='va'>up</span><span class='op'>$</span><span class='va'>time</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>Hels_seq</span>, <span class='va'>day_length</span>, type<span class='op'>=</span><span class='st'>"l"</span><span class='op'>)</span>
+</div><div class='img'><img src='sun-methods-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Using a grid of spatial points for the same point in time</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>grd</span> <span class='kw'>&lt;-</span> <span class='fu'>GridTopology</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>179</span>,-<span class='fl'>89</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>359</span>,<span class='fl'>179</span>))
-<span class='no'>SP</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialPoints</span>(<span class='fu'>coordinates</span>(<span class='no'>grd</span>),
-                    <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
-<span class='no'>wint</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2004-12-21"</span>, <span class='kw'>tz</span><span class='kw'>=</span><span class='st'>"GMT"</span>)
-<span class='no'>win</span> <span class='kw'>&lt;-</span> <span class='fu'>crepuscule</span>(<span class='no'>SP</span>, <span class='no'>wint</span>, <span class='kw'>solarDep</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>direction</span><span class='kw'>=</span><span class='st'>"dawn"</span>)
-<span class='no'>SPDF</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialGridDataFrame</span>(<span class='no'>grd</span>,
- <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>),
- <span class='kw'>data</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>winter</span><span class='kw'>=</span><span class='no'>win</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>SPDF</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>cm.colors</a></span>(<span class='fl'>40</span>))
-}</div></pre>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>grd</span> <span class='op'>&lt;-</span> <span class='fu'>GridTopology</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>179</span>,<span class='op'>-</span><span class='fl'>89</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>359</span>,<span class='fl'>179</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>SP</span> <span class='op'>&lt;-</span> <span class='fu'>SpatialPoints</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/xyFromCell.html'>coordinates</a></span><span class='op'>(</span><span class='va'>grd</span><span class='op'>)</span>,
+                    proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>wint</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"2004-12-21"</span>, tz<span class='op'>=</span><span class='st'>"GMT"</span><span class='op'>)</span>
+<span class='va'>win</span> <span class='op'>&lt;-</span> <span class='fu'>crepuscule</span><span class='op'>(</span><span class='va'>SP</span>, <span class='va'>wint</span>, solarDep<span class='op'>=</span><span class='fl'>6</span>, direction<span class='op'>=</span><span class='st'>"dawn"</span><span class='op'>)</span>
+<span class='va'>SPDF</span> <span class='op'>&lt;-</span> <span class='fu'>SpatialGridDataFrame</span><span class='op'>(</span><span class='va'>grd</span>,
+ proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span>,
+ data<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>winter<span class='op'>=</span><span class='va'>win</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/image.html'>image</a></span><span class='op'>(</span><span class='va'>SPDF</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>cm.colors</a></span><span class='op'>(</span><span class='fl'>40</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -282,7 +307,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

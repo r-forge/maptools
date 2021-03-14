@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -83,12 +83,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -118,25 +121,25 @@
   easily with <code>spplot</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lineLabel</span>(<span class='no'>line</span>, <span class='no'>label</span>,
-          <span class='kw'>spar</span><span class='kw'>=</span><span class='fl'>.6</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'above'</span>, <span class='st'>'below'</span>),
-          <span class='kw'>textloc</span> <span class='kw'>=</span> <span class='st'>'constantSlope'</span>,
-          <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>col</span>,
-          <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>alpha</span>,
-          <span class='kw'>cex</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>cex</span>,
-          <span class='kw'>lineheight</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>lineheight</span>,
-          <span class='kw'>font</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>font</span>,
-          <span class='kw'>fontfamily</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>fontfamily</span>,
-          <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='no'>add.text</span>$<span class='no'>fontface</span>,
-          <span class='kw'>lty</span> <span class='kw'>=</span> <span class='no'>add.line</span>$<span class='no'>lty</span>,
-          <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='no'>add.line</span>$<span class='no'>lwd</span>,
-          <span class='kw'>col.line</span> <span class='kw'>=</span> <span class='no'>add.line</span>$<span class='no'>col</span>,
-          <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>'lineLabel'</span>,
-          <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>lineLabel</span><span class='op'>(</span><span class='va'>line</span>, <span class='va'>label</span>,
+          spar<span class='op'>=</span><span class='fl'>.6</span>, position <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'above'</span>, <span class='st'>'below'</span><span class='op'>)</span>,
+          textloc <span class='op'>=</span> <span class='st'>'constantSlope'</span>,
+          col <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>col</span>,
+          alpha <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>alpha</span>,
+          cex <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>cex</span>,
+          lineheight <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>lineheight</span>,
+          font <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>font</span>,
+          fontfamily <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>fontfamily</span>,
+          fontface <span class='op'>=</span> <span class='va'>add.text</span><span class='op'>$</span><span class='va'>fontface</span>,
+          lty <span class='op'>=</span> <span class='va'>add.line</span><span class='op'>$</span><span class='va'>lty</span>,
+          lwd <span class='op'>=</span> <span class='va'>add.line</span><span class='op'>$</span><span class='va'>lwd</span>, 
+          col.line <span class='op'>=</span> <span class='va'>add.line</span><span class='op'>$</span><span class='va'>col</span>,
+          identifier <span class='op'>=</span> <span class='st'>'lineLabel'</span>,
+          <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>sp.lineLabel</span>(<span class='no'>object</span>, <span class='no'>labels</span>, <span class='kw'>byid</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='no'>...</span>)
+<span class='fu'>sp.lineLabel</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>labels</span>, byid<span class='op'>=</span><span class='cn'>TRUE</span>,<span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>label</span>(<span class='no'>object</span>, <span class='no'>text</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>label</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>text</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,6 +203,9 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Oscar Perpiñán Lamigueiro.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Part of the label location code is adapted from <code><a href='https://rdrr.io/pkg/lattice/man/panel.levelplot.html'>panel.levelplot</a></code>. 
@@ -207,49 +213,53 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></code>
-  <code><a href='pointLabelLattice.html'>sp.pointLabel</a></code>
-  <code><a href='pointLabelBase.html'>pointLabel</a></code>
+  <code><a href='panel.pointLabel.html'>sp.pointLabel</a></code>
+  <code><a href='pointLabel.html'>pointLabel</a></code>
   <code><a href='https://rdrr.io/pkg/lattice/man/panel.levelplot.html'>panel.levelplot</a></code>
   <code><a href='https://rdrr.io/r/stats/smooth.spline.html'>smooth.spline</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.grid</span>)
-<span class='fu'>coordinates</span>(<span class='no'>meuse.grid</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span>
-<span class='fu'>proj4string</span>(<span class='no'>meuse.grid</span>) <span class='kw'>&lt;-</span> <span class='fu'>CRS</span>(<span class='st'>"+init=epsg:28992"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Amersfoort in CRS definition</span></div><div class='input'><span class='fu'>gridded</span>(<span class='no'>meuse.grid</span>) <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/xyFromCell.html'>coordinates</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='op'>=</span> <span class='op'>~</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/projection.html'>proj4string</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+init=epsg:28992"</span><span class='op'>)</span>
+<span class='fu'>gridded</span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='op'>=</span> <span class='cn'>TRUE</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse</span>)
-<span class='fu'>coordinates</span>(<span class='no'>meuse</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.riv</span>)
-<span class='no'>meuse.sl</span> <span class='kw'>&lt;-</span> <span class='fu'>SpatialLines</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>Lines</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>Line</span>(<span class='no'>meuse.riv</span>)), <span class='st'>"1"</span>)))
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/xyFromCell.html'>coordinates</a></span><span class='op'>(</span><span class='va'>meuse</span><span class='op'>)</span> <span class='op'>=</span> <span class='op'>~</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse.riv</span><span class='op'>)</span>
+<span class='va'>meuse.sl</span> <span class='op'>&lt;-</span> <span class='fu'>SpatialLines</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>Lines</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'>Line</span><span class='op'>(</span><span class='va'>meuse.riv</span><span class='op'>)</span><span class='op'>)</span>, <span class='st'>"1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>RColorBrewer</span>)
-<span class='no'>myCols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/adjustcolor.html'>adjustcolor</a></span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/colorRamp.html'>colorRampPalette</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>9</span>, <span class='st'>'Reds'</span>))(<span class='fl'>100</span>), <span class='fl'>.85</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>RColorBrewer</span><span class='op'>)</span>
+<span class='va'>myCols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/adjustcolor.html'>adjustcolor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/colorRamp.html'>colorRampPalette</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>9</span>, <span class='st'>'Reds'</span><span class='op'>)</span><span class='op'>)</span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>, <span class='fl'>.85</span><span class='op'>)</span>
 
-<span class='no'>labs</span> <span class='kw'>&lt;-</span> <span class='fu'>label</span>(<span class='no'>meuse.sl</span>, <span class='st'>'Meuse River'</span>)
+<span class='va'>labs</span> <span class='op'>&lt;-</span> <span class='fu'>label</span><span class='op'>(</span><span class='va'>meuse.sl</span>, <span class='st'>'Meuse River'</span><span class='op'>)</span>
 
 <span class='co'>## Maximum depth</span>
-<span class='no'>sl1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>'sp.lineLabel'</span>, <span class='no'>meuse.sl</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='no'>labs</span>,
-            <span class='kw'>position</span><span class='kw'>=</span><span class='st'>'below'</span>, <span class='kw'>textloc</span><span class='kw'>=</span><span class='st'>'maxDepth'</span>,
-            <span class='kw'>spar</span><span class='kw'>=</span><span class='fl'>.2</span>,
-            <span class='kw'>col</span><span class='kw'>=</span><span class='st'>'darkblue'</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>1</span>,
-            <span class='kw'>fontfamily</span><span class='kw'>=</span><span class='st'>'Palatino'</span>,
-            <span class='kw'>fontface</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='va'>sl1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>'sp.lineLabel'</span>, <span class='va'>meuse.sl</span>, label<span class='op'>=</span><span class='va'>labs</span>,
+            position<span class='op'>=</span><span class='st'>'below'</span>, textloc<span class='op'>=</span><span class='st'>'maxDepth'</span>,
+            spar<span class='op'>=</span><span class='fl'>.2</span>,
+            col<span class='op'>=</span><span class='st'>'darkblue'</span>, cex<span class='op'>=</span><span class='fl'>1</span>,
+            fontfamily<span class='op'>=</span><span class='st'>'Palatino'</span>,
+            fontface<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 
-<span class='fu'>spplot</span>(<span class='no'>meuse.grid</span>[<span class='st'>"dist"</span>],
-       <span class='kw'>col.regions</span><span class='kw'>=</span><span class='no'>myCols</span>,
-       <span class='kw'>sp.layout</span> <span class='kw'>=</span> <span class='no'>sl1</span>)</div><div class='img'><img src='lineLabel-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>[</span><span class='st'>"dist"</span><span class='op'>]</span>,
+       col.regions<span class='op'>=</span><span class='va'>myCols</span>, 
+       sp.layout <span class='op'>=</span> <span class='va'>sl1</span><span class='op'>)</span>
+</div><div class='img'><img src='lineLabel-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Constant slope</span>
-<span class='no'>sl2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/modifyList.html'>modifyList</a></span>(<span class='no'>sl1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>textloc</span> <span class='kw'>=</span> <span class='st'>'constantSlope'</span>)) <span class='co'>## Default</span>
+<span class='va'>sl2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/modifyList.html'>modifyList</a></span><span class='op'>(</span><span class='va'>sl1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>textloc <span class='op'>=</span> <span class='st'>'constantSlope'</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## Default</span>
 
-<span class='fu'>spplot</span>(<span class='no'>meuse.grid</span>[<span class='st'>"dist"</span>],
-       <span class='kw'>col.regions</span><span class='kw'>=</span><span class='no'>myCols</span>,
-       <span class='kw'>sp.layout</span> <span class='kw'>=</span> <span class='no'>sl2</span>)</div><div class='img'><img src='lineLabel-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>[</span><span class='st'>"dist"</span><span class='op'>]</span>,
+       col.regions<span class='op'>=</span><span class='va'>myCols</span>, 
+       sp.layout <span class='op'>=</span> <span class='va'>sl2</span><span class='op'>)</span>
+</div><div class='img'><img src='lineLabel-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Location defined by its numeric index</span>
-<span class='no'>sl3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/modifyList.html'>modifyList</a></span>(<span class='no'>sl1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>textloc</span> <span class='kw'>=</span> <span class='fl'>140</span>, <span class='kw'>position</span><span class='kw'>=</span><span class='st'>'above'</span>))
+<span class='va'>sl3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/modifyList.html'>modifyList</a></span><span class='op'>(</span><span class='va'>sl1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>textloc <span class='op'>=</span> <span class='fl'>140</span>, position<span class='op'>=</span><span class='st'>'above'</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>spplot</span>(<span class='no'>meuse.grid</span>[<span class='st'>"dist"</span>],
-       <span class='kw'>col.regions</span><span class='kw'>=</span><span class='no'>myCols</span>,
-       <span class='kw'>sp.layout</span> <span class='kw'>=</span> <span class='no'>sl3</span>)</div><div class='img'><img src='lineLabel-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>[</span><span class='st'>"dist"</span><span class='op'>]</span>,
+       col.regions<span class='op'>=</span><span class='va'>myCols</span>, 
+       sp.layout <span class='op'>=</span> <span class='va'>sl3</span><span class='op'>)</span>
+</div><div class='img'><img src='lineLabel-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -266,7 +276,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

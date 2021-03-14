@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,9 +115,9 @@
     <p>These functions may be used to convert map objects returned by the map function in the maps package to suitable objects defined in the sp package. In the examples below, arguments are shown for retrieving first polygons by name, then lines by window.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>map2SpatialPolygons</span>(<span class='no'>map</span>, <span class='no'>IDs</span>, <span class='kw'>proj4string</span> <span class='kw'>=</span> <span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)), <span class='kw'>checkHoles</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>map2SpatialLines</span>(<span class='no'>map</span>, <span class='kw'>IDs</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>proj4string</span> <span class='kw'>=</span> <span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)))
-<span class='fu'>pruneMap</span>(<span class='no'>map</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>map2SpatialPolygons</span><span class='op'>(</span><span class='va'>map</span>, <span class='va'>IDs</span>, proj4string <span class='op'>=</span> <span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>, checkHoles<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'>map2SpatialLines</span><span class='op'>(</span><span class='va'>map</span>, IDs<span class='op'>=</span><span class='cn'>NULL</span>, proj4string <span class='op'>=</span> <span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>pruneMap</span><span class='op'>(</span><span class='va'>map</span>, xlim<span class='op'>=</span><span class='cn'>NULL</span>, ylim<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,6 +151,9 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>map2SpatialPolygons</code> returns a SpatialPolygons object and <code>map2SpatialLines</code> returns a SpatialLines object (objects defined in the sp package); <code>pruneMap</code> returns a modified map object defined in the maps package</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>As the examples show, retrieval by name should be checked to see whether a window is not also needed: the "norway" polygons include "Norway:Bouvet Island", which is in the South Atlantic. Here, the IDs argument is set uniformly to "Norway" for all the component polygons, so that the output object contains a single Polygons object with multiple component Polygon objects. When retrieving by window, pruning may be needed on lines which are included because they begin within the window; interior=FALSE is used to remove country boundaries in this case.</p>
@@ -156,60 +162,70 @@
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>maps</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>nor_coast_poly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"world"</span>, <span class='st'>"norway"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"transparent"</span>,
- <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>nor_coast_poly</span>$<span class='no'>x</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; [1] -9.098877 33.629295</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>nor_coast_poly</span>$<span class='no'>y</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; [1] 58.02095 80.47783</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>nor_coast_poly</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"world"</span>, <span class='st'>"norway"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"transparent"</span>,
- <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>58</span>,<span class='fl'>72</span>))
-<span class='no'>nor_coast_poly</span>$<span class='no'>names</span>
-}</div><div class='output co'>#&gt;  [1] "Norway:1"           "Norway:2"           "Norway:Smola"      
+    <pre class="examples"><div class='input'><span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>maps</span><span class='op'>)</span><span class='op'>)</span> <span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>nor_coast_poly</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span><span class='op'>(</span><span class='st'>"world"</span>, <span class='st'>"norway"</span>, fill<span class='op'>=</span><span class='cn'>TRUE</span>, col<span class='op'>=</span><span class='st'>"transparent"</span>,
+ plot<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>nor_coast_poly</span><span class='op'>$</span><span class='va'>x</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [1] -9.098877 33.629295</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>nor_coast_poly</span><span class='op'>$</span><span class='va'>y</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [1] 58.02095 80.47783</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>nor_coast_poly</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span><span class='op'>(</span><span class='st'>"world"</span>, <span class='st'>"norway"</span>, fill<span class='op'>=</span><span class='cn'>TRUE</span>, col<span class='op'>=</span><span class='st'>"transparent"</span>,
+ plot<span class='op'>=</span><span class='cn'>FALSE</span>, ylim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>58</span>,<span class='fl'>72</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>nor_coast_poly</span><span class='op'>$</span><span class='va'>names</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt;  [1] "Norway:1"           "Norway:2"           "Norway:Smola"      
 #&gt;  [4] "Norway:Froya"       "Norway:5"           "Norway:6"          
 #&gt;  [7] "Norway:7"           "Norway:8"           "Norway:Moskenesoya"
 #&gt; [10] "Norway:Vestvagoy"   "Norway:Langoya"     "Norway:Hinnoya"    
 #&gt; [13] "Norway:Senja"       "Norway:14"          "Norway:Arnoy"      
 #&gt; [16] "Norway:16"          "Norway:Vannoy"      "Norway:Seiland"    
 #&gt; [19] "Norway:Kvaloya"     "Norway:Soroya"      "Norway"            
-#&gt; [22] "Norway:Mageroya"    "Norway:Jan Mayen"  </div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>IDs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/strsplit.html'>strsplit</a></span>(<span class='no'>nor_coast_poly</span>$<span class='no'>names</span>, <span class='st'>":"</span>), <span class='kw'>function</span>(<span class='no'>x</span>) <span class='no'>x</span>[<span class='fl'>1</span>])
-}
-<span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>nor_coast_poly_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>map2SpatialPolygons</span>(<span class='no'>nor_coast_poly</span>, <span class='kw'>IDs</span><span class='kw'>=</span><span class='no'>IDs</span>,
- <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'>slot</span>(<span class='no'>nor_coast_poly_sp</span>, <span class='st'>"polygons"</span>),
- <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'>slot</span>(<span class='no'>x</span>, <span class='st'>"Polygons"</span>)))
-}</div><div class='output co'>#&gt; [1] 23</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>nor_coast_poly_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"grey"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='img'><img src='map2SpatialPolygons-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>nor_coast_lines</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"world"</span>, <span class='kw'>interior</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>32</span>),
- <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>58</span>,<span class='fl'>72</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>nor_coast_lines</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"l"</span>)
-}</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>nor_coast_lines</span> <span class='kw'>&lt;-</span> <span class='fu'>pruneMap</span>(<span class='no'>nor_coast_lines</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>32</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>58</span>,<span class='fl'>72</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/lines.html'>lines</a></span>(<span class='no'>nor_coast_lines</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>)
-<span class='no'>nor_coast_lines_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>map2SpatialLines</span>(<span class='no'>nor_coast_lines</span>,
- <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>nor_coast_poly_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"grey"</span>, <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='img'><img src='map2SpatialPolygons-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>nor_coast_lines_sp</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-}</div><div class='img'><img src='map2SpatialPolygons-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>worldmap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span>(<span class='st'>"world"</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='no'>worldmapPolys</span> <span class='kw'>&lt;-</span> <span class='fu'>map2SpatialPolygons</span>(<span class='no'>worldmap</span>,
- <span class='kw'>IDs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/strsplit.html'>strsplit</a></span>(<span class='no'>worldmap</span>$<span class='no'>names</span>, <span class='st'>":"</span>), <span class='st'>"["</span>, <span class='fl'>1L</span>),
- <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +datum=WGS84"</span>))
-<span class='kw'>if</span> (<span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span>()) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>rgeos</span>)
-<span class='no'>vals</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgeos</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rgeos/man/pred-unary-gIsValid.html'>gIsValid</a></span>(<span class='no'>worldmapPolys</span>, <span class='kw'>byid</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>reason</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/strsplit.html'>strsplit</a></span>(<span class='no'>vals</span>, <span class='st'>"\\["</span>), <span class='st'>"["</span>, <span class='fl'>1</span>)))
-}
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: rgeos</span></div><div class='output co'>#&gt; <span class='message'>rgeos version: 0.5-4, (SVN revision 636)</span>
-#&gt; <span class='message'> GEOS runtime version: 3.8.1-CAPI-1.13.3 </span>
-#&gt; <span class='message'> Linking to sp version: 1.4-2 </span>
+#&gt; [22] "Norway:Mageroya"    "Norway:Jan Mayen"  </div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>IDs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/strsplit.html'>strsplit</a></span><span class='op'>(</span><span class='va'>nor_coast_poly</span><span class='op'>$</span><span class='va'>names</span>, <span class='st'>":"</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>nor_coast_poly_sp</span> <span class='op'>&lt;-</span> <span class='fu'>map2SpatialPolygons</span><span class='op'>(</span><span class='va'>nor_coast_poly</span>, IDs<span class='op'>=</span><span class='va'>IDs</span>,
+ proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>nor_coast_poly_sp</span>, <span class='st'>"polygons"</span><span class='op'>)</span>,
+ <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'>slot</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"Polygons"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; [1] 23</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>nor_coast_poly_sp</span>, col<span class='op'>=</span><span class='st'>"grey"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='map2SpatialPolygons-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>nor_coast_lines</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span><span class='op'>(</span><span class='st'>"world"</span>, interior<span class='op'>=</span><span class='cn'>FALSE</span>, plot<span class='op'>=</span><span class='cn'>FALSE</span>, xlim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>32</span><span class='op'>)</span>,
+ ylim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>58</span>,<span class='fl'>72</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>nor_coast_lines</span>, type<span class='op'>=</span><span class='st'>"l"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>nor_coast_lines</span> <span class='op'>&lt;-</span> <span class='fu'>pruneMap</span><span class='op'>(</span><span class='va'>nor_coast_lines</span>, xlim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>32</span><span class='op'>)</span>, ylim<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>58</span>,<span class='fl'>72</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/lines.html'>lines</a></span><span class='op'>(</span><span class='va'>nor_coast_lines</span>, col<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span>
+<span class='va'>nor_coast_lines_sp</span> <span class='op'>&lt;-</span> <span class='fu'>map2SpatialLines</span><span class='op'>(</span><span class='va'>nor_coast_lines</span>,
+ proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>nor_coast_poly_sp</span>, col<span class='op'>=</span><span class='st'>"grey"</span>, axes<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='map2SpatialPolygons-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>nor_coast_lines_sp</span>, col<span class='op'>=</span><span class='st'>"blue"</span>, add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='map2SpatialPolygons-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>worldmap</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span><span class='op'>(</span><span class='st'>"world"</span>, fill<span class='op'>=</span><span class='cn'>TRUE</span>, plot<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>worldmapPolys</span> <span class='op'>&lt;-</span> <span class='fu'>map2SpatialPolygons</span><span class='op'>(</span><span class='va'>worldmap</span>, 
+ IDs<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/strsplit.html'>strsplit</a></span><span class='op'>(</span><span class='va'>worldmap</span><span class='op'>$</span><span class='va'>names</span>, <span class='st'>":"</span><span class='op'>)</span>, <span class='st'>"["</span>, <span class='fl'>1L</span><span class='op'>)</span>, 
+ proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +datum=WGS84"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='checkPolygonsHoles.html'>rgeosStatus</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://r-forge.r-project.org/projects/rgeos/'>rgeos</a></span><span class='op'>)</span>
+<span class='va'>vals</span> <span class='op'>&lt;-</span> <span class='fu'>rgeos</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rgeos/man/pred-unary-gIsValid.html'>gIsValid</a></span><span class='op'>(</span><span class='va'>worldmapPolys</span>, byid<span class='op'>=</span><span class='cn'>TRUE</span>, reason<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/strsplit.html'>strsplit</a></span><span class='op'>(</span><span class='va'>vals</span>, <span class='st'>"\\["</span><span class='op'>)</span>, <span class='st'>"["</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: rgeos</span></div><div class='output co'>#&gt; <span class='message'>rgeos version: 0.5-6, (SVN revision 649)</span>
+#&gt; <span class='message'> GEOS runtime version: 3.9.1-CAPI-1.14.2 </span>
+#&gt; <span class='message'> GEOS using OverlayNG</span>
+#&gt; <span class='message'> Linking to sp version: 1.4-5 </span>
 #&gt; <span class='message'> Polygon checking: TRUE </span></div><div class='output co'>#&gt; 
 #&gt;   Duplicate Rings     Nested shells Self-intersection    Valid Geometry 
 #&gt;                 2                 8                 4               239 </div></pre>
@@ -228,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

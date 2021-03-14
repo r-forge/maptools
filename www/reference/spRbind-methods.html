@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -117,7 +120,7 @@
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<dl'>
+<dl>
 
 <dt>obj = "SpatialPoints", x = "SpatialPoints"</dt><dd><p>rbind two SpatialPoints objects</p></dd>
 
@@ -143,13 +146,18 @@
      <code>spRbind</code>-methods these have to be modified explicitly, e.g. by 
      calling <code><a href='https://rdrr.io/pkg/sp/man/spChFIDs-methods.html'>spChFIDs-methods</a></code></p></li>
 </ol>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/sp/man/spChFIDs-methods.html'>spChFIDs-methods</a></code>, <code><a href='spCbind-methods.html'>spCbind-methods</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='readShapePoly.html'>readShapePoly</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/sids.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>IDvar</span><span class='kw'>=</span><span class='st'>"FIPSNO"</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +ellps=clrk66"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoly is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Unknown based on Clarke 1866 ellipsoid in CRS definition</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xx</span>)</div><div class='output co'>#&gt; Object of class SpatialPolygonsDataFrame
+    <pre class="examples"><div class='input'><span class='va'>xx</span> <span class='op'>&lt;-</span> <span class='fu'><a href='readShapePoly.html'>readShapePoly</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/sids.shp"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, 
+  IDvar<span class='op'>=</span><span class='st'>"FIPSNO"</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +ellps=clrk66"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoly is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xx</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialPolygonsDataFrame
 #&gt; Coordinates:
 #&gt;         min       max
 #&gt; x -84.32385 -75.45698
@@ -180,7 +188,8 @@
 #&gt;  Mean   :1050.8   Mean   : 4224   Mean   : 8.36   Mean   : 1352.8  
 #&gt;  3rd Qu.:1168.5   3rd Qu.: 4889   3rd Qu.:10.25   3rd Qu.: 1406.8  
 #&gt;  Max.   :8027.0   Max.   :30757   Max.   :57.00   Max.   :11631.0  
-#&gt;                                                                    </div><div class='input'><span class='no'>xx</span>$<span class='no'>FIPSNO</span></div><div class='output co'>#&gt;   [1] 37001 37003 37005 37007 37009 37011 37013 37015 37017 37019 37021 37023
+#&gt;                                                                    </div><div class='input'><span class='va'>xx</span><span class='op'>$</span><span class='va'>FIPSNO</span>
+</div><div class='output co'>#&gt;   [1] 37001 37003 37005 37007 37009 37011 37013 37015 37017 37019 37021 37023
 #&gt;  [13] 37025 37027 37029 37031 37033 37035 37037 37039 37041 37043 37045 37047
 #&gt;  [25] 37049 37051 37053 37055 37057 37059 37061 37063 37065 37067 37069 37071
 #&gt;  [37] 37073 37075 37077 37079 37081 37083 37085 37087 37089 37091 37093 37095
@@ -188,9 +197,11 @@
 #&gt;  [61] 37121 37123 37125 37127 37129 37131 37133 37135 37137 37139 37141 37143
 #&gt;  [73] 37145 37147 37149 37151 37153 37155 37157 37159 37161 37163 37165 37167
 #&gt;  [85] 37169 37171 37173 37175 37177 37179 37181 37183 37185 37187 37189 37191
-#&gt;  [97] 37193 37195 37197 37199</div><div class='input'><span class='no'>xx1</span> <span class='kw'>&lt;-</span> <span class='no'>xx</span>[<span class='no'>xx</span>$<span class='no'>CNTY_ID</span> <span class='kw'>&lt;</span> <span class='fl'>1982</span>,]
-<span class='no'>xx2</span> <span class='kw'>&lt;-</span> <span class='no'>xx</span>[<span class='no'>xx</span>$<span class='no'>CNTY_ID</span> <span class='kw'>&gt;=</span> <span class='fl'>1982</span>,]
-<span class='no'>xx3</span> <span class='kw'>&lt;-</span> <span class='fu'>spRbind</span>(<span class='no'>xx2</span>, <span class='no'>xx1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: CRS object has comment, which is lost in output</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Unknown based on Clarke 1866 ellipsoid in CRS definition</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xx3</span>)</div><div class='output co'>#&gt; Object of class SpatialPolygonsDataFrame
+#&gt;  [97] 37193 37195 37197 37199</div><div class='input'><span class='va'>xx1</span> <span class='op'>&lt;-</span> <span class='va'>xx</span><span class='op'>[</span><span class='va'>xx</span><span class='op'>$</span><span class='va'>CNTY_ID</span> <span class='op'>&lt;</span> <span class='fl'>1982</span>,<span class='op'>]</span>
+<span class='va'>xx2</span> <span class='op'>&lt;-</span> <span class='va'>xx</span><span class='op'>[</span><span class='va'>xx</span><span class='op'>$</span><span class='va'>CNTY_ID</span> <span class='op'>&gt;=</span> <span class='fl'>1982</span>,<span class='op'>]</span>
+<span class='va'>xx3</span> <span class='op'>&lt;-</span> <span class='fu'>spRbind</span><span class='op'>(</span><span class='va'>xx2</span>, <span class='va'>xx1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: CRS object has comment, which is lost in output</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Unknown based on Clarke 1866 ellipsoid in Proj4 definition</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xx3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialPolygonsDataFrame
 #&gt; Coordinates:
 #&gt;         min       max
 #&gt; x -84.32385 -75.45698
@@ -221,7 +232,8 @@
 #&gt;  Mean   :1050.8   Mean   : 4224   Mean   : 8.36   Mean   : 1352.8  
 #&gt;  3rd Qu.:1168.5   3rd Qu.: 4889   3rd Qu.:10.25   3rd Qu.: 1406.8  
 #&gt;  Max.   :8027.0   Max.   :30757   Max.   :57.00   Max.   :11631.0  
-#&gt;                                                                    </div><div class='input'><span class='no'>xx3</span>$<span class='no'>FIPSNO</span></div><div class='output co'>#&gt;   [1] 37007 37013 37017 37019 37021 37025 37031 37035 37039 37043 37045 37047
+#&gt;                                                                    </div><div class='input'><span class='va'>xx3</span><span class='op'>$</span><span class='va'>FIPSNO</span>
+</div><div class='output co'>#&gt;   [1] 37007 37013 37017 37019 37021 37025 37031 37035 37039 37043 37045 37047
 #&gt;  [13] 37049 37051 37055 37061 37071 37075 37079 37085 37087 37089 37093 37095
 #&gt;  [25] 37099 37101 37103 37105 37107 37109 37113 37119 37123 37125 37129 37133
 #&gt;  [37] 37137 37141 37147 37149 37153 37155 37161 37163 37165 37167 37173 37175
@@ -245,7 +257,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

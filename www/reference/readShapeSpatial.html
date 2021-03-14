@@ -73,7 +73,7 @@ The readShapeSpatial reads data from a shapefile into a Spatial*DataFrame object
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -81,12 +81,15 @@ The readShapeSpatial reads data from a shapefile into a Spatial*DataFrame object
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -110,14 +113,14 @@ The readShapeSpatial reads data from a shapefile into a Spatial*DataFrame object
     </div>
 
     <div class="ref-description">
-    <p>The use of this function is deprecated and it is not being maintained. Use <code><a href='https://rdrr.io/pkg/rgdal/man/readOGR.html'>rgdal::readOGR()</a></code> or <code><a href='https://rdrr.io/pkg/sf/man/st_read.html'>sf::st_read()</a></code> instead - both of these read the coordinate reference system from the input file, while this deprecated function does not. For writing, use <code><a href='https://rdrr.io/pkg/rgdal/man/writeOGR.html'>rgdal::writeOGR()</a></code> or <code><a href='https://rdrr.io/pkg/sf/man/st_write.html'>sf::st_write()</a></code> instead.</p>
+    <p>The use of this function is deprecated and it is not being maintained. Use <code><a href='http://rgdal.r-forge.r-project.org/reference/readOGR.html'>rgdal::readOGR()</a></code> or <code><a href='https://r-spatial.github.io/sf/reference/st_read.html'>sf::st_read()</a></code> instead - both of these read the coordinate reference system from the input file, while this deprecated function does not. For writing, use <code><a href='http://rgdal.r-forge.r-project.org/reference/writeOGR.html'>rgdal::writeOGR()</a></code> or <code><a href='https://r-spatial.github.io/sf/reference/st_write.html'>sf::st_write()</a></code> instead.</p>
 <p>The <code>readShapeSpatial</code> reads data from a shapefile into a <code>Spatial*DataFrame</code> object. The <code>writeSpatialShape</code> function writes data from a <code>Spatial*DataFrame</code> object to a shapefile. Note DBF file restrictions in <code><a href='https://rdrr.io/pkg/foreign/man/write.dbf.html'>write.dbf</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>readShapeSpatial</span>(<span class='no'>fn</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)),
-        <span class='kw'>verbose</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>repair</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>IDvar</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>force_ring</span><span class='kw'>=</span><span class='fl'>FALSE</span>,
-        <span class='kw'>delete_null_obj</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>retrieve_ABS_null</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>writeSpatialShape</span>(<span class='no'>x</span>, <span class='no'>fn</span>, <span class='kw'>factor2char</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_nchar</span><span class='kw'>=</span><span class='fl'>254</span>)</pre>
+    <pre class="usage"><span class='fu'>readShapeSpatial</span><span class='op'>(</span><span class='va'>fn</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>, 
+  verbose<span class='op'>=</span><span class='cn'>FALSE</span>, repair<span class='op'>=</span><span class='cn'>FALSE</span>, IDvar<span class='op'>=</span><span class='cn'>NULL</span>, force_ring<span class='op'>=</span><span class='cn'>FALSE</span>, 
+  delete_null_obj<span class='op'>=</span><span class='cn'>FALSE</span>, retrieve_ABS_null<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'>writeSpatialShape</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fn</span>, factor2char <span class='op'>=</span> <span class='cn'>TRUE</span>, max_nchar<span class='op'>=</span><span class='fl'>254</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,14 +179,19 @@ null geometries inserted by ABS (Polygons only)</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a Spatial*DataFrame object of a class corresponding to the input shapefile</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/foreign/man/write.dbf.html'>write.dbf</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>maptools</span>)
-<span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'>readShapeSpatial</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/sids.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>],
- <span class='kw'>IDvar</span><span class='kw'>=</span><span class='st'>"FIPSNO"</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=longlat +ellps=clrk66"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoly is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Discarded datum Unknown based on Clarke 1866 ellipsoid in CRS definition</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xx</span>)</div><div class='output co'>#&gt; Object of class SpatialPolygonsDataFrame
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://maptools.r-forge.r-project.org/'>maptools</a></span><span class='op'>)</span>
+<span class='va'>xx</span> <span class='op'>&lt;-</span> <span class='fu'>readShapeSpatial</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/sids.shp"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+ IDvar<span class='op'>=</span><span class='st'>"FIPSNO"</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=longlat +ellps=clrk66"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoly is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xx</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialPolygonsDataFrame
 #&gt; Coordinates:
 #&gt;         min       max
 #&gt; x -84.32385 -75.45698
@@ -214,11 +222,15 @@ null geometries inserted by ABS (Polygons only)</p></td>
 #&gt;  Mean   :1050.8   Mean   : 4224   Mean   : 8.36   Mean   : 1352.8  
 #&gt;  3rd Qu.:1168.5   3rd Qu.: 4889   3rd Qu.:10.25   3rd Qu.: 1406.8  
 #&gt;  Max.   :8027.0   Max.   :30757   Max.   :57.00   Max.   :11631.0  
-#&gt;                                                                    </div><div class='input'><span class='no'>xxx</span> <span class='kw'>&lt;-</span> <span class='no'>xx</span>[<span class='no'>xx</span>$<span class='no'>SID74</span> <span class='kw'>&lt;</span> <span class='fl'>2</span>,]
-<span class='no'>tmpfl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"xxpoly"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>)
-<span class='fu'>writeSpatialShape</span>(<span class='no'>xxx</span>, <span class='no'>tmpfl</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='output co'>#&gt; <span class='warning'>Warning: writePolyShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='input'><span class='fu'><a href='getinfo.shape.html'>getinfo.shape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>tmpfl</span>, <span class='st'>".shp"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div><div class='output co'>#&gt; Shapefile type: Polygon, (5), # of Shapes: 24</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>tmpfl</span>, <span class='st'>".*"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'>readShapeSpatial</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/fylk-val.shp"</span>,
- <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>], <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='st'>"+proj=utm +zone=33 +datum=WGS84"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeLines is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xx</span>)</div><div class='output co'>#&gt; Object of class SpatialLinesDataFrame
+#&gt;                                                                    </div><div class='input'><span class='va'>xxx</span> <span class='op'>&lt;-</span> <span class='va'>xx</span><span class='op'>[</span><span class='va'>xx</span><span class='op'>$</span><span class='va'>SID74</span> <span class='op'>&lt;</span> <span class='fl'>2</span>,<span class='op'>]</span>
+<span class='va'>tmpfl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"xxpoly"</span>, sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span>
+<span class='fu'>writeSpatialShape</span><span class='op'>(</span><span class='va'>xxx</span>, <span class='va'>tmpfl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='output co'>#&gt; <span class='warning'>Warning: writePolyShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='input'><span class='fu'><a href='getinfo.shape.html'>getinfo.shape</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>tmpfl</span>, <span class='st'>".shp"</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Shapefile type: Polygon, (5), # of Shapes: 24</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>tmpfl</span>, <span class='st'>".*"</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>xx</span> <span class='op'>&lt;-</span> <span class='fu'>readShapeSpatial</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/fylk-val.shp"</span>,
+ package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='st'>"+proj=utm +zone=33 +datum=WGS84"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeLines is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xx</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialLinesDataFrame
 #&gt; Coordinates:
 #&gt;           min     max
 #&gt; x   -4867.832 1084722
@@ -247,10 +259,15 @@ null geometries inserted by ABS (Polygons only)</p></td>
 #&gt;  Median :19970630  
 #&gt;  Mean   :19970630  
 #&gt;  3rd Qu.:19970630  
-#&gt;  Max.   :19970630  </div><div class='input'><span class='no'>xxx</span> <span class='kw'>&lt;-</span> <span class='no'>xx</span>[<span class='no'>xx</span>$<span class='no'>LENGTH</span> <span class='kw'>&gt;</span> <span class='fl'>30000</span>,]
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>xxx</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet</span></div><div class='input'><span class='no'>tmpfl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"xxline"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>)
-<span class='fu'>writeSpatialShape</span>(<span class='no'>xxx</span>, <span class='no'>tmpfl</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='output co'>#&gt; <span class='warning'>Warning: writeLinesShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='input'><span class='fu'><a href='getinfo.shape.html'>getinfo.shape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>tmpfl</span>, <span class='st'>".shp"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div><div class='output co'>#&gt; Shapefile type: PolyLine, (3), # of Shapes: 51</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>tmpfl</span>, <span class='st'>".*"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='no'>xx</span> <span class='kw'>&lt;-</span> <span class='fu'>readShapeSpatial</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/baltim.shp"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>])</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoints is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xx</span>)</div><div class='output co'>#&gt; Object of class SpatialPointsDataFrame
+#&gt;  Max.   :19970630  </div><div class='input'><span class='va'>xxx</span> <span class='op'>&lt;-</span> <span class='va'>xx</span><span class='op'>[</span><span class='va'>xx</span><span class='op'>$</span><span class='va'>LENGTH</span> <span class='op'>&gt;</span> <span class='fl'>30000</span>,<span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>xxx</span>, col<span class='op'>=</span><span class='st'>"red"</span>, add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet</span></div><div class='input'><span class='va'>tmpfl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"xxline"</span>, sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span>
+<span class='fu'>writeSpatialShape</span><span class='op'>(</span><span class='va'>xxx</span>, <span class='va'>tmpfl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='output co'>#&gt; <span class='warning'>Warning: writeLinesShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='input'><span class='fu'><a href='getinfo.shape.html'>getinfo.shape</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>tmpfl</span>, <span class='st'>".shp"</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Shapefile type: PolyLine, (3), # of Shapes: 51</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>tmpfl</span>, <span class='st'>".*"</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>xx</span> <span class='op'>&lt;-</span> <span class='fu'>readShapeSpatial</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/baltim.shp"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='output co'>#&gt; <span class='warning'>Warning: readShapePoints is deprecated; use rgdal::readOGR or sf::st_read</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xx</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialPointsDataFrame
 #&gt; Coordinates:
 #&gt;             min   max
 #&gt; coords.x1 860.0 987.5
@@ -293,9 +310,12 @@ null geometries inserted by ABS (Polygons only)</p></td>
 #&gt;  Median :544.5  
 #&gt;  Mean   :544.2  
 #&gt;  3rd Qu.:559.0  
-#&gt;  Max.   :581.0  </div><div class='input'><span class='no'>xxx</span> <span class='kw'>&lt;-</span> <span class='no'>xx</span>[<span class='no'>xx</span>$<span class='no'>PRICE</span> <span class='kw'>&lt;</span> <span class='fl'>40</span>,]
-<span class='no'>tmpfl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"xxpts"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>)
-<span class='fu'>writeSpatialShape</span>(<span class='no'>xxx</span>, <span class='no'>tmpfl</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='output co'>#&gt; <span class='warning'>Warning: writePointsShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='input'><span class='fu'><a href='getinfo.shape.html'>getinfo.shape</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>tmpfl</span>, <span class='st'>".shp"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div><div class='output co'>#&gt; Shapefile type: Point, (1), # of Shapes: 103</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>tmpfl</span>, <span class='st'>".*"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div></pre>
+#&gt;  Max.   :581.0  </div><div class='input'><span class='va'>xxx</span> <span class='op'>&lt;-</span> <span class='va'>xx</span><span class='op'>[</span><span class='va'>xx</span><span class='op'>$</span><span class='va'>PRICE</span> <span class='op'>&lt;</span> <span class='fl'>40</span>,<span class='op'>]</span>
+<span class='va'>tmpfl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"xxpts"</span>, sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span>
+<span class='fu'>writeSpatialShape</span><span class='op'>(</span><span class='va'>xxx</span>, <span class='va'>tmpfl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='output co'>#&gt; <span class='warning'>Warning: writePointsShape is deprecated; use rgdal::writeOGR or sf::st_write</span></div><div class='input'><span class='fu'><a href='getinfo.shape.html'>getinfo.shape</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>tmpfl</span>, <span class='st'>".shp"</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Shapefile type: Point, (1), # of Shapes: 103</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>tmpfl</span>, <span class='st'>".*"</span>, sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -311,7 +331,7 @@ null geometries inserted by ABS (Polygons only)</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

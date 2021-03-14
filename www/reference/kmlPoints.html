@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,9 +115,9 @@
     <p>The function is used to create and write a KML file on the basis of a given SpatialPointsDataFrame object for the usage in Google Earth resp. Google Maps.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kmlPoints</span>(<span class='kw'>obj</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kmlfile</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>""</span>,
-    <span class='kw'>name</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>description</span><span class='kw'>=</span><span class='st'>""</span>,
-    <span class='kw'>icon</span><span class='kw'>=</span><span class='st'>"http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png"</span>)</pre>
+    <pre class="usage"><span class='fu'>kmlPoints</span><span class='op'>(</span>obj<span class='op'>=</span><span class='cn'>NULL</span>, kmlfile<span class='op'>=</span><span class='cn'>NULL</span>, kmlname<span class='op'>=</span><span class='st'>""</span>, kmldescription<span class='op'>=</span><span class='st'>""</span>,
+    name<span class='op'>=</span><span class='cn'>NULL</span>, description<span class='op'>=</span><span class='st'>""</span>,
+    icon<span class='op'>=</span><span class='st'>"http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,25 +167,29 @@
 
     <p>The default icon URL is <a href='http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png'>http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png</a>. Additional icons are available at:
 <a href='http://sites.google.com/site/gmapsdevelopment'>http://sites.google.com/site/gmapsdevelopment</a>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Jonathan Callahan</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='kmlLine.html'>kmlLine</a></code>, <code><a href='kmlOverlay.html'>kmlOverlay</a></code>, <code><a href='kmlPolygon.html'>kmlPolygon</a></code>, <code><a href='https://rdrr.io/pkg/sp/man/Line.html'>Line</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>SplashDams</span>)
-<span class='no'>num</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>SplashDams</span>)
-<span class='no'>td</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='no'>kmlfile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>td</span>, <span class='st'>"OregonSplashDams.kml"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>)
-<span class='no'>kmlname</span> <span class='kw'>&lt;-</span> <span class='st'>"Oregon Splash Dams"</span>
-<span class='no'>kmldescription</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Data for Splash Dams in western Oregon."</span>,
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>SplashDams</span><span class='op'>)</span>
+<span class='va'>num</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>SplashDams</span><span class='op'>)</span>
+<span class='va'>td</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>kmlfile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>td</span>, <span class='st'>"OregonSplashDams.kml"</span>, sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span>
+<span class='va'>kmlname</span> <span class='op'>&lt;-</span> <span class='st'>"Oregon Splash Dams"</span>
+<span class='va'>kmldescription</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Data for Splash Dams in western Oregon."</span>,
  <span class='st'>"See http://www.fs.fed.us/pnw/lwm/aem/people/burnett.html#projects_activities"</span>,
- <span class='st'>"for more information."</span>)
-<span class='no'>icon</span> <span class='kw'>&lt;-</span> <span class='st'>"http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png"</span>
-<span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Dam on"</span>,<span class='no'>SplashDams</span>$<span class='no'>streamName</span>)
-<span class='no'>description</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"&lt;b&gt;owner:&lt;/b&gt;"</span>, <span class='no'>SplashDams</span>$<span class='no'>owner</span>, <span class='st'>"&lt;br&gt;&lt;b&gt;dates:&lt;/b&gt;"</span>, <span class='no'>SplashDams</span>$<span class='no'>datesUsed</span>)
+ <span class='st'>"for more information."</span><span class='op'>)</span>
+<span class='va'>icon</span> <span class='op'>&lt;-</span> <span class='st'>"http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png"</span>
+<span class='va'>name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Dam on"</span>,<span class='va'>SplashDams</span><span class='op'>$</span><span class='va'>streamName</span><span class='op'>)</span>
+<span class='va'>description</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"&lt;b&gt;owner:&lt;/b&gt;"</span>, <span class='va'>SplashDams</span><span class='op'>$</span><span class='va'>owner</span>, <span class='st'>"&lt;br&gt;&lt;b&gt;dates:&lt;/b&gt;"</span>, <span class='va'>SplashDams</span><span class='op'>$</span><span class='va'>datesUsed</span><span class='op'>)</span>
 
-<span class='fu'>kmlPoints</span>(<span class='no'>SplashDams</span>, <span class='kw'>kmlfile</span><span class='kw'>=</span><span class='no'>kmlfile</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='no'>name</span>, <span class='kw'>description</span><span class='kw'>=</span><span class='no'>description</span>,
-          <span class='kw'>icon</span><span class='kw'>=</span><span class='no'>icon</span>, <span class='kw'>kmlname</span><span class='kw'>=</span><span class='no'>kmlname</span>, <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='no'>kmldescription</span>)</div></pre>
+<span class='fu'>kmlPoints</span><span class='op'>(</span><span class='va'>SplashDams</span>, kmlfile<span class='op'>=</span><span class='va'>kmlfile</span>, name<span class='op'>=</span><span class='va'>name</span>, description<span class='op'>=</span><span class='va'>description</span>,
+          icon<span class='op'>=</span><span class='va'>icon</span>, kmlname<span class='op'>=</span><span class='va'>kmlname</span>, kmldescription<span class='op'>=</span><span class='va'>kmldescription</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -198,7 +205,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

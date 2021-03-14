@@ -73,7 +73,7 @@ to sps SpatialPolygons class. S4-style as() coercion works as well." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -81,12 +81,15 @@ to sps SpatialPolygons class. S4-style as() coercion works as well." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -114,7 +117,7 @@ to sps SpatialPolygons class. S4-style as() coercion works as well." />
 to <span class="pkg">sp</span>s <code>SpatialPolygons</code> class. S4-style as() coercion works as well.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.SpatialPolygons.tess</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>as.SpatialPolygons.tess</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,28 +130,25 @@ to <span class="pkg">sp</span>s <code>SpatialPolygons</code> class. S4-style as(
 
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <p></p><dl'>
+    <p></p><dl>
 <dt>coerce</dt><dd><p><code>signature(from = "tess", to = "SpatialPolygons")</code></p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Edzer Pebesma <a href='mailto:edzer.pebesma@uni-muenster.de'>edzer.pebesma@uni-muenster.de</a>, Roger Bivand</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>spatstat</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'spatstat':</span>
-#&gt; <span class='message'>  method     from</span>
-#&gt; <span class='message'>  print.boxx cli </span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>spatstat 1.64-1       (nickname: ‘Help you I can, yes!’) </span>
-#&gt; <span class='message'>For an introduction to spatstat, type ‘beginner’ </span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Note: spatstat version 1.64-1 is out of date by more than 13 weeks; a newer version should be available.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘spatstat’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:lattice’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    panel.histogram</span></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/spatstat/man/tess.html'>tess</a></span>(<span class='kw'>xgrid</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>4</span>,<span class='kw'>ygrid</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>4</span>)
-<span class='no'>A_sp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>A</span>, <span class='st'>"SpatialPolygons"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>A_sp</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fu'>coordinates</span>(<span class='no'>A_sp</span>), <span class='kw'>labels</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span>(<span class='no'>A_sp</span>), <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.6</span>)
-}</div><div class='img'><img src='as.SpatialPolygons.tess-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='http://spatstat.org/'>"spatstat.geom"</a></span>, quietly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+</div><div class='output co'>#&gt; <span class='message'>spatstat.geom 1.65-8</span></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/spatstat.geom/man/tess.html'>tess</a></span><span class='op'>(</span>xgrid<span class='op'>=</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>4</span>,ygrid<span class='op'>=</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>A_sp</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>A</span>, <span class='st'>"SpatialPolygons"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>A_sp</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='fu'>coordinates</span><span class='op'>(</span><span class='va'>A_sp</span><span class='op'>)</span>, labels<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>A_sp</span><span class='op'>)</span>, cex<span class='op'>=</span><span class='fl'>0.6</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='as.SpatialPolygons.tess-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -164,7 +164,7 @@ to <span class="pkg">sp</span>s <code>SpatialPolygons</code> class. S4-style as(
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

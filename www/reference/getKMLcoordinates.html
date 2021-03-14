@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,7 +115,7 @@
     <p>This function parses a KML file to get the content of <code>&lt;coordinates&gt;</code> tags and returns a list of matrices representing the longitude-latitute or if <code>ignoreAltitude</code> is <code>FALSE</code> the longitude-latitute-altitude coordinates of a KML geometry.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getKMLcoordinates</span>(<span class='no'>kmlfile</span>, <span class='kw'>ignoreAltitude</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>getKMLcoordinates</span><span class='op'>(</span><span class='va'>kmlfile</span>, ignoreAltitude<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,25 +133,30 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>coords</code> is a list of matrices representing the longitude-latitute or if <code>ignoreAltitude</code> is <code>FALSE</code> the longitude-latitute-altitude coordinates</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hans-J. Bibiko</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='kmlPolygon.html'>kmlPolygon</a></code>, <code><a href='kmlLine.html'>kmlLine</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>wrld_simpl</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>wrld_simpl</span><span class='op'>)</span>
 <span class='co'>## creates a KML file containing the polygons of South Africa (plus hole)</span>
-<span class='no'>sw</span> <span class='kw'>&lt;-</span> <span class='fu'>slot</span>(<span class='no'>wrld_simpl</span>[<span class='no'>wrld_simpl</span>$<span class='no'>NAME</span><span class='kw'>==</span><span class='st'>"South Africa"</span>,], <span class='st'>"polygons"</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
-<span class='no'>tf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
-<span class='fu'><a href='kmlPolygon.html'>kmlPolygon</a></span>(<span class='no'>sw</span>, <span class='kw'>kmlfile</span><span class='kw'>=</span><span class='no'>tf</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"South Africa"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"#df0000aa"</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>5</span>,
-    <span class='kw'>border</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>kmlname</span><span class='kw'>=</span><span class='st'>"R Test"</span>,
-    <span class='kw'>kmldescription</span><span class='kw'>=</span><span class='st'>"This is &lt;b&gt;only&lt;/b&gt; a &lt;a href='http://www.r-project.org'&gt;R&lt;/a&gt; test."</span>)
-<span class='no'>zz</span> <span class='kw'>&lt;-</span> <span class='fu'>getKMLcoordinates</span>(<span class='no'>tf</span>, <span class='kw'>ignoreAltitude</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; List of 4
+<span class='va'>sw</span> <span class='op'>&lt;-</span> <span class='fu'>slot</span><span class='op'>(</span><span class='va'>wrld_simpl</span><span class='op'>[</span><span class='va'>wrld_simpl</span><span class='op'>$</span><span class='va'>NAME</span><span class='op'>==</span><span class='st'>"South Africa"</span>,<span class='op'>]</span>, <span class='st'>"polygons"</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='kmlPolygon.html'>kmlPolygon</a></span><span class='op'>(</span><span class='va'>sw</span>, kmlfile<span class='op'>=</span><span class='va'>tf</span>, name<span class='op'>=</span><span class='st'>"South Africa"</span>, col<span class='op'>=</span><span class='st'>"#df0000aa"</span>, lwd<span class='op'>=</span><span class='fl'>5</span>, 
+    border<span class='op'>=</span><span class='fl'>4</span>, kmlname<span class='op'>=</span><span class='st'>"R Test"</span>, 
+    kmldescription<span class='op'>=</span><span class='st'>"This is &lt;b&gt;only&lt;/b&gt; a &lt;a href='http://www.r-project.org'&gt;R&lt;/a&gt; test."</span><span class='op'>)</span>
+<span class='va'>zz</span> <span class='op'>&lt;-</span> <span class='fu'>getKMLcoordinates</span><span class='op'>(</span><span class='va'>tf</span>, ignoreAltitude<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>zz</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 4
 #&gt;  $ : num [1:47, 1:2] 29.9 31.3 32 32 31.3 ...
 #&gt;  $ : num [1:8, 1:2] 28.6 27 27.6 28.1 28.4 ...
 #&gt;  $ : num [1:4, 1:2] 37.9 37.6 37.8 37.9 -47 ...
-#&gt;  $ : num [1:4, 1:2] 38 37.9 37.9 38 -46.7 ...</div><div class='input'><span class='no'>zz</span> <span class='kw'>&lt;-</span> <span class='fu'>getKMLcoordinates</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shapes/Testing.kml"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>))
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>zz</span>)</div><div class='output co'>#&gt; List of 1
+#&gt;  $ : num [1:4, 1:2] 38 37.9 37.9 38 -46.7 ...</div><div class='input'><span class='va'>zz</span> <span class='op'>&lt;-</span> <span class='fu'>getKMLcoordinates</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"shapes/Testing.kml"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>zz</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 1
 #&gt;  $ : num [1:3, 1:3] -71 -71.5 -71.1 42.3 42.7 ...</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -165,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

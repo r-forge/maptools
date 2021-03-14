@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,10 +115,10 @@
     <p>read/write to/from ESRI asciigrid format; a fuzz factor has been added to <code>writeAsciiGrid</code> to force cell resolution to equality if the difference is less than the square root of machine precision</p>
     </div>
 
-    <pre class="usage"><span class='fu'>readAsciiGrid</span>(<span class='no'>fname</span>, <span class='kw'>as.image</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>plot.image</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
- <span class='kw'>colname</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>fname</span>), <span class='kw'>proj4string</span> <span class='kw'>=</span> <span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)),
- <span class='kw'>dec</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>OutDec</span>)
-<span class='fu'>writeAsciiGrid</span>(<span class='no'>x</span>, <span class='no'>fname</span>, <span class='kw'>attr</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>na.value</span> <span class='kw'>=</span> -<span class='fl'>9999</span>, <span class='kw'>dec</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>OutDec</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>readAsciiGrid</span><span class='op'>(</span><span class='va'>fname</span>, as.image <span class='op'>=</span> <span class='cn'>FALSE</span>, plot.image <span class='op'>=</span> <span class='cn'>FALSE</span>, 
+ colname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='va'>fname</span><span class='op'>)</span>, proj4string <span class='op'>=</span> <span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>, 
+ dec<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>OutDec</span><span class='op'>)</span>
+<span class='fu'>writeAsciiGrid</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>fname</span>, attr <span class='op'>=</span> <span class='fl'>1</span>, na.value <span class='op'>=</span> <span class='op'>-</span><span class='fl'>9999</span>, dec<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>OutDec</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,10 +181,14 @@ to write the numeric data</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>image</code>, <code><a href='https://rdrr.io/r/graphics/image.html'>image</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Edzer Pebesma, edzer.pebesma@uni-muenster.de</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>readAsciiGrid</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"grids/test.ag"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"maptools"</span>)[<span class='fl'>1</span>])
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>readAsciiGrid</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"grids/test.ag"</span>, package<span class='op'>=</span><span class='st'>"maptools"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
 #&gt; Coordinates:
 #&gt;         min    max
 #&gt; [1,] 178400 181600
@@ -200,9 +207,12 @@ to write the numeric data</p></td>
 #&gt;  Mean   : 423.2  
 #&gt;  3rd Qu.: 499.8  
 #&gt;  Max.   :1805.8  
-#&gt;  NA's   :6097    </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>x</span>)</div><div class='input'><span class='no'>xp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>x</span>, <span class='st'>"SpatialPixelsDataFrame"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span>(<span class='kw'>h</span><span class='kw'>=</span><span class='fl'>332000</span>, <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='img'><img src='asciigrid-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>xpS</span> <span class='kw'>&lt;-</span> <span class='no'>xp</span>[<span class='fu'>coordinates</span>(<span class='no'>xp</span>)[,<span class='fl'>2</span>] <span class='kw'>&lt;</span> <span class='fl'>332000</span>,]
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xpS</span>)</div><div class='output co'>#&gt; Object of class SpatialPixelsDataFrame
+#&gt;  NA's   :6097    </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/raster/man/image.html'>image</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='input'><span class='va'>xp</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>x</span>, <span class='st'>"SpatialPixelsDataFrame"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/abline.html'>abline</a></span><span class='op'>(</span>h<span class='op'>=</span><span class='fl'>332000</span>, lwd<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+</div><div class='img'><img src='asciigrid-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>xpS</span> <span class='op'>&lt;-</span> <span class='va'>xp</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/xyFromCell.html'>coordinates</a></span><span class='op'>(</span><span class='va'>xp</span><span class='op'>)</span><span class='op'>[</span>,<span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;</span> <span class='fl'>332000</span>,<span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xpS</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialPixelsDataFrame
 #&gt; Coordinates:
 #&gt;       min    max
 #&gt; s1 178440 180960
@@ -221,8 +231,9 @@ to write the numeric data</p></td>
 #&gt;  Median : 363.7  
 #&gt;  Mean   : 399.5  
 #&gt;  3rd Qu.: 476.3  
-#&gt;  Max.   :1621.8  </div><div class='input'><span class='no'>xS</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>xpS</span>, <span class='st'>"SpatialGridDataFrame"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>xS</span>)</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
+#&gt;  Max.   :1621.8  </div><div class='input'><span class='va'>xS</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>xpS</span>, <span class='st'>"SpatialGridDataFrame"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>xS</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
 #&gt; Coordinates:
 #&gt;         min    max
 #&gt; [1,] 178400 181600
@@ -241,13 +252,15 @@ to write the numeric data</p></td>
 #&gt;  Mean   : 399.5  
 #&gt;  3rd Qu.: 476.3  
 #&gt;  Max.   :1621.8  
-#&gt;  NA's   :6984    </div><div class='input'><span class='no'>tmpfl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"testS.ag"</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>"/"</span>)
-<span class='fu'>writeAsciiGrid</span>(<span class='no'>xS</span>, <span class='no'>tmpfl</span>)
-<span class='no'>axS</span> <span class='kw'>&lt;-</span> <span class='fu'>readAsciiGrid</span>(<span class='no'>tmpfl</span>)
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>xS</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"before export"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>axS</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"after import"</span>)</div><div class='img'><img src='asciigrid-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>tmpfl</span>)</div></pre>
+#&gt;  NA's   :6984    </div><div class='input'><span class='va'>tmpfl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"testS.ag"</span>, sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span>
+<span class='fu'>writeAsciiGrid</span><span class='op'>(</span><span class='va'>xS</span>, <span class='va'>tmpfl</span><span class='op'>)</span>
+<span class='va'>axS</span> <span class='op'>&lt;-</span> <span class='fu'>readAsciiGrid</span><span class='op'>(</span><span class='va'>tmpfl</span><span class='op'>)</span>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/image.html'>image</a></span><span class='op'>(</span><span class='va'>xS</span>, main<span class='op'>=</span><span class='st'>"before export"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/image.html'>image</a></span><span class='op'>(</span><span class='va'>axS</span>, main<span class='op'>=</span><span class='st'>"after import"</span><span class='op'>)</span>
+</div><div class='img'><img src='asciigrid-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>tmpfl</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -263,7 +276,7 @@ to write the numeric data</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

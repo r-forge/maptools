@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -81,12 +81,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -114,12 +117,12 @@
   without overlaps.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pointLabel</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='kw'>along</span> <span class='kw'>=</span> <span class='no'>x</span>), <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-           <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"SANN"</span>, <span class='st'>"GA"</span>),
-           <span class='kw'>allowSmallOverlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-           <span class='kw'>trace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-           <span class='kw'>doPlot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-           <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>pointLabel</span><span class='op'>(</span><span class='va'>x</span>, y <span class='op'>=</span> <span class='cn'>NULL</span>, labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>along <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>, cex <span class='op'>=</span> <span class='fl'>1</span>,
+           method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SANN"</span>, <span class='st'>"GA"</span><span class='op'>)</span>,
+           allowSmallOverlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
+           trace <span class='op'>=</span> <span class='cn'>FALSE</span>,
+           doPlot <span class='op'>=</span> <span class='cn'>TRUE</span>,
+           <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,7 +197,7 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code>xy</code> list giving the <code>x</code> and <code>y</code> positions of the
-  label as would be placed by <code><a href='https://rdrr.io/r/graphics/text.html'>text(xy, labels)</a></code>.</p>
+  label as would be placed by <code><a href='https://rdrr.io/pkg/raster/man/text.html'>text(xy, labels)</a></code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -210,17 +213,24 @@
 maps and diagrams. In Paul Heckbert, editor, Graphics Gems IV, pages
 497-504. Academic Press, Boston, MA, 1994.
 <a href='http://www.eecs.harvard.edu/~shieber/Biblio/Papers/jc.label.pdf'>http://www.eecs.harvard.edu/~shieber/Biblio/Papers/jc.label.pdf</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Tom Short, EPRI, <a href='mailto:tshort@epri.com'>tshort@epri.com</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/graphics/text.html'>text</a></code>, <code><a href='https://rdrr.io/pkg/plotrix/man/thigmophobe.labels.html'>thigmophobe.labels</a></code>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/raster/man/text.html'>text</a></code>, <code><a href='https://rdrr.io/pkg/plotrix/man/thigmophobe.labels.html'>thigmophobe.labels</a></code>
   in package <span class="pkg">plotrix</span></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>50</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>)*<span class='fl'>10</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>)*<span class='fl'>10</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='input'><span class='fu'>pointLabel</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>x</span>,<span class='fl'>5</span>)), <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>.7</span>)</div><div class='img'><img src='pointLabelBase-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='input'><span class='fu'>pointLabel</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/plotmath.html'>over</a></span>(<span class='no'>alpha</span>, <span class='no'>beta</span>[<span class='fl'>123</span>])), <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>.8</span>)</div><div class='img'><img src='pointLabelBase-2.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fl'>50</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, pch <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'>pointLabel</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>x</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>, offset <span class='op'>=</span> <span class='fl'>0</span>, cex <span class='op'>=</span> <span class='fl'>.7</span><span class='op'>)</span>
+</div><div class='img'><img src='pointLabelBase-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, pch <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'>pointLabel</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/plotmath.html'>over</a></span><span class='op'>(</span><span class='va'>alpha</span>, <span class='va'>beta</span><span class='op'>[</span><span class='fl'>123</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>, offset <span class='op'>=</span> <span class='fl'>0</span>, cex <span class='op'>=</span> <span class='fl'>.8</span><span class='op'>)</span>
+</div><div class='img'><img src='pointLabelBase-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -237,7 +247,7 @@ maps and diagrams. In Paul Heckbert, editor, Graphics Gems IV, pages
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

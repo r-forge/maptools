@@ -75,7 +75,7 @@ S4-style as() coercion can be used as well." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -83,12 +83,15 @@ S4-style as() coercion can be used as well." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -118,11 +121,11 @@ well as one-way conversion from <code>SpatialGridDataFrame</code> to <code>ppp</
 S4-style <code>as()</code> coercion can be used as well.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.ppp.SpatialPoints</span>(<span class='no'>X</span>)
-<span class='fu'>as.ppp.SpatialPointsDataFrame</span>(<span class='no'>X</span>)
-<span class='fu'>as.SpatialPoints.ppp</span>(<span class='no'>from</span>)
-<span class='fu'>as.SpatialPointsDataFrame.ppp</span>(<span class='no'>from</span>)
-<span class='fu'>as.SpatialGridDataFrame.ppp</span>(<span class='no'>from</span>)</pre>
+    <pre class="usage"><span class='fu'>as.ppp.SpatialPoints</span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='fu'>as.ppp.SpatialPointsDataFrame</span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='fu'>as.SpatialPoints.ppp</span><span class='op'>(</span><span class='va'>from</span><span class='op'>)</span>
+<span class='fu'>as.SpatialPointsDataFrame.ppp</span><span class='op'>(</span><span class='va'>from</span><span class='op'>)</span>
+<span class='fu'>as.SpatialGridDataFrame.ppp</span><span class='op'>(</span><span class='va'>from</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,7 +138,7 @@ S4-style <code>as()</code> coercion can be used as well.</p>
 
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <p></p><dl'>
+    <p></p><dl>
 <dt>coerce</dt><dd><p><code>signature(from = "SpatialPoints", to = "ppp")</code></p></dd>
 <dt>coerce</dt><dd><p><code>signature(from = "SpatialPointsDataFrame", to = "ppp")</code></p></dd>
 <dt>coerce</dt><dd><p><code>signature(from = "ppp", to = "SpatialGridDataFrame")</code></p></dd>
@@ -156,7 +159,7 @@ rarely be used; using <code><a href='as.owin.html'>as.owin.SpatialGridDataFrame<
 region. The <span class="pkg">sp</span> formats contain no such information and by default the
 bounding box of the points is simply used. This is almost never the correct
 thing to do! Rather, information about the sampling region should be converted
-into <span class="pkg">spatstat</span>s <code><a href='https://rdrr.io/pkg/spatstat/man/owin.html'>owin</a></code> format and assigned as the
+into <span class="pkg">spatstat</span>s <code><a href='https://rdrr.io/pkg/spatstat.geom/man/owin.html'>owin</a></code> format and assigned as the
 observation window. Usually conversion from <code>ppp</code> to <span class="pkg">sp</span> format simply
 discards the <code>owin</code>. However, <code>as.SpatialGridDataFrame.ppp</code> actually
 first discards the points(!), second checks that the corresponding <code>owin</code>
@@ -174,46 +177,55 @@ and finally converts the TRUE/FALSE grid to a <code>SpatialGridDataFrame</code>.
   <span class="pkg">sp</span> object with <code>NA</code>, <code>proj4string(x) &lt;- CRS(NA)</code>, which
   will fool the system to think that the data is in local planar coordinates.
   This is probably not a good idea!</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Edzer Pebesma <a href='mailto:edzer.pebesma@uni-muenster.de'>edzer.pebesma@uni-muenster.de</a>, Roger Bivand</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>spatstat</span>, <span class='kw'>quietly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)) <span class='no'>run</span> <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='kw'>if</span> (<span class='no'>run</span>) {
+    <pre class="examples"><div class='input'><span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='http://spatstat.org/'>"spatstat.geom"</a></span>, quietly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='va'>run</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Convert SpatialPointsDataFrame into a marked ppp</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse</span>)
-<span class='fu'>coordinates</span>(<span class='no'>meuse</span>) <span class='kw'>=</span> ~<span class='no'>x</span>+<span class='no'>y</span>
-<span class='no'>meuse_ppp</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse</span>, <span class='st'>"ppp"</span>)
-<span class='no'>meuse_ppp</span> <span class='co'># Window is the bounding rectangle</span>
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: some mark values are NA in the point pattern x</span></div><div class='output co'>#&gt; Marked planar point pattern: 155 points
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/xyFromCell.html'>coordinates</a></span><span class='op'>(</span><span class='va'>meuse</span><span class='op'>)</span> <span class='op'>=</span> <span class='op'>~</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span>
+<span class='va'>meuse_ppp</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>meuse</span>, <span class='st'>"ppp"</span><span class='op'>)</span>
+<span class='va'>meuse_ppp</span> <span class='co'># Window is the bounding rectangle</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: some mark values are NA in the point pattern x</span></div><div class='output co'>#&gt; Marked planar point pattern: 155 points
 #&gt; Mark variables: 
 #&gt;    cadmium copper lead zinc elev dist om ffreq soil lime landuse dist.m
-#&gt; window: rectangle = [178605, 181390] x [329714, 333611] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>meuse_ppp</span>, <span class='kw'>which.marks</span> <span class='kw'>=</span> <span class='st'>"zinc"</span>)
-}</div><div class='img'><img src='as.ppp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+#&gt; window: rectangle = [178605, 181390] x [329714, 333611] units</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>meuse_ppp</span>, which.marks <span class='op'>=</span> <span class='st'>"zinc"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='as.ppp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Convert SpatialPoints into an unmarked ppp</span>
-<span class='no'>meuse2</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse</span>, <span class='st'>"SpatialPoints"</span>)
-<span class='fu'>as</span>(<span class='no'>meuse2</span>, <span class='st'>"ppp"</span>)
-}</div><div class='output co'>#&gt; Planar point pattern: 155 points
-#&gt; window: rectangle = [178605, 181390] x [329714, 333611] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+<span class='va'>meuse2</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>meuse</span>, <span class='st'>"SpatialPoints"</span><span class='op'>)</span>
+<span class='fu'>as</span><span class='op'>(</span><span class='va'>meuse2</span>, <span class='st'>"ppp"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Planar point pattern: 155 points
+#&gt; window: rectangle = [178605, 181390] x [329714, 333611] units</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Get sampling region in grid format and assign it as observation window</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>meuse.grid</span>)
-<span class='fu'>gridded</span>(<span class='no'>meuse.grid</span>) <span class='kw'>&lt;-</span> ~<span class='no'>x</span>+<span class='no'>y</span>
-<span class='no'>mg_owin</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>meuse.grid</span>, <span class='st'>"owin"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/spatstat/man/Window.html'>Window</a></span>(<span class='no'>meuse_ppp</span>) <span class='kw'>&lt;-</span> <span class='no'>mg_owin</span>
-<span class='no'>meuse_ppp</span> <span class='co'># Window is now a binary image mask (TRUE/FALSE grid)</span>
-}</div><div class='output co'>#&gt; <span class='warning'>Warning: as.matrix.SpatialGridDataFrame uses first column;</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span>
+<span class='fu'>gridded</span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='op'>~</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span>
+<span class='va'>mg_owin</span> <span class='op'>&lt;-</span> <span class='fu'>as</span><span class='op'>(</span><span class='va'>meuse.grid</span>, <span class='st'>"owin"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/spatstat.geom/man/Window.html'>Window</a></span><span class='op'>(</span><span class='va'>meuse_ppp</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>mg_owin</span>
+<span class='va'>meuse_ppp</span> <span class='co'># Window is now a binary image mask (TRUE/FALSE grid)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: as.matrix.SpatialGridDataFrame uses first column;</span>
 #&gt; <span class='warning'> use subset or [] for other columns</span></div><div class='output co'>#&gt; <span class='warning'>Warning: some mark values are NA in the point pattern x</span></div><div class='output co'>#&gt; Marked planar point pattern: 155 points
 #&gt; Mark variables: 
 #&gt;    cadmium copper lead zinc elev dist om ffreq soil lime landuse dist.m
 #&gt; window: binary image mask
 #&gt; 104 x 78 pixel array (ny, nx)
-#&gt; enclosing rectangle: [178440, 181560] x [329600, 333760] units</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>meuse_ppp</span>, <span class='kw'>which.marks</span> <span class='kw'>=</span> <span class='st'>"zinc"</span>)
-}</div><div class='img'><img src='as.ppp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+#&gt; enclosing rectangle: [178440, 181560] x [329600, 333760] units</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>meuse_ppp</span>, which.marks <span class='op'>=</span> <span class='st'>"zinc"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='as.ppp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Convert marked ppp back to SpatialPointsDataFrame</span>
-<span class='no'>rev_ppp_SPDF</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialPointsDataFrame.ppp</span>(<span class='no'>meuse_ppp</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>rev_ppp_SPDF</span>)
-}</div><div class='output co'>#&gt; Object of class SpatialPointsDataFrame
+<span class='va'>rev_ppp_SPDF</span> <span class='op'>&lt;-</span> <span class='fu'>as.SpatialPointsDataFrame.ppp</span><span class='op'>(</span><span class='va'>meuse_ppp</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>rev_ppp_SPDF</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Object of class SpatialPointsDataFrame
 #&gt; Coordinates:
 #&gt;       min    max
 #&gt; mx 178605 181390
@@ -245,22 +257,24 @@ and finally converts the TRUE/FALSE grid to a <code>SpatialGridDataFrame</code>.
 #&gt;             Fw     :10    Mean   : 290.3  
 #&gt;             Ab     : 8    3rd Qu.: 450.0  
 #&gt;             (Other):25    Max.   :1000.0  
-#&gt;             NA's   : 1                    </div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+#&gt;             NA's   : 1                    </div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Convert marked ppp back to SpatialPoints (discarding marks)</span>
-<span class='no'>rev_ppp_SP</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialPoints.ppp</span>(<span class='no'>meuse_ppp</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>rev_ppp_SP</span>)
-}</div><div class='output co'>#&gt; Object of class SpatialPoints
+<span class='va'>rev_ppp_SP</span> <span class='op'>&lt;-</span> <span class='fu'>as.SpatialPoints.ppp</span><span class='op'>(</span><span class='va'>meuse_ppp</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>rev_ppp_SP</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Object of class SpatialPoints
 #&gt; Coordinates:
 #&gt;       min    max
 #&gt; mx 178605 181390
 #&gt; my 329714 333611
 #&gt; Is projected: NA 
 #&gt; proj4string : [NA]
-#&gt; Number of points: 155</div><div class='input'><span class='kw'>if</span> (<span class='no'>run</span>) {
+#&gt; Number of points: 155</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='va'>run</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>## Convert marked ppp back to SpatialGridDataFrame (extracting the window grid)</span>
-<span class='no'>rev_ppp_SGDF</span> <span class='kw'>&lt;-</span> <span class='fu'>as.SpatialGridDataFrame.ppp</span>(<span class='no'>meuse_ppp</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>rev_ppp_SGDF</span>)
-}</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
+<span class='va'>rev_ppp_SGDF</span> <span class='op'>&lt;-</span> <span class='fu'>as.SpatialGridDataFrame.ppp</span><span class='op'>(</span><span class='va'>meuse_ppp</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>rev_ppp_SGDF</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Object of class SpatialGridDataFrame
 #&gt; Coordinates:
 #&gt;         min    max
 #&gt; [1,] 178440 181560
@@ -291,7 +305,7 @@ and finally converts the TRUE/FALSE grid to a <code>SpatialGridDataFrame</code>.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

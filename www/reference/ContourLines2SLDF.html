@@ -73,7 +73,7 @@ ArcObj2SLDF from the list returned by the get.arcdata function in the RArcInfo p
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -81,12 +81,15 @@ ArcObj2SLDF from the list returned by the get.arcdata function in the RArcInfo p
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -114,9 +117,9 @@ ArcObj2SLDF from the list returned by the get.arcdata function in the RArcInfo p
 <code>ArcObj2SLDF</code> from the list returned by the <code>get.arcdata</code> function in the RArcInfo package; <code>ContourLines2SLDF</code> from the list returned by the <code>contourLines</code> function in the graphics package (here the data frame is just the contour levels, with one Lines object made up of at least one Line object per level); and <code>MapGen2SL</code> reads a file in "Mapgen" format into a <code>SpatialLines</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ArcObj2SLDF</span>(<span class='no'>arc</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)), <span class='no'>IDs</span>)
-<span class='fu'>ContourLines2SLDF</span>(<span class='no'>cL</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)))
-<span class='fu'>MapGen2SL</span>(<span class='no'>file</span>, <span class='kw'>proj4string</span><span class='kw'>=</span><span class='fu'>CRS</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>NA</span>)))</pre>
+    <pre class="usage"><span class='fu'>ArcObj2SLDF</span><span class='op'>(</span><span class='va'>arc</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>IDs</span><span class='op'>)</span>
+<span class='fu'>ContourLines2SLDF</span><span class='op'>(</span><span class='va'>cL</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>MapGen2SL</span><span class='op'>(</span><span class='va'>file</span>, proj4string<span class='op'>=</span><span class='fu'>CRS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,6 +149,9 @@ ArcObj2SLDF from the list returned by the get.arcdata function in the RArcInfo p
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A SpatialLinesDataFrame object</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Roger Bivand; Edzer Pebesma</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Coastlines of varying resolution may be chosen online and downloaded in "Mapgen" text format from <a href='https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html'>https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html</a>, most conveniently using the interactive selection tool, but please note the 500,000 point limit on downloads, which is easy to exceed.</p>
@@ -164,8 +170,10 @@ ArcObj2SLDF from the list returned by the get.arcdata function in the RArcInfo p
 <span class='co'>#res &lt;- arcobj2SLDF(arc)</span>
 <span class='co'>#plot(res)</span>
 <span class='co'>#invisible(title(""))</span>
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'>ContourLines2SLDF</span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/contourLines.html'>contourLines</a></span>(<span class='no'>volcano</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>res</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>terrain.colors</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='fu'>as</span>(<span class='no'>res</span>, <span class='st'>"data.frame"</span>))))</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"Volcano contours as SpatialLines"</span>)</div><div class='img'><img src='ContourLines2SLDF-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>ContourLines2SLDF</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/contourLines.html'>contourLines</a></span><span class='op'>(</span><span class='va'>volcano</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>terrain.colors</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='fu'>as</span><span class='op'>(</span><span class='va'>res</span>, <span class='st'>"data.frame"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='st'>"Volcano contours as SpatialLines"</span><span class='op'>)</span>
+</div><div class='img'><img src='ContourLines2SLDF-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -181,7 +189,7 @@ ArcObj2SLDF from the list returned by the get.arcdata function in the RArcInfo p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">maptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1-1</span>
       </span>
     </div>
 
@@ -80,12 +80,15 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -112,7 +115,7 @@
     <p>The function reads a data frame from an attached GPS using the external program gpsbabel. The columns of the data frame need to be identified by hand because different GPS order NMEA data in different ways, and the columns should be converted to the correct classes by hand. Once the specifics of a particular GPS are identified, and ways of cleaning erroneous locations are found, the conversion of the output data frame into a usable one may be automated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>readGPS</span>(<span class='kw'>i</span> <span class='kw'>=</span> <span class='st'>"garmin"</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='st'>"usb:"</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"w"</span>, <span class='kw'>invisible</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>readGPS</span><span class='op'>(</span>i <span class='op'>=</span> <span class='st'>"garmin"</span>, f <span class='op'>=</span> <span class='st'>"usb:"</span>, type<span class='op'>=</span><span class='st'>"w"</span>, invisible<span class='op'>=</span><span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,9 +151,12 @@
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p><a href='https://www.gpsbabel.org'>https://www.gpsbabel.org</a></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Patrick Giraudoux and Roger Bivand</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>#b1 &lt;- readGPS(f="usb:")</span>
 <span class='co'>#str(b1)</span>
 <span class='co'>#b2 &lt;- b1[1:172,]</span>
@@ -167,7 +173,8 @@
 <span class='co'>#wp1 &lt;- wp0[,-(1:6)]</span>
 <span class='co'>#str(wp1)</span>
 <span class='co'>#summary(wp1)</span>
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -183,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
