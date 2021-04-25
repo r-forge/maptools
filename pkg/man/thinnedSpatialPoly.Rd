@@ -33,7 +33,8 @@ represent a digitized line or its caricature.
 xx <- readShapeSpatial(system.file("shapes/sids.shp", package="maptools")[1],
       IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
 object.size(as(xx, "SpatialPolygons"))
-xxx <- thinnedSpatialPoly(xx, tolerance=0.05, minarea=0.001)
+xxx <- thinnedSpatialPoly(xx, tolerance=0.05, minarea=0.001, topologyPreserve=TRUE)
+# fails if topologyPreserve=FALSE in some cases for GEOS >= 3.10.0
 object.size(as(xxx, "SpatialPolygons"))
 par(mfrow=c(2,1))
 plot(xx)
