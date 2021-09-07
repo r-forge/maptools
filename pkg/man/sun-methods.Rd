@@ -81,10 +81,10 @@
 
   NOAA used the reference below to develop their Sunrise/Sunset
 
-  \url{https://www.esrl.noaa.gov/gmd/grad/solcalc/sunrise.html} and Solar
+  \url{https://gml.noaa.gov/grad/solcalc/sunrise.html} and Solar
   Position 
 
-  \url{https://www.esrl.noaa.gov/gmd/grad/solcalc/azel.html}
+  \url{https://gml.noaa.gov/grad/solcalc/azel.html}
   Calculators.  The algorithms include corrections for atmospheric
   refraction effects.
 

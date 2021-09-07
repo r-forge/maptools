@@ -34,7 +34,7 @@ data(state.vbm)
 \author{Greg Snow \email{greg.snow@imail.org} (of this compilation)}
 
 \references{
-  \url{http://www.markmonmonier.com/index.htm},
+  \code{http://www.markmonmonier.com/index.htm},
   \url{http://euclid.psych.yorku.ca/SCS/Gallery/bright-ideas.html}
 }
 \examples{
