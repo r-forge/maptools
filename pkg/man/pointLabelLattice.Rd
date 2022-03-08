@@ -88,8 +88,6 @@ coordinates(meuse.grid) = ~x+y
 proj4string(meuse.grid) <- CRS("+init=epsg:28992")
 gridded(meuse.grid) = TRUE
 
-library(RColorBrewer)
-myCols <- adjustcolor(colorRampPalette(brewer.pal(n=9, 'Reds'))(100), .85)
 
 pts <- spsample(meuse.grid, n=15, type="random")
 
@@ -100,7 +98,11 @@ sl1 <- list('sp.points', pts, pch=19, cex=.8, col='midnightblue')
 sl2 <- list('sp.pointLabel', pts, label=someAuthors,
             cex=0.7, col='midnightblue',
             fontfamily='Palatino')
-
+run <- FALSE
+if (require("RColorBrewer", quietly=TRUE)) run <- TRUE
+if (run) {
+myCols <- adjustcolor(colorRampPalette(brewer.pal(n=9, 'Reds'))(100), .85)
 spplot(meuse.grid["dist"], col.regions=myCols, sp.layout=list(sl1, sl2))
+}
 }
 

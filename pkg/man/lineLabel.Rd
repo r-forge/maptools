@@ -98,7 +98,9 @@ coordinates(meuse) = ~x+y
 data(meuse.riv)
 meuse.sl <- SpatialLines(list(Lines(list(Line(meuse.riv)), "1")))
 
-library(RColorBrewer)
+run <- FALSE
+if (require("RColorBrewer", quietly=TRUE)) run <- TRUE
+if (run) {
 myCols <- adjustcolor(colorRampPalette(brewer.pal(n=9, 'Reds'))(100), .85)
 
 labs <- label(meuse.sl, 'Meuse River')
@@ -128,5 +130,5 @@ sl3 <- modifyList(sl1, list(textloc = 140, position='above'))
 spplot(meuse.grid["dist"],
        col.regions=myCols, 
        sp.layout = sl3)
-
+}
 }
