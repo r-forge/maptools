@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Create SpatialGrid for PNG output to GE}
 \description{
-  The function sets up metadata in the form of a SpatialGrid object for defining the size and placing of a PNG image overlay in Google Earth. The internal function \code{Sobj\_SpatialGrid} can also be called to build a grid for arbitrary Spatial* objects.
+  The function sets up metadata in the form of a SpatialGrid object for defining the size and placing of a PNG image overlay in Google Earth. The internal function \code{Sobj_SpatialGrid} can also be called to build a grid for arbitrary Spatial* objects.
 }
 \usage{
 GE_SpatialGrid(obj, asp = NA, maxPixels = 600)

@@ -23,14 +23,14 @@ writeSpatialShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{IDvar}{a character string: the name of a column in the shapefile DBF containing the ID values of the shapes - the values will be converted to a character vector (Polygons only)}
   \item{force_ring}{if TRUE, close unclosed input rings (Polygons only)}
   \item{delete_null_obj}{if TRUE, null geometries inserted by ABS will be removed together with their data.frame rows (Polygons and Lines)}
-  \item{retrieve_ABS_null}{default FALSE, if TRUE and delete\_null\_obj also 
+  \item{retrieve_ABS_null}{default FALSE, if TRUE and delete_null_obj also 
 TRUE, the function will return a data frame containing the data from any 
 null geometries inserted by ABS (Polygons only)}
   \item{x}{a vector data \code{Spatial*DataFrame} object}
   \item{factor2char}{logical, default TRUE, convert factor columns to character}
   \item{max_nchar}{default 254, may be set to a higher limit and passed through to the DBF writer, please see Details in \code{\link[foreign]{write.dbf}}}
 }
-\details{If no IDvar argument is given, the shpID values of the shapefile will be used as \code{Polygons} ID values; when writing shapefiles, the object data slot row.names are added to the DBF file as column SP\_ID.}
+\details{If no IDvar argument is given, the shpID values of the shapefile will be used as \code{Polygons} ID values; when writing shapefiles, the object data slot row.names are added to the DBF file as column SP_ID.}
 \value{
    a Spatial*DataFrame object of a class corresponding to the input shapefile
 }

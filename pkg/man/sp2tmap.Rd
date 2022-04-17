@@ -15,9 +15,9 @@ sp2tmap(SP)
 
 \value{
  a data frame with three columns:
-  \item{\_ID}{an integer vector of polygon identifiers in numeric order}
-  \item{\_X}{numeric x coordinate}
-  \item{\_Y}{numeric y coordinate}
+  \item{_ID}{an integer vector of polygon identifiers in numeric order}
+  \item{_X}{numeric x coordinate}
+  \item{_Y}{numeric y coordinate}
   and an \code{ID_n} attribute with the named polygon identifiers
 }
 \references{\url{https://www.stata.com/search.cgi?query=tmap}}

@@ -12,7 +12,7 @@ sp2Mondrian(SP, file, new_format=TRUE)
 \arguments{
   \item{SP}{a SpatialPolygonsDataFrame object}
   \item{file}{file where output is written}
-  \item{new_format}{default TRUE, creates a text data file and a separate map file; the old format put both data sets in a single file - the map file is named by inserting "MAP\_" into the file= argument after the rightmost directory separator (if any)}
+  \item{new_format}{default TRUE, creates a text data file and a separate map file; the old format put both data sets in a single file - the map file is named by inserting "MAP_" into the file= argument after the rightmost directory separator (if any)}
 }
 
 

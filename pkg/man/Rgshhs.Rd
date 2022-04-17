@@ -40,7 +40,7 @@ getRgshhsMap(fn = system.file("share/gshhs_c.b", package= "maptools"),
 \value{
   for polygon data, a list with the following components:
   \item{polydata}{data from the headers of the selected GSHHS polygons}
-  \item{belongs}{a matrix showing which polygon belongs to (is included in) which polygon, going from the highest level among the selected polygons down to 1 (land); levels are: 1 land, 2 lake, 3 island\_in\_lake, 4 pond\_in\_island\_in\_lake.}
+  \item{belongs}{a matrix showing which polygon belongs to (is included in) which polygon, going from the highest level among the selected polygons down to 1 (land); levels are: 1 land, 2 lake, 3 island_in_lake, 4 pond_in_island_in_lake.}
   \item{new_belongs}{a ragged list of polygon inclusion used for making SP}
   \item{SP}{a SpatialPolygons object; this is the principal output object, and will become the only output object as the package matures}
   the \code{getRgshhsMap} returns only a SpatialPolygons object;

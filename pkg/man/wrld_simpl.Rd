@@ -3,7 +3,7 @@
 \docType{data}
 \title{Simplified world country polygons}
 \description{
- The object loaded is a \code{SpatialPolygonsDataFrame} object containing a slightly modified version of Bjoern Sandvik's improved version of world\_borders.zip - TM\_WORLD\_BORDERS\_SIMPL-0.2.zip dataset from the Mapping Hacks geodata site. The country Polygons objects and the data slot data frame row numbers have been set to the ISO 3166 three letter codes. 
+ The object loaded is a \code{SpatialPolygonsDataFrame} object containing a slightly modified version of Bjoern Sandvik's improved version of world_borders.zip - TM_WORLD_BORDERS_SIMPL-0.2.zip dataset from the Mapping Hacks geodata site. The country Polygons objects and the data slot data frame row numbers have been set to the ISO 3166 three letter codes. 
 }
 \usage{data(wrld_simpl)}
 \format{
