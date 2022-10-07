@@ -5,6 +5,8 @@ pointLabel <- function(x, y = NULL, labels = seq(along = x), cex = 1,
                        doPlot = TRUE,
                        ...)
 {
+  .Deprecated(new="pointLabel", package="car", old="pointLabel",
+    msg="Function moved to the car package because maptools is retiring in 2023")
   if (!missing(y) && (is.character(y) || is.expression(y))) {
     labels <- y
     y <- NULL

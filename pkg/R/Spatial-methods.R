@@ -1,7 +1,7 @@
 readShapeSpatial <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE, IDvar=NULL, force_ring=FALSE, 
 	delete_null_obj=FALSE, retrieve_ABS_null=FALSE) {
-  .Deprecated("", package="maptools", msg="readShapeSpatial is deprecated; use rgdal::readOGR or sf::st_read")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra packages among others")
 	shinfo <- getinfo.shape(fn)
 	if (verbose) print(shinfo)
 	type <- shinfo[[2]]
@@ -27,7 +27,7 @@ readShapeSpatial <- function(fn, proj4string=CRS(as.character(NA)),
 }
 
 writeSpatialShape  <- function(x, fn, factor2char = TRUE, max_nchar=254) {
-  .Deprecated("", package="maptools", msg="writeSpatialShape is deprecated; use rgdal::writeOGR or sf::st_write")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra packages among others")
 	if (is(x, "SpatialPolygonsDataFrame")) {
 	    writePolyShape(x=x, fn=fn, factor2char=factor2char, 
 		max_nchar=max_nchar)

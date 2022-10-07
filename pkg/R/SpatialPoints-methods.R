@@ -1,6 +1,6 @@
 readShapePoints <- function(fn, proj4string=CRS(as.character(NA)), 
 	verbose=FALSE, repair=FALSE) {
-  .Deprecated("", package="maptools", msg="readShapePoints is deprecated; use rgdal::readOGR or sf::st_read")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra packages among others")
 	suppressWarnings(Map <- read.shape(filen=fn, verbose=verbose,
 	    repair=repair))
 	suppressWarnings(.Map2SPDF(Map, proj4string=proj4string))
@@ -23,7 +23,7 @@ readShapePoints <- function(fn, proj4string=CRS(as.character(NA)),
 }
 
 writePointsShape <- function(x, fn, factor2char = TRUE, max_nchar=254) {
-  .Deprecated("", package="maptools", msg="writePointsShape is deprecated; use rgdal::writeOGR or sf::st_write")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra packages among others")
         stopifnot(is(x, "SpatialPointsDataFrame"))
 	df <- as(x, "data.frame")
 	coords <- coordinates(x)

@@ -1,6 +1,12 @@
 # Please note that **maptools** will be retired by the end of 2023, plan transition at your earliest convenience; some functionality will be moved to **sp**.
 
-# Version 1.1-4 (development, rev. 401-)
+# Version 1.1-5 (development, rev. 402-)
+
+* functions using shapelib fully deprecated
+
+* `pointLabel()` deprecated; moved to **car** rev. 725
+
+# Version 1.1-4 (2022-04-17, rev. 401)
 
 * remove escaping of underscore in manual pages
 

@@ -6,7 +6,7 @@
 
 read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
   filen <- path.expand(filen)
-  .Deprecated("", package="maptools", msg="use readShapeSpatial:\nobjects other than Spatial objects defined in the sp package are deprecated")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra paackages among others")
   if (length(grep("\\.shp$", tolower(filen))) == 0L)
     filen <- paste(filen, "shp", sep=".")
   shinfo <- getinfo.shape(filen)
@@ -56,12 +56,14 @@ read.shape <- function(filen, dbf.data=TRUE, verbose=TRUE, repair=FALSE) {
 }
 
 getinfo.shape <- function(filen) {
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra paackages among others")
   shapehead <-.Call("Rshapeinfo1", as.character(path.expand(filen)), PACKAGE="maptools")
   class(shapehead) <- "shapehead"
   shapehead
 }
 
 print.shapehead <- function(x, ...) {
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra paackages among others")
     types <- c("Point", NA, "PolyLine", NA, "Polygon", NA, NA, "MultiPoint", NA, NA, "PointZ", NA, "PolyLineZ", NA, "PolygonZ", NA, NA, "MultiPointZ", NA, NA, "PointM", NA, "PolyLineM", NA, "PolygonM", NA, NA, "MultiPointM", NA, NA, "MultiPatch")
     cat("Shapefile type: ", types[x[[2]]], ", (", x[[2]], "), # of Shapes: ", 
       x[[3]], "\n", sep="")
@@ -71,7 +73,7 @@ print.shapehead <- function(x, ...) {
 #write.pointShape <- function(object, file, coordinates, factor2char=TRUE, 
 write.pointShape <- function(coordinates, df, file, factor2char=TRUE, 
   strictFilename=FALSE, max_nchar=254) {
-  .Deprecated("", package="maptools", msg="use writeSpatialShape:\nobjects other than Spatial objects defined in the sp package are deprecated")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra paackages among others")
   file <- path.expand(file)
   dirnm <- dirname(file)
   bnm0 <- basename(file)
@@ -278,7 +280,7 @@ write.pointShape <- function(coordinates, df, file, factor2char=TRUE,
 
 write.polylistShape <- function(polylist, df, file, factor2char=TRUE, 
   strictFilename=FALSE, force=TRUE, max_nchar=254) {
-  .Deprecated("", package="maptools", msg="use writeSpatialShape:\nobjects other than Spatial objects defined in the sp package are deprecated")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra paackages among others")
   file <- path.expand(file)
   dirnm <- dirname(file)
   bnm0 <- basename(file)
@@ -307,7 +309,7 @@ write.polylistShape <- function(polylist, df, file, factor2char=TRUE,
 
 write.linelistShape <- function(linelist, df, file, factor2char=TRUE, 
   strictFilename=FALSE, max_nchar=254) {
-  .Deprecated("", package="maptools", msg="use writeSpatialShape:\nobjects other than Spatial objects defined in the sp package are deprecated")
+  .Deprecated("", package="maptools", msg="shapelib support is provided by GDAL through the sf and terra paackages among others")
   file <- path.expand(file)
   dirnm <- dirname(file)
   bnm0 <- basename(file)
