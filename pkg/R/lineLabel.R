@@ -18,6 +18,8 @@ lineLabel <- function(line, label,
                       col.line = add.line$col,
                       identifier = 'lineLabel',
                      ...){
+  .Deprecated("", package="maptools", old="lineLabel",
+    msg="Function moved to https://github.com/oscarperpinan/label")
   ## line is a list of Line objects
   ## label and line must be of equal length
   stopifnot(is.numeric(textloc) | is.character(textloc))
@@ -225,6 +227,8 @@ setGeneric('sp.lineLabel', function(object, labels, byid=TRUE,...){standardGener
 setMethod('sp.lineLabel',
           signature=(object='Lines'),
           definition=function(object, labels, byid=TRUE, ...){
+  .Deprecated("", package="maptools", old="sp.lineLabel",
+    msg="Function moved to https://github.com/oscarperpinan/label")
             if (missing(labels)) labels=object@ID
             if (isTRUE(byid)){
               lengths <- sapply(object@Lines, LineLength)
@@ -241,6 +245,17 @@ setMethod('sp.lineLabel',
 setMethod('sp.lineLabel',
           signature=(object='SpatialLines'),
           definition=function(object, labels, byid=TRUE,...){
+  .Deprecated("", package="maptools", old="sp.lineLabel",
+    msg="Function moved to https://github.com/oscarperpinan/label")
+            if (missing(labels)) labels=object@ID
+            if (isTRUE(byid)){
+              lengths <- sapply(object@Lines, LineLength)
+              idxMax <- which.max(lengths)
+              labs <- rep('', length(object@Lines))
+              labs[idxMax] <- labels
+            } else {
+              labs <- rep(labels, length(object@Lines))
+            }
             if (missing(labels)){
               ids <- sapply(object@lines, function(l)l@ID)
               labels <- ids
@@ -260,6 +275,8 @@ setGeneric('label', function(object, text,...){standardGeneric('label')})
 
 setMethod('label', signature=(object='SpatialLines'),
           definition=function(object, text,...){
+  .Deprecated("", package="maptools", old="label",
+    msg="Function moved to https://github.com/oscarperpinan/label")
             text <- as.character(text)
             nfeatures <- length(object)
             if (!identical(nfeatures, length(text))){

@@ -6,6 +6,8 @@
 
 
 drawDetails.labels <- function(x, ..., recording) {
+  .Deprecated("", package="maptools", old="drawDetails.label",
+    msg="Function moved to https://github.com/oscarperpinan/label")
 
   ##------------------------------------------------------------------##
   ## Functions SANN, GA and auxiliars (extracted from maptools::pointLabel)
@@ -258,6 +260,8 @@ panel.pointLabel <- function (x, y = NULL,
                               fill='transparent',
                               ...){
 
+  .Deprecated("", package="maptools", old="panel.pointLabel",
+    msg="Function moved to https://github.com/oscarperpinan/label")
   add.text <- trellis.par.get("add.text")
   
   if (!missing(y) && (is.character(y) || is.expression(y))) {
@@ -292,6 +296,8 @@ setGeneric('sp.pointLabel', function(object, labels, ...){standardGeneric('sp.po
 setMethod('sp.pointLabel',
           signature=(object='SpatialPoints'),
           definition=function(object, labels, ...){
+  .Deprecated("", package="maptools", old="sp.pointLabel",
+    msg="Function moved to https://github.com/oscarperpinan/label")
             xy = coordinates(object)
             if (missing(labels)) labels <- row.names(object)
             panel.pointLabel(xy[,1], xy[,2], labels, ...)

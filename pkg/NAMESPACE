@@ -173,14 +173,14 @@ export(
 export(
  pointLabel, # car rayshader rioja deprecated 2022-10-05, moved to car Rev.: 725 email 2022-10-06
  gcDestination, # ggsn
- panel.pointLabel, # https://github.com/oscarperpinan/rastervis/issues/93
- lineLabel # https://github.com/oscarperpinan/rastervis/issues/93
+ panel.pointLabel, # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
+ lineLabel # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
 )
-S3method("drawDetails", "labels")  # https://github.com/oscarperpinan/rastervis/issues/93
+S3method("drawDetails", "labels")  # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
 exportMethods(
- sp.pointLabel, # https://github.com/oscarperpinan/rastervis/issues/93
- sp.lineLabel, # https://github.com/oscarperpinan/rastervis/issues/93
- label # https://github.com/oscarperpinan/rastervis/issues/93
+ sp.pointLabel, # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
+ sp.lineLabel, # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
+ label # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
 )
 
 export(

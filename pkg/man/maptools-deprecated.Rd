@@ -11,6 +11,18 @@
 \alias{writePolyShape}
 \alias{readShapePoints}
 \alias{writePointsShape}
+\alias{panel.pointLabel}
+\alias{sp.pointLabel}
+\alias{sp.pointLabel-methods}
+\alias{sp.pointLabel,SpatialPoints-method}
+\alias{lineLabel}
+\alias{sp.lineLabel}
+\alias{label}
+\alias{sp.lineLabel-methods}
+\alias{label-methods}
+\alias{sp.lineLabel,Lines-method}
+\alias{sp.lineLabel,SpatialLines-method}
+\alias{label,SpatialLines-method}
 \title{Deprecated functions and methods}
 \description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during 2023.}
 \usage{
@@ -32,6 +44,37 @@ writePolyShape(x, fn, factor2char = TRUE, max_nchar=254)
 readShapePoints(fn, proj4string = CRS(as.character(NA)), verbose = FALSE,
  repair=FALSE)
 writePointsShape(x, fn, factor2char = TRUE, max_nchar=254)
+lineLabel(line, label,
+          spar=.6, position = c('above', 'below'),
+          textloc = 'constantSlope',
+          col = add.text$col,
+          alpha = add.text$alpha,
+          cex = add.text$cex,
+          lineheight = add.text$lineheight,
+          font = add.text$font,
+          fontfamily = add.text$fontfamily,
+          fontface = add.text$fontface,
+          lty = add.line$lty,
+          lwd = add.line$lwd, 
+          col.line = add.line$col,
+          identifier = 'lineLabel',
+          ...)
+sp.lineLabel(object, labels, byid=TRUE,...)
+label(object, text, ...)
+panel.pointLabel(x, y = NULL,
+                              labels = seq(along = x),
+                              method = c("SANN", "GA"),
+                              allowSmallOverlap = FALSE,
+                              col = add.text$col,
+                              alpha = add.text$alpha,
+                              cex = add.text$cex,
+                              lineheight = add.text$lineheight,
+                              font = add.text$font,
+                              fontfamily = add.text$fontfamily,
+                              fontface = add.text$fontface,
+                              fill='transparent',
+                              ...)
+sp.pointLabel(object, labels, ...)
 
 }
 \arguments{
@@ -67,6 +110,29 @@ writePointsShape(x, fn, factor2char = TRUE, max_nchar=254)
   \item{retrieve_ABS_null}{default FALSE, if TRUE and delete_null_obj also 
 TRUE, the function will return a data frame containing the data from any 
 null geometries inserted by ABS (Polygons only)}
+  \item{object}{A \code{SpatialPoints} object.}
+  \item{col, alpha, lineheight, font, fontfamily,
+  fontface, fill}{Graphical arguments. See gpar for details}
+  \item{line}{a \code{list} of \code{Lines}.}
+  \item{label, text}{a string or expression to be printed
+    following the path of \code{line}. The \code{names} of \code{labels}
+    should match the values of the \code{ID} slot of the lines to
+    label. If \code{labels} is missing, the \code{ID} slot is used
+    instead. The \code{label} method is a wrapper function to extract
+    the \code{ID} slots and create a suitable \code{character} object
+    with the correct \code{names} values.}
+  \item{byid}{If TRUE (default) only the longest line of each unique
+  \code{ID} value will be labelled.}
+  \item{textloc}{a character or a numeric. It may be 'constantSlope',
+    'minSlope' or 'maxDepth', or the numeric index of the location. If
+    it is a numeric, its length must coincide with the number of
+    \code{Lines}.}
+  \item{spar}{smoothing parameter. With values near zero, the label
+    will closely follow the line. Default value is .6. See smooth.spline for details.}
+  \item{position}{character string ('above' or 'below') to define where
+    the text must be placed.}
+  \item{lty, lwd, col.line}{graphical parameters for the line. See gpar for details.}
+  \item{identifier}{A character string to identify the grob to be created.}
 
 }
 \keyword{ package }
@@ -156,5 +222,72 @@ xx <- readShapePoints(system.file("shapes/pointZ.shp", package="maptools")[1])
 dimensions(xx)
 plot(xx)
 summary(xx)
-
+n <- 15
+x <- rnorm(n)*10
+y <- rnorm(n)*10
+labels <- as.character(round(x, 5))
+myTheme <- list(add.text=list(
+                  cex=0.7,
+                  col='midnightblue',
+                  fontface=2,
+                  fontfamily='mono'))
+library(lattice)
+xyplot(y~x,
+       labels=labels,
+       par.settings=myTheme, 
+       panel=function(x, y, labels, ...){
+         panel.xyplot(x, y, ...)
+         panel.pointLabel(x, y, labels=labels, ...)
+       })
+data(meuse.grid)
+coordinates(meuse.grid) = ~x+y
+proj4string(meuse.grid) <- CRS("+init=epsg:28992")
+gridded(meuse.grid) = TRUE
+pts <- spsample(meuse.grid, n=15, type="random")
+Rauthors <- readLines(file.path(R.home("doc"), "AUTHORS"))[9:28]
+someAuthors <- Rauthors[seq_along(pts)]
+sl1 <- list('sp.points', pts, pch=19, cex=.8, col='midnightblue')
+sl2 <- list('sp.pointLabel', pts, label=someAuthors,
+            cex=0.7, col='midnightblue',
+            fontfamily='Palatino')
+run <- FALSE
+if (require("RColorBrewer", quietly=TRUE)) run <- TRUE
+if (run) {
+myCols <- adjustcolor(colorRampPalette(brewer.pal(n=9, 'Reds'))(100), .85)
+spplot(meuse.grid["dist"], col.regions=myCols, sp.layout=list(sl1, sl2))
+}
+data(meuse.grid)
+coordinates(meuse.grid) = ~x+y
+proj4string(meuse.grid) <- CRS("+init=epsg:28992")
+gridded(meuse.grid) = TRUE
+data(meuse)
+coordinates(meuse) = ~x+y
+data(meuse.riv)
+meuse.sl <- SpatialLines(list(Lines(list(Line(meuse.riv)), "1")))
+run <- FALSE
+if (require("RColorBrewer", quietly=TRUE)) run <- TRUE
+if (run) {
+myCols <- adjustcolor(colorRampPalette(brewer.pal(n=9, 'Reds'))(100), .85)
+labs <- label(meuse.sl, 'Meuse River')
+## Maximum depth
+sl1 <- list('sp.lineLabel', meuse.sl, label=labs,
+            position='below', textloc='maxDepth',
+            spar=.2,
+            col='darkblue', cex=1,
+            fontfamily='Palatino',
+            fontface=2)
+spplot(meuse.grid["dist"],
+       col.regions=myCols, 
+       sp.layout = sl1)
+## Constant slope
+sl2 <- modifyList(sl1, list(textloc = 'constantSlope')) ## Default
+spplot(meuse.grid["dist"],
+       col.regions=myCols, 
+       sp.layout = sl2)
+## Location defined by its numeric index
+sl3 <- modifyList(sl1, list(textloc = 140, position='above'))
+spplot(meuse.grid["dist"],
+       col.regions=myCols, 
+       sp.layout = sl3)
+}
 }
