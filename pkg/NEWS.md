@@ -2,6 +2,8 @@
 
 # Version 1.1-5 (development, rev. 402-)
 
+* `lineLabel.R` and `pointLabelLattice.R` deprecated, see https://github.com/oscarperpinan/rastervis/issues/93
+
 * functions using shapelib fully deprecated
 
 * `pointLabel()` deprecated; moved to **car** rev. 725
