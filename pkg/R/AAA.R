@@ -54,7 +54,7 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
 #    rgeosI <- setRgeosStatus()
     rgeosI <- rgeosStatus()
     Smess <- paste(Smess, rgeosI, "\n", sep="")
-    Smess <- paste(Smess, "Please note that 'maptools' will be retired by the end of 2023,\nplan transition at your earliest convenience;\nsome functionality will be moved to 'sp'.\n", sep="")
+    Smess <- paste(Smess, "Please note that 'maptools' will be retired during 2023,\nplan transition at your earliest convenience;\nsome functionality will be moved to 'sp'.\n", sep="")
     if (!rgeosI) Smess <- paste(Smess, 
               "\tNote: when rgeos is not available, polygon geometry",
               "\tcomputations in maptools depend on gpclib,\n",
