@@ -407,7 +407,7 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
     uchar		*pabyBuf;
     int			i;
     double		dValue;
-    size_t out;
+    size_t out, pszFnLen;
     
 /* -------------------------------------------------------------------- */
 /*      Ensure the access string is one of the legal ones.  We          */
@@ -454,12 +454,13 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
 /*	Open the .shp and .shx files.  Note that files pulled from	*/
 /*	a PC to Unix with upper case filenames won't work!		*/
 /* -------------------------------------------------------------------- */
-    pszFullname = (char *) malloc((size_t) (strlen(pszBasename) + 5));
-    sprintf( pszFullname, "%s.shp", pszBasename );
+    pszFnLen = (size_t) strlen(pszBasename) + 5;
+    pszFullname = (char *) malloc(pszFnLen);
+    snprintf( pszFullname, pszFnLen, "%s.shp", pszBasename );
     psSHP->fpSHP = fopen(pszFullname, pszAccess );
     if( psSHP->fpSHP == NULL )
     {
-        sprintf( pszFullname, "%s.SHP", pszBasename );
+        snprintf( pszFullname, pszFnLen, "%s.SHP", pszBasename );
         psSHP->fpSHP = fopen(pszFullname, pszAccess );
     }
     
@@ -476,11 +477,11 @@ SHPOpen( const char * pszLayer, const char * pszAccess )
         return( NULL );
     }
 
-    sprintf( pszFullname, "%s.shx", pszBasename );
+    snprintf( pszFullname, pszFnLen, "%s.shx", pszBasename );
     psSHP->fpSHX = fopen(pszFullname, pszAccess );
     if( psSHP->fpSHX == NULL )
     {
-        sprintf( pszFullname, "%s.SHX", pszBasename );
+        snprintf( pszFullname, pszFnLen, "%s.SHX", pszBasename );
         psSHP->fpSHX = fopen(pszFullname, pszAccess );
     }
     
@@ -722,6 +723,7 @@ SHPCreate( const char * pszLayer, int nShapeType )
     uchar     	abyHeader[100];
     int32	i32;
     double	dValue;
+    size_t pszFnLen;
     
 /* -------------------------------------------------------------------- */
 /*      Establish the byte order on this system.                        */
@@ -749,8 +751,9 @@ SHPCreate( const char * pszLayer, int nShapeType )
 /* -------------------------------------------------------------------- */
 /*      Open the two files so we can write their headers.               */
 /* -------------------------------------------------------------------- */
-    pszFullname = (char *) malloc((size_t) (strlen(pszBasename) + 5));
-    sprintf( pszFullname, "%s.shp", pszBasename );
+    pszFnLen = (size_t) strlen(pszBasename) + 5;
+    pszFullname = (char *) malloc(pszFnLen);
+    snprintf( pszFullname, pszFnLen, "%s.shp", pszBasename );
     fpSHP = fopen(pszFullname, "wb" );
     if( fpSHP == NULL )
     {
@@ -762,7 +765,7 @@ SHPCreate( const char * pszLayer, int nShapeType )
         return( NULL );
     }
 
-    sprintf( pszFullname, "%s.shx", pszBasename );
+    snprintf( pszFullname, pszFnLen, "%s.shx", pszBasename );
     fpSHX = fopen(pszFullname, "wb" );
     if( fpSHX == NULL )
     {

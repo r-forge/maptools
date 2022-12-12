@@ -1,6 +1,10 @@
 # Please note that **maptools** will be retired by the end of 2023, plan transition at your earliest convenience; some functionality will be moved to **sp**.
 
-# Version 1.1-5 (development, rev. 402-)
+# Version 1.1-6 (development, rev. 411-)
+
+* CRAN `sprintf()` warnings
+
+# Version 1.1-5 (2022-10-22, rev. 402-410)
 
 * `lineLabel.R` and `pointLabelLattice.R` deprecated, see https://github.com/oscarperpinan/rastervis/issues/93
 
