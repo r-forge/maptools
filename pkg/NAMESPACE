@@ -172,7 +172,7 @@ export(
 )
 
 export(
- pointLabel, # (gone 2212 car) rayshader rioja deprecated 2022-10-05, moved to car Rev.: 725 email 2022-10-06
+ pointLabel, # rayshader rioja deprecated 2022-10-05 car, moved to car Rev.: 725 email 2022-10-06
  gcDestination, # ggsn
  panel.pointLabel, # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
  lineLabel # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
