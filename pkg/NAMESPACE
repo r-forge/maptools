@@ -10,7 +10,8 @@ importFrom(graphics, image, polygon, par, text, rect, points, lines, box, strwid
 importFrom(grDevices, hsv, col2rgb, as.graphicsAnnot, xy.coords)
 import(methods)
 
-# packages using exported maptools functions 2022-08-11 
+# packages using exported maptools functions 2022-08-11 and 2022-12-06
+# moved after deprecation date if no longer present at latest pkgapi check
 
 export(
  getinfo.shape, # SSN deprecated 2022-10-06
@@ -69,8 +70,8 @@ export(
  SpatialLines2PolySet, # DRHotNet MapGAM RchivalTag
  PolySet2SpatialPolygons, # DRHotNet RchivalTag
  PolySet2SpatialLines,
- map2SpatialPolygons, # ausplotsR rangemap
- map2SpatialLines, # MapGAM
+ map2SpatialPolygons, # ausplotsR rangemap (new 2212 intSDM)
+ map2SpatialLines, # MapGAM (new 2212 MODIS)
  pruneMap
 )
 
@@ -100,7 +101,7 @@ export(
 )
 
 export(
- as.linnet.SpatialLines # SpNetPrep
+ as.linnet.SpatialLines # (gone 2212 SpNetPrep)
 )
 
 if(getRversion() >= "3.6.0") {
@@ -127,11 +128,11 @@ export(
 export(
  unionSpatialPolygons, # re-implement in sp with status 2
    # animint2 bamlss BayesX bfsMaps
-   # broom disaggregation GADMTools LabourMarketAreas micromap
-   # R2BayesX RchivalTag rmapzen stampr surveillance
+   # broom disaggregation (gone 2212 GADMTools) LabourMarketAreas micromap
+   # (new 2212 micromapST) R2BayesX RchivalTag rmapzen stampr surveillance
  nowrapSpatialPolygons,
  nowrapRecenter,
- checkPolygonsHoles, # inlmisc
+ checkPolygonsHoles, # (gone 2212) inlmisc
  nowrapSpatialLines,
  thinnedSpatialPoly
 )
@@ -147,8 +148,8 @@ export(
 
 exportMethods(
  coerce,
- spCbind, # MapGAM
- spRbind # APfun ecospat iSDM track2KBA uavRmp
+ spCbind, # (gone 2212 MapGAM) (new 2212 eeptools)
+ spRbind # APfun ecospat iSDM (new 2212 micromapST) track2KBA uavRmp
 )
 
 exportMethods(
@@ -158,20 +159,20 @@ exportMethods(
 export(
  GE_SpatialGrid,
  kmlOverlay, # RgoogleMaps
- Sobj_SpatialGrid # surveillance
+ Sobj_SpatialGrid # (gone 2212 surveillance)
 )
 
 export(
  kmlPolygons, # red https://github.com/r-spatial/evolution/issues/6
  kmlLines, # https://github.com/r-spatial/evolution/issues/6
  kmlPolygon, # red
- kmlLine, # BPEC
+ kmlLine, # (gone 2212 BPEC)
  getKMLcoordinates, # animaltracker
- kmlPoints # BPEC
+ kmlPoints # (gone 2212 BPEC)
 )
 
 export(
- pointLabel, # car rayshader rioja deprecated 2022-10-05, moved to car Rev.: 725 email 2022-10-06
+ pointLabel, # (gone 2212 car) rayshader rioja deprecated 2022-10-05, moved to car Rev.: 725 email 2022-10-06
  gcDestination, # ggsn
  panel.pointLabel, # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
  lineLabel # https://github.com/oscarperpinan/rastervis/issues/93 deprecated 2022-10-10 https://github.com/oscarperpinan/label
