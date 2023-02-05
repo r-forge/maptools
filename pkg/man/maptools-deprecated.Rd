@@ -23,6 +23,15 @@
 \alias{sp.lineLabel,Lines-method}
 \alias{sp.lineLabel,SpatialLines-method}
 \alias{label,SpatialLines-method}
+\alias{elide-methods}
+\alias{elide,SpatialPoints-method}
+\alias{elide,SpatialPointsDataFrame-method}
+\alias{elide,SpatialLines-method}
+\alias{elide,SpatialLinesDataFrame-method}
+\alias{elide,SpatialPolygons-method}
+\alias{elide,SpatialPolygonsDataFrame-method}
+\alias{elide}
+
 \title{Deprecated functions and methods}
 \description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during 2023.}
 \usage{
@@ -75,6 +84,7 @@ panel.pointLabel(x, y = NULL,
                               fill='transparent',
                               ...)
 sp.pointLabel(object, labels, ...)
+elide(obj, ...)
 
 }
 \arguments{
@@ -96,8 +106,6 @@ sp.pointLabel(object, labels, ...)
           progress.}
   \item{doPlot}{ logical; if \code{TRUE}, the labels are plotted on the
           existing graph with \code{text}.}
-  \item{...}{ arguments passed along to \code{text} to specify
-          labeling parameters such as \code{col}. }
   \item{fn}{shapefile layer name, when writing omitting the extensions *.shp, *.shx and *.dbf, which are added in the function}
   \item{proj4string}{Object of class \code{CRS}; holding a valid proj4 string}
   \item{verbose}{default FALSE - report type of shapefile and number of shapes}
@@ -133,6 +141,18 @@ null geometries inserted by ABS (Polygons only)}
     the text must be placed.}
   \item{lty, lwd, col.line}{graphical parameters for the line. See gpar for details.}
   \item{identifier}{A character string to identify the grob to be created.}
+  \item{obj}{object to be elided}
+  \item{...}{other arguments:
+  \describe{
+    \item{bb}{if NULL, uses bounding box of object, otherwise the given bounding box}
+    \item{shift}{values to shift the coordinates of the input object; this is made ineffective by the scale argument}
+    \item{reflect}{reverse coordinate axes}
+    \item{scale}{if NULL, coordinates not scaled; if TRUE, the longer dimension is scaled to lie within [0,1] and aspect maintained; if a scalar, the output range of [0,1] is multiplied by scale}
+    \item{flip}{translate coordinates on the main diagonal}
+    \item{rotate}{default 0, rotate angle degrees clockwise around center}
+    \item{center}{default NULL, if not NULL, the rotation center, numeric of length two}
+    \item{unitsq}{logical, default FALSE, if TRUE and scale TRUE, impose unit square bounding box (currently only points)}
+}}
 
 }
 \keyword{ package }
@@ -289,5 +309,30 @@ sl3 <- modifyList(sl1, list(textloc = 140, position='above'))
 spplot(meuse.grid["dist"],
        col.regions=myCols, 
        sp.layout = sl3)
+data(meuse)
+coordinates(meuse) <- c("x", "y")
+proj4string(meuse) <- CRS("+init=epsg:28992")
+data(meuse.riv)
+river_polygon <- Polygons(list(Polygon(meuse.riv)), ID="meuse")
+rivers <- SpatialPolygons(list(river_polygon))
+proj4string(rivers) <- CRS("+init=epsg:28992")
+rivers1 <- elide(rivers, reflect=c(TRUE, TRUE), scale=TRUE)
+meuse1 <- elide(meuse, bb=bbox(rivers), reflect=c(TRUE, TRUE), scale=TRUE)
+opar <- par(mfrow=c(1,2))
+plot(rivers, axes=TRUE)
+plot(meuse, add=TRUE)
+plot(rivers1, axes=TRUE)
+plot(meuse1, add=TRUE)
+par(opar)
+meuse1 <- elide(meuse, shift=c(10000, -10000))
+bbox(meuse)
+bbox(meuse1)
+rivers1 <- elide(rivers, shift=c(10000, -10000))
+bbox(rivers)
+bbox(rivers1)
+meuse1 <- elide(meuse, rotate=-30, center=apply(bbox(meuse), 1, mean))
+bbox(meuse)
+bbox(meuse1)
+plot(meuse1, axes=TRUE)
 }
 }

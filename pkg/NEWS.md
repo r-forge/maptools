@@ -1,6 +1,10 @@
 # Please note that **maptools** will be retired by the end of 2023, plan transition at your earliest convenience; some functionality will be moved to **sp**.
 
-# Version 1.1-6 (development, rev. 411-)
+# Version 1.1-7 (development, rev. 413-)
+
+* `elide()` deprecated and moved to `sp`, `"add_elide"` branch
+
+# Version 1.1-6 (2022-12-14, rev. 411-413)
 
 * CRAN `sprintf()` warnings
 

@@ -10,6 +10,8 @@ if (!isGeneric("elide")) {
 
 elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, flip=FALSE, rotate=0, center=NULL, unitsq=FALSE) {
+  .Deprecated(new="elide", package="sp", old="elide",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
   if (length(shift) != 2L)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
@@ -48,7 +50,9 @@ elide.points <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
 
 elide.pointsdf <- function(obj, bb=NULL, shift=c(0, 0), 
   reflect=c(FALSE, FALSE), scale=NULL, flip=FALSE, rotate=0, center=NULL) {
-  res <- elide(as(obj, "SpatialPoints"), bb=bb, shift=shift,
+  .Deprecated(new="elide", package="sp", old="elide",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
+   res <- elide(as(obj, "SpatialPoints"), bb=bb, shift=shift,
     reflect=reflect, scale=scale, flip=flip, rotate=rotate, center=center)
 #    df <- as(obj, "data.frame")[,-c(1,2)]
 #  df <- as(obj, "data.frame")
@@ -100,7 +104,9 @@ elideCoords <- function(x, y, xr, yr, reflect, scale, rotate, center) {
 
 elide.lines <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, inverse=FALSE, flip=FALSE, rotate=0, center=NULL) {
-  if (length(shift) != 2L)
+  .Deprecated(new="elide", package="sp", old="elide",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
+   if (length(shift) != 2L)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
   if (!is.logical(reflect)) stop("reflect must be logical")
@@ -145,7 +151,9 @@ elide.lines <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
 
 elide.linesdf <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, inverse=FALSE, flip=FALSE, rotate=0, center=NULL) {
-  res <- elide(as(obj, "SpatialLines"), bb=bb, shift=shift,
+  .Deprecated(new="elide", package="sp", old="elide",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
+   res <- elide(as(obj, "SpatialLines"), bb=bb, shift=shift,
     reflect=reflect, scale=scale, flip=flip, rotate=rotate, center=center)
   df <- as(obj, "data.frame")
   res <- SpatialLinesDataFrame(res, data=df)
@@ -158,7 +166,9 @@ setMethod("elide", signature(obj="SpatialLinesDataFrame"), elide.linesdf)
 
 elide.polygons <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
   scale=NULL, inverse=FALSE, flip=FALSE, rotate=0, center=NULL) {
-  if (length(shift) != 2L)
+  .Deprecated(new="elide", package="sp", old="elide",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
+   if (length(shift) != 2L)
     stop("Two coordinate shift in input units required")
   if (!is.numeric(shift)) stop("shift not numeric")
   if (!is.logical(reflect)) stop("reflect must be logical")
@@ -203,7 +213,9 @@ elide.polygons <- function(obj, bb=NULL, shift=c(0, 0), reflect=c(FALSE, FALSE),
 elide.polygonsdf <- function(obj, bb=NULL, shift=c(0, 0),
   reflect=c(FALSE, FALSE), scale=NULL, inverse=FALSE, flip=FALSE,
   rotate=0, center=NULL) {
-  res <- elide(as(obj, "SpatialPolygons"), bb=bb, shift=shift,
+  .Deprecated(new="elide", package="sp", old="elide",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
+   res <- elide(as(obj, "SpatialPolygons"), bb=bb, shift=shift,
     reflect=reflect, scale=scale, flip=flip, rotate=rotate, center=center)
   df <- as(obj, "data.frame")
   res <- SpatialPolygonsDataFrame(res, data=df)
