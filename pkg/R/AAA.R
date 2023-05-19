@@ -24,6 +24,13 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
   )
 }
 
+load_stuff <- function() {
+    Smess <- paste("Please note that 'maptools' will be retired during October 2023,\nplan transition at your earliest convenience (see https://r-spatial.org/r/2023/05/15/evolution4.html\nand earlier blogs for guidance);some functionality will be moved to 'sp'.\n", sep="")
+    Smess <- paste(Smess, "Checking rgeos availability: ")
+    rgeosI <- rgeosStatus()
+    Smess <- paste(Smess, rgeosI, "\n", sep="")
+    packageStartupMessage(Smess, appendLF = FALSE)
+}
 
 .onLoad <- function(lib, pkg) {
     rgeosI <- setRgeosStatus()
@@ -41,12 +48,7 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
       register_s3_method("spatstat.geom", "as.psp", "SpatialLines")
       register_s3_method("spatstat.geom", "as.psp", "SpatialLinesDataFrame")
     }
-    Smess <- paste("Please note that 'maptools' will be retired during October 2023,\nplan transition at your earliest convenience (see https://r-spatial.org/r/2023/05/15/evolution4.html\nand earlier blogs for guidance);some functionality will be moved to 'sp'.\n", sep="")
-    Smess <- paste(Smess, "Checking rgeos availability: ")
-    rgeosI <- rgeosStatus()
-    Smess <- paste(Smess, rgeosI, "\n", sep="")
-    packageStartupMessage(Smess, appendLF = FALSE)
-
+    load_stuff()
     invisible(NULL)
 }
 
