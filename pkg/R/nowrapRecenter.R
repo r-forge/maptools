@@ -4,14 +4,6 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
     	if (!requireNamespace("rgeos", quietly = TRUE))
 		stop("package rgeos required")
 #        require(rgeos)
-    } else if (!avoidGEOS) {
-    	if (!requireNamespace("polyclip", quietly = TRUE)) {
-          warning("package polyclip suggested")
-          stopifnot(isTRUE(gpclibPermitStatus()))
-    	  if (!requireNamespace("gpclib", quietly = TRUE))
-		stop("package gpclib required")
-        }
-#	require(gpclib)
     }
 	if (!is(obj, "SpatialPolygons")) stop("obj not a SpatialPolygons object")
 	proj <- is.projected(obj)
@@ -64,44 +56,6 @@ nowrapSpatialPolygons <- function(obj, offset=0, eps=rep(.Machine$double.eps^(1/
                  cparts <- c(slot(slot(resW, "polygons")[[1]], "Polygons"),
                      slot(slot(resE, "polygons")[[1]], "Polygons"))
                  res <- Polygons(cparts, ID=slot(obj, "ID"))
-            } else if (isTRUE(gpclibPermitStatus())) {
-    		if (!requireNamespace("gpclib", quietly = TRUE))
-			stop("package gpclib required for .nowrapPolygons")
-		pls <- slot(obj, "Polygons")
-		nParts <- length(pls)
-		ID <- slot(obj, "ID")
-		gpc <- as(slot(pls[[1]], "coords"), "gpc.poly")
-		if (nParts > 1) for (i in 2:nParts) gpc <- gpclib::append.poly(gpc, 
-			as(slot(pls[[i]], "coords"), "gpc.poly"))
-		bb <- gpclib::get.bbox(gpc)
-		bbmat1 <- matrix(c(rep(bb$x[1], 2), rep(offset-eps[1], 2), 
-			bb$x[1], bb$y[1], rep(bb$y[2], 2), rep(bb$y[1], 2)), 
-			ncol=2)
-		bbmat2 <- matrix(c(rep(offset+eps[2], 2), rep(bb$x[2], 2), 
-			offset+eps[2], bb$y[1], rep(bb$y[2], 2), 
-			rep(bb$y[1], 2)), ncol=2)
-		gpc_left <- gpclib::intersect(gpc, as(bbmat1, "gpc.poly"))
-		gpc_right <- gpclib::intersect(gpc, as(bbmat2, "gpc.poly"))
-		gpc_res <- gpclib::append.poly(gpc_left, gpc_right)
-		nP <- length(gpc_res@pts)
-		if (nP == 0)
-			return(obj)
-		Srl <- vector(mode="list", length=nP)
-		for (j in 1:nP) {
-			crds <- cbind(gpc_res@pts[[j]]$x, gpc_res@pts[[j]]$y)
-			crds <- rbind(crds, crds[1,])
-                        if (any(crds[,1] > offset)) {
-                            crds[,1] <- crds[,1] - (2*offset)
-                        } else if (any(crds[,1] < -offset)){
-                            crds[,1] <- crds[,1] + (2*offset)
-                        }
-			hole <- gpc_res@pts[[j]]$hole
-			rD <- .ringDirxy(crds)
-			if (rD == 1 & hole) crds <- crds[nrow(crds):1,]
-			if (rD == -1 & !hole)  crds <- crds[nrow(crds):1,]
-			Srl[[j]] <- Polygon(coords=crds, hole=hole)
-		}
-		res <- Polygons(Srl, ID=ID)
             } else {
                 if (!requireNamespace("polyclip", quietly = TRUE))
 			stop("package polyclip required for .nowrapPolygons")

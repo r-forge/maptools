@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Aggregate Polygons in a SpatialPolygons object}
 \description{
-  The function aggregates Polygons in a SpatialPolygons object, according to the IDs vector specifying which input Polygons belong to which output Polygons; internal boundaries are dissolved using the rgeos package \code{gUnaryUnion} function. If the rgeos package is not available, and if the gpclib package is available and the user confirms that its restrictive license conditions are met, its \code{union} function will be used.
+  The function aggregates Polygons in a SpatialPolygons object, according to the IDs vector specifying which input Polygons belong to which output Polygons; internal boundaries are dissolved using the rgeos package \code{gUnaryUnion} function..
 }
 \usage{
 unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=FALSE)
@@ -13,7 +13,7 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=
   \item{SpP}{A SpatialPolygons object as defined in package sp}
   \item{IDs}{A vector defining the output Polygons objects, equal in length to the length of the polygons slot of SpRs; it may be character, integer, or factor (try table(factor(IDs)) for a sanity check). It may contain NA values for input objects not included in the union}
   \item{threshold}{if not NULL, an area measure below which slivers will be discarded (some polygons have non-identical boundaries, for instance along rivers, generating slivers on union which are artefacts, not real sub-polygons)}
-  \item{avoidGEOS}{default FALSE; if TRUE force use of gpclib even when GEOS is available}
+  \item{avoidGEOS}{default FALSE}
   \item{avoidUnaryUnion}{avoid gUnaryUnion if it is available; not relevant before GEOS 3.3.0}
 }
 

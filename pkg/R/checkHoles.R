@@ -1,12 +1,3 @@
-gpclibPermit <- function() {
-    if ("gpclib" %in% .packages(all.available = TRUE))
-        assign("gpclib", TRUE, envir=.MAPTOOLS_CACHE)
-    if (gpclibPermitStatus()) warning("support for gpclib will be withdrawn from maptools at the next major release")
-    gpclibPermitStatus()
-}
-
-gpclibPermitStatus <- function() get("gpclib", envir=.MAPTOOLS_CACHE)
-
 setRgeosStatus <- function() {
     rgeosI <- "rgeos" %in% .packages(all.available = TRUE)
 #    if (rgeosI) {
@@ -32,36 +23,6 @@ checkPolygonsHoles <- function(x, properly=TRUE, avoidGEOS=FALSE,
         if (compareVersion(as.character(packageVersion("rgeos")), "0.1-4") < 0)
             useSTRtree <- FALSE
         return(checkPolygonsGEOS(x, properly=properly, useSTRtree=useSTRtree))
-    } else {
-        stopifnot(isTRUE(gpclibPermitStatus()))
-	# require(gpclib)
-    	if (!requireNamespace("gpclib", quietly = TRUE))
-		stop("package gpclib required")
-	if (!is(x, "Polygons")) stop("not an Polygons object")
-	pls <- slot(x, "Polygons")
-	nParts <- length(pls)
-	ID <- slot(x, "ID")
-	gpc <- as(slot(pls[[1]], "coords"), "gpc.poly")
-	if (nParts > 1) for (i in 2:nParts) gpc <- gpclib::append.poly(gpc, 
-		as(slot(pls[[i]], "coords"), "gpc.poly"))
-	bb <- gpclib::get.bbox(gpc)
-	bbmat <- matrix(c(rep(bb$x[1], 2), rep(bb$x[2], 2), bb$x[1], bb$y[1], 
-		rep(bb$y[2], 2), rep(bb$y[1], 2)), ncol=2)
-	gpc_bb <- as(bbmat, "gpc.poly")
-	gpc_res <- gpclib::intersect(gpc, gpc_bb)
-	nP <- length(gpc_res@pts)
-	Srl <- vector(mode="list", length=nP)
-	for (j in 1:nP) {
-		crds <- cbind(gpc_res@pts[[j]]$x, gpc_res@pts[[j]]$y)
-		crds <- rbind(crds, crds[1,])
-		hole <- gpc_res@pts[[j]]$hole
-		rD <- .ringDirxy_gpc(crds)
-		if (rD == 1 & hole) crds <- crds[nrow(crds):1,]
-		if (rD == -1 & !hole)  crds <- crds[nrow(crds):1,]
-		Srl[[j]] <- Polygon(coords=crds, hole=hole)
-	}
-	res <- Polygons(Srl, ID=ID)
-	res
     }
 }
 

@@ -17,7 +17,7 @@ nowrapSpatialPolygons(obj, offset = 0, eps=rep(.Machine$double.eps^(1/2.5), 2),
   \item{obj}{ A SpatialPolygons object }
   \item{offset}{ offset from the Greenwich meridian }
   \item{eps}{vector of two (left and right) fuzz factors to retract the ring from the offset (2.5 root to accommodate \pkg{rgeos} precision rules)}
-  \item{avoidGEOS}{default FALSE; use \pkg{polyclip} or \pkg{gpclib} code even if \pkg{rgeos} is available}
+  \item{avoidGEOS}{default FALSE}
 }
 
 \value{

@@ -1,8 +1,5 @@
 .MAPTOOLS_CACHE <- new.env(FALSE, parent=globalenv())
 
-#.onLoad <- function(lib, pkg) {
-#    assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
-#}
 register_s3_method <- function(pkg, generic, class, fun = NULL) {
   stopifnot(is.character(pkg), length(pkg) == 1L)
   stopifnot(is.character(generic), length(generic) == 1L)
@@ -29,7 +26,6 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
 
 
 .onLoad <- function(lib, pkg) {
-    assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
     rgeosI <- setRgeosStatus()
     if (getRversion() < "3.6.0") {
       register_s3_method("spatstat.geom", "as.im", "RasterLayer")
@@ -45,22 +41,16 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
       register_s3_method("spatstat.geom", "as.psp", "SpatialLines")
       register_s3_method("spatstat.geom", "as.psp", "SpatialLinesDataFrame")
     }
+    Smess <- paste("Please note that 'maptools' will be retired during October 2023,\nplan transition at your earliest convenience (see https://r-spatial.org/r/2023/05/15/evolution4.html\nand earlier blogs for guidance);some functionality will be moved to 'sp'.\n", sep="")
+    Smess <- paste(Smess, "Checking rgeos availability: ")
+    rgeosI <- rgeosStatus()
+    Smess <- paste(Smess, rgeosI, "\n", sep="")
+    packageStartupMessage(Smess, appendLF = FALSE)
+
     invisible(NULL)
 }
 
 .onAttach <- function(lib, pkg) {
-#    assign("gpclib", FALSE, envir=.MAPTOOLS_CACHE)
-    Smess <- paste("Checking rgeos availability: ")
-#    rgeosI <- setRgeosStatus()
-    rgeosI <- rgeosStatus()
-    Smess <- paste(Smess, rgeosI, "\n", sep="")
-    Smess <- paste(Smess, "Please note that 'maptools' will be retired during 2023,\nplan transition at your earliest convenience;\nsome functionality will be moved to 'sp'.\n", sep="")
-    if (!rgeosI) Smess <- paste(Smess, 
-              "\tNote: when rgeos is not available, polygon geometry",
-              "\tcomputations in maptools depend on gpclib,\n",
-              "\twhich has a restricted licence. It is disabled by default;\n",
-              "\tto enable gpclib, type gpclibPermit()\n")
-    packageStartupMessage(Smess, appendLF = FALSE)
 }
 
 .onUnload <- function(libpath) {
