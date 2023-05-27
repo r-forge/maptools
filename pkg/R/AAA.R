@@ -25,7 +25,7 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
 }
 
 load_stuff <- function() {
-    Smess <- paste("Please note that 'maptools' will be retired during October 2023,\nplan transition at your earliest convenience (see https://r-spatial.org/r/2023/05/15/evolution4.html\nand earlier blogs for guidance);some functionality will be moved to 'sp'.\n", sep="")
+    Smess <- paste("Please note that 'maptools' will be retired during October 2023,\nplan transition at your earliest convenience (see\nhttps://r-spatial.org/r/2023/05/15/evolution4.html and earlier blogs\nfor guidance);some functionality will be moved to 'sp'.\n", sep="")
     Smess <- paste(Smess, "Checking rgeos availability: ")
     rgeosI <- rgeosStatus()
     Smess <- paste(Smess, rgeosI, "\n", sep="")
