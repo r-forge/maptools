@@ -1,6 +1,10 @@
 # Please note that **maptools** will be retired during October 2023, plan transition at your earliest convenience (see https://r-spatial.org/r/2023/05/15/evolution4.html and earlier blogs for guidance); some functionality will be moved to **sp**.
 
-# Version 1.1-7 (development, rev. 413-)
+# Version 1.1-8 (development, rev. 421-)
+
+* Deprecate methods moved to new `suntools` package (1.1-9 will stop exporting them)
+
+# Version 1.1-7 (2023-05-29, rev. 414-420)
 
 * remove gpclib and Rgshhs
 

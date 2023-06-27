@@ -59,10 +59,10 @@ export(
 )
 
 exportMethods(
- "crepuscule", # amt incR
- "sunriset", # amt FLightR overlap PWFSLSmoke
- "solarnoon", # PWFSLSmoke
- "solarpos" # EMbC shadow
+ "crepuscule", # amt incR deprecated 2023-07-01
+ "sunriset", # amt FLightR overlap PWFSLSmoke deprecated 2023-07-01
+ "solarnoon", # PWFSLSmoke deprecated 2023-07-01
+ "solarpos" # EMbC shadow deprecated 2023-07-01
 )
 
 export(

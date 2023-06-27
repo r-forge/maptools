@@ -34,6 +34,7 @@ setMethod("crepuscule",
               if (!isTRUE(!is.projected(crds)))
                   stop("crds must be geographical coordinates")
               if (missing(solarDep)) stop("solarDep must be given")
+              .Deprecated("crepuscule", package="suntools", msg="sun-methods moved to new package suntools")
               crdsmtx <- matrix(c(coordinates(crds)[, 1],
                                   coordinates(crds)[, 2]), ncol=2)
               eq.ll <- .balanceCrdsTimes(crdsmtx, dateTime)
@@ -79,6 +80,7 @@ setMethod("sunriset", signature(crds="SpatialPoints", dateTime="POSIXct"),
                    POSIXct.out=FALSE) {
               if (!isTRUE(!is.projected(crds)))
                   stop("crds must be geographical coordinates")
+              .Deprecated("sunriset", package="suntools", msg="sun-methods moved to new package suntools")
               crdsmtx <- matrix(c(coordinates(crds)[, 1],
                                   coordinates(crds)[, 2]), ncol=2)
               eq.ll <- .balanceCrdsTimes(crdsmtx, dateTime)
@@ -123,6 +125,7 @@ setMethod("solarnoon", signature(crds="SpatialPoints", dateTime="POSIXct"),
           function(crds, dateTime, POSIXct.out=FALSE) {
               if (!isTRUE(!is.projected(crds)))
                   stop("crds must be geographical coordinates")
+              .Deprecated("solarnoon", package="suntools", msg="sun-methods moved to new package suntools")
               crdsmtx <- matrix(c(coordinates(crds)[, 1],
                                   coordinates(crds)[, 2]), ncol=2)
               eq.ll <- .balanceCrdsTimes(crdsmtx, dateTime)
@@ -164,6 +167,7 @@ setMethod("solarpos", signature(crds="SpatialPoints", dateTime="POSIXct"),
           function(crds, dateTime, ...) {
               if (!isTRUE(!is.projected(crds)))
                   stop("crds must be geographical coordinates")
+              .Deprecated("solarpos", package="suntools", msg="sun-methods moved to new package suntools")
               crdsmtx <- matrix(c(coordinates(crds)[, 1],
                                   coordinates(crds)[, 2]), ncol=2)
               eq.ll <- .balanceCrdsTimes(crdsmtx, dateTime)

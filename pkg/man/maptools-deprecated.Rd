@@ -23,6 +23,22 @@
 \alias{sp.lineLabel,Lines-method}
 \alias{sp.lineLabel,SpatialLines-method}
 \alias{label,SpatialLines-method}
+\alias{crepuscule}
+\alias{sunriset}
+\alias{solarnoon}
+\alias{solarpos}
+\alias{crepuscule-methods}
+\alias{crepuscule,SpatialPoints,POSIXct-method}
+\alias{crepuscule,matrix,POSIXct-method}
+\alias{solarnoon-methods}
+\alias{solarnoon,SpatialPoints,POSIXct-method}
+\alias{solarnoon,matrix,POSIXct-method}
+\alias{solarpos-methods}
+\alias{solarpos,SpatialPoints,POSIXct-method}
+\alias{solarpos,matrix,POSIXct-method}
+\alias{sunriset-methods}
+\alias{sunriset,SpatialPoints,POSIXct-method}
+\alias{sunriset,matrix,POSIXct-method}
 
 \title{Deprecated functions and methods}
 \description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during 2023.}
@@ -77,6 +93,23 @@ panel.pointLabel(x, y = NULL,
                               ...)
 sp.pointLabel(object, labels, ...)
 #elide(obj, ...)
+\S4method{crepuscule}{SpatialPoints,POSIXct}(crds, dateTime, solarDep, direction=c("dawn", "dusk"),
+           POSIXct.out=FALSE)
+\S4method{crepuscule}{matrix,POSIXct}(crds, dateTime,
+           proj4string=CRS("+proj=longlat +datum=WGS84"), solarDep,
+           direction=c("dawn", "dusk"), POSIXct.out=FALSE)
+\S4method{sunriset}{SpatialPoints,POSIXct}(crds, dateTime, direction=c("sunrise", "sunset"),
+         POSIXct.out=FALSE)
+\S4method{sunriset}{matrix,POSIXct}(crds, dateTime,
+         proj4string=CRS("+proj=longlat +datum=WGS84"),
+         direction=c("sunrise", "sunset"), POSIXct.out=FALSE)
+\S4method{solarnoon}{SpatialPoints,POSIXct}(crds, dateTime, POSIXct.out=FALSE)
+\S4method{solarnoon}{matrix,POSIXct}(crds, dateTime,
+          proj4string=CRS("+proj=longlat +datum=WGS84"),
+          POSIXct.out=FALSE)
+\S4method{solarpos}{SpatialPoints,POSIXct}(crds, dateTime, ...)
+\S4method{solarpos}{matrix,POSIXct}(crds, dateTime,
+         proj4string=CRS("+proj=longlat +datum=WGS84"), ...)
 
 }
 \arguments{
@@ -144,6 +177,21 @@ null geometries inserted by ABS (Polygons only)}
     \item{center}{default NULL, if not NULL, the rotation center, numeric of length two}
     \item{unitsq}{logical, default FALSE, if TRUE and scale TRUE, impose unit square bounding box (currently only points)}
 }}
+  \item{crds}{a \code{SpatialPoints} or \code{matrix} object, containing
+    x and y coordinates (in that order).}
+
+  \item{dateTime}{a POSIXct object with the date and time associated to
+    calculate ephemerides for points given in crds.}
+
+  \item{solarDep}{numeric vector with the angle of the sun below the
+    horizon in degrees.}
+
+  \item{direction}{one of "dawn", "dusk", "sunrise", or "sunset",
+    indicating which ephemerides should be calculated.}
+
+  \item{POSIXct.out}{logical indicating whether POSIXct output should be
+    included.}
+
 
 }
 \keyword{ package }
@@ -301,4 +349,30 @@ spplot(meuse.grid["dist"],
        col.regions=myCols, 
        sp.layout = sl3)
 }
+## Location of Helsinki, Finland, in decimal degrees,
+## as listed in NOAA's website
+hels <- matrix(c(24.97, 60.17), nrow=1)
+Hels <- SpatialPoints(hels, proj4string=CRS("+proj=longlat +datum=WGS84"))
+d041224 <- as.POSIXct("2004-12-24", tz="EET")
+## Astronomical dawn
+crepuscule(hels, d041224, solarDep=18, direction="dawn", POSIXct.out=TRUE)
+crepuscule(Hels, d041224, solarDep=18, direction="dawn", POSIXct.out=TRUE)
+## Nautical dawn
+crepuscule(hels, d041224, solarDep=12, direction="dawn", POSIXct.out=TRUE)
+crepuscule(Hels, d041224, solarDep=12, direction="dawn", POSIXct.out=TRUE)
+## Civil dawn
+crepuscule(hels, d041224, solarDep=6, direction="dawn", POSIXct.out=TRUE)
+crepuscule(Hels, d041224, solarDep=6, direction="dawn", POSIXct.out=TRUE)
+solarnoon(hels, d041224, POSIXct.out=TRUE)
+solarnoon(Hels, d041224, POSIXct.out=TRUE)
+solarpos(hels, as.POSIXct(Sys.time(), tz="EET"))
+solarpos(Hels, as.POSIXct(Sys.time(), tz="EET"))
+sunriset(hels, d041224, direction="sunrise", POSIXct.out=TRUE)
+sunriset(Hels, d041224, direction="sunrise", POSIXct.out=TRUE)
+## Using a sequence of dates
+Hels_seq <- seq(from=d041224, length.out=365, by="days")
+up <- sunriset(Hels, Hels_seq, direction="sunrise", POSIXct.out=TRUE)
+down <- sunriset(Hels, Hels_seq, direction="sunset", POSIXct.out=TRUE)
+day_length <- down$time - up$time
+plot(Hels_seq, day_length, type="l")
 }
