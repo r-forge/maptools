@@ -39,9 +39,18 @@
 \alias{sunriset-methods}
 \alias{sunriset,SpatialPoints,POSIXct-method}
 \alias{sunriset,matrix,POSIXct-method}
+\alias{GE_SpatialGrid}
+\alias{Sobj_SpatialGrid}
+\alias{getKMLcoordinates}
+\alias{kmlLine}
+\alias{kmlLines}
+\alias{kmlOverlay}
+\alias{kmlPoints}
+\alias{kmlPolygon}
+\alias{kmlPolygons}
 
 \title{Deprecated functions and methods}
-\description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during 2023.}
+\description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during October 2023.}
 \usage{
 pointLabel(x, y = NULL, labels = seq(along = x), cex = 1, method = c("SANN", "GA"),
  allowSmallOverlap = FALSE, trace = FALSE, doPlot = TRUE, ...) # moved to car
@@ -110,6 +119,25 @@ sp.pointLabel(object, labels, ...)
 \S4method{solarpos}{SpatialPoints,POSIXct}(crds, dateTime, ...)
 \S4method{solarpos}{matrix,POSIXct}(crds, dateTime,
          proj4string=CRS("+proj=longlat +datum=WGS84"), ...)
+GE_SpatialGrid(obj, asp = NA, maxPixels = 600)
+Sobj_SpatialGrid(obj, asp=1, maxDim=100, n=NULL)
+getKMLcoordinates(kmlfile, ignoreAltitude=FALSE)
+kmlLine(obj=NULL, kmlfile=NULL, 
+    name="R Line", description="", col=NULL, visibility=1, lwd=1,
+    kmlname="", kmldescription="")
+kmlLines(obj=NULL, kmlfile=NULL, 
+        name="R Lines", description="", col=NULL, visibility=1, lwd=1,
+        kmlname="", kmldescription="")
+kmlOverlay(obj, kmlfile = NULL, imagefile = NULL, name = "R image")
+kmlPoints(obj=NULL, kmlfile=NULL, kmlname="", kmldescription="",
+    name=NULL, description="",
+    icon="http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png")
+kmlPolygon(obj=NULL, kmlfile=NULL, 
+    name="R Polygon", description="", col=NULL, visibility=1, lwd=1, border=1,
+    kmlname="", kmldescription="")
+kmlPolygons(obj=NULL, kmlfile=NULL, 
+    name="KML Polygons", description="", col=NULL, visibility=1, lwd=1,
+    border="white", kmlname="", kmldescription="")
 
 }
 \arguments{
@@ -191,6 +219,21 @@ null geometries inserted by ABS (Polygons only)}
 
   \item{POSIXct.out}{logical indicating whether POSIXct output should be
     included.}
+  \item{obj}{a Spatial* object}
+  \item{asp}{if NA, will be set to the latitude corrected value}
+  \item{maxPixels}{the maximum dimension of the output PNG}
+  \item{maxDim}{the maximum dimension of the output grid; ignored if \code{n} not NULL}
+  \item{n}{if not NULL, the minimum number of cells in the returned grid}
+  \item{ignoreAltitude}{if set to \code{TRUE} the altitude values of a KML points will be ignored}
+  \item{kmlfile}{if not \code{NULL} the name as character string of the kml file to be written}
+  \item{name}{the name of the KML line}
+  \item{description}{the description of the KML line (HTML tags allowed)}
+  \item{visibility}{if set to \code{1} or \code{TRUE} specifies that the KML line should be visible after loading}
+  \item{kmlname}{the name of the KML layer}
+  \item{kmldescription}{the description of the KML layer (HTML tags allowed)}
+  \item{imagefile}{the name of the PNG file containing the image - this should be either relative (same directory as kml file) or abosolute (fully qualified)}
+  \item{icon}{a character vector of icon URLs to be used in the style associated with each KML Placemark}
+  \item{border}{the stroke color (see also Color Specification) for the KML polygon}
 
 
 }
@@ -375,4 +418,129 @@ up <- sunriset(Hels, Hels_seq, direction="sunrise", POSIXct.out=TRUE)
 down <- sunriset(Hels, Hels_seq, direction="sunset", POSIXct.out=TRUE)
 day_length <- down$time - up$time
 plot(Hels_seq, day_length, type="l")
+opt_exask <- options(example.ask=FALSE)
+qk <- SpatialPointsDataFrame(quakes[, c(2:1)], quakes)
+summary(Sobj_SpatialGrid(qk)$SG)
+t2 <- Sobj_SpatialGrid(qk, n=10000)$SG
+summary(t2)
+prod(slot(slot(t2, "grid"), "cells.dim"))
+proj4string(qk) <- CRS("+proj=longlat +ellps=WGS84")
+tf <- tempfile()
+SGqk <- GE_SpatialGrid(qk)
+png(file=paste(tf, ".png", sep=""), width=SGqk$width, height=SGqk$height,
+  bg="transparent")
+par(mar=c(0,0,0,0), xaxs="i", yaxs="i")
+plot(qk, xlim=SGqk$xlim, ylim=SGqk$ylim, setParUsrBB=TRUE)
+dev.off()
+kmlOverlay(SGqk, paste(tf, ".kml", sep=""), paste(tf, ".png", sep=""))
+options(example.ask=opt_exask)
+data(wrld_simpl)
+## creates a KML file containing the polygons of South Africa (plus hole)
+sw <- slot(wrld_simpl[wrld_simpl$NAME=="South Africa",], "polygons")[[1]]
+tf <- tempfile()
+kmlPolygon(sw, kmlfile=tf, name="South Africa", col="#df0000aa", lwd=5, 
+    border=4, kmlname="R Test", 
+    kmldescription="This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+zz <- getKMLcoordinates(tf, ignoreAltitude=TRUE)
+str(zz)
+zz <- getKMLcoordinates(system.file("shapes/Testing.kml", package="maptools"))
+str(zz)
+xx <- readShapeSpatial(system.file("shapes/fylk-val-ll.shp",
+      package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=WGS84"))
+out <- sapply(slot(xx, "lines"), function(x) { kmlLine(x,
+    name=slot(x, "ID"), col="blue", lwd=1.5, 
+    description=paste("river:", slot(x, "ID"))) })
+tf <- tempfile()
+kmlFile <- file(tf, "w")
+tf
+cat(kmlLine(kmlname="R Test", kmldescription="<i>Hello</i>")$header, 
+    file=kmlFile, sep="\n")
+cat(unlist(out["style",]), file=kmlFile, sep="\n")
+cat(unlist(out["content",]), file=kmlFile, sep="\n")
+cat(kmlLine()$footer, file=kmlFile, sep="\n")
+close(kmlFile)
+rivers <- readShapeSpatial(system.file("shapes/fylk-val-ll.shp",
+                           package="maptools")[1], proj4string=CRS("+proj=longlat +ellps=WGS84"))
+# create kml file
+td <- tempdir()
+kmlfile <- paste(td, "rivers.kml", sep="/")
+kmlLines(rivers, kmlfile = kmlfile, name = "R Lines", 
+         description = "Hello!", col = "blue", visibility = 1, lwd = 1, 
+         kmlname = "", kmldescription = "")
+opt_exask <- options(example.ask=FALSE)
+qk <- SpatialPointsDataFrame(quakes[, c(2:1)], quakes)
+proj4string(qk) <- CRS("+proj=longlat +ellps=WGS84")
+tf <- tempfile()
+SGqk <- GE_SpatialGrid(qk)
+png(file=paste(tf, ".png", sep=""), width=SGqk$width, height=SGqk$height,
+  bg="transparent")
+par(mar=c(0,0,0,0), xaxs="i", yaxs="i")
+plot(qk, xlim=SGqk$xlim, ylim=SGqk$ylim, setParUsrBB=TRUE)
+dev.off()
+kmlOverlay(SGqk, paste(tf, ".kml", sep=""), paste(tf, ".png", sep=""))
+options(example.ask=opt_exask)
+data(SplashDams)
+num <- length(SplashDams)
+td <- tempdir()
+kmlfile <- paste(td, "OregonSplashDams.kml", sep="/")
+kmlname <- "Oregon Splash Dams"
+kmldescription <- paste("Data for Splash Dams in western Oregon.",
+ "See http://www.fs.fed.us/pnw/lwm/aem/people/burnett.html#projects_activities",
+ "for more information.")
+icon <- "http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png"
+name <- paste("Dam on",SplashDams$streamName)
+description <- paste("<b>owner:</b>", SplashDams$owner, "<br><b>dates:</b>", SplashDams$datesUsed)
+kmlPoints(SplashDams, kmlfile=kmlfile, name=name, description=description,
+          icon=icon, kmlname=kmlname, kmldescription=kmldescription)
+data(wrld_simpl)
+## creates a KML file containing the polygons of South Africa (plus hole)
+sw <- slot(wrld_simpl[wrld_simpl$NAME=="South Africa",], "polygons")[[1]]
+tf <- tempfile()
+kmlPolygon(sw, kmlfile=tf, name="South Africa", col="#df0000aa", lwd=5, 
+    border=4, kmlname="R Test", 
+    kmldescription="This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+tf
+
+## creates a KML file containing the polygons of South Africa, Switzerland, and Canada
+sw  <- wrld_simpl[wrld_simpl$NAME \%in\% c("South Africa", "Switzerland", "Canada"),]
+out <- sapply(slot(sw, "polygons"), function(x) { kmlPolygon(x,
+    name=as(sw, "data.frame")[slot(x, "ID"), "NAME"], 
+    col="red", lwd=1.5, border='black', 
+    description=paste("ISO3:", slot(x, "ID"))) })
+tf <- tempfile()
+kmlFile <- file(tf, "w")
+tf
+cat(kmlPolygon(kmlname="R Test", kmldescription="<i>Hello</i>")$header, 
+    file=kmlFile, sep="\n")
+cat(unlist(out["style",]), file=kmlFile, sep="\n")
+cat(unlist(out["content",]), file=kmlFile, sep="\n")
+cat(kmlPolygon()$footer, file=kmlFile, sep="\n")
+close(kmlFile)
+data(wrld_simpl)
+td <- tempdir()
+kmlfile <- paste(td, "worldPolitical.kml", sep="/")
+## creates a KML file containing the polygons of a political world map
+kmlPolygons(wrld_simpl, kmlfile = kmlfile, name = "KML Polygons", 
+         description = "the world", col = "red",
+         visibility = 1, lwd = 1, border = "white", kmlname = "R Test", 
+         kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+
+data(wrld_simpl)
+## create a KML file containing the polygons of Brazil, Uganda, and Canada
+regions <- c("Brazil","Canada","Uganda")
+wrld_simpl_subset <- wrld_simpl[wrld_simpl$NAME \%in\% regions,]
+kmlfile <- paste(td, "worldPoliticalSubset.kml", sep="/")
+kmlPolygons(wrld_simpl_subset, kmlfile = kmlfile,
+ name = "KML Polygons subset", description = "three countries", col = "blue", 
+ visibility = 1, lwd = 1, border = "white", kmlname = "R Test 2", 
+ kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+## combine to make a list of polygon objects to plot
+polList <- c(regions,wrld_simpl)
+kmlfile <- paste(td, "worldPoliticalandSubset.kml", sep="/")
+kmlPolygons(wrld_simpl_subset, kmlfile = kmlfile,
+ name = "KML Polygons subset", description = "three countries highlighted in world", 
+ col = sample(colours(), length(polList)), visibility = 1, lwd = 1, border = "white", 
+ kmlname = "R Test 2", 
+ kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+
 }

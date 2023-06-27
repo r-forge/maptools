@@ -17,6 +17,7 @@
 # bbox(obj) in one and only one value
 
 GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
+  .Deprecated("GE_SpatialGrid", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
     if (!extends(class(obj), "Spatial")) 
         stop("GE_SpatialGrid only works for class(es extending) Spatial")
     p4s <- proj4string(obj)
@@ -31,6 +32,7 @@ GE_SpatialGrid <- function(obj, asp=NA, maxPixels=600) {
 }
 
 Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100, n=NULL) {
+  .Deprecated("Sobj_SpatialGrid", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
     if (!extends(class(obj), "Spatial")) 
         stop("Sobj_SpatialGrid only works for class(es extending) Spatial")
     p4s <- slot(obj, "proj4string")
@@ -78,6 +80,7 @@ Sobj_SpatialGrid <- function(obj, asp=1, maxDim=100, n=NULL) {
 # kml file
 
 kmlOverlay <- function(obj, kmlfile=NULL, imagefile=NULL, name="R image") {
+  .Deprecated("kmlOverlay", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
     if (!inherits(obj, "GE_SG")) 
         stop("obj must be of class GE_SG from function GE_SpatialGrid")
     if (is.na(proj4string(obj$SG)) || is.projected(obj$SG))

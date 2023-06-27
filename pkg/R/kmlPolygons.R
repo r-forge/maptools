@@ -3,6 +3,7 @@
 kmlPolygons <- function(obj = NULL, kmlfile = NULL, name = "KML Polygons", 
                         description = "", col = NULL, visibility = 1, lwd = 1, 
                         border = "white", kmlname = "", kmldescription = "") {
+  .Deprecated("kmlPolygons", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
   
   # Handle NULL object
   if (is.null(obj)) 

@@ -2,6 +2,7 @@
 kmlLine <- function(obj = NULL, kmlfile = NULL, name = "R Line", 
     description = "", col = NULL, visibility = 1, lwd = 1, 
     kmlname = "", kmldescription = "") {
+  .Deprecated("kmlLine", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
     if (is.null(obj)) 
         return(list(header = c("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", 
             "<kml xmlns=\"http://earth.google.com/kml/2.2\">", 

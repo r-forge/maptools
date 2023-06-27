@@ -2,7 +2,9 @@
 
 # Version 1.1-8 (development, rev. 421-)
 
-* Deprecate methods moved to new `suntools` package (1.1-9 will stop exporting them)
+* Deprecate functions handling KML, handed off to https://github.com/rsbivand/spkml and seeking new maintainer
+
+* Deprecate methods moved to new `suntools` package (1.1-9 will stop exporting them); until then use `library("maptools", exclude=c("crepuscule", "solarnoon", "solarpos", "sunriset"))` to prefer `suntools` if loading `maptools` after `suntools`
 
 # Version 1.1-7 (2023-05-29, rev. 414-420)
 

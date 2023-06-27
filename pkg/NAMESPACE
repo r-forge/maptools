@@ -151,18 +151,18 @@ exportMethods(
 #)
 
 export(
- GE_SpatialGrid,
- kmlOverlay, # RgoogleMaps
- Sobj_SpatialGrid # (gone 2212 surveillance)
+ GE_SpatialGrid, # deprecated 2023-07-01
+ kmlOverlay, # RgoogleMaps  deprecated 2023-07-01
+ Sobj_SpatialGrid # (gone 2212 surveillance)  deprecated 2023-07-01
 )
 
 export(
- kmlPolygons, # red https://github.com/r-spatial/evolution/issues/6
- kmlLines, # https://github.com/r-spatial/evolution/issues/6
- kmlPolygon, # red
- kmlLine, # (gone 2212 BPEC)
- getKMLcoordinates, # animaltracker
- kmlPoints # (gone 2212 BPEC)
+ kmlPolygons, # red https://github.com/r-spatial/evolution/issues/6  deprecated 2023-07-01
+ kmlLines, # https://github.com/r-spatial/evolution/issues/6  deprecated 2023-07-01
+ kmlPolygon, # red  deprecated 2023-07-01
+ kmlLine, # (gone 2212 BPEC)  deprecated 2023-07-01
+ getKMLcoordinates, # animaltracker  deprecated 2023-07-01
+ kmlPoints # (gone 2212 BPEC)  deprecated 2023-07-01
 )
 
 export(

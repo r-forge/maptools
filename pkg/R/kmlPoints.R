@@ -2,6 +2,7 @@
 kmlPoints <- function (obj = NULL, kmlfile = NULL, kmlname = "", kmldescription = "",
                        name = NULL, description = "", 
                        icon = "http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png") {
+  .Deprecated("kmlPoints", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
     # Handle null object
     if (is.null(obj)) 
         return(list(header = c("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", 

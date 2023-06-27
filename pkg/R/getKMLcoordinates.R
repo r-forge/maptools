@@ -1,5 +1,6 @@
 
 getKMLcoordinates <- function(kmlfile, ignoreAltitude = FALSE) {
+  .Deprecated("getKMLcoordinates", "", msg="Code moved to https://github.com/rsbivand/spkml - seeking maintainer\nhttps://github.com/r-spatial/evolution/issues/6")
     if (missing(kmlfile)) 
         stop("kmlfile is missing")
     kml <- paste(readLines(kmlfile, encoding = "UTF-8"), 
