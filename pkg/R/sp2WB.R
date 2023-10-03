@@ -10,6 +10,9 @@
 
 sp2WB <- function(map, filename, Xscale=1, Yscale=Xscale, plotorder=FALSE) {
 
+  .Deprecated(new="sp2WB", package="DCluster", old="sp2WB",
+    msg="Function moved to the DCluster package because maptools is retiring in 2023")
+
 # Write some tests here to ensure that all the objects passed
 # are of the appropriate type
 

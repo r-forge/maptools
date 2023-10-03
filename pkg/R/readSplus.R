@@ -3,6 +3,8 @@
 #
 readSplus<-function(file, proj4string=CRS(as.character(NA)) )
 {
+  .Deprecated(new="readSplus", package="DCluster", old="readSplus",
+    msg="Function moved to the DCluster package because maptools is retiring in 2023")
 
 	lns<-readLines(file)
 	nlines<-length(lns)

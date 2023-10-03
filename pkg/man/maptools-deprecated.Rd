@@ -48,6 +48,8 @@
 \alias{kmlPoints}
 \alias{kmlPolygon}
 \alias{kmlPolygons}
+\alias{readSplus}
+\alias{sp2WB}
 
 \title{Deprecated functions and methods}
 \description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during October 2023.}
@@ -101,6 +103,9 @@ panel.pointLabel(x, y = NULL,
                               fill='transparent',
                               ...)
 sp.pointLabel(object, labels, ...)
+readSplus(file, proj4string = CRS(as.character(NA)))
+sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
+
 #elide(obj, ...)
 \S4method{crepuscule}{SpatialPoints,POSIXct}(crds, dateTime, solarDep, direction=c("dawn", "dusk"),
            POSIXct.out=FALSE)
@@ -234,6 +239,11 @@ null geometries inserted by ABS (Polygons only)}
   \item{imagefile}{the name of the PNG file containing the image - this should be either relative (same directory as kml file) or abosolute (fully qualified)}
   \item{icon}{a character vector of icon URLs to be used in the style associated with each KML Placemark}
   \item{border}{the stroke color (see also Color Specification) for the KML polygon}
+  \item{file}{name of file}
+  \item{map}{a SpatialPolygons object}
+  \item{filename}{file where output is written}
+  \item{Xscale, Yscale}{scales to be written in the output file}
+  \item{plotorder}{default=FALSE, if TRUE, export polygons in plotting order}
 
 
 }
@@ -542,5 +552,30 @@ kmlPolygons(wrld_simpl_subset, kmlfile = kmlfile,
  col = sample(colours(), length(polList)), visibility = 1, lwd = 1, border = "white", 
  kmlname = "R Test 2", 
  kmldescription = "This is <b>only</b> a <a href='http://www.r-project.org'>R</a> test.")
+if (rgeosStatus()) {
+geobugs <- readSplus(system.file("share/Splus.map", package="maptools"))
+plot(geobugs, axes=TRUE, col=1:3)
+row.names(geobugs)
+pls <- slot(geobugs, "polygons")
+sapply(pls, function(i) sapply(slot(i, "Polygons"), slot, "hole"))
+pls1 <- lapply(pls, checkPolygonsHoles)
+sapply(pls1, function(i) sapply(slot(i, "Polygons"), slot, "hole"))
+plot(SpatialPolygons(pls1), axes=TRUE, col=1:3)
+}
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+ IDvar="FIPSNO", proj4string=CRS("+proj=longlat +ellps=clrk66"))
+plot(xx, border="blue", axes=TRUE, las=1)
+tf <- tempfile()
+sp2WB(as(xx, "SpatialPolygons"), filename=tf)
+xxx <- readSplus(tf, proj4string=CRS("+proj=longlat +ellps=clrk66"))
+all.equal(xxx, as(xx, "SpatialPolygons"), tolerance=.Machine$double.eps^(1/4),
+ check.attributes=FALSE)
+\dontrun{
+x <- readAsciiGrid(system.file("grids/test.ag", package="maptools")[1])
+xp <- as(x, "SpatialPixelsDataFrame")
+pp <- as(xp, "SpatialPolygons")
+td <- tempdir()
+sp2WB(pp, filename=file.path(td, "test.map"))
+}
 
 }
