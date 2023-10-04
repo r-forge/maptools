@@ -2,6 +2,8 @@
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 sp2Mondrian <- function(SP, file, new_format=TRUE) {
+  .Deprecated(new="sp2Mondrian", package="sp", old="sp2Mondrian",
+    msg="Function moved to the sp package because maptools is retiring in 2023")
 	if (!inherits(SP, "SpatialPolygonsDataFrame"))
 		stop("not a SpatialPolygonsDataFrame object")
 	pls <- slot(SP, "polygons")

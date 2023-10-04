@@ -50,6 +50,7 @@
 \alias{kmlPolygons}
 \alias{readSplus}
 \alias{sp2WB}
+\alias{sp2Mondrian}
 
 \title{Deprecated functions and methods}
 \description{Cumulative deprecated functions and methods from maptools prior to package retirement/archiving during October 2023.}
@@ -105,6 +106,7 @@ panel.pointLabel(x, y = NULL,
 sp.pointLabel(object, labels, ...)
 readSplus(file, proj4string = CRS(as.character(NA)))
 sp2WB(map, filename, Xscale = 1, Yscale = Xscale, plotorder = FALSE)
+sp2Mondrian(SP, file, new_format=TRUE)
 
 #elide(obj, ...)
 \S4method{crepuscule}{SpatialPoints,POSIXct}(crds, dateTime, solarDep, direction=c("dawn", "dusk"),
@@ -244,6 +246,8 @@ null geometries inserted by ABS (Polygons only)}
   \item{filename}{file where output is written}
   \item{Xscale, Yscale}{scales to be written in the output file}
   \item{plotorder}{default=FALSE, if TRUE, export polygons in plotting order}
+  \item{SP}{a SpatialPolygonsDataFrame object}
+  \item{new_format}{default TRUE, creates a text data file and a separate map file; the old format put both data sets in a single file - the map file is named by inserting "MAP_" into the file= argument after the rightmost directory separator (if any)}
 
 
 }
@@ -576,6 +580,13 @@ xp <- as(x, "SpatialPixelsDataFrame")
 pp <- as(xp, "SpatialPolygons")
 td <- tempdir()
 sp2WB(pp, filename=file.path(td, "test.map"))
+}
+\dontrun{
+td <- tempdir()
+xx <- readShapePoly(system.file("shapes/columbus.shp", package="maptools")[1])
+sp2Mondrian(xx, file=file.path(td, "columbus1.txt"))
+xx <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1])
+sp2Mondrian(xx, file=file.path(td, "sids1.txt"))
 }
 
 }
